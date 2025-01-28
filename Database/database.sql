@@ -237,3 +237,11 @@ CREATE TABLE `blocklist` (
 ALTER TABLE `blocklist`
   ADD PRIMARY KEY (`blockingPlayer`,`blockedPlayer`),
   ADD KEY `blockingPlayer` (`blockingPlayer`);
+
+SET GLOBAL event_scheduler = ON;
+
+CREATE EVENT AutoDeleteOldCompletedGames IF NOT EXISTS
+ON SCHEDULE AT CURRENT_TIMESTAMP + INTERVAL 1 DAY 
+ON COMPLETION PRESERVE
+DO
+DELETE LOW_PRIORITY FROM completedgame WHERE CompletionTime < DATE_SUB(NOW(), INTERVAL 90 DAY);
