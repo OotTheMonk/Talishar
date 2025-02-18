@@ -5,17 +5,17 @@
     global $currentPlayer;
     switch($cardID)
     {
-      case "UPR044": case "UPR045":
-        if(SearchCurrentTurnEffects("OUT183", $currentPlayer)) return "";
-        MZMoveCard($currentPlayer, "MYDISCARD:isSameName=UPR101", "MYHAND");
+      case "fai_rising_rebellion": case "fai":
+        if(SearchCurrentTurnEffects("amnesia_red", $currentPlayer)) return "";
+        MZMoveCard($currentPlayer, "MYDISCARD:isSameName=phoenix_flame_red", "MYHAND");
         return "";
-      case "UPR047":
+      case "heat_wave":
         AddCurrentTurnEffect($cardID, $currentPlayer);
         return "";
-      case "UPR049":
+      case "spreading_flames_red":
         AddCurrentTurnEffect($cardID, $currentPlayer);
         return "";
-      case "UPR050":
+      case "combustion_point_red":
         AddDecisionQueue("FINDINDICES", $currentPlayer, "CCDEFLESSX," . NumDraconicChainLinks()-1);
         AddDecisionQueue("FILTER", $currentPlayer, "CombatChain-exclude-type-E", 1);
         AddDecisionQueue("FILTER", $currentPlayer, "CombatChain-exclude-subtype-evo", 1);
@@ -25,14 +25,14 @@
         AddDecisionQueue("REMOVECOMBATCHAIN", $currentPlayer, "-", 1);
         AddDecisionQueue("MULTIBANISH", ($currentPlayer == 1 ? 2 : 1), "CC,-", 1);
         return "";
-      case "UPR057": case "UPR058": case "UPR059":
+      case "rise_from_the_ashes_red": case "rise_from_the_ashes_yellow": case "rise_from_the_ashes_blue":
         AddCurrentTurnEffect($cardID, $currentPlayer);
-        MZMoveCard($currentPlayer, "MYDISCARD:isSameName=UPR101", "MYHAND", may:true);
+        MZMoveCard($currentPlayer, "MYDISCARD:isSameName=phoenix_flame_red", "MYHAND", may:true);
         return "";
-      case "UPR060": case "UPR061": case "UPR062":
+      case "brand_with_cinderclaw_red": case "brand_with_cinderclaw_yellow": case "brand_with_cinderclaw_blue":
         AddCurrentTurnEffectFromCombat($cardID, $currentPlayer);
         return "";
-      case "UPR159":
+      case "tide_flippers":
         GiveAttackGoAgain();
         return "";
       default: return "";
@@ -43,23 +43,23 @@
   {
     global $mainPlayer, $combatChainState;
     switch($cardID) {
-      case "UPR048":
+      case "phoenix_form_red":
         if(IsHeroAttackTarget() && NumChainLinksWithName("Phoenix Flame") >= 3) {
           Draw($mainPlayer);
           Draw($mainPlayer);
           Draw($mainPlayer);
         }
         break;
-      case "UPR051": case "UPR052": case "UPR053":
+      case "engulfing_flamewave_red": case "engulfing_flamewave_yellow": case "engulfing_flamewave_blue":
         $deck = new Deck($mainPlayer);
         if($deck->Reveal() && CardType($deck->Top()) == "AA" && CardCost($deck->Top()) < NumDraconicChainLinks()) $deck->BanishTop("TT", $mainPlayer);
         break;
-      case "UPR054": case "UPR055": case "UPR056":
-      case "UPR075": case "UPR076": case "UPR077":
-      case "UPR081": case "UPR082": case "UPR083":
+      case "mounting_anger_red": case "mounting_anger_yellow": case "mounting_anger_blue":
+      case "rising_resentment_red": case "rising_resentment_yellow": case "rising_resentment_blue":
+      case "soaring_strike_red": case "soaring_strike_yellow": case "soaring_strike_blue":
         AddLayer("TRIGGER", $mainPlayer, $cardID);
         break;
-      case "UPR161":
+      case "take_the_tempo_red":
         $deck = new Deck($mainPlayer);
         if(HitsInCombatChain() >= 2) $deck->BanishTop(CardType($deck->Top()) == "AA" ? "NT" : "-", $mainPlayer);
         break;

@@ -5,28 +5,28 @@
     global $CS_PlayIndex, $currentPlayer, $CombatChain;
     switch($cardID)
     {
-      case "ARC003":
+      case "teklo_plasma_pistol":
         $abilityType = GetResolvedAbilityType($cardID);
         return ($abilityType == "A" ? 1 : 0);
-      case "ARC004": return 1;
-      case "ARC010":
+      case "teklo_foundry_heart": return 1;
+      case "induction_chamber_red":
         $abilityType = GetResolvedAbilityType($cardID);
         return $CombatChain->HasCurrentLink() ? 0 : 1;
-      case "ARC017":
+      case "aether_sink_yellow":
         $items = &GetItems($currentPlayer);
         return ($items[GetClassState($currentPlayer, $CS_PlayIndex) + 1] > 0 ? 0 : 1);
-      case "ARC018":
+      case "cognition_nodes_blue":
         $abilityType = GetResolvedAbilityType($cardID);
         return $CombatChain->HasCurrentLink() ? 0 : 1;
-      case "ARC040": return 1;
-      case "ARC077": return 2;
-      case "ARC078": return 2 + NumRunechants($currentPlayer);
-      case "ARC079": return 1;
-      case "ARC113": case "ARC114": return 3;
-      case "ARC115": return 1;
-      case "ARC116": return 1;
-      case "ARC117": return 0;
-      case "ARC154": return 1;
+      case "death_dealer": return 1;
+      case "nebula_blade": return 2;
+      case "grasp_of_the_arknight": return 2 + NumRunechants($currentPlayer);
+      case "crown_of_dichotomy": return 1;
+      case "kano_dracai_of_aether": case "kano": return 3;
+      case "crucible_of_aetherweave": return 1;
+      case "storm_striders": return 1;
+      case "robe_of_rapture": return 0;
+      case "mage_master_boots": return 1;
       default: return 0;
     }
   }
@@ -37,29 +37,29 @@
     $items = &GetItems($currentPlayer);
     switch($cardID)
     {
-      case "ARC003":
+      case "teklo_plasma_pistol":
         return "A";
-      case "ARC004": return "A";
-      case "ARC005": return "I";
-      case "ARC010": return $CombatChain->HasCurrentLink() ? "AR" : "A";
-      case "ARC017":
+      case "teklo_foundry_heart": return "A";
+      case "achilles_accelerator": return "I";
+      case "induction_chamber_red": return $CombatChain->HasCurrentLink() ? "AR" : "A";
+      case "aether_sink_yellow":
         if($index == -1) $index = GetClassState($currentPlayer, $CS_PlayIndex);
         if(isset($items[$index + 1])) return ($items[$index+1] > 0 ? "I" : "A");
         else return "A";
-      case "ARC018":
+      case "cognition_nodes_blue":
         if($index == -1) $index = GetClassState($currentPlayer, $CS_PlayIndex);
         return ($CombatChain->HasCurrentLink() ? "AR" : "A");
-      case "ARC019": return "A";
-      case "ARC035": return "I";
-      case "ARC037": return "A";
-      case "ARC038": case "ARC039": case "ARC040": case "ARC041": case "ARC042": return "A";
-      case "ARC077": return "AA";
-      case "ARC078": return "A";
-      case "ARC079": return "A";
-      case "ARC113": case "ARC114": case "ARC115": case "ARC116": return "I";
-      case "ARC117": return "A";
-      case "ARC151": return "I";
-      case "ARC153": case "ARC154": return "A";
+      case "convection_amplifier_red": return "A";
+      case "dissipation_shield_yellow": return "I";
+      case "optekal_monocle_blue": return "A";
+      case "azalea_ace_in_the_hole": case "azalea": case "death_dealer": case "skullbone_crosswrap": case "bulls_eye_bracers": return "A";
+      case "nebula_blade": return "AA";
+      case "grasp_of_the_arknight": return "A";
+      case "crown_of_dichotomy": return "A";
+      case "kano_dracai_of_aether": case "kano": case "crucible_of_aetherweave": case "storm_striders": return "I";
+      case "robe_of_rapture": return "A";
+      case "talismanic_lens": return "I";
+      case "bracers_of_belief": case "mage_master_boots": return "A";
       default: return "";
     }
   }
@@ -69,23 +69,23 @@
     global $currentPlayer, $CS_PlayIndex, $CombatChain;
     switch($cardID)
     {
-      case "ARC003":
+      case "teklo_plasma_pistol":
         $abilityType = GetResolvedAbilityType($cardID);
         return $abilityType == "A";
-      case "ARC004": return true;
-      case "ARC010":
+      case "teklo_foundry_heart": return true;
+      case "induction_chamber_red":
         return !$CombatChain->HasCurrentLink();
-      case "ARC017":
+      case "aether_sink_yellow":
         $items = &GetItems($currentPlayer);
         return ($items[GetClassState($currentPlayer, $CS_PlayIndex)+1] > 0 ? true : false);
-      case "ARC018":
+      case "cognition_nodes_blue":
         $items = &GetItems($currentPlayer);
         return ($items[GetClassState($currentPlayer, $CS_PlayIndex)+1] > 0 ? true : false);
-      case "ARC019": return true;
-      case "ARC037": return true;
-      case "ARC038": case "ARC039": case "ARC040": case "ARC041": case "ARC042": return true;
-      case "ARC078": return true;
-      case "ARC153": case "ARC154": return true;
+      case "convection_amplifier_red": return true;
+      case "optekal_monocle_blue": return true;
+      case "azalea_ace_in_the_hole": case "azalea": case "death_dealer": case "skullbone_crosswrap": case "bulls_eye_bracers": return true;
+      case "grasp_of_the_arknight": return true;
+      case "bracers_of_belief": case "mage_master_boots": return true;
       default: return false;
     }
   }
@@ -94,28 +94,28 @@
   {
     switch($cardID)
     {
-      case "ARC032": return 3;
-      case "ARC033": return 2;
-      case "ARC034": return 1;
-      case "ARC042": return 1;
-      case "ARC054": return 3;
-      case "ARC055": return 2;
-      case "ARC056": return 1;
-      case "ARC057": case "ARC058": case "ARC059": return 2;
-      case "ARC091": return 3;
-      case "ARC092": return 2;
-      case "ARC093": return 1;
-      case "ARC153-1": return 1; case "ARC153-2": return 2; case "ARC153-3": return 3;
-      case "ARC160-1": return 1;
-      case "ARC170-2": return 3;
-      case "ARC171-2": return 2;
-      case "ARC172-2": return 1;
-      case "ARC203": return 3;
-      case "ARC204": return 2;
-      case "ARC205": return 1;
-      case "ARC206": return 3;
-      case "ARC207": return 2;
-      case "ARC208": return 1;
+      case "locked_and_loaded_red": return 3;
+      case "locked_and_loaded_yellow": return 2;
+      case "locked_and_loaded_blue": return 1;
+      case "bulls_eye_bracers": return 1;
+      case "take_aim_red": return 3;
+      case "take_aim_yellow": return 2;
+      case "take_aim_blue": return 1;
+      case "head_shot_red": case "head_shot_yellow": case "head_shot_blue": return 2;
+      case "oath_of_the_arknight_red": return 3;
+      case "oath_of_the_arknight_yellow": return 2;
+      case "oath_of_the_arknight_blue": return 1;
+      case "bracers_of_belief-1": return 1; case "bracers_of_belief-2": return 2; case "bracers_of_belief-3": return 3;
+      case "art_of_war_yellow-1": return 1;
+      case "plunder_run_red-2": return 3;
+      case "plunder_run_yellow-2": return 2;
+      case "plunder_run_blue-2": return 1;
+      case "come_to_fight_red": return 3;
+      case "come_to_fight_yellow": return 2;
+      case "come_to_fight_blue": return 1;
+      case "force_sight_red": return 3;
+      case "force_sight_yellow": return 2;
+      case "force_sight_blue": return 1;
       default: return 0;
     }
   }
@@ -124,21 +124,21 @@ function ARCCombatEffectActive($cardID, $attackID)
 {
   global $combatChainState, $CCS_AttackPlayedFrom, $mainPlayer;
   switch($cardID) {
-    case "ARC011": case "ARC012": case "ARC013": return true;
-    case "ARC019": return CardType($attackID) == "AA";
-    case "ARC032": case "ARC033": case "ARC034": return CardType($attackID) == "AA" && ClassContains($attackID, "MECHANOLOGIST", $mainPlayer);
-    case "ARC038": case "ARC039": return CardSubType($attackID) == "Arrow" && $combatChainState[$CCS_AttackPlayedFrom] == "ARS";
-    case "ARC042": return CardSubType($attackID) == "Arrow" && $combatChainState[$CCS_AttackPlayedFrom] == "ARS";
-    case "ARC047": return CardSubType($attackID) == "Arrow";
-    case "ARC054": case "ARC055": case "ARC056": return ClassContains($attackID, "RANGER", $mainPlayer) && CardType($attackID) == "AA";
-    case "ARC057": case "ARC058": case "ARC059": return $cardID == $attackID;
-    case "ARC091": case "ARC092": case "ARC093": return ClassContains($attackID, "RUNEBLADE", $mainPlayer);
-    case "ARC153-1": case "ARC153-2": case "ARC153-3": return CardType($attackID) == "AA";
-    case "ARC160-1": case "ARC160-3": return CardType($attackID) == "AA";
-    case "ARC170-1": case "ARC171-1": case "ARC172-1": return CardType($attackID) == "AA";
-    case "ARC170-2": case "ARC171-2": case "ARC172-2": return CardType($attackID) == "AA";
-    case "ARC203": case "ARC204": case "ARC205": return CardType($attackID) == "AA";
-    case "ARC206": case "ARC207": case "ARC208": return CardType($attackID) == "AA";
+    case "pedal_to_the_metal_red": case "pedal_to_the_metal_yellow": case "pedal_to_the_metal_blue": return true;
+    case "convection_amplifier_red": return CardType($attackID) == "AA";
+    case "locked_and_loaded_red": case "locked_and_loaded_yellow": case "locked_and_loaded_blue": return CardType($attackID) == "AA" && ClassContains($attackID, "MECHANOLOGIST", $mainPlayer);
+    case "azalea_ace_in_the_hole": case "azalea": return CardSubType($attackID) == "Arrow" && $combatChainState[$CCS_AttackPlayedFrom] == "ARS";
+    case "bulls_eye_bracers": return CardSubType($attackID) == "Arrow" && $combatChainState[$CCS_AttackPlayedFrom] == "ARS";
+    case "rapid_fire_yellow": return CardSubType($attackID) == "Arrow";
+    case "take_aim_red": case "take_aim_yellow": case "take_aim_blue": return ClassContains($attackID, "RANGER", $mainPlayer) && CardType($attackID) == "AA";
+    case "head_shot_red": case "head_shot_yellow": case "head_shot_blue": return $cardID == $attackID;
+    case "oath_of_the_arknight_red": case "oath_of_the_arknight_yellow": case "oath_of_the_arknight_blue": return ClassContains($attackID, "RUNEBLADE", $mainPlayer);
+    case "bracers_of_belief-1": case "bracers_of_belief-2": case "bracers_of_belief-3": return CardType($attackID) == "AA";
+    case "art_of_war_yellow-1": case "art_of_war_yellow-3": return CardType($attackID) == "AA";
+    case "plunder_run_red-1": case "plunder_run_yellow-1": case "plunder_run_blue-1": return CardType($attackID) == "AA";
+    case "plunder_run_red-2": case "plunder_run_yellow-2": case "plunder_run_blue-2": return CardType($attackID) == "AA";
+    case "come_to_fight_red": case "come_to_fight_yellow": case "come_to_fight_blue": return CardType($attackID) == "AA";
+    case "force_sight_red": case "force_sight_yellow": case "force_sight_blue": return CardType($attackID) == "AA";
     default: return false;
   }
 }

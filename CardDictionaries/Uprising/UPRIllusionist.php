@@ -14,56 +14,56 @@
     }
     switch($cardID)
     {
-      case "UPR004": Transform($currentPlayer, "Ash", "UPR042", target:$target); return "";
-      case "UPR006": Transform($currentPlayer, "Ash", "UPR406", target:$target); return "";
-      case "UPR007": Transform($currentPlayer, "Ash", "UPR407", target:$target); return "";
-      case "UPR008": Transform($currentPlayer, "Ash", "UPR408", target:$target); return "";
-      case "UPR009": Transform($currentPlayer, "Ash", "UPR409", target:$target); return "";
-      case "UPR010": Transform($currentPlayer, "Ash", "UPR410", target:$target); return "";
-      case "UPR011": Transform($currentPlayer, "Ash", "UPR411", target:$target); return "";
-      case "UPR012": Transform($currentPlayer, "Ash", "UPR412", target:$target); return "";
-      case "UPR013": Transform($currentPlayer, "Ash", "UPR413", target:$target); return "";
-      case "UPR014": Transform($currentPlayer, "Ash", "UPR414", target:$target); return "";
-      case "UPR015": Transform($currentPlayer, "Ash", "UPR415", target:$target); return "";
-      case "UPR016": Transform($currentPlayer, "Ash", "UPR416", target:$target); return "";
-      case "UPR017": Transform($currentPlayer, "Ash", "UPR417", target:$target); return "";
-      case "UPR018": case "UPR019": case "UPR020": Transform($currentPlayer, "Ash", "UPR042", true); return "";
-      case "UPR030": case "UPR031": case "UPR032":
-        PutPermanentIntoPlay($currentPlayer, "UPR043");
+      case "silken_form": Transform($currentPlayer, "Ash", "aether_ashwing", target:$target); return "";
+      case "invoke_dracona_optimai_red": Transform($currentPlayer, "Ash", "dracona_optimai", target:$target); return "";
+      case "invoke_tomeltai_red": Transform($currentPlayer, "Ash", "tomeltai", target:$target); return "";
+      case "invoke_dominia_red": Transform($currentPlayer, "Ash", "dominia", target:$target); return "";
+      case "invoke_azvolai_red": Transform($currentPlayer, "Ash", "azvolai", target:$target); return "";
+      case "invoke_cromai_red": Transform($currentPlayer, "Ash", "cromai", target:$target); return "";
+      case "invoke_kyloria_red": Transform($currentPlayer, "Ash", "kyloria", target:$target); return "";
+      case "invoke_miragai_red": Transform($currentPlayer, "Ash", "miragai", target:$target); return "";
+      case "invoke_nekria_red": Transform($currentPlayer, "Ash", "nekria", target:$target); return "";
+      case "invoke_ouvia_red": Transform($currentPlayer, "Ash", "ouvia", target:$target); return "";
+      case "invoke_themai_red": Transform($currentPlayer, "Ash", "themai", target:$target); return "";
+      case "invoke_vynserakai_red": Transform($currentPlayer, "Ash", "vynserakai", target:$target); return "";
+      case "invoke_yendurai_red": Transform($currentPlayer, "Ash", "yendurai", target:$target); return "";
+      case "billowing_mirage_red": case "billowing_mirage_yellow": case "billowing_mirage_blue": Transform($currentPlayer, "Ash", "aether_ashwing", true); return "";
+      case "sweeping_blow_red": case "sweeping_blow_yellow": case "sweeping_blow_blue":
+        PutPermanentIntoPlay($currentPlayer, "ash");
         return "";
-      case "UPR033": case "UPR034": case "UPR035":
-        PutPermanentIntoPlay($currentPlayer, "UPR043");
-        if($cardID == "UPR033") $maxTransform = 3;
-        else if($cardID == "UPR034") $maxTransform = 2;
+      case "rake_the_embers_red": case "rake_the_embers_yellow": case "rake_the_embers_blue":
+        PutPermanentIntoPlay($currentPlayer, "ash");
+        if($cardID == "rake_the_embers_red") $maxTransform = 3;
+        else if($cardID == "rake_the_embers_yellow") $maxTransform = 2;
         else $maxTransform = 1;
-        for($i=0; $i<$maxTransform; ++$i) Transform($currentPlayer, "Ash", "UPR042", true, ($i == 0 ? false : true), ($i == 0 ? false : true));
+        for($i=0; $i<$maxTransform; ++$i) Transform($currentPlayer, "Ash", "aether_ashwing", true, ($i == 0 ? false : true), ($i == 0 ? false : true));
         return "";
-      case "UPR039":
+      case "sand_cover_red":
         Transform($currentPlayer, "Ash", "UPR439", target:$target);
         return "";
-      case "UPR040":
+      case "sand_cover_yellow":
         Transform($currentPlayer, "Ash", "UPR440", target:$target);
         return "";
-      case "UPR041":
+      case "sand_cover_blue":
         Transform($currentPlayer, "Ash", "UPR441", target:$target);
         return "";
-      case "UPR036": case "UPR037": case "UPR038":
-        Transform($currentPlayer, "Ash", "UPR042", target:$target);
+      case "skittering_sands_red": case "skittering_sands_yellow": case "skittering_sands_blue":
+        Transform($currentPlayer, "Ash", "aether_ashwing", target:$target);
         AddDecisionQueue("MZOP", $currentPlayer, "GETUNIQUEID");
         AddDecisionQueue("ADDLIMITEDCURRENTEFFECT", $currentPlayer, $cardID . ",HAND");
         return "";
-      case "UPR151":
-        $gtIndex = FindCharacterIndex($currentPlayer, "UPR151");
+      case "ghostly_touch":
+        $gtIndex = FindCharacterIndex($currentPlayer, "ghostly_touch");
         $char = &GetPlayerCharacter($currentPlayer);
         $index = PlayAlly("UPR551", $currentPlayer);
         $allies = &GetAllies($currentPlayer);
         $allies[$index+2] = $char[$gtIndex+2];
         AddCurrentTurnEffect($cardID . "-" . $char[$gtIndex+2], $currentPlayer);
         return "";
-      case "UPR154":
-        AddCurrentTurnEffect("UPR154", $currentPlayer);
+      case "semblance_blue":
+        AddCurrentTurnEffect("semblance_blue", $currentPlayer);
         return "";
-      case "UPR155": case "UPR156": case "UPR157":
+      case "transmogrify_red": case "transmogrify_yellow": case "transmogrify_blue":
         AddCurrentTurnEffect($cardID, $currentPlayer);
         return "";
       default: return "";
@@ -75,11 +75,11 @@
     global $mainPlayer, $combatChainState, $CCS_WeaponIndex, $defPlayer;
     switch($cardID)
     {
-      case "UPR024": case "UPR025": case "UPR026":
-        PutPermanentIntoPlay($mainPlayer, "UPR043");
-        Transform($mainPlayer, "Ash", "UPR042", true);
+      case "dustup_red": case "dustup_yellow": case "dustup_blue":
+        PutPermanentIntoPlay($mainPlayer, "ash");
+        Transform($mainPlayer, "Ash", "aether_ashwing", true);
         break;
-      case "UPR411":
+      case "kyloria":
         if(IsHeroAttackTarget()) {
           AddDecisionQueue("MULTIZONEINDICES", $mainPlayer, "THEIRITEMS");
           AddDecisionQueue("SETDQCONTEXT", $mainPlayer, "Choose an item to take");
@@ -89,14 +89,14 @@
           AddDecisionQueue("DRAW", $mainPlayer, "-", 1);
         }
         break;
-      case "UPR413":
+      case "nekria":
         $index = $combatChainState[$CCS_WeaponIndex];
         $allies = &GetAllies($mainPlayer);
         $allies[$index+2] -= 1;
         $allies[$index+7] -= 1;
-        PutPermanentIntoPlay($mainPlayer, "UPR043");
+        PutPermanentIntoPlay($mainPlayer, "ash");
         break;
-      case "UPR416": if(IsHeroAttackTarget()) { DealArcane(3, 0, "ABILITY", $cardID, true, $mainPlayer); } break;
+      case "vynserakai": if(IsHeroAttackTarget()) { DealArcane(3, 0, "ABILITY", $cardID, true, $mainPlayer); } break;
       default: break;
     }
   }
@@ -105,12 +105,12 @@ function UPRIllusionistDealDamageEffect($cardID)
 {
   global $mainPlayer, $combatChainState, $CCS_WeaponIndex;
   switch ($cardID) {
-    case "UPR413":
+    case "nekria":
       $index = $combatChainState[$CCS_WeaponIndex];
       $allies = &GetAllies($mainPlayer);
       $allies[$index + 2] -= 1;
       $allies[$index + 7] -= 1;
-      PutPermanentIntoPlay($mainPlayer, "UPR043");
+      PutPermanentIntoPlay($mainPlayer, "ash");
       break;
     default:
       break;
@@ -135,9 +135,9 @@ function UPRIllusionistDealDamageEffect($cardID)
       if($optional) AddDecisionQueue("MAYCHOOSEPERMANENT", $player, "<-", 1);
       else AddDecisionQueue("CHOOSEPERMANENT", $player, "<-", 1);
       AddDecisionQueue("TRANSFORM", $player, $into.",".$firstTransform, 1);
-    } else if($materialType == "MON104") {
+    } else if($materialType == "spectral_shield") {
       $subType = CardSubType($materialType);
-      AddDecisionQueue("FINDINDICES", $player, "MON104",($subsequent ? 1 : 0));
+      AddDecisionQueue("FINDINDICES", $player, "spectral_shield",($subsequent ? 1 : 0));
       AddDecisionQueue("SETDQCONTEXT", $player, "Choose a " . CardLink($materialType, $materialType) . " to transform into " . CardLink($into, $into), 1);
       AddDecisionQueue("CHOOSEMY" . strtoupper($subType), $player, "<-", 1);
       AddDecisionQueue("TRANSFORM" . strtoupper($subType), $player, $into, 1);
@@ -171,7 +171,7 @@ function UPRIllusionistDealDamageEffect($cardID)
   function GhostlyTouchPhantasmDestroy()
   {
     global $mainPlayer;
-    $ghostlyTouchIndex = FindCharacterIndex($mainPlayer, "UPR151");
+    $ghostlyTouchIndex = FindCharacterIndex($mainPlayer, "ghostly_touch");
     if($ghostlyTouchIndex > -1) {
       $char = &GetPlayerCharacter($mainPlayer);
       ++$char[$ghostlyTouchIndex+2];

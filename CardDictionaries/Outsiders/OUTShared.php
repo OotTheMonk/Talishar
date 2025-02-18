@@ -4,28 +4,28 @@ function OUTAbilityCost($cardID)
 {
   switch($cardID)
   {
-    case "OUT005": case "OUT006": return 2;
-    case "OUT007": case "OUT008": return 2;
-    case "OUT009": case "OUT010": return 2;
-    case "OUT011": return 0;
-    case "OUT049": return 1;
-    case "OUT054": return 0;
-    case "OUT093": return 1;
-    case "OUT094": return 0;
-    case "OUT095": return 3;
-    case "OUT096": return 3;
-    case "OUT098": return 0;
-    case "OUT139": return 0;
-    case "OUT140": return 0;
-    case "OUT141": return 2;
-    case "OUT157": return 1;
-    case "OUT158": return 1;
-    case "OUT174": return 1;
-    case "OUT175": case "OUT176": case "OUT177": case "OUT178": return 1;//Seeker's Equips
-    case "OUT179": return 0;
-    case "OUT180": return 0;
-    case "OUT181": return 2;
-    case "OUT182": return 0;
+    case "nerve_scalpel": case "nerve_scalpel": return 2;
+    case "orbitoclast": case "orbitoclast": return 2;
+    case "scale_peeler": case "scale_peeler": return 2;
+    case "redback_shroud": return 0;
+    case "mask_of_many_faces": return 1;
+    case "silverwind_shuriken_blue": return 0;
+    case "barbed_castaway": return 1;
+    case "trench_of_sunken_treasure": return 0;
+    case "quiver_of_abyssal_depths": return 3;
+    case "quiver_of_rustling_leaves": return 3;
+    case "driftwood_quiver": return 0;
+    case "flick_knives": return 0;
+    case "mask_of_shifting_perspectives": return 0;
+    case "blade_cuff": return 2;
+    case "mask_of_malicious_manifestations": return 1;
+    case "toxic_tips": return 1;
+    case "vambrace_of_determination": return 1;
+    case "seekers_hood": case "seekers_gilet": case "seekers_mitts": case "seekers_leggings": return 1;//Seeker's Equips
+    case "silken_gi": return 0;
+    case "threadbare_tunic": return 0;
+    case "fisticuffs": return 2;
+    case "fleet_foot_sandals": return 0;
     default: return 0;
   }
 }
@@ -34,29 +34,29 @@ function OUTAbilityCost($cardID)
   {
     switch ($cardID)
     {
-      case "OUT001": case "OUT002": return "AR";
-      case "OUT005": case "OUT006": return "AA";
-      case "OUT007": case "OUT008": return "AA";
-      case "OUT009": case "OUT010": return "AA";
-      case "OUT011": return "AR";
-      case "OUT049": return "I";
-      case "OUT054": return "AR";
-      case "OUT093": return "I";
-      case "OUT094": return "I";
-      case "OUT095": return "I";
-      case "OUT096": return "I";
-      case "OUT098": return "I";
-      case "OUT139": return "AR";
-      case "OUT140": return "AR";
-      case "OUT141": return "A";
-      case "OUT157": return "A";
-      case "OUT158": return "A";
-      case "OUT174": return "AR";
-      case "OUT175": case "OUT176": case "OUT177": case "OUT178": return "I";//Seeker's Equips
-      case "OUT179": return "I";
-      case "OUT180": return "I";
-      case "OUT181": return "AR";
-      case "OUT182": return "AR";
+      case "uzuri_switchblade": case "uzuri": return "AR";
+      case "nerve_scalpel": case "nerve_scalpel": return "AA";
+      case "orbitoclast": case "orbitoclast": return "AA";
+      case "scale_peeler": case "scale_peeler": return "AA";
+      case "redback_shroud": return "AR";
+      case "mask_of_many_faces": return "I";
+      case "silverwind_shuriken_blue": return "AR";
+      case "barbed_castaway": return "I";
+      case "trench_of_sunken_treasure": return "I";
+      case "quiver_of_abyssal_depths": return "I";
+      case "quiver_of_rustling_leaves": return "I";
+      case "driftwood_quiver": return "I";
+      case "flick_knives": return "AR";
+      case "mask_of_shifting_perspectives": return "AR";
+      case "blade_cuff": return "A";
+      case "mask_of_malicious_manifestations": return "A";
+      case "toxic_tips": return "A";
+      case "vambrace_of_determination": return "AR";
+      case "seekers_hood": case "seekers_gilet": case "seekers_mitts": case "seekers_leggings": return "I";//Seeker's Equips
+      case "silken_gi": return "I";
+      case "threadbare_tunic": return "I";
+      case "fisticuffs": return "AR";
+      case "fleet_foot_sandals": return "AR";
       default: return "";
     }
   }
@@ -65,9 +65,9 @@ function OUTAbilityCost($cardID)
   {
     switch ($cardID)
     {
-      case "OUT141": return true;
-      case "OUT157": return true;
-      case "OUT158": return true;
+      case "blade_cuff": return true;
+      case "mask_of_malicious_manifestations": return true;
+      case "toxic_tips": return true;
       default: return false;
     }
   }
@@ -79,43 +79,43 @@ function OUTAbilityCost($cardID)
     $cardID = $idArr2[0];
     switch($cardID)
     {
-      case "OUT021": case "OUT022": case "OUT023": return 3;
-      case "OUT033": case "OUT034": case "OUT035": return 1;
-      case "OUT042": return 3;
-      case "OUT043": return 2;
-      case "OUT044": return 1;
-      case "OUT052": return 1;
-      case "OUT071": case "OUT072": case "OUT073": return 2;
-      case "OUT105": return 4;
-      case "OUT109": return 4;
-      case "OUT110": return 3;
-      case "OUT111": return 2;
-      case "OUT112": return 3;
-      case "OUT113": return 3;
-      case "OUT114": return 3;
-      case "OUT115": case "OUT116": case "OUT117": return 1;
-      case "OUT118": case "OUT119": case "OUT120": return 1;
-      case "OUT121": case "OUT122": case "OUT123": return 1;
-      case "OUT124": case "OUT125": case "OUT126": return 1;
-      case "OUT127": case "OUT128": case "OUT129": return 1;
-      case "OUT136": case "OUT137": case "OUT138": return 1;
-      case "OUT141": return 1;
-      case "OUT143": return 1;
-      case "OUT144": return 1;
-      case "OUT151": case "OUT152": case "OUT153": return 1;
-      case "OUT154": return 3;
-      case "OUT155": return 2;
-      case "OUT156": return 1;
-      case "OUT179_2": return -1;
-      case "OUT186": return (-1 * $idArr[1]);
-      case "OUT188_2": return 3;
-      case "OUT195": case "OUT196": case "OUT197": return 1;
-      case "OUT219": return 3;
-      case "OUT220": return 2;
-      case "OUT221": return 1;
-      case "OUT225": return 3;
-      case "OUT226": return 2;
-      case "OUT227": return 1;
+      case "spike_with_bloodrot_red": case "spike_with_frailty_red": case "spike_with_inertia_red": return 3;
+      case "prowl_red": case "prowl_yellow": case "prowl_blue": return 1;
+      case "razors_edge_red": return 3;
+      case "razors_edge_yellow": return 2;
+      case "razors_edge_blue": return 1;
+      case "head_leads_the_tail_red": return 1;
+      case "deadly_duo_red": case "deadly_duo_yellow": case "deadly_duo_blue": return 2;
+      case "melting_point_red": return 4;
+      case "fletch_a_red_tail_red": return 4;
+      case "fletch_a_yellow_tail_yellow": return 3;
+      case "fletch_a_blue_tail_blue": return 2;
+      case "lace_with_bloodrot_red": return 3;
+      case "lace_with_frailty_red": return 3;
+      case "lace_with_inertia_red": return 3;
+      case "falcon_wing_red": case "falcon_wing_yellow": case "falcon_wing_blue": return 1;
+      case "infecting_shot_red": case "infecting_shot_yellow": case "infecting_shot_blue": return 1;
+      case "murkmire_grapnel_red": case "murkmire_grapnel_yellow": case "murkmire_grapnel_blue": return 1;
+      case "sedation_shot_red": case "sedation_shot_yellow": case "sedation_shot_blue": return 1;
+      case "skybound_shot_red": case "skybound_shot_yellow": case "skybound_shot_blue": return 1;
+      case "withering_shot_red": case "withering_shot_yellow": case "withering_shot_blue": return 1;
+      case "blade_cuff": return 1;
+      case "concealed_blade_blue": return 1;
+      case "knives_out_blue": return 1;
+      case "plunge_red": case "plunge_yellow": case "plunge_blue": return 1;
+      case "short_and_sharp_red": return 3;
+      case "short_and_sharp_yellow": return 2;
+      case "short_and_sharp_blue": return 1;
+      case "silken_gi_2": return -1;
+      case "gore_belching_red": return (-1 * $idArr[1]);
+      case "premeditate_red_2": return 3;
+      case "looking_for_a_scrap_red": case "looking_for_a_scrap_yellow": case "looking_for_a_scrap_blue": return 1;
+      case "spring_load_red": return 3;
+      case "spring_load_yellow": return 2;
+      case "spring_load_blue": return 1;
+      case "scout_the_periphery_red": return 3;
+      case "scout_the_periphery_yellow": return 2;
+      case "scout_the_periphery_blue": return 1;
       default: return 0;
     }
   }
@@ -129,40 +129,40 @@ function OUTAbilityCost($cardID)
     if(strlen($cardID) > 6) $cardID = $commaArr[0];
     switch ($cardID)
     {
-      case "OUT021": case "OUT022": case "OUT023": return true;
-      case "OUT033": case "OUT034": case "OUT035": return HasStealth($attackID);
-      case "OUT042": case "OUT043": case "OUT044": return true;
-      case "OUT049": return CardType($attackID) == "AA";
-      case "OUT052": return CardType($attackID) == "AA" && count($commaArr) > 1 && IsCurrentAttackName(GamestateUnsanitize($commaArr[1]));
-      case "OUT068": case "OUT069": case "OUT070": return true;
-      case "OUT071": case "OUT072": case "OUT073": return CardType($attackID) == "AA" && AttackValue($attackID) <= 2;//Base power
-      case "OUT102": return true;
-      case "OUT105": return CardSubType($attackID) == "Arrow";
-      case "OUT109": case "OUT110": case "OUT111": return CardSubType($attackID) == "Arrow";
-      case "OUT112": return CardSubType($attackID) == "Arrow";
-      case "OUT113": return CardSubType($attackID) == "Arrow";
-      case "OUT114": return CardSubType($attackID) == "Arrow";
-      case "OUT115": case "OUT116": case "OUT117": return true;
-      case "OUT118": case "OUT119": case "OUT120": return true;
-      case "OUT121": case "OUT122": case "OUT123": return true;
-      case "OUT124": case "OUT125": case "OUT126": return true;
-      case "OUT127": case "OUT128": case "OUT129": return true;
-      case "OUT136": case "OUT137": case "OUT138": return true;
-      case "OUT140": return SubtypeContains($attackID, "Dagger");
-      case "OUT141": return SubtypeContains($attackID, "Dagger");
-      case "OUT143": return true;
-      case "OUT144": return SubtypeContains($attackID, "Dagger");
-      case "OUT151": case "OUT152": case "OUT153": return SubtypeContains($attackID, "Dagger");
-      case "OUT154": case "OUT155": case "OUT156": return true;
-      case "OUT158": return CardType($attackID) == "AA";
-      case "OUT165": case "OUT166": case "OUT167": return CardType($attackID) == "AA" && (ClassContains($attackID, "ASSASSIN", $mainPlayer) || ClassContains($attackID, "RANGER", $mainPlayer));
-      case "OUT179_2": return CardType($attackID) == "AA";
-      case "OUT186": return true;
-      case "OUT188_1": return CardType($attackID) == "AA";
-      case "OUT188_2": return CardType($attackID) == "AA" && AttackPlayedFrom() == "ARS";
-      case "OUT195": case "OUT196": case "OUT197": return true;
-      case "OUT219": case "OUT220": case "OUT221": return true;
-      case "OUT225": case "OUT226": case "OUT227": return CardType($attackID) == "AA" && AttackPlayedFrom() == "ARS";
+      case "spike_with_bloodrot_red": case "spike_with_frailty_red": case "spike_with_inertia_red": return true;
+      case "prowl_red": case "prowl_yellow": case "prowl_blue": return HasStealth($attackID);
+      case "razors_edge_red": case "razors_edge_yellow": case "razors_edge_blue": return true;
+      case "mask_of_many_faces": return CardType($attackID) == "AA";
+      case "head_leads_the_tail_red": return CardType($attackID) == "AA" && count($commaArr) > 1 && IsCurrentAttackName(GamestateUnsanitize($commaArr[1]));
+      case "be_like_water_red": case "be_like_water_yellow": case "be_like_water_blue": return true;
+      case "deadly_duo_red": case "deadly_duo_yellow": case "deadly_duo_blue": return CardType($attackID) == "AA" && AttackValue($attackID) <= 2;//Base power
+      case "buzzsaw_trap_blue": return true;
+      case "melting_point_red": return CardSubType($attackID) == "Arrow";
+      case "fletch_a_red_tail_red": case "fletch_a_yellow_tail_yellow": case "fletch_a_blue_tail_blue": return CardSubType($attackID) == "Arrow";
+      case "lace_with_bloodrot_red": return CardSubType($attackID) == "Arrow";
+      case "lace_with_frailty_red": return CardSubType($attackID) == "Arrow";
+      case "lace_with_inertia_red": return CardSubType($attackID) == "Arrow";
+      case "falcon_wing_red": case "falcon_wing_yellow": case "falcon_wing_blue": return true;
+      case "infecting_shot_red": case "infecting_shot_yellow": case "infecting_shot_blue": return true;
+      case "murkmire_grapnel_red": case "murkmire_grapnel_yellow": case "murkmire_grapnel_blue": return true;
+      case "sedation_shot_red": case "sedation_shot_yellow": case "sedation_shot_blue": return true;
+      case "skybound_shot_red": case "skybound_shot_yellow": case "skybound_shot_blue": return true;
+      case "withering_shot_red": case "withering_shot_yellow": case "withering_shot_blue": return true;
+      case "mask_of_shifting_perspectives": return SubtypeContains($attackID, "Dagger");
+      case "blade_cuff": return SubtypeContains($attackID, "Dagger");
+      case "concealed_blade_blue": return true;
+      case "knives_out_blue": return SubtypeContains($attackID, "Dagger");
+      case "plunge_red": case "plunge_yellow": case "plunge_blue": return SubtypeContains($attackID, "Dagger");
+      case "short_and_sharp_red": case "short_and_sharp_yellow": case "short_and_sharp_blue": return true;
+      case "toxic_tips": return CardType($attackID) == "AA";
+      case "toxicity_red": case "toxicity_yellow": case "toxicity_blue": return CardType($attackID) == "AA" && (ClassContains($attackID, "ASSASSIN", $mainPlayer) || ClassContains($attackID, "RANGER", $mainPlayer));
+      case "silken_gi_2": return CardType($attackID) == "AA";
+      case "gore_belching_red": return true;
+      case "premeditate_red_1": return CardType($attackID) == "AA";
+      case "premeditate_red_2": return CardType($attackID) == "AA" && AttackPlayedFrom() == "ARS";
+      case "looking_for_a_scrap_red": case "looking_for_a_scrap_yellow": case "looking_for_a_scrap_blue": return true;
+      case "spring_load_red": case "spring_load_yellow": case "spring_load_blue": return true;
+      case "scout_the_periphery_red": case "scout_the_periphery_yellow": case "scout_the_periphery_blue": return CardType($attackID) == "AA" && AttackPlayedFrom() == "ARS";
       default: return false;
     }
   }
@@ -175,7 +175,7 @@ function OUTAbilityCost($cardID)
     $otherPlayer = $currentPlayer == 1 ? 2 : 1;
     switch ($cardID)
     {
-      case "OUT001": case "OUT002":
+      case "uzuri_switchblade": case "uzuri":
         $banish = new Banish($currentPlayer);
         $card = $banish->FirstCardWithModifier("UZURI");
         if($card == null) return "Uzuri's knife is re-sheathed";
@@ -192,40 +192,40 @@ function OUTAbilityCost($cardID)
         $combatChainState[$CCS_LinkBaseAttack] = ModifiedAttackValue($combatChain[0], $currentPlayer, "CC", source:"");
         $card->Remove();
         return "";
-      case "OUT011":
+      case "redback_shroud":
         AddCurrentTurnEffect($cardID, $currentPlayer);
         return "";
-      case "OUT014":
+      case "spreading_plague_yellow":
         for($i=0; $i<count($combatChain); $i+=CombatChainPieces())
         {
           if($combatChain[$i+1] == $defPlayer && $combatChain[$i+2] != "PLAY" && CardType($combatChain[$i]) != "C") PlayAura($CID_BloodRotPox, $defPlayer, effectController:$mainPlayer);
         }
         return "";
-      case "OUT021": case "OUT022": case "OUT023":
+      case "spike_with_bloodrot_red": case "spike_with_frailty_red": case "spike_with_inertia_red":
         AddCurrentTurnEffect($cardID, $currentPlayer);
         return "";
-      case "OUT033": case "OUT034": case "OUT035":
+      case "prowl_red": case "prowl_yellow": case "prowl_blue":
         AddCurrentTurnEffectFromCombat($cardID, $currentPlayer);
         return "";
-      case "OUT042": case "OUT043": case "OUT044":
+      case "razors_edge_red": case "razors_edge_yellow": case "razors_edge_blue":
         AddCurrentTurnEffect($cardID, $currentPlayer);
         return "";
-      case "OUT049":
+      case "mask_of_many_faces":
         AddDecisionQueue("INPUTCARDNAME", $currentPlayer, "-");
         AddDecisionQueue("SETDQVAR", $currentPlayer, "0");
-        AddDecisionQueue("PREPENDLASTRESULT", $currentPlayer, "OUT049-");
+        AddDecisionQueue("PREPENDLASTRESULT", $currentPlayer, "mask_of_many_faces-");
         AddDecisionQueue("ADDCURRENTEFFECTNEXTATTACK", $currentPlayer, "<-");
         AddDecisionQueue("WRITELOG", $currentPlayer, "📣<b>{0}</b> was chosen");
         return "";
-      case "OUT052":
-        AddDecisionQueue("INPUTCARDNAME", $currentPlayer, "OUT052");
+      case "head_leads_the_tail_red":
+        AddDecisionQueue("INPUTCARDNAME", $currentPlayer, "head_leads_the_tail_red");
         AddDecisionQueue("SETDQVAR", $currentPlayer, "0");
-        AddDecisionQueue("PREPENDLASTRESULT", $currentPlayer, "OUT052,");
+        AddDecisionQueue("PREPENDLASTRESULT", $currentPlayer, "head_leads_the_tail_red,");
         AddDecisionQueue("ADDCURRENTEFFECT", $currentPlayer, "<-");
         AddDecisionQueue("WRITELOG", $currentPlayer, "📣<b>{0}</b> was chosen");
         return "";
-      case "OUT055":
-        AddDecisionQueue("MULTIZONEINDICES", $currentPlayer, "MYDISCARD:isSameName=WTR107");
+      case "visit_the_floating_dojo_blue":
+        AddDecisionQueue("MULTIZONEINDICES", $currentPlayer, "MYDISCARD:isSameName=surging_strike_red");
         AddDecisionQueue("SETDQCONTEXT", $currentPlayer, "Choose a Surging Strike from your graveyard");
         AddDecisionQueue("MAYCHOOSEMULTIZONE", $currentPlayer, "<-", 1);
         AddDecisionQueue("MZREMOVE", $currentPlayer, "-", 1);
@@ -242,7 +242,7 @@ function OUTAbilityCost($cardID)
         AddDecisionQueue("PREPENDLASTRESULT", $currentPlayer, "{0},", 1);
         AddDecisionQueue("ADDTOPORBOT", $currentPlayer, "-", 1);
         return "";
-      case "OUT056": case "OUT057": case "OUT058":
+      case "bonds_of_ancestry_red": case "bonds_of_ancestry_yellow": case "bonds_of_ancestry_blue":
         if(ComboActive())
         {
           GiveAttackGoAgain();
@@ -258,9 +258,9 @@ function OUTAbilityCost($cardID)
           AddDecisionQueue("MZREMOVE", $currentPlayer, "-", 1);
         }
         return "";
-      case "OUT093":
+      case "barbed_castaway":
         $abilityName = GetResolvedAbilityName($cardID);
-        SearchCurrentTurnEffects("OUT093-".$abilityName, $currentPlayer, true);
+        SearchCurrentTurnEffects("barbed_castaway-".$abilityName, $currentPlayer, true);
         if($abilityName == "Load") LoadArrow($currentPlayer);
         else if($abilityName == "Aim") {
           $arsenalFaceDown = ArsenalFaceDownCard($currentPlayer);
@@ -271,10 +271,10 @@ function OUTAbilityCost($cardID)
           }
         }
         return "";
-      case "OUT094":
+      case "trench_of_sunken_treasure":
         GainResources($currentPlayer, 1);
         return "";
-      case "OUT095":
+      case "quiver_of_abyssal_depths":
         AddDecisionQueue("FINDINDICES", $currentPlayer, "MYDISCARDARROW");
         AddDecisionQueue("PREPENDLASTRESULT", $currentPlayer, "3-", 1);
         AddDecisionQueue("MULTICHOOSEDISCARD", $currentPlayer, "<-", 1);
@@ -282,7 +282,7 @@ function OUTAbilityCost($cardID)
         AddDecisionQueue("SPECIFICCARD", $currentPlayer, "QUIVEROFABYSSALDEPTH", 1);
         AddDecisionQueue("SHUFFLEDECK", $currentPlayer, "-");
         return "";
-      case "OUT096":
+      case "quiver_of_rustling_leaves":
         $deck = new Deck($currentPlayer);
         if($deck->Reveal())
         {
@@ -299,94 +299,94 @@ function OUTAbilityCost($cardID)
           }
         }
         return $rv;
-      case "OUT098":
+      case "driftwood_quiver":
         AddDecisionQueue("FINDINDICES", $currentPlayer, "ARSENAL");
         AddDecisionQueue("CHOOSEARSENAL", $currentPlayer, "<-", 1);
         AddDecisionQueue("REMOVEARSENAL", $currentPlayer, "-", 1);
         AddDecisionQueue("ADDBOTDECK", $currentPlayer, "-", 1);
         break;
-      case "OUT105":
+      case "melting_point_red":
         AddCurrentTurnEffect($cardID, $currentPlayer);
         return "";
-      case "OUT109": case "OUT110": case "OUT111":
+      case "fletch_a_red_tail_red": case "fletch_a_yellow_tail_yellow": case "fletch_a_blue_tail_blue":
         AddCurrentTurnEffect($cardID, $currentPlayer);
         AddCurrentTurnEffect($cardID, $defPlayer);
         return "";
-      case "OUT112":
+      case "lace_with_bloodrot_red":
         AddCurrentTurnEffect($cardID, $currentPlayer);
         return "";
-      case "OUT113":
+      case "lace_with_frailty_red":
         AddCurrentTurnEffect($cardID, $currentPlayer);
         return "";
-      case "OUT114":
+      case "lace_with_inertia_red":
         AddCurrentTurnEffect($cardID, $currentPlayer);
         return "";
-      case "OUT115": case "OUT116": case "OUT117":
+      case "falcon_wing_red": case "falcon_wing_yellow": case "falcon_wing_blue":
         if(HasAimCounter()) {
           AddCurrentTurnEffect($cardID, $currentPlayer);
         }
         return "";
-      case "OUT118": case "OUT119": case "OUT120":
+      case "infecting_shot_red": case "infecting_shot_yellow": case "infecting_shot_blue":
         if(HasAimCounter()) {
           AddCurrentTurnEffect($cardID, $currentPlayer);
         }
         return "";
-      case "OUT121": case "OUT122": case "OUT123":
+      case "murkmire_grapnel_red": case "murkmire_grapnel_yellow": case "murkmire_grapnel_blue":
         if(HasAimCounter()) {
           AddCurrentTurnEffect($cardID, $currentPlayer);
           $rv = "Gets +1.";
         }
         return $rv;
-      case "OUT124": case "OUT125": case "OUT126":
+      case "sedation_shot_red": case "sedation_shot_yellow": case "sedation_shot_blue":
         if(HasAimCounter()) {
           AddCurrentTurnEffect($cardID, $currentPlayer);
           $rv = "Gets +1.";
         }
         return $rv;
-      case "OUT127": case "OUT128": case "OUT129":
+      case "skybound_shot_red": case "skybound_shot_yellow": case "skybound_shot_blue":
         if(HasAimCounter()) {
           AddCurrentTurnEffect($cardID, $currentPlayer);
           $rv = "Gets +1.";
         }
         return $rv;
-      case "OUT136": case "OUT137": case "OUT138":
+      case "withering_shot_red": case "withering_shot_yellow": case "withering_shot_blue":
         if(HasAimCounter()) {
           AddCurrentTurnEffect($cardID, $currentPlayer);
           $rv = "Gets +1.";
         }
         return $rv;
-      case "OUT139":
+      case "flick_knives":
         ThrowWeapon("Dagger", $cardID, target:$target);
         return "";
-      case "OUT140":
+      case "mask_of_shifting_perspectives":
         AddCurrentTurnEffect($cardID, $currentPlayer);
         return "";
-      case "OUT141":
+      case "blade_cuff":
         AddCurrentTurnEffect($cardID, $currentPlayer);
         return "";
-      case "OUT143":
+      case "concealed_blade_blue":
         AddCurrentTurnEffect($cardID, $currentPlayer);
         return "";
-      case "OUT144":
+      case "knives_out_blue":
         AddCurrentTurnEffect($cardID, $currentPlayer);
         return "";
-      case "OUT148": case "OUT149": case "OUT150":
+      case "hurl_red": case "hurl_yellow": case "hurl_blue":
         if(DelimStringContains($additionalCosts, "PAY1"))
         {
           ThrowWeapon("Dagger", $cardID);
         }
         return "";
-      case "OUT154": case "OUT155": case "OUT156":
+      case "short_and_sharp_red": case "short_and_sharp_yellow": case "short_and_sharp_blue":
         AddCurrentTurnEffect($cardID, $currentPlayer);
         return "";
-      case "OUT157":
+      case "mask_of_malicious_manifestations":
         $cardRemoved = Belch();
         AddPlayerHand($cardRemoved, $currentPlayer, "DECK");
         return "";
-      case "OUT158":
+      case "toxic_tips":
         AddCurrentTurnEffect($cardID, $currentPlayer);
         return "";
-      case "OUT159":
+      case "codex_of_bloodrot_yellow":
         $otherPlayer = ($currentPlayer == 1 ? 2 : 1);
         if(!ArsenalFull($currentPlayer))
         {
@@ -396,16 +396,16 @@ function OUTAbilityCost($cardID)
         {
           MZMoveCard($otherPlayer, "MYHAND", "MYARS,HAND,DOWN", silent:true);
         }
-        PlayAura("DYN244", $currentPlayer);//Ponder
+        PlayAura("ponder", $currentPlayer);//Ponder
         PlayAura($CID_BloodRotPox, $otherPlayer, effectController: $currentPlayer);
         return "";
-      case "OUT160":
+      case "codex_of_frailty_yellow":
         $otherPlayer = ($currentPlayer == 1 ? 2 : 1);
         CodexOfFrailty($currentPlayer);
-        PlayAura("DYN244", $currentPlayer);
+        PlayAura("ponder", $currentPlayer);
         PlayAura($CID_Frailty, $otherPlayer, effectController: $currentPlayer);
         return "";
-      case "OUT161":
+      case "codex_of_inertia_yellow":
         $otherPlayer = ($currentPlayer == 1 ? 2 : 1);
         $myDeck = new Deck($currentPlayer);
         if(!ArsenalFull($currentPlayer) && !$myDeck->Empty())
@@ -419,38 +419,38 @@ function OUTAbilityCost($cardID)
           TopDeckToArsenal($otherPlayer);
           PummelHit($otherPlayer);
         }
-        PlayAura("DYN244", $currentPlayer);
+        PlayAura("ponder", $currentPlayer);
         PlayAura($CID_Inertia, $otherPlayer, effectController: $currentPlayer);
         return "";
-      case "OUT165": case "OUT166": case "OUT167":
+      case "toxicity_red": case "toxicity_yellow": case "toxicity_blue":
         AddCurrentTurnEffect($cardID, $currentPlayer);
         return "Your opponent loses life if your next assassin or ranger attack hits.";
-      case "OUT174":
+      case "vambrace_of_determination":
         AddCurrentTurnEffect($cardID, $defPlayer);
         return "";
-      case "OUT175": case "OUT176": case "OUT177": case "OUT178":
+      case "seekers_hood": case "seekers_gilet": case "seekers_mitts": case "seekers_leggings":
         AddCurrentTurnEffect($cardID, $currentPlayer);
         PlayerOpt($currentPlayer, 1);
         return "";
-      case "OUT179":
+      case "silken_gi":
         AddCurrentTurnEffectNextAttack($cardID . "_1", $currentPlayer);
         AddCurrentTurnEffectNextAttack($cardID . "_2", $currentPlayer);
         return "";
-      case "OUT180":
+      case "threadbare_tunic":
         GainResources($currentPlayer, 1);
         break;
-      case "OUT182":
+      case "fleet_foot_sandals":
         GiveAttackGoAgain();
         break;
-      case "OUT186":
+      case "gore_belching_red":
         $cardRemoved = Belch();
-        if($cardRemoved == "") { AddCurrentTurnEffect("OUT186-7", $currentPlayer); return "You cannot reveal cards so Gore Belching gets -7."; }
+        if($cardRemoved == "") { AddCurrentTurnEffect("gore_belching_red-7", $currentPlayer); return "You cannot reveal cards so Gore Belching gets -7."; }
         else {
-          BanishCardForPlayer($cardRemoved, $currentPlayer, "DECK", "-", "OUT186");
-          AddCurrentTurnEffect("OUT186-" . ModifiedAttackValue($cardRemoved, $currentPlayer, "DECK", source:"OUT186"), $currentPlayer);
+          BanishCardForPlayer($cardRemoved, $currentPlayer, "DECK", "-", "gore_belching_red");
+          AddCurrentTurnEffect("gore_belching_red-" . ModifiedAttackValue($cardRemoved, $currentPlayer, "DECK", source:"gore_belching_red"), $currentPlayer);
         }
         return "";
-      case "OUT187":
+      case "burdens_of_the_past_blue":
         if(ShouldAutotargetOpponent($currentPlayer)) {
           AddDecisionQueue("PASSPARAMETER", $currentPlayer, "Target_Opponent");
           AddDecisionQueue("PLAYERTARGETEDABILITY", $currentPlayer, "BURDENSOFTHEPAST", 1);
@@ -460,23 +460,23 @@ function OUTAbilityCost($cardID)
           AddDecisionQueue("PLAYERTARGETEDABILITY", $currentPlayer, "BURDENSOFTHEPAST", 1);
         }
         return "";
-      case "OUT188":
+      case "premeditate_red":
         AddCurrentTurnEffect($cardID . "_1", $currentPlayer);
         AddCurrentTurnEffect($cardID . "_2", $currentPlayer);
         return "";
-      case "OUT192": case "OUT193": case "OUT194":
+      case "infectious_host_red": case "infectious_host_yellow": case "infectious_host_blue":
         if(SearchAuras($CID_Frailty, $currentPlayer)) PlayAura($CID_Frailty, $defPlayer, effectController: $currentPlayer);
         if(SearchAuras($CID_BloodRotPox, $currentPlayer)) PlayAura($CID_BloodRotPox, $defPlayer, effectController: $currentPlayer);
         if(SearchAuras($CID_Inertia, $currentPlayer)) PlayAura($CID_Inertia, $defPlayer, effectController: $currentPlayer);
         return "";
-      case "OUT195": case "OUT196": case "OUT197":
+      case "looking_for_a_scrap_red": case "looking_for_a_scrap_yellow": case "looking_for_a_scrap_blue":
         if(DelimStringContains($additionalCosts, "BANISH1ATTACK"))
         {
           AddCurrentTurnEffect($cardID, $currentPlayer);
           GiveAttackGoAgain();
         }
         return "";
-      case "OUT219": case "OUT220": case "OUT221":
+      case "spring_load_red": case "spring_load_yellow": case "spring_load_blue":
         $hand = &GetHand($currentPlayer);
         if(count($hand) == 0)
         {
@@ -484,16 +484,16 @@ function OUTAbilityCost($cardID)
           AddCurrentTurnEffect($cardID, $currentPlayer);
         }
         return $rv;
-      case "OUT225": case "OUT226": case "OUT227":
+      case "scout_the_periphery_red": case "scout_the_periphery_yellow": case "scout_the_periphery_blue":
         LookAtTopCard($currentPlayer, $cardID);
         AddCurrentTurnEffect($cardID, $currentPlayer);
         return "";
-      case "OUT228": case "OUT229": case "OUT230":
+      case "brush_off_red": case "brush_off_yellow": case "brush_off_blue":
         AddCurrentTurnEffect($cardID, $currentPlayer);
         return "";
-      case "OUT231": case "OUT232": case "OUT233":
+      case "peace_of_mind_red": case "peace_of_mind_yellow": case "peace_of_mind_blue":
         AddCurrentTurnEffect($cardID, $currentPlayer);
-        PlayAura("DYN244", $currentPlayer);
+        PlayAura("ponder", $currentPlayer);
         return "Prevents some of the next combat damage you take this turn.";
       default: return "";
     }
@@ -506,22 +506,22 @@ function OUTAbilityCost($cardID)
     global $combatChainState, $CCS_GoesWhereAfterLinkResolves, $CCS_FlickedDamage;
     switch ($cardID)
     {
-      case "OUT005": case "OUT006":
+      case "nerve_scalpel": case "nerve_scalpel":
         if (IsHeroAttackTarget()) {
           AddCurrentTurnEffect($cardID, $defPlayer);
         }
         break;
-      case "OUT007": case "OUT008":
+      case "orbitoclast": case "orbitoclast":
         if (IsHeroAttackTarget()) {
           AddCurrentTurnEffect($cardID, $defPlayer);
         }
         break;
-      case "OUT009": case "OUT010":
+      case "scale_peeler": case "scale_peeler":
         if (IsHeroAttackTarget()) {
           AddCurrentTurnEffect($cardID, $defPlayer);
         }
         break;
-      case "OUT012":
+      case "infiltrate_red":
         if(IsHeroAttackTarget())
         {
           $deck = new Deck($defPlayer);
@@ -529,7 +529,7 @@ function OUTAbilityCost($cardID)
           if($deckCard != "") BanishCardForPlayer($deckCard, $defPlayer, "THEIRDECK", "NTFromOtherPlayer", $cardID);
         }
         break;
-      case "OUT013":
+      case "shake_down_red":
         if(NumAttackReactionsPlayed() > 0 && IsHeroAttackTarget())
         {
           AddDecisionQueue("SETDQCONTEXT", $mainPlayer, "Choose a pitch value", 1);
@@ -544,16 +544,16 @@ function OUTAbilityCost($cardID)
           AddDecisionQueue("MZREMOVE", $mainPlayer, "-", 1);
         }
         break;
-      case "OUT024": case "OUT025": case "OUT026":
+      case "infect_red": case "infect_yellow": case "infect_blue":
         if(IsHeroAttackTarget()) PlayAura($CID_BloodRotPox, $defPlayer, effectController: $mainPlayer);
         break;
-      case "OUT036": case "OUT037": case "OUT038":
+      case "sedate_red": case "sedate_yellow": case "sedate_blue":
         if(IsHeroAttackTarget()) PlayAura($CID_Inertia, $defPlayer, effectController: $mainPlayer);
         break;
-      case "OUT039": case "OUT040": case "OUT041":
+      case "wither_red": case "wither_yellow": case "wither_blue":
         if(IsHeroAttackTarget()) PlayAura($CID_Frailty, $defPlayer, effectController: $mainPlayer);
         break;
-      case "OUT051":
+      case "dishonor_blue":
         $char = &GetPlayerCharacter($defPlayer);
         if(IsHeroAttackTarget() && HasAttackName("Surging Strike") && HasAttackName("Descendent Gustwave") && HasAttackName("Bonds of Ancestry"))
         {
@@ -562,13 +562,13 @@ function OUTAbilityCost($cardID)
           else $char[1] = 4;
         }
         break;
-      case "OUT053":
+      case "wander_with_purpose_yellow":
         KatsuHit("to_discard_and_search_for_a_combo_card");
         break;
-      case "OUT059": case "OUT060": case "OUT061":
+      case "recoil_red": case "recoil_yellow": case "recoil_blue":
         if(ComboActive() && IsHeroAttackTarget()) MZMoveCard($defPlayer, "MYHAND", "MYTOPDECK", silent:true);
         break;
-      case "OUT062": case "OUT063": case "OUT064":
+      case "spinning_wheel_kick_red": case "spinning_wheel_kick_yellow": case "spinning_wheel_kick_blue":
         if(ComboActive()) {
           if(substr($from, 0, 5) != "THEIR") {
             AddBottomDeck($cardID, $mainPlayer, "CC");
@@ -580,7 +580,7 @@ function OUTAbilityCost($cardID)
           }
         }
         break;
-      case "OUT068": case "OUT069": case "OUT070":
+      case "be_like_water_red": case "be_like_water_yellow": case "be_like_water_blue":
         $hand = &GetHand($mainPlayer);
         $resources = &GetResources($mainPlayer);
         if(Count($hand) > 0 || $resources[0] > 0)
@@ -596,21 +596,21 @@ function OUTAbilityCost($cardID)
           AddDecisionQueue("ADDCURRENTEFFECT", $mainPlayer, "<-", 1);
         }
         break;
-      case "OUT071": case "OUT072": case "OUT073":
+      case "deadly_duo_red": case "deadly_duo_yellow": case "deadly_duo_blue":
         AddCurrentTurnEffectFromCombat($cardID, $mainPlayer);
         break;
-      case "OUT080": case "OUT081": case "OUT082":
+      case "onetwo_punch_red": case "onetwo_punch_yellow": case "onetwo_punch_blue":
         if(ComboActive() && IsHeroAttackTarget())
         {
           AddDecisionQueue("DEALDAMAGE", $defPlayer, "2-" . $cardID . "-DAMAGE", 1);
         }
         break;
-      case "OUT101":
+      case "barbed_undertow_red":
         if(HasAimCounter() && IsHeroAttackTarget()) {
           AddDecisionQueue("SETDQCONTEXT", $mainPlayer, "Choose a pitch value", 1);
           AddDecisionQueue("BUTTONINPUT", $mainPlayer, "1,2,3", 1);
           AddDecisionQueue("SETDQVAR", $mainPlayer, "0", 1);
-          AddDecisionQueue("PREPENDLASTRESULT", $mainPlayer, "OUT101-", 1);
+          AddDecisionQueue("PREPENDLASTRESULT", $mainPlayer, "barbed_undertow_red-", 1);
           AddDecisionQueue("ADDCURRENTANDNEXTTURNEFFECT", $defPlayer, "<-", 1);
           AddDecisionQueue("PASSPARAMETER", $mainPlayer, "{0}", 1);
           AddDecisionQueue("PREPENDLASTRESULT", $mainPlayer, "Cannot_pitch_", 1);
@@ -618,43 +618,43 @@ function OUTAbilityCost($cardID)
           AddDecisionQueue("WRITELOG", $mainPlayer, "<-", 1);
         }
         break;
-      case "OUT118": case "OUT119": case "OUT120":
+      case "infecting_shot_red": case "infecting_shot_yellow": case "infecting_shot_blue":
         if(IsHeroAttackTarget()) PlayAura($CID_BloodRotPox, $defPlayer, effectController: $mainPlayer);
         break;
-      case "OUT124": case "OUT125": case "OUT126":
+      case "sedation_shot_red": case "sedation_shot_yellow": case "sedation_shot_blue":
         if(IsHeroAttackTarget()) PlayAura($CID_Inertia, $defPlayer, effectController: $mainPlayer);
         break;
-      case "OUT136": case "OUT137": case "OUT138":
+      case "withering_shot_red": case "withering_shot_yellow": case "withering_shot_blue":
         if(IsHeroAttackTarget()) PlayAura($CID_Frailty, $defPlayer, effectController: $mainPlayer);
         break;
-      case "OUT142":
+      case "stab_wound_blue":
         $numDaggerHits = 0;
         for($i=0; $i<count($chainLinks); ++$i)
         {
           if(CardSubType($chainLinks[$i][0]) == "Dagger" && $chainLinkSummary[$i*ChainLinkSummaryPieces()] > 0) ++$numDaggerHits;
         }
         $numDaggerHits += $combatChainState[$CCS_FlickedDamage];
-        if($numDaggerHits > 0) WriteLog("Player " . $defPlayer . " lost " . $numDaggerHits . " life from " . CardLink("OUT142", "OUT142"));
+        if($numDaggerHits > 0) WriteLog("Player " . $defPlayer . " lost " . $numDaggerHits . " life from " . CardLink("stab_wound_blue", "stab_wound_blue"));
         LoseHealth($numDaggerHits, $defPlayer);
         break;
-      case "OUT151": case "OUT152": case "OUT153":
+      case "plunge_red": case "plunge_yellow": case "plunge_blue":
         AddCurrentTurnEffect($cardID, $mainPlayer);
         break;
-      case "OUT162": case "OUT163": case "OUT164":
+      case "death_touch_red": case "death_touch_yellow": case "death_touch_blue":
         if(IsHeroAttackTarget())
         {
           AddDecisionQueue("CHOOSECARD", $mainPlayer, $CID_BloodRotPox . "," . $CID_Frailty . "," . $CID_Inertia);
           AddDecisionQueue("PUTPLAY", $defPlayer, $mainPlayer, 1);
         }
         break;
-      case "OUT183":
+      case "amnesia_red":
         if(IsHeroAttackTarget())
         {
           AddCurrentTurnEffect($cardID, $defPlayer);
           AddNextTurnEffect($cardID, $defPlayer);
         }
         break;
-      case "OUT189": case "OUT190": case "OUT191":
+      case "humble_red": case "humble_yellow": case "humble_blue":
         if(IsHeroAttackTarget())
         {
           AddCurrentTurnEffect($cardID, $defPlayer);
@@ -663,22 +663,22 @@ function OUTAbilityCost($cardID)
           $char[1] = 3;
         }
         break;
-      case "OUT198": case "OUT199": case "OUT200":
+      case "wreck_havoc_red": case "wreck_havoc_yellow": case "wreck_havoc_blue":
         SetArsenalFacing("UP", $defPlayer);
         AddDecisionQueue("MULTIZONEINDICES", $mainPlayer, "THEIRARS:type=DR");
         AddDecisionQueue("SETDQCONTEXT", $mainPlayer, "Choose which card you want to destroy", 1);
         AddDecisionQueue("CHOOSEMULTIZONE", $mainPlayer, "<-", 1);
         AddDecisionQueue("MZDESTROY", $mainPlayer, "-", 1);
         break;
-      case "OUT201": case "OUT202": case "OUT203":
+      case "cut_down_to_size_red": case "cut_down_to_size_yellow": case "cut_down_to_size_blue":
         if(IsHeroAttackTarget())
         {
           $hand = &GetHand($defPlayer);
           if(count($hand) >= 4) PummelHit($defPlayer);
         }
         break;
-      case "OUT204": case "OUT205": case "OUT206":
-        PlayAura("DYN244", $mainPlayer);//Ponder
+      case "destructive_deliberation_red": case "destructive_deliberation_yellow": case "destructive_deliberation_blue":
+        PlayAura("ponder", $mainPlayer);//Ponder
         break;
       default: break;
     }
@@ -721,34 +721,34 @@ function OUTAbilityCost($cardID)
   {
     switch($cardID)
     {
-      case "OUT012":
-      case "OUT015": case "OUT016": case "OUT017":
-      case "OUT024": case "OUT025": case "OUT026":
-      case "OUT027": case "OUT028": case "OUT029":
-      case "OUT030": case "OUT031": case "OUT032":
-      case "OUT033": case "OUT034": case "OUT035":
-      case "OUT036": case "OUT037": case "OUT038":
-      case "OUT039": case "OUT040": case "OUT041":
-      case "MST103": case "MST104":
-      case "MST106": case "MST107": case "MST108": 
-      case "MST109": case "MST110": case "MST111": 
-      case "MST112": case "MST113": case "MST114": 
-      case "MST115": case "MST116": case "MST117": 
-      case "MST118": case "MST119": case "MST120": 
-      case "MST121": case "MST122": case "MST123": 
-      case "MST124": case "MST125": case "MST126":
-      case "MST127": case "MST128": case "MST129":
-      case "HNT012": case "HNT013":
-      case "HNT017": case "HNT018": case "HNT019":
-      case "HNT020": case "HNT021": case "HNT022":
-      case "HNT030": case "HNT031":
-      case "HNT032": case "HNT033": case "HNT034":
-      case "HNT035": case "HNT036": case "HNT037":
-      case "HNT038": case "HNT039": case "HNT040":
-      case "HNT041": case "HNT042": case "HNT043":
-      case "HNT044": case "HNT045": case "HNT046":
-      case "HNT047": case "HNT048": case "HNT049":
-      case "HNT053":
+      case "infiltrate_red":
+      case "back_stab_red": case "back_stab_yellow": case "back_stab_blue":
+      case "infect_red": case "infect_yellow": case "infect_blue":
+      case "isolate_red": case "isolate_yellow": case "isolate_blue":
+      case "malign_red": case "malign_yellow": case "malign_blue":
+      case "prowl_red": case "prowl_yellow": case "prowl_blue":
+      case "sedate_red": case "sedate_yellow": case "sedate_blue":
+      case "wither_red": case "wither_yellow": case "wither_blue":
+      case "bonds_of_agony_blue": case "persuasive_prognosis_blue":
+      case "art_of_desire_body_red": case "art_of_desire_soul_yellow": case "art_of_desire_mind_blue": 
+      case "bonds_of_attraction_red": case "bonds_of_attraction_yellow": case "bonds_of_attraction_blue": 
+      case "double_trouble_red": case "double_trouble_yellow": case "double_trouble_blue": 
+      case "bonds_of_memory_red": case "bonds_of_memory_yellow": case "bonds_of_memory_blue": 
+      case "desires_of_flesh_red": case "desires_of_flesh_yellow": case "desires_of_flesh_blue": 
+      case "impulsive_desire_red": case "impulsive_desire_yellow": case "impulsive_desire_blue": 
+      case "minds_desire_red": case "minds_desire_yellow": case "minds_desire_blue":
+      case "pick_to_pieces_red": case "pick_to_pieces_yellow": case "pick_to_pieces_blue":
+      case "kiss_of_death_red": case "under_the_trapdoor_blue":
+      case "bite_red": case "bite_yellow": case "bite_blue":
+      case "whittle_from_bone_red": case "whittle_from_bone_yellow": case "whittle_from_bone_blue":
+      case "defang_the_dragon_red": case "extinguish_the_flames_red":
+      case "mark_of_the_black_widow_red": case "mark_of_the_black_widow_yellow": case "mark_of_the_black_widow_blue":
+      case "mark_of_the_funnel_web_red": case "mark_of_the_funnel_web_yellow": case "mark_of_the_funnel_web_blue":
+      case "mark_the_prey_red": case "mark_the_prey_yellow": case "mark_the_prey_blue":
+      case "plunge_the_prospect_red": case "plunge_the_prospect_yellow": case "plunge_the_prospect_blue":
+      case "reapers_call_red": case "reapers_call_yellow": case "reapers_call_blue":
+      case "scuttle_the_canal_red": case "scuttle_the_canal_yellow": case "scuttle_the_canal_blue":
+      case "graphene_chelicera":
         return true;
       default:
         return false;
@@ -835,7 +835,7 @@ function OUTAbilityCost($cardID)
     global $mainPlayer, $defPlayer;
     $char = &GetPlayerCharacter($defPlayer);
     $characterID = ShiyanaCharacter($char[0], $defPlayer);
-    if($char[1] == 2 && $characterID == "OUT091" || $characterID == "OUT092")
+    if($char[1] == 2 && $characterID == "riptide_lurker_of_the_deep" || $characterID == "riptide")
     {
       DamageTrigger($mainPlayer, 1, "DAMAGE", $characterID, $cardID);
     }

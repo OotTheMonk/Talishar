@@ -7,34 +7,34 @@
     $otherPlayer = ($currentPlayer == 1 ? 2 : 1);
     switch($cardID)
     {
-      case "ELE031": case "ELE032":
-        if(DelimStringContains($additionalCosts, "LIGHTNING")) { $rv .= "The next attack gains go again."; AddCurrentTurnEffect("ELE031-1", $currentPlayer); }
-        if(DelimStringContains($additionalCosts, "ICE")) { if($rv != "") $rv .= " "; $rv .= "The opponent gets a Frostbite."; PlayAura("ELE111", $otherPlayer, effectController: $currentPlayer); }
+      case "lexi_livewire": case "lexi":
+        if(DelimStringContains($additionalCosts, "LIGHTNING")) { $rv .= "The next attack gains go again."; AddCurrentTurnEffect("lexi_livewire-1", $currentPlayer); }
+        if(DelimStringContains($additionalCosts, "ICE")) { if($rv != "") $rv .= " "; $rv .= "The opponent gets a Frostbite."; PlayAura("frostbite", $otherPlayer, effectController: $currentPlayer); }
         return $rv;
-      case "ELE033":
+      case "shiver":
         LoadArrow($currentPlayer);
         AddDecisionQueue("SETDQCONTEXT", $currentPlayer, "Choose a mode", 1);
         AddDecisionQueue("BUTTONINPUT", $currentPlayer, "1_Attack,Dominate", 1);
         AddDecisionQueue("SHOWMODES", $currentPlayer, $cardID, 1);
         AddDecisionQueue("MODAL", $currentPlayer, "SHIVER", 1);
         return "";
-      case "ELE034":
+      case "voltaire_strike_twice":
         LoadArrow($currentPlayer);
         AddDecisionQueue("SETDQCONTEXT", $currentPlayer, "Choose a mode", 1);
         AddDecisionQueue("BUTTONINPUT", $currentPlayer, "1_Attack,Go_again", 1);
         AddDecisionQueue("SHOWMODES", $currentPlayer, $cardID, 1);
         AddDecisionQueue("MODAL", $currentPlayer, "VOLTAIRE", 1);
         return "";
-      case "ELE035":
+      case "frost_lock_blue":
         AddCurrentTurnEffect($cardID . "-1", $otherPlayer);
         return "";
-      case "ELE037":
+      case "ice_storm_red":
         AddCurrentTurnEffect($cardID . "-1", $currentPlayer);
         if(DelimStringContains($additionalCosts, "ICE") && DelimStringContains($additionalCosts, "LIGHTNING")) {
           AddCurrentTurnEffect($cardID . "-2", $currentPlayer);
         }
         return "";
-      case "ELE214":
+      case "honing_hood":
         $arsenal = &GetArsenal($currentPlayer);
         for($i=0; $i < count($arsenal); $i+=ArsenalPieces()) {
           AddPlayerHand($arsenal[$i], $currentPlayer, "ARS");
@@ -42,10 +42,10 @@
         $arsenal = [];
         MZMoveCard($currentPlayer, "MYHAND", "MYARS,HAND,DOWN", silent:true);
         return "";
-      case "ELE215":
+      case "seek_and_destroy_red":
         AddCurrentTurnEffect($cardID, $currentPlayer);
         return "";
-      case "ELE219": case "ELE220": case "ELE221":
+      case "over_flex_red": case "over_flex_yellow": case "over_flex_blue":
         AddCurrentTurnEffect($cardID, $currentPlayer);
         Reload();
         return "";
@@ -58,10 +58,10 @@
     global $defPlayer, $combatChainState, $CCS_AttackFused, $mainPlayer;
     switch($cardID)
     {
-      case "ELE036":
+      case "light_it_up_yellow":
         if(IsHeroAttackTarget() && $combatChainState[$CCS_AttackFused]) DamageTrigger($defPlayer, NumEquipment($defPlayer), "ATTACKHIT", $cardID);
         break;
-      case "ELE216": case "ELE217": case "ELE218":
+      case "boltn_shot_red": case "boltn_shot_yellow": case "boltn_shot_blue":
         if(HasIncreasedAttack()) Reload($mainPlayer);
         break;
       default: break;
@@ -100,7 +100,7 @@
   {
     switch($cardID)
     {
-      case "ELE091": case "ELE092": case "ELE093": return true;
+      case "fulminate_yellow": case "flashfreeze_red": case "exposed_to_the_elements_blue": return true;
       default: return false;
     }
   }
@@ -112,39 +112,39 @@
     $set = CardSet($cardID);
     switch($cardID)
     {
-      case "ELE004": AddCurrentTurnEffect($cardID, $otherPlayer); break;
-      case "ELE007": case "ELE008": case "ELE009":
+      case "endless_winter_red": AddCurrentTurnEffect($cardID, $otherPlayer); break;
+      case "biting_gale_red": case "biting_gale_yellow": case "biting_gale_blue":
         if (!IsAllyAttacking()) {
           PayOrDiscard($otherPlayer, 2, true);
         }
         break;
-      case "ELE010": case "ELE011": case "ELE012":
+      case "turn_timber_red": case "turn_timber_yellow": case "turn_timber_blue":
         $index = GetClassState($player, $CS_PlayCCIndex);
         $CombatChain->Card($index)->ModifyDefense(2);
         break;
-      case "ELE016": case "ELE017": case "ELE018": AddCurrentTurnEffect($cardID, $player); break;
-      case "ELE019": case "ELE020": case "ELE021": AddCurrentTurnEffect($cardID, $player); break;
-      case "ELE022": case "ELE023": case "ELE024": AddCurrentTurnEffect($cardID, $player); break;
-      case "ELE025": case "ELE026": case "ELE027": PlayAura("ELE111", $otherPlayer, effectController: $player); break;
-      case "ELE028": case "ELE029": case "ELE030": PlayAura("WTR075", $player); break;
-      case "ELE035": AddCurrentTurnEffect($cardID . "-2", $player); break;
-      case "ELE038": case "ELE039": case "ELE040": AddCurrentTurnEffect($cardID, $otherPlayer); break;
-      case "ELE041": case "ELE042": case "ELE043":
+      case "glacial_footsteps_red": case "glacial_footsteps_yellow": case "glacial_footsteps_blue": AddCurrentTurnEffect($cardID, $player); break;
+      case "mulch_red": case "mulch_yellow": case "mulch_blue": AddCurrentTurnEffect($cardID, $player); break;
+      case "snow_under_red": case "snow_under_yellow": case "snow_under_blue": AddCurrentTurnEffect($cardID, $player); break;
+      case "emerging_avalanche_red": case "emerging_avalanche_yellow": case "emerging_avalanche_blue": PlayAura("frostbite", $otherPlayer, effectController: $player); break;
+      case "strength_of_sequoia_red": case "strength_of_sequoia_yellow": case "strength_of_sequoia_blue": PlayAura("seismic_surge", $player); break;
+      case "frost_lock_blue": AddCurrentTurnEffect($cardID . "-2", $player); break;
+      case "cold_wave_red": case "cold_wave_yellow": case "cold_wave_blue": AddCurrentTurnEffect($cardID, $otherPlayer); break;
+      case "snap_shot_red": case "snap_shot_yellow": case "snap_shot_blue":
         SearchCharacterAddUses($player, 1, "W", "Bow");
         SearchCharacterAddEffect($player, "INSTANT", "W", "Bow");
         break;
-      case "ELE044": case "ELE045": case "ELE046": AddCurrentTurnEffect($cardID, $player); break;
-      case "ELE047": case "ELE048": case "ELE049": AddCurrentTurnEffect($cardID, $player); break;
-      case "ELE050": case "ELE051": case "ELE052": AddCurrentTurnEffect($cardID, $player); break;
-      case "ELE053": case "ELE054": case "ELE055": GiveAttackGoAgain(); break;
-      case "ELE056": case "ELE057": case "ELE058": AddCurrentTurnEffect($cardID, $player); break;
-      case "ELE059": case "ELE060": case "ELE061": AddCurrentTurnEffect($cardID, $player); break;
-      case "ELE065": AddCurrentTurnEffect($cardID, $player); break;
-      case "ELE066": AddCurrentTurnEffect($cardID, $player); break;
-      case "ELE070": case "ELE071": case "ELE072": DealArcane(1, 0, "PLAYCARD", $cardID); break;
-      case "ELE073": case "ELE074": case "ELE075": DealArcane(1, 0, "PLAYCARD", $cardID); break;
-      case "ELE076": case "ELE077": case "ELE078": SetClassState($player, $CS_NextNAAInstant, 1); break;
-      case "ELE079": case "ELE080": case "ELE081":
+      case "blizzard_bolt_red": case "blizzard_bolt_yellow": case "blizzard_bolt_blue": AddCurrentTurnEffect($cardID, $player); break;
+      case "buzz_bolt_red": case "buzz_bolt_yellow": case "buzz_bolt_blue": AddCurrentTurnEffect($cardID, $player); break;
+      case "chilling_icevein_red": case "chilling_icevein_yellow": case "chilling_icevein_blue": AddCurrentTurnEffect($cardID, $player); break;
+      case "dazzling_crescendo_red": case "dazzling_crescendo_yellow": case "dazzling_crescendo_blue": GiveAttackGoAgain(); break;
+      case "flake_out_red": case "flake_out_yellow": case "flake_out_blue": AddCurrentTurnEffect($cardID, $player); break;
+      case "frazzle_red": case "frazzle_yellow": case "frazzle_blue": AddCurrentTurnEffect($cardID, $player); break;
+      case "flicker_wisp_yellow": AddCurrentTurnEffect($cardID, $player); break;
+      case "force_of_nature_blue": AddCurrentTurnEffect($cardID, $player); break;
+      case "rites_of_lightning_red": case "rites_of_lightning_yellow": case "rites_of_lightning_blue": DealArcane(1, 0, "PLAYCARD", $cardID); break;
+      case "arcanic_shockwave_red": case "arcanic_shockwave_yellow": case "arcanic_shockwave_blue": DealArcane(1, 0, "PLAYCARD", $cardID); break;
+      case "vela_flash_red": case "vela_flash_yellow": case "vela_flash_blue": SetClassState($player, $CS_NextNAAInstant, 1); break;
+      case "rites_of_replenishment_red": case "rites_of_replenishment_yellow": case "rites_of_replenishment_blue":
         PrependDecisionQueue("WRITELOG", $player, "Card chosen: <0>", 1);
         PrependDecisionQueue("SETDQVAR", $player, "0", 1);
         PrependDecisionQueue("MZREMOVE", $player, "-", 1);
@@ -152,29 +152,29 @@
         PrependDecisionQueue("MAYCHOOSEMULTIZONE", $player, "<-", 1);
         PrependDecisionQueue("MULTIZONEINDICES", $player, "MYDISCARD:type=AA");
         break;
-      case "ELE082": case "ELE083": case "ELE084": AddCurrentTurnEffect($cardID, $player); break;
-      case "ELE085": case "ELE086": case "ELE087": AddCurrentTurnEffect($cardID . "-FUSE", $player); break;
-      case "ELE088": DealArcane(3, 0, "PLAYCARD", $cardID); break;
-      case "ELE089": DealArcane(2, 0, "PLAYCARD", $cardID); break;
-      case "ELE090": DealArcane(1, 0, "PLAYCARD", $cardID); break;
-      case "ELE091":
+      case "stir_the_wildwood_red": case "stir_the_wildwood_yellow": case "stir_the_wildwood_blue": AddCurrentTurnEffect($cardID, $player); break;
+      case "bramble_spark_red": case "bramble_spark_yellow": case "bramble_spark_blue": AddCurrentTurnEffect($cardID . "-FUSE", $player); break;
+      case "inspire_lightning_red": DealArcane(3, 0, "PLAYCARD", $cardID); break;
+      case "inspire_lightning_yellow": DealArcane(2, 0, "PLAYCARD", $cardID); break;
+      case "inspire_lightning_blue": DealArcane(1, 0, "PLAYCARD", $cardID); break;
+      case "fulminate_yellow":
         if(DelimStringContains($element, "LIGHTNING")) AddCurrentTurnEffect($cardID . "-GA", $player);
         if(DelimStringContains($element, "EARTH")) AddCurrentTurnEffect($cardID . "-BUFF", $player);
         break;
-      case "ELE092":
+      case "flashfreeze_red":
         if(DelimStringContains($element, "LIGHTNING")) AddCurrentTurnEffect($cardID . "-BUFF", $player);
         if(DelimStringContains($element, "ICE")) AddCurrentTurnEffect($cardID . "-DOM", $player);
         break;
-      case "ELE093":
+      case "exposed_to_the_elements_blue":
         if(DelimStringContains($element, "ICE")) ExposedToTheElementsIce($player);
         if(DelimStringContains($element, "EARTH")) ExposedToTheElementsEarth($player);
         break;
-      case "ELE094": case "ELE095": case "ELE096":
+      case "entwine_earth_red": case "entwine_earth_yellow": case "entwine_earth_blue":
         $index = GetClassState($player, $CS_PlayCCIndex);
         $CombatChain->Card($index)->ModifyPower(2);
         break;
-      case "ELE097": case "ELE098": case "ELE099": AddCurrentTurnEffect($cardID, $player); break;
-      case "ELE100": case "ELE101": case "ELE102": GiveAttackGoAgain(); break;
+      case "entwine_ice_red": case "entwine_ice_yellow": case "entwine_ice_blue": AddCurrentTurnEffect($cardID, $player); break;
+      case "entwine_lightning_red": case "entwine_lightning_yellow": case "entwine_lightning_blue": GiveAttackGoAgain(); break;
       default: break;
     }
   }
@@ -216,55 +216,55 @@
   {
     switch($cardID)
     {
-      case "ELE004": return "ICE";
-      case "ELE005": return "EARTH,ICE";
-      case "ELE006": return "EARTH";
-      case "ELE007": case "ELE008": case "ELE009": return "ICE";
-      case "ELE010": case "ELE011": case "ELE012": return "EARTH";
-      case "ELE013": case "ELE014": case "ELE015": return "EARTH";
-      case "ELE016": case "ELE017": case "ELE018": return "ICE";
-      case "ELE019": case "ELE020": case "ELE021": return "EARTH";
-      case "ELE022": case "ELE023": case "ELE024": return "ICE";
-      case "ELE025": case "ELE026": case "ELE027": return "ICE";
-      case "ELE028": case "ELE029": case "ELE030": return "EARTH";
-      case "ELE035": return "ICE";
-      case "ELE036": return "LIGHTNING";
-      case "ELE037": return "ICE,LIGHTNING";
-      case "ELE038": case "ELE039": case "ELE040": return "ICE";
-      case "ELE041": case "ELE042": case "ELE043": return "LIGHTNING";
-      case "ELE044": case "ELE045": case "ELE046": return "ICE";
-      case "ELE047": case "ELE048": case "ELE049": return "LIGHTNING";
-      case "ELE050": case "ELE051": case "ELE052": return "ICE";
-      case "ELE053": case "ELE054": case "ELE055": return "LIGHTNING";
-      case "ELE056": case "ELE057": case "ELE058": return "ICE";
-      case "ELE059": case "ELE060": case "ELE061": return "LIGHTNING";
-      case "ELE064": return "EARTH,LIGHTNING";
-      case "ELE065": return "LIGHTNING";
-      case "ELE066": return "EARTH";
-      case "ELE067": case "ELE068": case "ELE069": return "EARTH";
-      case "ELE070": case "ELE071": case "ELE072": return "LIGHTNING";
-      case "ELE073": case "ELE074": case "ELE075": return "LIGHTNING";
-      case "ELE076": case "ELE077": case "ELE078": return "LIGHTNING";
-      case "ELE079": case "ELE080": case "ELE081": return "EARTH";
-      case "ELE082": case "ELE083": case "ELE084": return "EARTH";
-      case "ELE085": case "ELE086": case "ELE087": return "EARTH";
-      case "ELE088": case "ELE089": case "ELE090": return "LIGHTNING";
-      case "ELE091": return "EARTH,LIGHTNING";
-      case "ELE092": return "ICE,LIGHTNING";
-      case "ELE093": return "EARTH,ICE";
-      case "ELE094": case "ELE095": case "ELE096": return "EARTH";
-      case "ELE097": case "ELE098": case "ELE099": return "ICE";
-      case "ELE100": case "ELE101": case "ELE102": return "LIGHTNING";
-      case "UPR104": return "ICE";
-      case "UPR105": return "ICE";
-      case "UPR106": case "UPR107": case "UPR108": return "ICE";
-      case "UPR109": return "ICE";
-      case "UPR110": case "UPR111": case "UPR112": return "ICE";
-      case "UPR113": case "UPR114": case "UPR115": return "ICE";
-      case "UPR116": case "UPR117": case "UPR118": return "ICE";
-      case "UPR119": case "UPR120": case "UPR121": return "ICE";
-      case "UPR122": case "UPR123": case "UPR124": return "ICE";
-      case "AJV020": return "ICE";
+      case "endless_winter_red": return "ICE";
+      case "oaken_old_red": return "EARTH,ICE";
+      case "awakening_blue": return "EARTH";
+      case "biting_gale_red": case "biting_gale_yellow": case "biting_gale_blue": return "ICE";
+      case "turn_timber_red": case "turn_timber_yellow": case "turn_timber_blue": return "EARTH";
+      case "entangle_red": case "entangle_yellow": case "entangle_blue": return "EARTH";
+      case "glacial_footsteps_red": case "glacial_footsteps_yellow": case "glacial_footsteps_blue": return "ICE";
+      case "mulch_red": case "mulch_yellow": case "mulch_blue": return "EARTH";
+      case "snow_under_red": case "snow_under_yellow": case "snow_under_blue": return "ICE";
+      case "emerging_avalanche_red": case "emerging_avalanche_yellow": case "emerging_avalanche_blue": return "ICE";
+      case "strength_of_sequoia_red": case "strength_of_sequoia_yellow": case "strength_of_sequoia_blue": return "EARTH";
+      case "frost_lock_blue": return "ICE";
+      case "light_it_up_yellow": return "LIGHTNING";
+      case "ice_storm_red": return "ICE,LIGHTNING";
+      case "cold_wave_red": case "cold_wave_yellow": case "cold_wave_blue": return "ICE";
+      case "snap_shot_red": case "snap_shot_yellow": case "snap_shot_blue": return "LIGHTNING";
+      case "blizzard_bolt_red": case "blizzard_bolt_yellow": case "blizzard_bolt_blue": return "ICE";
+      case "buzz_bolt_red": case "buzz_bolt_yellow": case "buzz_bolt_blue": return "LIGHTNING";
+      case "chilling_icevein_red": case "chilling_icevein_yellow": case "chilling_icevein_blue": return "ICE";
+      case "dazzling_crescendo_red": case "dazzling_crescendo_yellow": case "dazzling_crescendo_blue": return "LIGHTNING";
+      case "flake_out_red": case "flake_out_yellow": case "flake_out_blue": return "ICE";
+      case "frazzle_red": case "frazzle_yellow": case "frazzle_blue": return "LIGHTNING";
+      case "blossoming_spellblade_red": return "EARTH,LIGHTNING";
+      case "flicker_wisp_yellow": return "LIGHTNING";
+      case "force_of_nature_blue": return "EARTH";
+      case "explosive_growth_red": case "explosive_growth_yellow": case "explosive_growth_blue": return "EARTH";
+      case "rites_of_lightning_red": case "rites_of_lightning_yellow": case "rites_of_lightning_blue": return "LIGHTNING";
+      case "arcanic_shockwave_red": case "arcanic_shockwave_yellow": case "arcanic_shockwave_blue": return "LIGHTNING";
+      case "vela_flash_red": case "vela_flash_yellow": case "vela_flash_blue": return "LIGHTNING";
+      case "rites_of_replenishment_red": case "rites_of_replenishment_yellow": case "rites_of_replenishment_blue": return "EARTH";
+      case "stir_the_wildwood_red": case "stir_the_wildwood_yellow": case "stir_the_wildwood_blue": return "EARTH";
+      case "bramble_spark_red": case "bramble_spark_yellow": case "bramble_spark_blue": return "EARTH";
+      case "inspire_lightning_red": case "inspire_lightning_yellow": case "inspire_lightning_blue": return "LIGHTNING";
+      case "fulminate_yellow": return "EARTH,LIGHTNING";
+      case "flashfreeze_red": return "ICE,LIGHTNING";
+      case "exposed_to_the_elements_blue": return "EARTH,ICE";
+      case "entwine_earth_red": case "entwine_earth_yellow": case "entwine_earth_blue": return "EARTH";
+      case "entwine_ice_red": case "entwine_ice_yellow": case "entwine_ice_blue": return "ICE";
+      case "entwine_lightning_red": case "entwine_lightning_yellow": case "entwine_lightning_blue": return "LIGHTNING";
+      case "encase_red": return "ICE";
+      case "freezing_point_red": return "ICE";
+      case "sigil_of_permafrost_red": case "sigil_of_permafrost_yellow": case "sigil_of_permafrost_blue": return "ICE";
+      case "ice_eternal_blue": return "ICE";
+      case "succumb_to_winter_red": case "succumb_to_winter_yellow": case "succumb_to_winter_blue": return "ICE";
+      case "aether_icevein_red": case "aether_icevein_yellow": case "aether_icevein_blue": return "ICE";
+      case "brain_freeze_red": case "brain_freeze_yellow": case "brain_freeze_blue": return "ICE";
+      case "icebind_red": case "icebind_yellow": case "icebind_blue": return "ICE";
+      case "polar_cap_red": case "polar_cap_yellow": case "polar_cap_blue": return "ICE";
+      case "frozen_to_death_blue": return "ICE";
       default: return "";
     }
   }
@@ -278,7 +278,7 @@
       $remove = 0;
       if($player == $currentTurnEffects[$i+1]) {
         switch($currentTurnEffects[$i]) {
-          case "UPR141": case "UPR142": case "UPR143":
+          case "isenhowl_weathervane_red": case "isenhowl_weathervane_yellow": case "isenhowl_weathervane_blue":
             if($element == "ICE") {
               $otherPlayer = ($player == 1 ? 2 : 1);
               AddLayer("TRIGGER", $player, $currentTurnEffects[$i], $otherPlayer);
@@ -299,7 +299,7 @@
     $otherPlayer = $player == 1 ? 2 : 1;
     for($i=count($auras)-AuraPieces(); $i>=0; $i-=AuraPieces()) {
       switch($auras[$i]) {
-        case "UPR140":
+        case "insidious_chill_blue":
           if($element == "ICE") AddLayer("TRIGGER", $player, $auras[$i], $otherPlayer, uniqueID:$auras[$i+6]);
           break;
         default: break;

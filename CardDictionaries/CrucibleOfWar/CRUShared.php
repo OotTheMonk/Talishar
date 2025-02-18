@@ -3,104 +3,104 @@
   function CRUAbilityCost($cardID) {
     global $CS_PlayIndex, $currentPlayer;
     switch($cardID) {
-      case "CRU004": case "CRU005": return 2;
-      case "CRU024": return 4;
-      case "CRU025": return 3;
-      case "CRU049": return 1;
-      case "CRU050": case "CRU051": case "CRU052": return 1;
-      case "CRU079": case "CRU080": return 1;
-      case "CRU101": return (GetResolvedAbilityType($cardID) == "A" ? 2 : 0);
-      case "CRU105": 
+      case "mandible_claw": case "mandible_claw": return 2;
+      case "sledge_of_anvilheim": return 4;
+      case "crater_fist": return 3;
+      case "harmonized_kodachi": return 1;
+      case "edge_of_autumn": case "zephyr_needle": case "zephyr_needle": return 1;
+      case "cintari_saber": case "cintari_saber": return 1;
+      case "plasma_barrel_shot": return (GetResolvedAbilityType($cardID) == "A" ? 2 : 0);
+      case "plasma_purifier_red": 
         $items = &GetItems($currentPlayer); 
         if ($items[GetClassState($currentPlayer, $CS_PlayIndex) + 2] < 2) return 1;
         if ($items[GetClassState($currentPlayer, $CS_PlayIndex) + 1] > 0) return 0;
         return 1;
-      case "CRU118": return 3;
-      case "CRU122": return 2;
-      case "CRU140": return 1;
-      case "CRU160": return 2;
-      case "CRU177": return 2;
-      case "CRU197": return 4;
+      case "kavdaen_trader_of_skins": return 3;
+      case "perch_grapplers": return 2;
+      case "reaping_blade": return 1;
+      case "aether_conduit": return 2;
+      case "talishar_the_lost_prince": return 2;
+      case "copper": return 4;
       default: return 0;
     }
   }
 
   function CRUAbilityType($cardID, $index=-1) {
     switch($cardID) {
-      case "CRU004": case "CRU005": return "AA";
-      case "CRU006": return "A";
-      case "CRU024": return "AA";
-      case "CRU025": return "A";
-      case "CRU049": return "AA";
-      case "CRU050": case "CRU051": case "CRU052": return "AA";
-      case "CRU079": case "CRU080": return "AA";
-      case "CRU081": return "A";
-      case "CRU101": return "A";
-      case "CRU102": return "A";
-      case "CRU105": return "A";
-      case "CRU118": return "A";
-      case "CRU121": return "A";
-      case "CRU122": return "A";
-      case "CRU140": return "AA";
-      case "CRU141": return "I";
-      case "CRU160": return "A";
-      case "CRU177": return "AA";
-      case "CRU197": return "A";
+      case "mandible_claw": case "mandible_claw": return "AA";
+      case "skullhorn": return "A";
+      case "sledge_of_anvilheim": return "AA";
+      case "crater_fist": return "A";
+      case "harmonized_kodachi": return "AA";
+      case "edge_of_autumn": case "zephyr_needle": case "zephyr_needle": return "AA";
+      case "cintari_saber": case "cintari_saber": return "AA";
+      case "courage_of_bladehold": return "A";
+      case "plasma_barrel_shot": return "A";
+      case "viziertronic_model_i": return "A";
+      case "plasma_purifier_red": return "A";
+      case "kavdaen_trader_of_skins": return "A";
+      case "red_liner": return "A";
+      case "perch_grapplers": return "A";
+      case "reaping_blade": return "AA";
+      case "bloodsheath_skeleta": return "I";
+      case "aether_conduit": return "A";
+      case "talishar_the_lost_prince": return "AA";
+      case "copper": return "A";
       default: return "";
     }
   }
 
   function CRUAbilityHasGoAgain($cardID) {
     switch($cardID) {
-      case "CRU006": return true;
-      case "CRU025": return true;
-      case "CRU081": return true;
-      case "CRU101": return GetResolvedAbilityType($cardID) == "A";
-      case "CRU102": return true;
-      case "CRU105": return true;
-      case "CRU118": return true;
-      case "CRU121": case "CRU122": return true;
-      case "CRU197": return true;
+      case "skullhorn": return true;
+      case "crater_fist": return true;
+      case "courage_of_bladehold": return true;
+      case "plasma_barrel_shot": return GetResolvedAbilityType($cardID) == "A";
+      case "viziertronic_model_i": return true;
+      case "plasma_purifier_red": return true;
+      case "kavdaen_trader_of_skins": return true;
+      case "red_liner": case "perch_grapplers": return true;
+      case "copper": return true;
       default: return false;
     }
   }
 
   function CRUEffectAttackModifier($cardID) {
     switch($cardID) {
-      case "CRU008": return 2;
-      case "CRU025": return 2;
-      case "CRU029": return 10;
-      case "CRU030": return 9;
-      case "CRU031": return 8;
-      case "CRU038": return 3;
-      case "CRU039": return 2;
-      case "CRU040": return 1;
-      case "CRU046": return 1;
-      case "CRU047": return 1;
-      case "CRU055": return 3;
-      case "CRU072": return 1;
-      case "CRU084": return 2;
-      case "CRU085-1": return 3;
-      case "CRU086-1": return 2;
-      case "CRU087-1": return 1;
-      case "CRU088-1": return 3;
-      case "CRU089-1": return 2;
-      case "CRU090-1": return 1;
-      case "CRU088-2": return 1;
-      case "CRU089-2": return 1;
-      case "CRU090-2": return 1;
-      case "CRU091-2": return 3;
-      case "CRU092-2": return 2;
-      case "CRU093-2": return 1;
-      case "CRU094-1": return 3;
-      case "CRU095-1": return 2;
-      case "CRU096-1": return 1;
-      case "CRU105": return 1;
-      case "CRU109": case "CRU110": case "CRU111": return 3;
-      case "CRU135": return 3;
-      case "CRU136": return 2;
-      case "CRU137": return 1;
-      case "CRU186": return 1;
+      case "massacre_red": return 2;
+      case "crater_fist": return 2;
+      case "towering_titan_red": return 10;
+      case "towering_titan_yellow": return 9;
+      case "towering_titan_blue": return 8;
+      case "emerging_dominance_red": return 3;
+      case "emerging_dominance_yellow": return 2;
+      case "emerging_dominance_blue": return 1;
+      case "ira_crimson_haze": return 1;
+      case "benji_the_piercing_wind": return 1;
+      case "flood_of_force_yellow": return 3;
+      case "bittering_thorns_yellow": return 1;
+      case "spoils_of_war_red": return 2;
+      case "dauntless_red-1": return 3;
+      case "dauntless_yellow-1": return 2;
+      case "dauntless_blue-1": return 1;
+      case "out_for_blood_red-1": return 3;
+      case "out_for_blood_yellow-1": return 2;
+      case "out_for_blood_blue-1": return 1;
+      case "out_for_blood_red-2": return 1;
+      case "out_for_blood_yellow-2": return 1;
+      case "out_for_blood_blue-2": return 1;
+      case "hit_and_run_red-2": return 3;
+      case "hit_and_run_yellow-2": return 2;
+      case "hit_and_run_blue-2": return 1;
+      case "push_forward_red-1": return 3;
+      case "push_forward_yellow-1": return 2;
+      case "push_forward_blue-1": return 1;
+      case "plasma_purifier_red": return 1;
+      case "combustible_courier_red": case "combustible_courier_yellow": case "combustible_courier_blue": return 3;
+      case "increase_the_tension_red": return 3;
+      case "increase_the_tension_yellow": return 2;
+      case "increase_the_tension_blue": return 1;
+      case "lunging_press_blue": return 1;
       default: return 0;
     }
   }
@@ -108,37 +108,37 @@
   function CRUCombatEffectActive($cardID, $attackID) {
     global $CombatChain, $combatChainState, $mainPlayer, $CCS_IsBoosted, $CS_ArsenalFacing;
     switch($cardID) {
-      case "CRU008": return true;
-      case "CRU013": case "CRU014": case "CRU015": return true;
-      case "CRU025": return HasCrush($attackID);
-      case "CRU029": case "CRU030": case "CRU031": return CardType($attackID) == "AA" && ClassContains($attackID, "GUARDIAN", $mainPlayer);
-      case "CRU038": case "CRU039": case "CRU040": return CardType($attackID) == "AA" && ClassContains($attackID, "GUARDIAN", $mainPlayer);
-      case "CRU046": return true;
-      case "CRU047": return true;
-      case "CRU053": return HasCombo($attackID);
-      case "CRU055": return true;
-      case "CRU072": return true;
-      case "CRU084": return TypeContains($attackID, "W", $mainPlayer);
-      case "CRU084-2": return TypeContains($attackID, "W", $mainPlayer);
-      case "CRU085-1": case "CRU086-1": case "CRU087-1": return TypeContains($attackID, "W", $mainPlayer);
-      case "CRU088-1": case "CRU089-1": case "CRU090-1": return TypeContains($attackID, "W", $mainPlayer);
-      case "CRU088-2": case "CRU089-2": case "CRU090-2": return true;
-      case "CRU091-1": case "CRU092-1": case "CRU093-1": return TypeContains($attackID, "W", $mainPlayer);
-      case "CRU091-2": case "CRU092-2": case "CRU093-2": return true;
-      case "CRU094-1": case "CRU095-1": case "CRU096-1": return TypeContains($attackID, "W", $mainPlayer);
-      case "CRU094-2": case "CRU095-2": case "CRU096-2": return true;
-      case "CRU105": return TypeContains($attackID, "W", $mainPlayer) && CardSubtype($attackID) == "Pistol" && ClassContains($attackID, "MECHANOLOGIST", $mainPlayer);
-      case "CRU106": case "CRU107": case "CRU108": return $combatChainState[$CCS_IsBoosted] == "1";
-      case "CRU109": case "CRU110": case "CRU111": return $combatChainState[$CCS_IsBoosted] == "1";
-      case "CRU122": return $CombatChain->AttackCard()->From() == "ARS" && GetClassState($mainPlayer, $CS_ArsenalFacing) == "UP" && CardSubtype($attackID) == "Arrow"; //The card being played from ARS and being an Arrow implies that the card is UP.
-      case "CRU123": return $attackID == "CRU123";
-      case "CRU124": return CardSubtype($attackID) == "Arrow";
-      case "CRU125": return true;
-      case "CRU126": return true;
-      case "CRU135": case "CRU136": case "CRU137": return CardSubtype($attackID) == "Arrow";
-      case "CRU135-1": case "CRU136-1": case "CRU137-1": return CardSubtype($attackID) == "Arrow";
-      case "CRU145": case "CRU146": case "CRU147": return CardType($attackID) == "AA" && ClassContains($attackID, "RUNEBLADE", $mainPlayer);
-      case "CRU186": return true;
+      case "massacre_red": return true;
+      case "predatory_assault_red": case "predatory_assault_yellow": case "predatory_assault_blue": return true;
+      case "crater_fist": return HasCrush($attackID);
+      case "towering_titan_red": case "towering_titan_yellow": case "towering_titan_blue": return CardType($attackID) == "AA" && ClassContains($attackID, "GUARDIAN", $mainPlayer);
+      case "emerging_dominance_red": case "emerging_dominance_yellow": case "emerging_dominance_blue": return CardType($attackID) == "AA" && ClassContains($attackID, "GUARDIAN", $mainPlayer);
+      case "ira_crimson_haze": return true;
+      case "benji_the_piercing_wind": return true;
+      case "breeze_rider_boots": return HasCombo($attackID);
+      case "flood_of_force_yellow": return true;
+      case "bittering_thorns_yellow": return true;
+      case "spoils_of_war_red": return TypeContains($attackID, "W", $mainPlayer);
+      case "spoils_of_war_red-2": return TypeContains($attackID, "W", $mainPlayer);
+      case "dauntless_red-1": case "dauntless_yellow-1": case "dauntless_blue-1": return TypeContains($attackID, "W", $mainPlayer);
+      case "out_for_blood_red-1": case "out_for_blood_yellow-1": case "out_for_blood_blue-1": return TypeContains($attackID, "W", $mainPlayer);
+      case "out_for_blood_red-2": case "out_for_blood_yellow-2": case "out_for_blood_blue-2": return true;
+      case "hit_and_run_red-1": case "hit_and_run_yellow-1": case "hit_and_run_blue-1": return TypeContains($attackID, "W", $mainPlayer);
+      case "hit_and_run_red-2": case "hit_and_run_yellow-2": case "hit_and_run_blue-2": return true;
+      case "push_forward_red-1": case "push_forward_yellow-1": case "push_forward_blue-1": return TypeContains($attackID, "W", $mainPlayer);
+      case "push_forward_red-2": case "push_forward_yellow-2": case "push_forward_blue-2": return true;
+      case "plasma_purifier_red": return TypeContains($attackID, "W", $mainPlayer) && CardSubtype($attackID) == "Pistol" && ClassContains($attackID, "MECHANOLOGIST", $mainPlayer);
+      case "high_speed_impact_red": case "high_speed_impact_yellow": case "high_speed_impact_blue": return $combatChainState[$CCS_IsBoosted] == "1";
+      case "combustible_courier_red": case "combustible_courier_yellow": case "combustible_courier_blue": return $combatChainState[$CCS_IsBoosted] == "1";
+      case "perch_grapplers": return $CombatChain->AttackCard()->From() == "ARS" && GetClassState($mainPlayer, $CS_ArsenalFacing) == "UP" && CardSubtype($attackID) == "Arrow"; //The card being played from ARS and being an Arrow implies that the card is UP.
+      case "remorseless_red": return $attackID == "remorseless_red";
+      case "poison_the_tips_yellow": return CardSubtype($attackID) == "Arrow";
+      case "feign_death_yellow": return true;
+      case "tripwire_trap_red": return true;
+      case "increase_the_tension_red": case "increase_the_tension_yellow": case "increase_the_tension_blue": return CardSubtype($attackID) == "Arrow";
+      case "increase_the_tension_red-1": case "increase_the_tension_yellow-1": case "increase_the_tension_blue-1": return CardSubtype($attackID) == "Arrow";
+      case "mauvrion_skies_red": case "mauvrion_skies_yellow": case "mauvrion_skies_blue": return CardType($attackID) == "AA" && ClassContains($attackID, "RUNEBLADE", $mainPlayer);
+      case "lunging_press_blue": return true;
       default: return false;
     }
   }
@@ -149,17 +149,17 @@ function CRUPlayAbility($cardID, $from, $resourcesPaid, $target, $additionalCost
   global $CCS_BaseAttackDefenseMax, $CCS_ResourceCostDefenseMin, $CCS_CardTypeDefenseRequirement, $CCS_RequiredEquipmentBlock, $CCS_NumBoosted;
   $rv = "";
   switch($cardID) {
-    case "CRU006":
+    case "skullhorn":
       Draw($currentPlayer);
       DiscardRandom($currentPlayer, $cardID);
       return "";
-    case "CRU008":
+    case "massacre_red":
       if(GetClassState($currentPlayer, $CS_Num6PowDisc) > 0) {
         Intimidate();
         AddCurrentTurnEffect($cardID, $currentPlayer);
       }
       return "";
-    case "CRU009":
+    case "argh_smash_yellow":
       $roll = GetDieRoll($currentPlayer);
       for($i = 1; $i < $roll; $i += 2) {
         AddDecisionQueue("MULTIZONEINDICES", $currentPlayer, "THEIRITEMS", 1);
@@ -167,32 +167,32 @@ function CRUPlayAbility($cardID, $from, $resourcesPaid, $target, $additionalCost
         AddDecisionQueue("MZDESTROY", $currentPlayer, "-", 1);
       }
       return "Argh... Smash! rolled " . $roll;
-    case "CRU013": case "CRU014": case "CRU015":
+    case "predatory_assault_red": case "predatory_assault_yellow": case "predatory_assault_blue":
       if(GetClassState($currentPlayer, $CS_Num6PowDisc) > 0) {
         AddCurrentTurnEffect($cardID, $currentPlayer);
         $rv = "Gains Dominate.";
       }
       return $rv;
-    case "CRU025":
+    case "crater_fist":
       AddCurrentTurnEffect($cardID, $currentPlayer);
       return "";
-    case "CRU028":
+    case "stamp_authority_blue":
       if(SearchCount(SearchPitch($mainPlayer, minCost:3)) >= 2) AddCurrentTurnEffect($cardID, $currentPlayer);
       return $rv;
-    case "CRU041": case "CRU042": case "CRU043":
+    case "blessing_of_serenity_red": case "blessing_of_serenity_yellow": case "blessing_of_serenity_blue":
       AddCurrentTurnEffect($cardID, $currentPlayer);
       return "";
-    case "CRU049":
+    case "harmonized_kodachi":
       if(SearchCount(SearchPitch($currentPlayer, minCost:0, maxCost:0)) > 0) GiveAttackGoAgain();
       return "";
-    case "CRU054":
+    case "find_center_blue":
       if(ComboActive()) {
         $numLinks = NumChainLinks();
         $combatChainState[$CCS_ResourceCostDefenseMin] = $numLinks;
         $rv = "Cannot be defended by cards with cost less than " . $numLinks;
       }
       return $rv;
-    case "CRU055":
+    case "flood_of_force_yellow":
       if(ComboActive()) {
         AddDecisionQueue("DECKCARDS", $mainPlayer, "0");
         AddDecisionQueue("REVEALCARDS", $mainPlayer, "-", 1);
@@ -200,27 +200,27 @@ function CRUPlayAbility($cardID, $from, $resourcesPaid, $target, $additionalCost
         AddDecisionQueue("FINDINDICES", $mainPlayer, "TOPDECK", 1);
         AddDecisionQueue("MULTIREMOVEDECK", $mainPlayer, "<-", 1);
         AddDecisionQueue("MULTIADDHAND", $mainPlayer, "-", 1);
-        AddDecisionQueue("ADDCURRENTEFFECT", $mainPlayer, "CRU055", 1);
+        AddDecisionQueue("ADDCURRENTEFFECT", $mainPlayer, "flood_of_force_yellow", 1);
       }
       return $rv;
-    case "CRU056":
+    case "herons_flight_red":
       if(ComboActive()) {
         AddDecisionQueue("SETDQCONTEXT", $currentPlayer, "Choose a mode");
         AddDecisionQueue("BUTTONINPUT", $currentPlayer, "Attack_Action,Non-attack_Action");
         AddDecisionQueue("SETCOMBATCHAINSTATE", $currentPlayer, $CCS_CardTypeDefenseRequirement, 1);
       }
       return "";
-    case "CRU057": case "CRU058": case "CRU059":
+    case "crane_dance_red": case "crane_dance_yellow": case "crane_dance_blue":
       if(ComboActive()) {
         $numLinks = NumChainLinks();
         $combatChainState[$CCS_BaseAttackDefenseMax] = $numLinks;
         $rv = "Cannot be defended by attacks with greater than " . $numLinks . " base attack";
       }
       return $rv;
-    case "CRU081":
+    case "courage_of_bladehold":
       AddCurrentTurnEffect($cardID, $mainPlayer);
       return "";
-    case "CRU082":
+    case "twinning_blade_yellow":
       $character = &GetPlayerCharacter($currentPlayer);
       if(SubtypeContains($character[$combatChainState[$CCS_WeaponIndex]], "Sword", $currentPlayer)) {
         ++$character[$combatChainState[$CCS_WeaponIndex] + 5];
@@ -234,7 +234,7 @@ function CRUPlayAbility($cardID, $from, $resourcesPaid, $target, $additionalCost
         }
       }
       return "";
-    case "CRU083":
+    case "unified_decree_yellow":
       if(RepriseActive()) {
         AddDecisionQueue("DECKCARDS", $currentPlayer, "0");
         AddDecisionQueue("SETDQVAR", $currentPlayer, "0");
@@ -249,19 +249,19 @@ function CRUPlayAbility($cardID, $from, $resourcesPaid, $target, $additionalCost
         AddDecisionQueue("WRITELOG", $currentPlayer, "<0> was banished.", 1);
       }
       return "";
-    case "CRU084":
+    case "spoils_of_war_red":
       AddCurrentTurnEffect($cardID, $currentPlayer);
       AddCurrentTurnEffect($cardID . "-2", $currentPlayer);
       return "";
-    case "CRU085": case "CRU086": case "CRU087":
+    case "dauntless_red": case "dauntless_yellow": case "dauntless_blue":
       AddCurrentTurnEffect($cardID . "-1", $mainPlayer);
       AddCurrentTurnEffect($cardID . "-2", ($mainPlayer == 1 ? 2 : 1));
       return "";
-    case "CRU088": case "CRU089": case "CRU090":
+    case "out_for_blood_red": case "out_for_blood_yellow": case "out_for_blood_blue":
       AddCurrentTurnEffect($cardID . "-1", $mainPlayer);
       if(RepriseActive()) AddCurrentTurnEffectFromCombat($cardID . "-2", $mainPlayer);
       return "";
-    case "CRU091": case "CRU092": case "CRU093":
+    case "hit_and_run_red": case "hit_and_run_yellow": case "hit_and_run_blue":
       AddCurrentTurnEffect($cardID . "-1", $mainPlayer);
       if(GetClassState($currentPlayer, $CS_AtksWWeapon) > 0)
       {
@@ -269,14 +269,14 @@ function CRUPlayAbility($cardID, $from, $resourcesPaid, $target, $additionalCost
         $rv = "Gives your next weapon +" . EffectAttackModifier($cardID . "-2") . " because you've attacked with a weapon";
       }
       return $rv;
-    case "CRU094": case "CRU095": case "CRU096":
+    case "push_forward_red": case "push_forward_yellow": case "push_forward_blue":
       AddCurrentTurnEffect($cardID . "-1", $mainPlayer);
       if(GetClassState($currentPlayer, $CS_AtksWWeapon) > 0) {
         AddCurrentTurnEffect($cardID . "-2", $mainPlayer);
         $rv = "Gives your attack dominate because you've attacked with a weapon";
       }
       return $rv;
-    case "CRU101":
+    case "plasma_barrel_shot":
       $abilityType = GetResolvedAbilityType($cardID);
       if($abilityType == "A") {
         $character = &GetPlayerCharacter($currentPlayer);
@@ -284,17 +284,17 @@ function CRUPlayAbility($cardID, $from, $resourcesPaid, $target, $additionalCost
         $character[$index + 2] = 1;
       }
       return "";
-    case "CRU102":
+    case "viziertronic_model_i":
       AddCurrentTurnEffect($cardID, $currentPlayer);
       return "";
-    case "CRU103":
+    case "meganetic_shockwave_blue":
       if($combatChainState[$CCS_NumBoosted] && !IsAllyAttackTarget()) {
         if ($combatChainState[$CCS_NumBoosted] > 1 && IsOverpowerActive()) $combatChainState[$CCS_RequiredEquipmentBlock] = 1;
         else $combatChainState[$CCS_RequiredEquipmentBlock] = $combatChainState[$CCS_NumBoosted];
         $rv .= "Requires you to block with " . $combatChainState[$CCS_NumBoosted] . " equipment if able";
       }
       return $rv;
-    case "CRU105":
+    case "plasma_purifier_red":
       if($from == "PLAY") {
         $items = &GetItems($currentPlayer);
         $index = GetClassState($currentPlayer, $CS_PlayIndex);
@@ -306,10 +306,10 @@ function CRUPlayAbility($cardID, $from, $resourcesPaid, $target, $additionalCost
         }
       }
       return "";
-    case "CRU115": case "CRU116": case "CRU117":
-      if($cardID == "CRU115") $maxCost = 2;
-      else if($cardID == "CRU116") $maxCost = 1;
-      else if($cardID == "CRU117") $maxCost = 0;
+    case "teklovossens_workshop_red": case "teklovossens_workshop_yellow": case "teklovossens_workshop_blue":
+      if($cardID == "teklovossens_workshop_red") $maxCost = 2;
+      else if($cardID == "teklovossens_workshop_yellow") $maxCost = 1;
+      else if($cardID == "teklovossens_workshop_blue") $maxCost = 0;
       Opt($cardID, GetClassState($currentPlayer, $CS_NumBoosted));
       AddDecisionQueue("DECKCARDS", $currentPlayer, "0");
       AddDecisionQueue("REVEALCARDS", $currentPlayer, "-", 1);
@@ -319,50 +319,50 @@ function CRUPlayAbility($cardID, $from, $resourcesPaid, $target, $additionalCost
       AddDecisionQueue("MULTIREMOVEDECK", $currentPlayer, "<-", 1);
       AddDecisionQueue("PUTPLAY", $currentPlayer, "-", 1);
       return "";
-    case "CRU118":
+    case "kavdaen_trader_of_skins":
       if(PlayerHasLessHealth(1)) {
         LoseHealth(1, 2);
-        PutItemIntoPlayForPlayer("CRU197", 2);
+        PutItemIntoPlayForPlayer("copper", 2);
         WriteLog("Player 2 lost a life and gained a copper from Kavdaen");
         if(PlayerHasLessHealth(1)) {
           GainHealth(1, 1);
         }
       } else if(PlayerHasLessHealth(2)) {
         LoseHealth(1, 1);
-        PutItemIntoPlayForPlayer("CRU197", 1);
+        PutItemIntoPlayForPlayer("copper", 1);
         WriteLog("Player 1 lost a life and gained a copper from Kavdaen");
         if(PlayerHasLessHealth(2)) {
           GainHealth(1, 2);
         }
       }
       return "";
-    case "CRU121":
+    case "red_liner":
       if(!ArsenalEmpty($currentPlayer)) return "Your arsenal is full, you cannot reload";
       LoadArrow($currentPlayer);
       return "";
-    case "CRU122":
+    case "perch_grapplers":
       AddCurrentTurnEffect($cardID, $currentPlayer);
       return "";
-    case "CRU124":
+    case "poison_the_tips_yellow":
       AddCurrentTurnEffect($cardID, $currentPlayer);
       Reload();
       return "";
-    case "CRU125":
+    case "feign_death_yellow":
       SetClassState($currentPlayer, $CS_NextDamagePrevented, 1);
       AddCurrentTurnEffect($cardID, $currentPlayer);
       return "";
-    case "CRU135": case "CRU136": case "CRU137":
+    case "increase_the_tension_red": case "increase_the_tension_yellow": case "increase_the_tension_blue":
       AddCurrentTurnEffect($cardID, $currentPlayer);
       AddCurrentTurnEffect($cardID . "-1", ($currentPlayer == 1 ? 2 : 1));
       return "";
-    case "CRU141":
+    case "bloodsheath_skeleta":
       AddCurrentTurnEffect($cardID . "-AA", $currentPlayer);
       AddCurrentTurnEffect($cardID . "-NAA", $currentPlayer);
       return "";
-    case "CRU142":
+    case "dread_triptych_blue":
       AddLayer("TRIGGER", $currentPlayer, $cardID);
       return "";
-    case "CRU143":
+    case "rattle_bones_red":
       $params = explode("-", $target);
       $index = SearchdiscardForUniqueID($params[1], $currentPlayer);
       if ($index != -1) {
@@ -375,86 +375,86 @@ function CRUPlayAbility($cardID, $from, $resourcesPaid, $target, $additionalCost
         return "FAILED";
       }
       return "";
-    case "CRU144":
-      PlayAura("ARC112", $currentPlayer, 4);
+    case "runeblood_barrier_yellow":
+      PlayAura("runechant", $currentPlayer, 4);
       return "";
-    case "CRU145": case "CRU146": case "CRU147":
+    case "mauvrion_skies_red": case "mauvrion_skies_yellow": case "mauvrion_skies_blue":
       AddCurrentTurnEffect($cardID, $currentPlayer);
       return "";
-    case "CRU154": case "CRU155": case "CRU156":
-      if($cardID == "CRU154") $count = 3;
-      else if($cardID == "CRU155") $count = 2;
+    case "sutcliffes_research_notes_red": case "sutcliffes_research_notes_yellow": case "sutcliffes_research_notes_blue":
+      if($cardID == "sutcliffes_research_notes_red") $count = 3;
+      else if($cardID == "sutcliffes_research_notes_yellow") $count = 2;
       else $count = 1;
       $deck = new Deck($currentPlayer);
       $numRunechants = 0;
       if($deck->Reveal($count)) {
         $cards = explode(",", $deck->Top(remove:true, amount:$count));
         for($i=0; $i<count($cards); ++$i) if(ClassContains($cards[$i], "RUNEBLADE", $currentPlayer) && CardType($cards[$i]) == "AA") ++$numRunechants;
-        if($numRunechants > 0) PlayAura("ARC112", $currentPlayer, number:$numRunechants);
+        if($numRunechants > 0) PlayAura("runechant", $currentPlayer, number:$numRunechants);
         AddDecisionQueue("CHOOSETOP", $currentPlayer, implode(",", $cards));
       }
       return "";
-    case "CRU160":
+    case "aether_conduit":
       DealArcane(2, 0, "ABILITY", $cardID);
       return "";
-    case "CRU162":
+    case "chain_lightning_yellow":
       AddCurrentTurnEffect($cardID, $currentPlayer);
       SetClassState($currentPlayer, $CS_NextWizardNAAInstant, 1);
       if(GetClassState($currentPlayer, $CS_NumWizardNonAttack) >= 2) {
         DealArcane(3, 1, "PLAYCARD", $cardID, resolvedTarget: $target);
       }
       return "";
-    case "CRU163":
+    case "gaze_the_ages_blue":
       PlayerOpt($currentPlayer, 2);
       return "";
-    case "CRU164":
+    case "aetherize_blue":
       NegateLayer($target);
       return "";
-    case "CRU165": case "CRU166": case "CRU167":
-      if($cardID == "CRU165") $optAmount = 3;
-      else if($cardID == "CRU166") $optAmount = 2;
+    case "cindering_foresight_red": case "cindering_foresight_yellow": case "cindering_foresight_blue":
+      if($cardID == "cindering_foresight_red") $optAmount = 3;
+      else if($cardID == "cindering_foresight_yellow") $optAmount = 2;
       else $optAmount = 1;
       AddCurrentTurnEffect($cardID, $currentPlayer);
       PlayerOpt($currentPlayer, $optAmount);
       return "";
-    case "CRU168": case "CRU169": case "CRU170":
+    case "foreboding_bolt_red": case "foreboding_bolt_yellow": case "foreboding_bolt_blue":
       DealArcane(ArcaneDamage($cardID), 0, "PLAYCARD", $cardID, resolvedTarget: $target);
       PlayerOpt($currentPlayer, 1);
       return "";
-    case "CRU171": case "CRU172": case "CRU173":
+    case "rousing_aether_red": case "rousing_aether_yellow": case "rousing_aether_blue":
       DealArcane(ArcaneDamage($cardID), 0, "PLAYCARD", $cardID, resolvedTarget: $target);
       AddCurrentTurnEffect($cardID, $currentPlayer);
       return "";
-    case "CRU174": case "CRU175": case "CRU176":
+    case "snapback_red": case "snapback_yellow": case "snapback_blue":
       DealArcane(ArcaneDamage($cardID), 0, "PLAYCARD",$cardID, resolvedTarget: $target);
       return "";
-    case "CRU181":
-      $count = SearchCount(CombineSearches(SearchDiscardForCard(1, "CRU181"), SearchDiscardForCard(2, "CRU181")));
+    case "gorganian_tome":
+      $count = SearchCount(CombineSearches(SearchDiscardForCard(1, "gorganian_tome"), SearchDiscardForCard(2, "gorganian_tome")));
       for($i = 0; $i < $count; ++$i) Draw($currentPlayer);
       return "Drew " . $count . " card" . ($count > 1 ? "s" : "");
-    case "CRU182":
-      AddCurrentTurnEffect("CRU182", ($currentPlayer == 1 ? 2 : 1));
+    case "snag_blue":
+      AddCurrentTurnEffect("snag_blue", ($currentPlayer == 1 ? 2 : 1));
       return "";
-    case "CRU183": case "CRU184": case "CRU185":
+    case "promise_of_plenty_red": case "promise_of_plenty_yellow": case "promise_of_plenty_blue":
       if($from == "ARS") {
         GiveAttackGoAgain();
         $rv = "Gains go again";
       }
       return $rv;
-    case "CRU186":
+    case "lunging_press_blue":
       AddCurrentTurnEffect($cardID, $currentPlayer);
       return "";
-    case "CRU188":
+    case "cash_in_yellow":
       Draw($currentPlayer);
       Draw($currentPlayer);
       return "";
-    case "CRU189": case "CRU190": case "CRU191":
+    case "reinforce_the_line_red": case "reinforce_the_line_yellow": case "reinforce_the_line_blue":
       $options = GetChainLinkCards($defPlayer, "AA");
       if($options == "") return "No defending attack action cards";
       AddDecisionQueue("CHOOSECOMBATCHAIN", $currentPlayer, $options);
       AddDecisionQueue("COMBATCHAINDEFENSEMODIFIER", $currentPlayer, PlayBlockModifier($cardID), 1);
       return "";
-    case "CRU197":
+    case "copper":
       if($from == "PLAY") {
         Draw($currentPlayer);
         DestroyItemForPlayer($currentPlayer, GetClassState($currentPlayer, $CS_PlayIndex));
@@ -468,8 +468,8 @@ function CRUHitEffect($cardID)
 {
   global $mainPlayer, $defPlayer, $combatChainState, $CS_ArcaneDamageTaken;
   switch($cardID) {
-    case "CRU054": PlayAura("CRU075", $mainPlayer); break;
-    case "CRU060": case "CRU061": case "CRU062":
+    case "find_center_blue": PlayAura("zen_state", $mainPlayer); break;
+    case "rushing_river_red": case "rushing_river_yellow": case "rushing_river_blue":
       if(ComboActive()) {
         $num = NumAttacksHit()+1;
         for($i = 0; $i < $num; ++$i) {
@@ -481,59 +481,59 @@ function CRUHitEffect($cardID)
         }
       }
       break;
-    case "CRU066": case "CRU067": case "CRU068":
+    case "soulbead_strike_red": case "soulbead_strike_yellow": case "soulbead_strike_blue":
       GiveAttackGoAgain();
       break;
-    case "CRU069": case "CRU070": case "CRU071":
+    case "torrent_of_tempo_red": case "torrent_of_tempo_yellow": case "torrent_of_tempo_blue":
       GiveAttackGoAgain();
       break;
-    case "CRU072":
+    case "bittering_thorns_yellow":
       AddCurrentTurnEffectFromCombat($cardID, $mainPlayer);
       break;
-    case "CRU074":
+    case "whirling_mist_blossom_yellow":
       if(HitsInRow() > 0) {
         Draw($mainPlayer);
         Draw($mainPlayer);
       }
       break;
-    case "CRU106": case "CRU107": case "CRU108":
+    case "high_speed_impact_red": case "high_speed_impact_yellow": case "high_speed_impact_blue":
       AddCurrentTurnEffectFromCombat($cardID, $mainPlayer);
       break;
-    case "CRU109": case "CRU110": case "CRU111":
+    case "combustible_courier_red": case "combustible_courier_yellow": case "combustible_courier_blue":
       AddCurrentTurnEffectFromCombat($cardID, $mainPlayer);
       break;
-    case "CRU123":
+    case "remorseless_red":
       if(IsHeroAttackTarget()) {
-        AddCurrentTurnEffect("CRU123-DMG", $defPlayer);
-        AddNextTurnEffect("CRU123-DMG", $defPlayer);
+        AddCurrentTurnEffect("remorseless_red-DMG", $defPlayer);
+        AddNextTurnEffect("remorseless_red-DMG", $defPlayer);
       }
       break;
-    case "CRU129": case "CRU130": case "CRU131":
+    case "pathing_helix_red": case "pathing_helix_yellow": case "pathing_helix_blue":
       if(!ArsenalEmpty($mainPlayer)) return "There is already a card in your arsenal, so you cannot put an arrow in your arsenal";
       MZMoveCard($mainPlayer, "MYHAND", "MYARS,HAND,DOWN", may:true);
       break;
-    case "CRU132": case "CRU133": case "CRU134":
+    case "sleep_dart_red": case "sleep_dart_yellow": case "sleep_dart_blue":
       if(IsHeroAttackTarget()) {
         $char = &GetPlayerCharacter($defPlayer);
         $char[1] = 3;
       }
       break;
-    case "CRU142":
-      PlayAura("ARC112", $mainPlayer);
+    case "dread_triptych_blue":
+      PlayAura("runechant", $mainPlayer);
       break;
-    case "CRU148": case "CRU149": case "CRU150":
+    case "consuming_volition_red": case "consuming_volition_yellow": case "consuming_volition_blue":
       if(IsHeroAttackTarget() && GetClassState($defPlayer, $CS_ArcaneDamageTaken)) PummelHit();
       break;
-    case "CRU151": case "CRU152": case "CRU153":
-      PlayAura("ARC112", $mainPlayer);
+    case "meat_and_greet_red": case "meat_and_greet_yellow": case "meat_and_greet_blue":
+      PlayAura("runechant", $mainPlayer);
       break;
-    case "CRU180":
+    case "coax_a_commotion_red":
       AddDecisionQueue("SETDQCONTEXT", $mainPlayer, "Choose any number of options");
       AddDecisionQueue("MAYMULTICHOOSETEXT", $mainPlayer, "3-Quicken_token,Draw_card,Gain_life");
       AddDecisionQueue("MODAL", $mainPlayer, "COAXCOMMOTION", 1);
       AddDecisionQueue("SHOWMODES", $mainPlayer, $cardID, 1);
       break;
-    case "CRU183": case "CRU184": case "CRU185":
+    case "promise_of_plenty_red": case "promise_of_plenty_yellow": case "promise_of_plenty_blue":
       if(ArsenalEmpty($defPlayer)) TopDeckToArsenal($defPlayer);
       if(ArsenalEmpty($mainPlayer)) TopDeckToArsenal($mainPlayer);
       break;
@@ -557,6 +557,6 @@ function KassaiEndTurnAbility()
 {
   global $mainPlayer, $CS_AtksWWeapon, $CS_HitsWithWeapon;
   if(GetClassState($mainPlayer, $CS_AtksWWeapon) >= 2) {
-    PutItemIntoPlayForPlayer("CRU197", $mainPlayer, number:GetClassState($mainPlayer, $CS_HitsWithWeapon));
+    PutItemIntoPlayForPlayer("copper", $mainPlayer, number:GetClassState($mainPlayer, $CS_HitsWithWeapon));
   }
 }

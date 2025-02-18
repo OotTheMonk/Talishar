@@ -6,17 +6,17 @@
     global $currentPlayer;
     switch($cardID)
     {
-      case "ARC078":
-        PlayAura("ARC112", $currentPlayer);
+      case "grasp_of_the_arknight":
+        PlayAura("runechant", $currentPlayer);
         return "";
-      case "ARC079":
+      case "crown_of_dichotomy":
         MZMoveCard($currentPlayer, "MYDISCARD:type=A&MYDISCARD:type=AA", "MYTOPDECK");
         AddDecisionQueue("SPECIFICCARD", $currentPlayer, "CROWNOFDICHOTOMY", 1);
         return "";
-      case "ARC081":
+      case "mordred_tide_red":
         AddCurrentTurnEffect($cardID, $currentPlayer);
         return "";
-      case "ARC083":
+      case "become_the_arknight_blue":
         AddDecisionQueue("MULTIZONEINDICES", $currentPlayer, "MYHAND:type=A&MYHAND:type=AA");
         AddDecisionQueue("SETDQCONTEXT", $currentPlayer, "Choose a card to discard", 1);
         AddDecisionQueue("MAYCHOOSEMULTIZONE", $currentPlayer, "<-", 1);
@@ -25,7 +25,7 @@
         AddDecisionQueue("DISCARDCARD", $currentPlayer, "HAND-".$currentPlayer, 1);
         AddDecisionQueue("SPECIFICCARD", $currentPlayer, "BECOMETHEARKNIGHT", 1);
         return "";
-      case "ARC084":
+      case "tome_of_the_arknight_blue":
         $deck = new Deck($currentPlayer);
         $deck->Reveal(2);
         $cards = explode(",", $deck->Top(amount:2));
@@ -37,21 +37,21 @@
           AddPlayerHand($cards[1], $currentPlayer, "HAND");
         }
         return "";
-      case "ARC085": case "ARC086": case "ARC087":
-        PlayAura("ARC112", $currentPlayer, 2);
+      case "spellblade_assault_red": case "spellblade_assault_yellow": case "spellblade_assault_blue":
+        PlayAura("runechant", $currentPlayer, 2);
         return "";
-      case "ARC088": case "ARC089": case "ARC090":
-        PlayAura("ARC112", $currentPlayer);
+      case "reduce_to_runechant_red": case "reduce_to_runechant_yellow": case "reduce_to_runechant_blue":
+        PlayAura("runechant", $currentPlayer);
         return "";
-      case "ARC091": case "ARC092": case "ARC093":
+      case "oath_of_the_arknight_red": case "oath_of_the_arknight_yellow": case "oath_of_the_arknight_blue":
         AddCurrentTurnEffect($cardID, $currentPlayer);
-        PlayAura("ARC112", $currentPlayer);
+        PlayAura("runechant", $currentPlayer);
         return "";
-      case "ARC097": case "ARC098": case "ARC099": Draw($currentPlayer); return "";
-      case "ARC103": case "ARC104": case "ARC105": PlayAura("ARC112", $currentPlayer); return "";
-      case "ARC109": PlayAura("ARC112", $currentPlayer, 3); return "";
-      case "ARC110": PlayAura("ARC112", $currentPlayer, 2); return "";
-      case "ARC111": PlayAura("ARC112", $currentPlayer); return "";
+      case "drawn_to_the_dark_dimension_red": case "drawn_to_the_dark_dimension_yellow": case "drawn_to_the_dark_dimension_blue": Draw($currentPlayer); return "";
+      case "spellblade_strike_red": case "spellblade_strike_yellow": case "spellblade_strike_blue": PlayAura("runechant", $currentPlayer); return "";
+      case "read_the_runes_red": PlayAura("runechant", $currentPlayer, 3); return "";
+      case "read_the_runes_yellow": PlayAura("runechant", $currentPlayer, 2); return "";
+      case "read_the_runes_blue": PlayAura("runechant", $currentPlayer); return "";
       default: return "";
     }
   }
@@ -61,12 +61,12 @@
     global $combatChainState, $mainPlayer, $CCS_DamageDealt;
     switch($cardID)
     {
-      case "ARC077":
-        PlayAura("ARC112", $mainPlayer);
+      case "nebula_blade":
+        PlayAura("runechant", $mainPlayer);
         break;
-      case "ARC080":
+      case "arknight_ascendancy_red":
         $damageDone = $combatChainState[$CCS_DamageDealt];
-        PlayAura("ARC112", $mainPlayer, $damageDone);
+        PlayAura("runechant", $mainPlayer, $damageDone);
         break;
       default: break;
     }
@@ -89,7 +89,7 @@
     global $currentPlayer, $CS_NumNonAttackCards;
     $target = CardType($cardID) == "A" ? 1 : 0;
     if(ClassContains($cardID, "RUNEBLADE", $currentPlayer) && GetClassState($currentPlayer, $CS_NumNonAttackCards) > $target) {
-      PlayAura("ARC112", $currentPlayer);
+      PlayAura("runechant", $currentPlayer);
     }
   }
 

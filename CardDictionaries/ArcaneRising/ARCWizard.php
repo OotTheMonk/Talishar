@@ -5,8 +5,8 @@ function ARCWizardPlayAbility($cardID, $from, $resourcesPaid, $target = "-", $ad
   global $currentPlayer, $CS_NextWizardNAAInstant, $CS_ArcaneDamageTaken;
   $otherPlayer = ($currentPlayer == 1 ? 2 : 1);
   switch ($cardID) {
-    case "ARC113":
-    case "ARC114":
+    case "kano_dracai_of_aether":
+    case "kano":
       AddDecisionQueue("DECKCARDS", $currentPlayer, "0");
       AddDecisionQueue("SETDQVAR", $currentPlayer, "0");
       AddDecisionQueue("ALLCARDTYPEORPASS", $currentPlayer, "A", 1);
@@ -22,21 +22,21 @@ function ARCWizardPlayAbility($cardID, $from, $resourcesPaid, $target = "-", $ad
       AddDecisionQueue("OK", $currentPlayer, "whether to banish a card with ". CardLink($cardID, $cardID), 1);
       AddDecisionQueue("SETDQCONTEXT", $currentPlayer, "-");
       return "";
-    case "ARC115":
+    case "crucible_of_aetherweave":
       AddCurrentTurnEffect($cardID, $currentPlayer);
       return "";
-    case "ARC116":
+    case "storm_striders":
       AddCurrentTurnEffect($cardID, $currentPlayer);
       SetClassState($currentPlayer, $CS_NextWizardNAAInstant, 1);
       return "";
-    case "ARC117":
+    case "robe_of_rapture":
       GainResources($currentPlayer, 3);
       return "";
-    case "ARC118":
+    case "blazing_aether_red":
       $damage = GetClassState($otherPlayer, $CS_ArcaneDamageTaken);
       DealArcane($damage, 0, "PLAYCARD", $cardID, resolvedTarget: $target);
       return "";
-    case "ARC119":
+    case "sonic_boom_yellow":
       DealArcane(ArcaneDamage($cardID), 1, "PLAYCARD", $cardID, resolvedTarget: $target);
       AddDecisionQueue("LESSTHANPASS", $currentPlayer, 1);
       AddDecisionQueue("SETDQVAR", $currentPlayer, "0", 1);
@@ -49,7 +49,7 @@ function ARCWizardPlayAbility($cardID, $from, $resourcesPaid, $target = "-", $ad
       AddDecisionQueue("NOPASS", $currentPlayer, "-", 1);
       AddDecisionQueue("PARAMDELIMTOARRAY", $currentPlayer, "0", 1);
       AddDecisionQueue("MULTIREMOVEDECK", $currentPlayer, "0", 1);
-      AddDecisionQueue("MULTIBANISH", $currentPlayer, "DECK,ARC119-{0}", 1);
+      AddDecisionQueue("MULTIBANISH", $currentPlayer, "DECK,sonic_boom_yellow-{0}", 1);
       AddDecisionQueue("ELSE", $currentPlayer, "-");
       AddDecisionQueue("PASSPARAMETER", $currentPlayer, "{1}", 1);
       AddDecisionQueue("LESSTHANPASS", $currentPlayer, 1, 1);
@@ -57,13 +57,13 @@ function ARCWizardPlayAbility($cardID, $from, $resourcesPaid, $target = "-", $ad
       AddDecisionQueue("OK", $currentPlayer, "whether to banish a card with ". CardLink($cardID, $cardID), 1);
       AddDecisionQueue("SETDQCONTEXT", $currentPlayer, "-");
       return "";
-    case "ARC120":
+    case "forked_lightning_red":
       $arcaneBonus = ConsumeArcaneBonus($currentPlayer);
       $damage = ArcaneDamage($cardID) + $arcaneBonus;
       DealArcane($damage, 0, "PLAYCARD", $cardID, resolvedTarget: $target);
       DealArcane($damage, 0, "PLAYCARD", $cardID, resolvedTarget: $target);
       return "";
-    case "ARC121":
+    case "lesson_in_lava_yellow":
       DealArcane(ArcaneDamage($cardID), 1, "PLAYCARD", $cardID, resolvedTarget: $target);
       AddDecisionQueue("SETDQVAR", $currentPlayer, "0");
       AddDecisionQueue("LESSTHANPASS", $currentPlayer, 1);
@@ -76,38 +76,38 @@ function ARCWizardPlayAbility($cardID, $from, $resourcesPaid, $target = "-", $ad
       AddDecisionQueue("MULTIADDTOPDECK", $currentPlayer, "-", 1);
       AddDecisionQueue("REVEALCARDS", $currentPlayer, "-", 1);
       return "";
-    case "ARC122":
+    case "tome_of_aetherwind_red":
       AddDecisionQueue("PASSPARAMETER", $currentPlayer, $additionalCosts, 1);
       AddDecisionQueue("MODAL", $currentPlayer, "TOMEOFAETHERWIND", 1);
       return "";
-    case "ARC123":
-    case "ARC124":
-    case "ARC125":
+    case "absorb_in_aether_red":
+    case "absorb_in_aether_yellow":
+    case "absorb_in_aether_blue":
       AddCurrentTurnEffect($cardID, $currentPlayer);
       return "";
-    case "ARC126":
-    case "ARC127":
-    case "ARC128":
+    case "aether_spindle_red":
+    case "aether_spindle_yellow":
+    case "aether_spindle_blue":
       DealArcane(ArcaneDamage($cardID), 1, "PLAYCARD", $cardID, resolvedTarget: $target);
       AddDecisionQueue("OPTX", $currentPlayer, "<-", 1);
       return "";
-    case "ARC129":
-    case "ARC130":
-    case "ARC131":
+    case "stir_the_aetherwinds_red":
+    case "stir_the_aetherwinds_yellow":
+    case "stir_the_aetherwinds_blue":
       AddCurrentTurnEffect($cardID, $currentPlayer);
       SetClassState($currentPlayer, $CS_NextWizardNAAInstant, 1);
       return "";
-    case "ARC132":
-    case "ARC133":
-    case "ARC134":
+    case "aether_flare_red":
+    case "aether_flare_yellow":
+    case "aether_flare_blue":
       DealArcane(ArcaneDamage($cardID), 1, "PLAYCARD", $cardID, resolvedTarget: $target);
       AddDecisionQueue("BUFFARCANE", $currentPlayer, $cardID, 1);
       return "";
-    case "ARC135":
-    case "ARC136":
-    case "ARC137":
-      if ($cardID == "ARC135") $count = 5;
-      else if ($cardID == "ARC136") $count = 4;
+    case "index_red":
+    case "index_yellow":
+    case "index_blue":
+      if ($cardID == "index_red") $count = 5;
+      else if ($cardID == "index_yellow") $count = 4;
       else $count = 3;
       AddDecisionQueue("FINDINDICES", $currentPlayer, "DECKTOPXREMOVE," . $count);
       AddDecisionQueue("SETDQVAR", $currentPlayer, "0", 1);
@@ -116,9 +116,9 @@ function ARCWizardPlayAbility($cardID, $from, $resourcesPaid, $target = "-", $ad
       AddDecisionQueue("OP", $currentPlayer, "REMOVECARD", 1);
       AddDecisionQueue("CHOOSEBOTTOM", $currentPlayer, "<-", 1);
       return "";
-    case "ARC138":
-    case "ARC139":
-    case "ARC140":
+    case "reverberate_red":
+    case "reverberate_yellow":
+    case "reverberate_blue":
       DealArcane(ArcaneDamage($cardID), 1, "PLAYCARD", $cardID, resolvedTarget: $target);
       AddDecisionQueue("LESSTHANPASS", $currentPlayer, 1);
       AddDecisionQueue("SETDQVAR", $currentPlayer, "1", 1);
@@ -128,15 +128,15 @@ function ARCWizardPlayAbility($cardID, $from, $resourcesPaid, $target = "-", $ad
       AddDecisionQueue("MZBANISH", $currentPlayer, "HAND,INST," . $currentPlayer, 1);
       AddDecisionQueue("MZREMOVE", $currentPlayer, "-", 1);
       return "";
-    case "ARC141":
-    case "ARC142":
-    case "ARC143":
-    case "ARC144":
-    case "ARC145":
-    case "ARC146":
-    case "ARC147":
-    case "ARC148":
-    case "ARC149":
+    case "scalding_rain_red":
+    case "scalding_rain_yellow":
+    case "scalding_rain_blue":
+    case "zap_red":
+    case "zap_yellow":
+    case "zap_blue":
+    case "voltic_bolt_red":
+    case "voltic_bolt_yellow":
+    case "voltic_bolt_blue":
       DealArcane(ArcaneDamage($cardID), 0, "PLAYCARD", $cardID, resolvedTarget: $target);
       return "";
     default:
@@ -230,163 +230,163 @@ function DealArcane($damage, $target = 0, $type = "PLAYCARD", $source = "NA", $f
 function PlayRequiresTarget($cardID, $from)
 {
   switch ($cardID) {
-    case "ARC118":
+    case "blazing_aether_red":
       return 0;//Blazing Aether
-    case "ARC119":
+    case "sonic_boom_yellow":
       return 1;//Sonic Boom
-    case "ARC120":
+    case "forked_lightning_red":
       return 1;//Forked Lightning
-    case "ARC121":
+    case "lesson_in_lava_yellow":
       return 1;//Lesson in Lava
-    case "ARC126":
-    case "ARC127":
-    case "ARC128":
+    case "aether_spindle_red":
+    case "aether_spindle_yellow":
+    case "aether_spindle_blue":
       return 1;//Aether Spindle
-    case "ARC132":
-    case "ARC133":
-    case "ARC134":
+    case "aether_flare_red":
+    case "aether_flare_yellow":
+    case "aether_flare_blue":
       return 1;//Aether Flare
-    case "ARC138":
-    case "ARC139":
-    case "ARC140":
+    case "reverberate_red":
+    case "reverberate_yellow":
+    case "reverberate_blue":
       return 1;//Reverberate
-    case "ARC141":
-    case "ARC142":
-    case "ARC143":
+    case "scalding_rain_red":
+    case "scalding_rain_yellow":
+    case "scalding_rain_blue":
       return 0;//Scalding Rain
-    case "ARC144":
-    case "ARC145":
-    case "ARC146":
+    case "zap_red":
+    case "zap_yellow":
+    case "zap_blue":
       return 0;//Zap
-    case "ARC147":
-    case "ARC148":
-    case "ARC149":
+    case "voltic_bolt_red":
+    case "voltic_bolt_yellow":
+    case "voltic_bolt_blue":
       return 0;//Voltic Bolt
-    case "CRU162":
+    case "chain_lightning_yellow":
       return 1;//Chain Lightning
-    case "CRU168":
-    case "CRU169":
-    case "CRU170":
+    case "foreboding_bolt_red":
+    case "foreboding_bolt_yellow":
+    case "foreboding_bolt_blue":
       return 0;//Foreboding Bolt
-    case "CRU171":
-    case "CRU172":
-    case "CRU173":
+    case "rousing_aether_red":
+    case "rousing_aether_yellow":
+    case "rousing_aether_blue":
       return 0;//Rousing Aether
-    case "CRU174":
-    case "CRU175":
-    case "CRU176":
+    case "snapback_red":
+    case "snapback_yellow":
+    case "snapback_blue":
       return 0;//Snapback
-    case "EVR123":
+    case "aether_wildfire_red":
       return 1;//Aether Wildfire
-    case "EVR125":
-    case "EVR126":
-    case "EVR127":
+    case "emeritus_scolding_red":
+    case "emeritus_scolding_yellow":
+    case "emeritus_scolding_blue":
       return 0;//Emeritus Scolding
-    case "EVR134":
-    case "EVR135":
-    case "EVR136":
+    case "timekeepers_whim_red":
+    case "timekeepers_whim_yellow":
+    case "timekeepers_whim_blue":
       return 0;//Timekeeper's Whim
-    case "UPR104":
+    case "encase_red":
       return 2;//Encase
-    case "UPR105":
+    case "freezing_point_red":
       return 0;//Freezing Point
-    case "UPR109":
+    case "ice_eternal_blue":
       return 0;//Ice Eternal
-    case "UPR110":
-    case "UPR111":
-    case "UPR112":
+    case "succumb_to_winter_red":
+    case "succumb_to_winter_yellow":
+    case "succumb_to_winter_blue":
       return 2;//Succumb to Winter
-    case "UPR113":
-    case "UPR114":
-    case "UPR115":
+    case "aether_icevein_red":
+    case "aether_icevein_yellow":
+    case "aether_icevein_blue":
       return 2;//Aether Icevein
-    case "UPR119":
-    case "UPR120":
-    case "UPR121":
+    case "icebind_red":
+    case "icebind_yellow":
+    case "icebind_blue":
       return 2;//Icebind
-    case "UPR122":
-    case "UPR123":
-    case "UPR124":
+    case "polar_cap_red":
+    case "polar_cap_yellow":
+    case "polar_cap_blue":
       return 2;//Polar Cap
-    case "UPR127":
-    case "UPR128":
-    case "UPR129":
+    case "aether_hail_red":
+    case "aether_hail_yellow":
+    case "aether_hail_blue":
       return 2;//Aether Hail
-    case "UPR130":
-    case "UPR131":
-    case "UPR132":
+    case "frosting_red":
+    case "frosting_yellow":
+    case "frosting_blue":
       return 2;//Frosting
-    case "UPR133":
-    case "UPR134":
-    case "UPR135":
+    case "ice_bolt_red":
+    case "ice_bolt_yellow":
+    case "ice_bolt_blue":
       return 2;//Ice Bolt
-    case "UPR165":
+    case "waning_moon":
       return 0;//Waning Moon
-    case "UPR170":
-    case "UPR171":
-    case "UPR172":
+    case "dampen_red":
+    case "dampen_yellow":
+    case "dampen_blue":
       return 2;//Dampen
-    case "UPR173":
-    case "UPR174":
-    case "UPR175":
+    case "aether_dart_red":
+    case "aether_dart_yellow":
+    case "aether_dart_blue":
       return 2;//Aether Dart
-    case "UPR179":
-    case "UPR180":
-    case "UPR181":
+    case "singe_red":
+    case "singe_yellow":
+    case "singe_blue":
       return 1;//Singe
-    case "DYN194":
+    case "mind_warp_yellow":
       return 0;//Mind Warp
-    case "DYN195":
+    case "swell_tidings_red":
       return 0;//Swell Tidings
-    case "DYN197":
-    case "DYN198":
-    case "DYN199":
+    case "aether_quickening_red":
+    case "aether_quickening_yellow":
+    case "aether_quickening_blue":
       return 0;//Aether Quickening
-    case "DYN203":
-    case "DYN204":
-    case "DYN205":
+    case "prognosticate_red":
+    case "prognosticate_yellow":
+    case "prognosticate_blue":
       return 0;//Prognosticate
-    case "DYN206":
-    case "DYN207":
-    case "DYN208":
+    case "sap_red":
+    case "sap_yellow":
+    case "sap_blue":
       return 0;//Sap
-    case "ROS166":
+    case "destructive_aethertide_blue":
       return 2;//Destructive Aethertide
-    case "ROS167"://eternal inferno
+    case "eternal_inferno_red"://eternal inferno
       return 2;
-    case "ROS170":
-    case "ROS171":
-    case "ROS172":
+    case "chorus_of_the_amphitheater_red":
+    case "chorus_of_the_amphitheater_yellow":
+    case "chorus_of_the_amphitheater_blue":
       return (GetResolvedAbilityType($cardID, "HAND") == "A") ? 2 : -1; //Chorus of Amphitheater
-    case "ROS176":
-    case "ROS177":
-    case "ROS178":
+    case "pop_the_bubble_red":
+    case "pop_the_bubble_yellow":
+    case "pop_the_bubble_blue":
       return 0;//Pop the Bubble
-    case "ROS186":
-    case "ROS187":
-    case "ROS188":
+    case "arcane_twining_red":
+    case "arcane_twining_yellow":
+    case "arcane_twining_blue":
       return (GetResolvedAbilityType($cardID, "HAND") == "A") ? 2 : -1; //Arcane Twining
-    case "ROS189":
-    case "ROS190":
-    case "ROS191":
+    case "etchings_of_arcana_red":
+    case "etchings_of_arcana_yellow":
+    case "etchings_of_arcana_blue":
       return 0;//Etchings of Arcana
-    case "ROS195": 
-    case "ROS196": 
-    case "ROS197":
+    case "open_the_flood_gates_red": 
+    case "open_the_flood_gates_yellow": 
+    case "open_the_flood_gates_blue":
       return 0; //Open the Flood Gates
-    case "ROS198":
-    case "ROS199":
-    case "ROS200":
+    case "overflow_the_aetherwell_red":
+    case "overflow_the_aetherwell_yellow":
+    case "overflow_the_aetherwell_blue":
       return 0;//Overflow the Aetherwell
-    case "ROS201":
-    case "ROS202":
-    case "ROS203":
+    case "perennial_aetherbloom_red":
+    case "perennial_aetherbloom_yellow":
+    case "perennial_aetherbloom_blue":
       return 0;//Perennial Aetherbloom
-    case "ROS207":
-    case "ROS208":
-    case "ROS209":
+    case "trailblazing_aether_red":
+    case "trailblazing_aether_yellow":
+    case "trailblazing_aether_blue":
       return 0;//Trailblazing Aether
-    case "HVY252":
+    case "aether_arc_blue":
       return 1;
     default:
       return -1;
@@ -436,76 +436,76 @@ function ArcaneModifierAmount($source, $player, $index)
     $effectArr = explode(",", $currentTurnEffects[$index]);
     if ($currentTurnEffects[$index + 1] != $player || $source != $effectArr[0]) return 0;
     switch ($effectArr[0]) {
-      case "ARC115":
+      case "crucible_of_aetherweave":
         return 1;
-      case "ARC122":
+      case "tome_of_aetherwind_red":
         return 1;
-      case "ARC123":
-      case "ARC124":
-      case "ARC125":
+      case "absorb_in_aether_red":
+      case "absorb_in_aether_yellow":
+      case "absorb_in_aether_blue":
         return 2;
-      case "ARC129":
+      case "stir_the_aetherwinds_red":
         return 3;
-      case "ARC130":
+      case "stir_the_aetherwinds_yellow":
         return 2;
-      case "ARC131":
+      case "stir_the_aetherwinds_blue":
         return 1;
-      case "ARC132":
-      case "ARC133":
-      case "ARC134":
+      case "aether_flare_red":
+      case "aether_flare_yellow":
+      case "aether_flare_blue":
         return $effectArr[1];
-      case "CRU161":
+      case "metacarpus_node":
         return 1;
-      case "CRU165":
-      case "CRU166":
-      case "CRU167":
+      case "cindering_foresight_red":
+      case "cindering_foresight_yellow":
+      case "cindering_foresight_blue":
         return 1;
-      case "CRU171":
-      case "CRU172":
-      case "CRU173":
+      case "rousing_aether_red":
+      case "rousing_aether_yellow":
+      case "rousing_aether_blue":
         return 1;
-      case "DYN192":
+      case "surgent_aethertide":
         return $effectArr[1];
-      case "DYN200":
+      case "blessing_of_aether_red":
         return 3;
-      case "DYN201":
+      case "blessing_of_aether_yellow":
         return 2;
-      case "DYN202":
+      case "blessing_of_aether_blue":
         return 1;
-      case "DYN209":
-      case "DYN210":
-      case "DYN211":
+      case "tempest_aurora_red":
+      case "tempest_aurora_yellow":
+      case "tempest_aurora_blue":
         return 1;  
-      case "EVR123":
+      case "aether_wildfire_red":
         return $effectArr[1];
-      case "ROS017":
+      case "rampant_growth__life_yellow":
         return $effectArr[1];
-      case "ROS000":
-      case "ROS015-AMP":
-      case "ROS168"://sigil of aether
-      case "ROS078":
-      case "ROS186":
-      case "ROS187":
-      case "ROS188":
-      case "ROS204":
-      case "ROS205":
-      case "ROS206":
-      case "MST234":
-      case "ROS165":
+      case "will_of_arcana_blue":
+      case "staff_of_verdant_shoots-AMP":
+      case "sigil_of_aether_blue"://sigil of aether
+      case "high_voltage_blue":
+      case "arcane_twining_red":
+      case "arcane_twining_yellow":
+      case "arcane_twining_blue":
+      case "photon_splicing_red":
+      case "photon_splicing_yellow":
+      case "photon_splicing_blue":
+      case "kindle_red":
+      case "hold_focus":
         return 1;
-      case "ROS021":
+      case "volzar_the_lightning_rod":
         return $effectArr[1];
-      case "ROS033":
+      case "channel_the_millennium_tree_red":
         return 3;
-      case "ROS163-AMP":
+      case "aether_bindings_of_the_third_age-AMP":
         return 1;
-      case "ROS170":
-      case "ROS171":
-      case "ROS172":
+      case "chorus_of_the_amphitheater_red":
+      case "chorus_of_the_amphitheater_yellow":
+      case "chorus_of_the_amphitheater_blue":
         return 1;
-      case "ROS192":
-      case "ROS193":
-      case "ROS194":
+      case "exploding_aether_red":
+      case "exploding_aether_yellow":
+      case "exploding_aether_blue":
         return $effectArr[1];
         break;
       default:
@@ -522,56 +522,56 @@ function CurrentEffectArcaneModifier($source, $player, $meldState = "-"): int|st
     $remove = false;
     $effectArr = explode(",", $currentTurnEffects[$i]);
     switch ($effectArr[0]) {
-      case "EVR123":
+      case "aether_wildfire_red":
         $cardType = CardType($source);
         if ((DelimStringContains($cardType, "A") || $cardType == "AA")
           && (!HasMeld($source) || DelimStringContains($meldState, "A"))) $modifier += $effectArr[1];
         break;
-      case "ROS017":
+      case "rampant_growth__life_yellow":
         if ($currentTurnEffects[$i + 1] != $player) break;
         $modifier += $effectArr[1];
         $remove = true;
         break;
-      case "ROS000":
-      case "ROS015-AMP":
-      case "ROS168"://sigil of aether
-      case "ROS078":
-      case "ROS186":
-      case "ROS187":
-      case "ROS188":
-      case "ROS204":
-      case "ROS205":
-      case "ROS206":
-      case "MST234":
-      case "ROS165":
+      case "will_of_arcana_blue":
+      case "staff_of_verdant_shoots-AMP":
+      case "sigil_of_aether_blue"://sigil of aether
+      case "high_voltage_blue":
+      case "arcane_twining_red":
+      case "arcane_twining_yellow":
+      case "arcane_twining_blue":
+      case "photon_splicing_red":
+      case "photon_splicing_yellow":
+      case "photon_splicing_blue":
+      case "kindle_red":
+      case "hold_focus":
         if ($currentTurnEffects[$i + 1] != $player) break;
         $modifier += 1;
         $remove = true;
         break;
-      case "ROS021":
+      case "volzar_the_lightning_rod":
         if ($currentTurnEffects[$i + 1] != $player) break;
         $modifier += $effectArr[1];
         $remove = true;
         break;
-      case "ROS033":
+      case "channel_the_millennium_tree_red":
         if ($currentTurnEffects[$i + 1] != $player) break;
         $modifier += 3;
         $remove = true;
         break;
-      case "ROS163-AMP":
+      case "aether_bindings_of_the_third_age-AMP":
         if ($currentTurnEffects[$i + 1] != $player) break;
         $modifier += 1;
         $remove = true;
         break;
-      case "ROS170":
-      case "ROS171":
-      case "ROS172":
+      case "chorus_of_the_amphitheater_red":
+      case "chorus_of_the_amphitheater_yellow":
+      case "chorus_of_the_amphitheater_blue":
         if ($currentTurnEffects[$i + 1] != $player) break;
         $modifier += 1;
         break;
-      case "ROS192":
-      case "ROS193":
-      case "ROS194":
+      case "exploding_aether_red":
+      case "exploding_aether_yellow":
+      case "exploding_aether_blue":
         if ($currentTurnEffects[$i + 1] != $player) break;
         $modifier += $effectArr[1];
         $remove = true;
@@ -588,19 +588,19 @@ function ArcaneDamage($cardID): int
 {
   //Blaze - Replacement effects aren't considered when evaluating how much an effect does so Emeritus Scolding (blu) would require 2 counters.
   return match ($cardID) {
-    "ARC147", "EVR134", "UPR105", "UPR133", "UPR110", "UPR113", "DYN195" => 5,
-    "ARC126", "ARC141", "ARC148", "CRU171", "EVR125", "EVR123", "EVR135", "UPR170", "UPR134", "UPR127", "UPR122",
-    "UPR111", "UPR114", "DYN197", "ROS167", "ROS170", "ROS204" => 4,
-    "ARC119", "ARC121", "ARC127", "ARC132", "ARC138", "ARC142", "ARC144", "ARC149", "EVR126", "EVR136", "DYN198",
-    "DYN203", "DYN206", "CRU162", "CRU168", "CRU172", "CRU174", "UPR173", "UPR171", "UPR135", "UPR130", "UPR128",
-    "UPR123", "UPR112", "UPR115", "UPR104", "UPR119", "ROS171", "ROS176", "ROS186", "ROS189", "ROS195", "ROS198", "ROS201", "ROS207", "ROS173",
-    "ROS205" => 3,
-    "ARC120", "CRU169", "CRU173", "CRU175", "EVR127", "UPR174", "UPR172", "UPR131", "UPR129", "UPR124", "UPR120",
-    "DYN194", "DYN199", "DYN204", "DYN207", "ROS172", "ROS177", "ROS187", "ROS190", "ROS196", "ROS199", "ROS202", "ROS208", "ROS174", "ARC128",
-    "ARC133", "ARC139", "ARC143", "ARC145", "ROS206" => 2,
-    "ARC134", "ARC140", "ARC146", "CRU170", "CRU176", "UPR175", "UPR179", "UPR180", "UPR181", "UPR132", "UPR121",
-    "DYN205", "DYN208", "HVY252", "ROS166", "ROS178", "ROS188", "ROS191", "ROS197", "ROS200", "ROS203", "ROS209", "ROS175" => 1,
-    "EVR124" => 0,
+    "voltic_bolt_red", "timekeepers_whim_red", "freezing_point_red", "ice_bolt_red", "succumb_to_winter_red", "aether_icevein_red", "swell_tidings_red" => 5,
+    "aether_spindle_red", "scalding_rain_red", "voltic_bolt_yellow", "rousing_aether_red", "emeritus_scolding_red", "aether_wildfire_red", "timekeepers_whim_yellow", "dampen_red", "ice_bolt_yellow", "aether_hail_red", "polar_cap_red",
+    "succumb_to_winter_yellow", "aether_icevein_yellow", "aether_quickening_red", "eternal_inferno_red", "chorus_of_the_amphitheater_red", "photon_splicing_red" => 4,
+    "sonic_boom_yellow", "lesson_in_lava_yellow", "aether_spindle_yellow", "aether_flare_red", "reverberate_red", "scalding_rain_yellow", "zap_red", "voltic_bolt_blue", "emeritus_scolding_yellow", "timekeepers_whim_blue", "aether_quickening_yellow",
+    "prognosticate_red", "sap_red", "chain_lightning_yellow", "foreboding_bolt_red", "rousing_aether_yellow", "snapback_red", "aether_dart_red", "dampen_yellow", "ice_bolt_blue", "frosting_red", "aether_hail_yellow",
+    "polar_cap_yellow", "succumb_to_winter_blue", "aether_icevein_blue", "encase_red", "icebind_red", "chorus_of_the_amphitheater_yellow", "pop_the_bubble_red", "arcane_twining_red", "etchings_of_arcana_red", "open_the_flood_gates_red", "overflow_the_aetherwell_red", "perennial_aetherbloom_red", "trailblazing_aether_red", "glyph_overlay_red",
+    "photon_splicing_yellow" => 3,
+    "forked_lightning_red", "foreboding_bolt_yellow", "rousing_aether_blue", "snapback_yellow", "emeritus_scolding_blue", "aether_dart_yellow", "dampen_blue", "frosting_yellow", "aether_hail_blue", "polar_cap_blue", "icebind_yellow",
+    "mind_warp_yellow", "aether_quickening_blue", "prognosticate_yellow", "sap_yellow", "chorus_of_the_amphitheater_blue", "pop_the_bubble_yellow", "arcane_twining_yellow", "etchings_of_arcana_yellow", "open_the_flood_gates_yellow", "overflow_the_aetherwell_yellow", "perennial_aetherbloom_yellow", "trailblazing_aether_yellow", "glyph_overlay_yellow", "aether_spindle_blue",
+    "aether_flare_yellow", "reverberate_yellow", "scalding_rain_blue", "zap_yellow", "photon_splicing_blue" => 2,
+    "aether_flare_blue", "reverberate_blue", "zap_blue", "foreboding_bolt_blue", "snapback_blue", "aether_dart_blue", "singe_red", "singe_yellow", "singe_blue", "frosting_blue", "icebind_blue",
+    "prognosticate_blue", "sap_blue", "aether_arc_blue", "destructive_aethertide_blue", "pop_the_bubble_blue", "arcane_twining_blue", "etchings_of_arcana_blue", "open_the_flood_gates_blue", "overflow_the_aetherwell_blue", "perennial_aetherbloom_blue", "trailblazing_aether_blue", "glyph_overlay_blue" => 1,
+    "scour_blue" => 0,
     default => -1,
   };
 }
@@ -608,9 +608,9 @@ function ArcaneDamage($cardID): int
 function ActionsThatDoXArcaneDamage($cardID)
 {
   switch ($cardID) {
-    case "ARC118":
-    case "EVR124":
-    case "UPR109":
+    case "blazing_aether_red":
+    case "scour_blue":
+    case "ice_eternal_blue":
       return true;
     default:
       return false;
@@ -620,132 +620,132 @@ function ActionsThatDoXArcaneDamage($cardID)
 function ActionsThatDoArcaneDamage($cardID, $playerID)
 {
   switch ($cardID) {
-    case "ARC119":
-    case "ARC120":
-    case "ARC121":
-    case "ARC126":
-    case "ARC127":
-    case "ARC128":
-    case "ARC132":
-    case "ARC133":
-    case "ARC134":
-    case "ARC138":
-    case "ARC139":
-    case "ARC140":
-    case "ARC141":
-    case "ARC142":
-    case "ARC143":
-    case "ARC144":
-    case "ARC145":
-    case "ARC146":
-    case "ARC147":
-    case "ARC148":
-    case "ARC149":
+    case "sonic_boom_yellow":
+    case "forked_lightning_red":
+    case "lesson_in_lava_yellow":
+    case "aether_spindle_red":
+    case "aether_spindle_yellow":
+    case "aether_spindle_blue":
+    case "aether_flare_red":
+    case "aether_flare_yellow":
+    case "aether_flare_blue":
+    case "reverberate_red":
+    case "reverberate_yellow":
+    case "reverberate_blue":
+    case "scalding_rain_red":
+    case "scalding_rain_yellow":
+    case "scalding_rain_blue":
+    case "zap_red":
+    case "zap_yellow":
+    case "zap_blue":
+    case "voltic_bolt_red":
+    case "voltic_bolt_yellow":
+    case "voltic_bolt_blue":
       return true;
-    case "CRU162":
-    case "CRU168":
-    case "CRU169":
-    case "CRU170":
-    case "CRU171":
-    case "CRU172":
-    case "CRU173":
-    case "CRU174":
-    case "CRU175":
-    case "CRU176":
+    case "chain_lightning_yellow":
+    case "foreboding_bolt_red":
+    case "foreboding_bolt_yellow":
+    case "foreboding_bolt_blue":
+    case "rousing_aether_red":
+    case "rousing_aether_yellow":
+    case "rousing_aether_blue":
+    case "snapback_red":
+    case "snapback_yellow":
+    case "snapback_blue":
       return true;
-    case "EVR123":
-    case "EVR125":
-    case "EVR126":
-    case "EVR127":
-    case "EVR134":
-    case "EVR135":
-    case "EVR136":
+    case "aether_wildfire_red":
+    case "emeritus_scolding_red":
+    case "emeritus_scolding_yellow":
+    case "emeritus_scolding_blue":
+    case "timekeepers_whim_red":
+    case "timekeepers_whim_yellow":
+    case "timekeepers_whim_blue":
       return true;
-    case "UPR104":
-    case "UPR105":
-    case "UPR110":
-    case "UPR111":
-    case "UPR112":
-    case "UPR113":
-    case "UPR114":
-    case "UPR115":
-    case "UPR119":
-    case "UPR120":
-    case "UPR121":
-    case "UPR122":
-    case "UPR123":
-    case "UPR124":
-    case "UPR127":
-    case "UPR128":
-    case "UPR129":
-    case "UPR130":
-    case "UPR131":
-    case "UPR132":
-    case "UPR133":
-    case "UPR134":
-    case "UPR135":
-    case "UPR170":
-    case "UPR171":
-    case "UPR172":
-    case "UPR173":
-    case "UPR174":
-    case "UPR175":
-    case "UPR179":
-    case "UPR180":
-    case "UPR181":
+    case "encase_red":
+    case "freezing_point_red":
+    case "succumb_to_winter_red":
+    case "succumb_to_winter_yellow":
+    case "succumb_to_winter_blue":
+    case "aether_icevein_red":
+    case "aether_icevein_yellow":
+    case "aether_icevein_blue":
+    case "icebind_red":
+    case "icebind_yellow":
+    case "icebind_blue":
+    case "polar_cap_red":
+    case "polar_cap_yellow":
+    case "polar_cap_blue":
+    case "aether_hail_red":
+    case "aether_hail_yellow":
+    case "aether_hail_blue":
+    case "frosting_red":
+    case "frosting_yellow":
+    case "frosting_blue":
+    case "ice_bolt_red":
+    case "ice_bolt_yellow":
+    case "ice_bolt_blue":
+    case "dampen_red":
+    case "dampen_yellow":
+    case "dampen_blue":
+    case "aether_dart_red":
+    case "aether_dart_yellow":
+    case "aether_dart_blue":
+    case "singe_red":
+    case "singe_yellow":
+    case "singe_blue":
       return true;
-    case "DYN194":
-    case "DYN195":
-    case "DYN197":
-    case "DYN198":
-    case "DYN199":
-    case "DYN203":
-    case "DYN204":
-    case "DYN205":
-    case "DYN206":
-    case "DYN207":
-    case "DYN208":
+    case "mind_warp_yellow":
+    case "swell_tidings_red":
+    case "aether_quickening_red":
+    case "aether_quickening_yellow":
+    case "aether_quickening_blue":
+    case "prognosticate_red":
+    case "prognosticate_yellow":
+    case "prognosticate_blue":
+    case "sap_red":
+    case "sap_yellow":
+    case "sap_blue":
       return true;
-    case "HVY252":
+    case "aether_arc_blue":
       return true;
-    case "ROS011":
-    case "ROS012":
-    case "ROS018":
-    case "ROS024":
-    case "ROS023":
-    case "ROS166":
-    case "ROS167":
-    case "ROS170":
-    case "ROS171":
-    case "ROS172":
-    case "ROS173":
-    case "ROS174":
-    case "ROS175":
-    case "ROS176":
-    case "ROS177":
-    case "ROS178":
-    case "ROS186":
-    case "ROS187":
-    case "ROS188":
-    case "ROS189":
-    case "ROS190":
-    case "ROS191":
-    case "ROS195":
-    case "ROS196":
-    case "ROS197":
-    case "ROS198":
-    case "ROS199":
-    case "ROS200":
-    case "ROS201":
-    case "ROS202":
-    case "ROS203":
-    case "ROS207":
-    case "ROS208":
-    case "ROS209":
-    case "ROS204":
-    case "ROS205":
-    case "ROS206":
-    case "ROS253":
+    case "vaporize__shock_yellow":
+    case "burn_up__shock_red":
+    case "pulsing_aether__life_red":
+    case "comet_storm__shock_red":
+    case "null__shock_yellow":
+    case "destructive_aethertide_blue":
+    case "eternal_inferno_red":
+    case "chorus_of_the_amphitheater_red":
+    case "chorus_of_the_amphitheater_yellow":
+    case "chorus_of_the_amphitheater_blue":
+    case "glyph_overlay_red":
+    case "glyph_overlay_yellow":
+    case "glyph_overlay_blue":
+    case "pop_the_bubble_red":
+    case "pop_the_bubble_yellow":
+    case "pop_the_bubble_blue":
+    case "arcane_twining_red":
+    case "arcane_twining_yellow":
+    case "arcane_twining_blue":
+    case "etchings_of_arcana_red":
+    case "etchings_of_arcana_yellow":
+    case "etchings_of_arcana_blue":
+    case "open_the_flood_gates_red":
+    case "open_the_flood_gates_yellow":
+    case "open_the_flood_gates_blue":
+    case "overflow_the_aetherwell_red":
+    case "overflow_the_aetherwell_yellow":
+    case "overflow_the_aetherwell_blue":
+    case "perennial_aetherbloom_red":
+    case "perennial_aetherbloom_yellow":
+    case "perennial_aetherbloom_blue":
+    case "trailblazing_aether_red":
+    case "trailblazing_aether_yellow":
+    case "trailblazing_aether_blue":
+    case "photon_splicing_red":
+    case "photon_splicing_yellow":
+    case "photon_splicing_blue":
+    case "regrowth__shock_blue":
       return true;
     default:
       return false;
@@ -762,153 +762,153 @@ function ArcaneBarrierChoices($playerID, $max)
   for ($i = 0; $i < count($character); $i += CharacterPieces()) {
     if ($character[$i + 1] == 0 || $character[$i + 12] == "DOWN") continue;
     switch ($character[$i]) {
-      case "ARC005":
+      case "achilles_accelerator":
         ++$barrierArray[1];
         $total += 1;
         break;
-      case "ARC041":
+      case "skullbone_crosswrap":
         ++$barrierArray[1];
         $total += 1;
         break;
-      case "ARC042":
+      case "bulls_eye_bracers":
         ++$barrierArray[1];
         $total += 1;
         break;
-      case "ARC079":
+      case "crown_of_dichotomy":
         ++$barrierArray[1];
         $total += 1;
         break;
-      case "ARC116":
+      case "storm_striders":
         ++$barrierArray[2];
         $total += 2;
         break;
-      case "ARC117":
+      case "robe_of_rapture":
         ++$barrierArray[1];
         $total += 1;
         break;
-      case "ARC150":
+      case "arcanite_skullcap":
         if (PlayerHasLessHealth($playerID)) {
           ++$barrierArray[3];
           $total += 3;
         }
         break;
-      case "ARC155":
-      case "ARC156":
-      case "ARC157":
-      case "ARC158":
+      case "nullrune_hood":
+      case "nullrune_robe":
+      case "nullrune_gloves":
+      case "nullrune_boots":
         ++$barrierArray[1];
         $total += 1;
         break;
-      case "CRU006":
+      case "skullhorn":
         ++$barrierArray[2];
         $total += 2;
         break;
-      case "CRU102":
+      case "viziertronic_model_i":
         ++$barrierArray[2];
         $total += 2;
         break;
-      case "CRU161":
+      case "metacarpus_node":
         ++$barrierArray[1];
         $total += 1;
         break;
-      case "ELE144":
+      case "heart_of_ice":
         ++$barrierArray[1];
         $total += 1;
         break;
-      case "EVR103":
+      case "vexing_quillhand":
         ++$barrierArray[1];
         $total += 1;
         break;
-      case "EVR137":
+      case "crown_of_reflection":
         ++$barrierArray[1];
         $total += 1;
         break;
-      case "EVR155":
+      case "arcane_lantern":
         ++$barrierArray[1];
         $total += 1;
         break;
-      case "UPR152":
+      case "silent_stilettos":
         ++$barrierArray[1];
         $total += 1;
         break;
-      case "UPR159":
+      case "tide_flippers":
         ++$barrierArray[1];
         $total += 1;
         break;
-      case "UPR166":
+      case "alluvion_constellas":
         ++$barrierArray[1];
         $total += 1;
         break;
-      case "UPR167":
+      case "spellfire_cloak":
         ++$barrierArray[1];
         $total += 1;
         break;
-      case "OUT094":
+      case "trench_of_sunken_treasure":
         ++$barrierArray[1];
         $total += 1;
         break;
-      case "DTD106":
+      case "spoiled_skull":
         ++$barrierArray[1];
         $total += 1;
         break;
-      case "DTD136":
+      case "grimoire_of_the_haunt":
         ++$barrierArray[1];
         $total += 1;
         break;
-      case "DTD211":
+      case "dyadic_carapace":
         ++$barrierArray[2];
         $total += 2;
         break;
-      case "MST228":
-      case "MST628":
+      case "evo_recall_blue":
+      case "evo_recall_blue_equip":
         ++$barrierArray[1];
         $total += 1;
         break;
-      case "MST229":
-      case "MST629":
+      case "evo_heartdrive_blue":
+      case "evo_heartdrive_blue_equip":
         ++$barrierArray[1];
         $total += 1;
         break;
-      case "MST230":
-      case "MST630":
+      case "evo_shortcircuit_blue":
+      case "evo_shortcircuit_blue_equip":
         ++$barrierArray[1];
         $total += 1;
         break;
-      case "MST231":
-      case "MST631":
+      case "evo_speedslip_blue":
+      case "evo_speedslip_blue_equip":
         ++$barrierArray[1];
         $total += 1;
         break;
-      case "AAZ005":
+      case "hidden_agenda":
         ++$barrierArray[1];
         $total += 1;
         break;
-      case "ROS071":
+      case "lightning_greaves":
         ++$barrierArray[1];
         $total += 1;
         break;
-      case "ROS239":
+      case "widow_veil_respirator":
         ++$barrierArray[1];
         $total += 1;
         break;
-      case "ROS240":
+      case "widow_back_abdomen":
         ++$barrierArray[1];
         $total += 1;
         break;
-      case "ROS241":
+      case "widow_claw_tarsus":
         ++$barrierArray[1];
         $total += 1;
         break;
-      case "ROS242":
+      case "widow_web_crawler":
         ++$barrierArray[1];
         $total += 1;
         break;
-      case "ROS246":
+      case "adaptive_dissolver":
         ++$barrierArray[1];
         $total += 1;
         break;
-      case "ROS249":
-      case "ROS250":
+      case "calming_cloak":
+      case "calming_gesture":
         ++$barrierArray[1];
         $total += 1;
         break;
@@ -919,7 +919,7 @@ function ArcaneBarrierChoices($playerID, $max)
   $items = GetItems($playerID);
   for ($i = 0; $i < count($items); $i += ItemPieces()) {
     switch ($items[$i]) {
-      case "ARC163":
+      case "rusted_relic_blue":
         ++$barrierArray[1];
         $total += 1;
         break;
@@ -930,7 +930,7 @@ function ArcaneBarrierChoices($playerID, $max)
   $allies = GetAllies($playerID);
   for ($i = 0; $i < count($allies); $i += AllyPieces()) {
     switch ($allies[$i]) {
-      case "UPR042":
+      case "aether_ashwing":
         ++$barrierArray[1];
         $total += 1;
         break;
@@ -940,7 +940,7 @@ function ArcaneBarrierChoices($playerID, $max)
   }
   for ($i = 0; $i < count($currentTurnEffects); $i += CurrentTurnEffectsPieces()) {
     switch ($currentTurnEffects[$i]) {
-      case "ARC017":
+      case "aether_sink_yellow":
         ++$barrierArray[2];
         $total += 2;
         break;
@@ -973,19 +973,19 @@ function CheckSpellvoid($player, $damage)
 function ArcaneHitEffect($player, $source, $target, $damage)
 {
   switch ($source) {
-    case "UPR104":
+    case "encase_red":
       if (MZIsPlayer($target) && $damage > 0) {
         AddDecisionQueue("SPECIFICCARD", MZPlayerID($player, $target), "ENCASEDAMAGE", 1);
       }
       break;
-    case "UPR113":
-    case "UPR114":
-    case "UPR115":
+    case "aether_icevein_red":
+    case "aether_icevein_yellow":
+    case "aether_icevein_blue":
       if (MZIsPlayer($target)) PayOrDiscard(MZPlayerID($player, $target), 2, true);
       break;
-    case "UPR119":
-    case "UPR120":
-    case "UPR121":
+    case "icebind_red":
+    case "icebind_yellow":
+    case "icebind_blue":
       if (MZIsPlayer($target) && $damage > 0) {
         AddDecisionQueue("MULTIZONEINDICES", $player, "THEIRARS", 1);
         AddDecisionQueue("SETDQCONTEXT", $player, "Choose a card to freeze", 1);
@@ -993,14 +993,14 @@ function ArcaneHitEffect($player, $source, $target, $damage)
         AddDecisionQueue("MZOP", $player, "FREEZE", 1);
       }
       break;
-    case "UPR122":
-    case "UPR123":
-    case "UPR124":
+    case "polar_cap_red":
+    case "polar_cap_yellow":
+    case "polar_cap_blue":
       if (MZIsPlayer($target) && $damage > 0) {
-        AddDecisionQueue("PLAYAURA", MZPlayerID($player, $target), "ELE111-1", 1);
+        AddDecisionQueue("PLAYAURA", MZPlayerID($player, $target), "frostbite-1", 1);
       }
       break;
-    case "ROS168":
+    case "sigil_of_aether_blue":
       AddCurrentTurnEffect($source, $player);
       Writelog(CardLink($source, $source) . " is amping 1");
       break;
@@ -1008,11 +1008,11 @@ function ArcaneHitEffect($player, $source, $target, $damage)
       break;
   }
 
-  if ($damage > 0 && CardType($source) != "W" && SearchCurrentTurnEffects("UPR125", $player, true)) AddDecisionQueue("OP", MZPlayerID($player, $target), "DESTROYFROZENARSENAL");
+  if ($damage > 0 && CardType($source) != "W" && SearchCurrentTurnEffects("conduit_of_frostburn", $player, true)) AddDecisionQueue("OP", MZPlayerID($player, $target), "DESTROYFROZENARSENAL");
   $auras = &GetAuras($player);
   for ($i = 0; $i < count($auras); $i += AuraPieces()) {
     switch ($auras[$i]) {
-      case "HNT256":
+      case "ring_of_roses_yellow":
         if ($auras[$i+5] > 0) {
           AddLayer("TRIGGER", $player, $auras[$i]);
           $auras[$i+5] -= 1;
@@ -1033,7 +1033,7 @@ function ProcessSurge($cardID, $player, $target)
   global $mainPlayer;
   $targetPlayer = MZPlayerID($player, $target);
   switch ($cardID) {
-    case "DYN194":
+    case "mind_warp_yellow":
       $hand = &GetHand($targetPlayer);
       $numToDraw = count($hand) - 1;
       if ($numToDraw < 0) $numToDraw = 0;
@@ -1043,32 +1043,32 @@ function ProcessSurge($cardID, $player, $target)
       WriteLog("Mind Warp warps the target's mind.");
       AddDecisionQueue("SHUFFLEDECK", $targetPlayer, "-");
       break;
-    case "DYN195":
-      PlayAura("DYN244", $player);
-      WriteLog(CardLink($cardID, $cardID) . " created a " . CardLink("DYN244", "DYN244") . " token");
+    case "swell_tidings_red":
+      PlayAura("ponder", $player);
+      WriteLog(CardLink($cardID, $cardID) . " created a " . CardLink("ponder", "ponder") . " token");
       break;
-    case "DYN197":
-    case "DYN198":
-    case "DYN199":
+    case "aether_quickening_red":
+    case "aether_quickening_yellow":
+    case "aether_quickening_blue":
       if (CurrentEffectPreventsGoAgain($cardID) || $player != $mainPlayer) break;
       GainActionPoints();
       WriteLog(CardLink($cardID, $cardID) . " gained go again");
       break;
-    case "DYN203":
-    case "DYN204":
-    case "DYN205":
+    case "prognosticate_red":
+    case "prognosticate_yellow":
+    case "prognosticate_blue":
       PlayerOpt($player, 1);
       break;
-    case "DYN206":
-    case "DYN207":
-    case "DYN208":
+    case "sap_red":
+    case "sap_yellow":
+    case "sap_blue":
       AddDecisionQueue("MULTIZONEINDICES", $player, "THEIRCHAR:type=E;hasEnergyCounters=true");
       AddDecisionQueue("SETDQCONTEXT", $player, "Remove an energy counter from a card");
       AddDecisionQueue("CHOOSEMULTIZONE", $player, "<-", 1);
       AddDecisionQueue("MZOP", $player, "GETCARDINDEX", 1);
       AddDecisionQueue("REMOVECOUNTER", $targetPlayer, $cardID, 1);
       break;
-    case "ROS166":
+    case "destructive_aethertide_blue":
       if (MZIsPlayer($target)) {
         AddDecisionQueue("MULTIZONEINDICES", $player, "THEIRARS", 1);
         AddDecisionQueue("SETDQCONTEXT", $player, "Choose a card you want to destroy from their arsenal", 1);
@@ -1076,40 +1076,40 @@ function ProcessSurge($cardID, $player, $target)
         AddDecisionQueue("MZDESTROY", $player, false, 1);
         }
       break;
-    case "ROS167"://eternal inferno
-      BanishCardForPlayer("ROS167", $player, "MYDISCARD", "TT", "ROS167");
+    case "eternal_inferno_red"://eternal inferno
+      BanishCardForPlayer("eternal_inferno_red", $player, "MYDISCARD", "TT", "eternal_inferno_red");
       $discard = &GetDiscard($player);
       for($i = 0; $i < DiscardPieces(); $i++){
         array_pop($discard);
       }
       break;
-    case "ROS176":
-    case "ROS177":
-    case "ROS178":
+    case "pop_the_bubble_red":
+    case "pop_the_bubble_yellow":
+    case "pop_the_bubble_blue":
       MZChooseAndDestroy($player, "THEIRAURAS");
       break;
-    case "ROS189":
-    case "ROS190":
-    case "ROS191":
+    case "etchings_of_arcana_red":
+    case "etchings_of_arcana_yellow":
+    case "etchings_of_arcana_blue":
       WriteLog("Surge active, returning a sigil from graveyard to hand");
       MZMoveCard($player, "MYDISCARD:subtype=Aura;nameIncludes=Sigil", "MYHAND", may: true);
       break;
-    case "ROS195": 
-    case "ROS196": 
-    case "ROS197":
+    case "open_the_flood_gates_red": 
+    case "open_the_flood_gates_yellow": 
+    case "open_the_flood_gates_blue":
       WriteLog("Surge active, drawing 2 cards");
       Draw($player);
       Draw($player);
       break;
-    case "ROS198":
-    case "ROS199":
-    case "ROS200":
+    case "overflow_the_aetherwell_red":
+    case "overflow_the_aetherwell_yellow":
+    case "overflow_the_aetherwell_blue":
       WriteLog("Surge active, gaining 2 resources");
       GainResources($player, 2);
       break;
-    case "ROS201":
-    case "ROS202":
-    case "ROS203": //perennial aetherbloom
+    case "perennial_aetherbloom_red":
+    case "perennial_aetherbloom_yellow":
+    case "perennial_aetherbloom_blue": //perennial aetherbloom
       WriteLog("Surge active, returning on the bottom of the deck");
       AddBottomDeck($cardID, $player, "STACK"); //create a copy on the bottom
       $discard = &GetDiscard($player);
@@ -1117,9 +1117,9 @@ function ProcessSurge($cardID, $player, $target)
         array_pop($discard);
       }
       break;
-    case "ROS173":
-    case "ROS174":
-    case "ROS175":
+    case "glyph_overlay_red":
+    case "glyph_overlay_yellow":
+    case "glyph_overlay_blue":
       WriteLog("Surge Active, gaining 1 life and returning sigils to the deck");
       GainHealth(1, $player);
       $auras = &GetAuras($player);
@@ -1134,9 +1134,9 @@ function ProcessSurge($cardID, $player, $target)
       }
       if($sigilFound)AddDecisionQueue("SHUFFLEDECK", $player, "-");
       break;
-    case "ROS207":
-    case "ROS208":
-    case "ROS209":
+    case "trailblazing_aether_red":
+    case "trailblazing_aether_yellow":
+    case "trailblazing_aether_blue":
       if (CurrentEffectPreventsGoAgain($cardID) || $player != $mainPlayer) break;
       GainActionPoints();
       WriteLog(CardLink($cardID, $cardID) . " gained go again");

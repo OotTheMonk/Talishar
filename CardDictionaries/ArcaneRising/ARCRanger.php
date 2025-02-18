@@ -6,7 +6,7 @@
     global $currentPlayer;
     switch($cardID)
     {
-      case "ARC038": case "ARC039":
+      case "azalea_ace_in_the_hole": case "azalea":
         if(ArsenalEmpty($currentPlayer)) return "There is no card in your arsenal.";
         AddDecisionQueue("FINDINDICES", $currentPlayer, "ARSENAL");
         AddDecisionQueue("CHOOSEARSENAL", $currentPlayer, "<-", 1);
@@ -18,26 +18,26 @@
         AddDecisionQueue("ALLCARDSUBTYPEORPASS", $currentPlayer, "Arrow", 1);
         AddDecisionQueue("LASTARSENALADDEFFECT", $currentPlayer, $cardID . ",DECK", 1);
         return "";
-      case "ARC040":
+      case "death_dealer":
         if(!ArsenalEmpty($currentPlayer)) return "Your arsenal is full, you cannot reload";
         LoadArrow($currentPlayer);
         AddDecisionQueue("DRAW", $currentPlayer, "-", 1);
         return "";
-      case "ARC041":
+      case "skullbone_crosswrap":
         Opt($cardID, 1);
         return "";
-      case "ARC042":
+      case "bulls_eye_bracers":
         if(!ArsenalEmpty($currentPlayer)) return "Your arsenal is full, you cannot reload";
         LoadArrow($currentPlayer);
         AddDecisionQueue("LASTARSENALADDEFFECT", $currentPlayer, $cardID . ",HAND", 1);
         return "";
-      case "ARC044":
+      case "three_of_a_kind_red":
         Draw($currentPlayer);
         Draw($currentPlayer);
         Draw($currentPlayer);
         AddCurrentTurnEffect($cardID, $currentPlayer);
         return "";
-      case "ARC046":
+      case "nock_the_deathwhistle_blue":
         AddDecisionQueue("MULTIZONEINDICES", $currentPlayer, "MYDECK:subtype=Arrow");
         AddDecisionQueue("MAYCHOOSEMULTIZONE", $currentPlayer, "<-", 1);
         AddDecisionQueue("MZREMOVE", $currentPlayer, "-", 1);
@@ -46,17 +46,17 @@
         AddDecisionQueue("MULTIADDTOPDECK", $currentPlayer, "-", 1);
         Reload();
         return "";
-      case "ARC047":
+      case "rapid_fire_yellow":
         AddCurrentTurnEffect($cardID, $currentPlayer);
         Reload();
         return "";
-      case "ARC048": case "ARC049": case "ARC050":
+      case "take_cover_red": case "take_cover_yellow": case "take_cover_blue":
         Reload();
         return "";
-      case "ARC051": case "ARC052": case "ARC053":
+      case "silver_the_tip_red": case "silver_the_tip_yellow": case "silver_the_tip_blue":
         if(!ArsenalEmpty($currentPlayer)) return "It does nothing because your arsenal is full";
-        if($cardID == "ARC051") $count = 4;
-        else if($cardID == "ARC052") $count = 3;
+        if($cardID == "silver_the_tip_red") $count = 4;
+        else if($cardID == "silver_the_tip_yellow") $count = 3;
         else $count = 2;
         AddDecisionQueue("PASSPARAMETER", $currentPlayer, $count);
         AddDecisionQueue("SETDQVAR", $currentPlayer, "0");
@@ -77,7 +77,7 @@
         AddDecisionQueue("FINDINDICES", $currentPlayer, "DECKTOPXREMOVE,{0}");
         AddDecisionQueue("CHOOSEBOTTOM", $currentPlayer, "<-", 1);
         return "";
-      case "ARC054": case "ARC055": case "ARC056":
+      case "take_aim_red": case "take_aim_yellow": case "take_aim_blue":
         AddCurrentTurnEffect($cardID, $currentPlayer);
         Reload();
         return "";
@@ -90,21 +90,21 @@
     global $defPlayer, $mainPlayer, $combatChainState, $CCS_GoesWhereAfterLinkResolves;
     switch($cardID)
     {
-      case "ARC043":
+      case "red_in_the_ledger_red":
         if(IsHeroAttackTarget()) AddNextTurnEffect($cardID, $defPlayer);
         break;
-      case "ARC045":
+      case "endless_arrow_red":
         $combatChainState[$CCS_GoesWhereAfterLinkResolves] = "-";
         AddPlayerHand($cardID, $mainPlayer, "CC");
         break;
-      case "ARC060": case "ARC061": case "ARC062":
+      case "hamstring_shot_red": case "hamstring_shot_yellow": case "hamstring_shot_blue":
         if(IsHeroAttackTarget()) AddNextTurnEffect($cardID, $defPlayer);
         break;
-      case "ARC066": case "ARC067": case "ARC068":
+      case "salvage_shot_red": case "salvage_shot_yellow": case "salvage_shot_blue":
         if(substr($from, 0, 5) != "THEIR") $combatChainState[$CCS_GoesWhereAfterLinkResolves] = "BOTDECK";
         else $combatChainState[$CCS_GoesWhereAfterLinkResolves] = "THEIRBOTDECK";
           break;
-      case "ARC069": case "ARC070": case "ARC071":
+      case "searing_shot_red": case "searing_shot_yellow": case "searing_shot_blue":
         if(IsHeroAttackTarget()) PlayerLoseHealth($defPlayer, 1);
         break;
       default: break;

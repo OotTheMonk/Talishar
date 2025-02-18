@@ -10,12 +10,12 @@
     global $mainPlayer, $currentPlayer;
     switch($cardID)
     {
-      case "UPR044": case "UPR045": return 3 - ($mainPlayer == $currentPlayer ? NumDraconicChainLinks() : 0);
-      case "UPR046": return 2;
-      case "UPR084": return 1;
-      case "UPR136": return 3;
-      case "UPR165": return 2;
-      case "UPR183": return 2;
+      case "fai_rising_rebellion": case "fai": return 3 - ($mainPlayer == $currentPlayer ? NumDraconicChainLinks() : 0);
+      case "searing_emberblade": return 2;
+      case "flamescale_furnace": return 1;
+      case "coronet_peak": return 3;
+      case "waning_moon": return 2;
+      case "helios_mitre": return 2;
       case "UPR551": return 3;
       default: return 0;
     }
@@ -25,21 +25,21 @@
   {
     switch($cardID)
     {
-      case "UPR004": return "I";
-      case "UPR044": case "UPR045": return "I";
-      case "UPR046": return "AA";
-      case "UPR047": return "I";
-      case "UPR084": return "I";
-      case "UPR085": return "I";
-      case "UPR125": return "I";
-      case "UPR136": return "A";
-      case "UPR137": return "A";
-      case "UPR151": return "A";
-      case "UPR159": return "AR";
-      case "UPR165": return "I";
-      case "UPR166": return "I";
-      case "UPR167": return "I";
-      case "UPR183": return "I";
+      case "silken_form": return "I";
+      case "fai_rising_rebellion": case "fai": return "I";
+      case "searing_emberblade": return "AA";
+      case "heat_wave": return "I";
+      case "flamescale_furnace": return "I";
+      case "sash_of_sandikai": return "I";
+      case "conduit_of_frostburn": return "I";
+      case "coronet_peak": return "A";
+      case "glacial_horns": return "A";
+      case "ghostly_touch": return "A";
+      case "tide_flippers": return "AR";
+      case "waning_moon": return "I";
+      case "alluvion_constellas": return "I";
+      case "spellfire_cloak": return "I";
+      case "helios_mitre": return "I";
       case "UPR551": return "AA";
       default: return "";
     }
@@ -49,8 +49,8 @@
   {
     switch($cardID)
     {
-      case "UPR137": return true;
-      case "UPR151": return true;
+      case "glacial_horns": return true;
+      case "ghostly_touch": return true;
       default: return false;
     }
   }
@@ -62,20 +62,20 @@
     if(count($params) > 1) $subparam = $params[1];
     switch($cardID)
     {
-      case "UPR036": return 3;
-      case "UPR037": return 2;
-      case "UPR038": return 1;
-      case "UPR047": return 1;
-      case "UPR049": return 1;
-      case "UPR054": case "UPR055": case "UPR056": return 1;
-      case "UPR057": return 3;
-      case "UPR058": return 2;
-      case "UPR059": return 1;
-      case "UPR088": return 1;
-      case "UPR091": return NumChainLinksWithName("Phoenix Flame")*2;
-      case "UPR094": return 2;
-      case "UPR158": return 1;
-      case "UPR191": case "UPR192": case "UPR193": return 2;
+      case "skittering_sands_red": return 3;
+      case "skittering_sands_yellow": return 2;
+      case "skittering_sands_blue": return 1;
+      case "heat_wave": return 1;
+      case "spreading_flames_red": return 1;
+      case "mounting_anger_red": case "mounting_anger_yellow": case "mounting_anger_blue": return 1;
+      case "rise_from_the_ashes_red": return 3;
+      case "rise_from_the_ashes_yellow": return 2;
+      case "rise_from_the_ashes_blue": return 1;
+      case "uprising_red": return 1;
+      case "rise_up_red": return NumChainLinksWithName("Phoenix Flame")*2;
+      case "burn_away_red": return 2;
+      case "tiger_stripe_shuko": return 1;
+      case "flex_red": case "flex_yellow": case "flex_blue": return 2;
       default: return 0;
     }
   }
@@ -87,22 +87,22 @@
     $cardID = $params[0];
     switch($cardID)
     {
-      case "UPR036": case "UPR037": case "UPR038": return true;
-      case "UPR047": return IsCardNamed($mainPlayer, $attackID, "Phoenix Flame");
-      case "UPR049": return TalentContains($attackID, "DRACONIC", $mainPlayer) && AttackValue($attackID) < NumDraconicChainLinks();
-      case "UPR054": case "UPR055": case "UPR056": return true;
-      case "UPR057": case "UPR058": case "UPR059": return CardType($attackID) == "AA" && (TalentContains($attackID, "DRACONIC", $mainPlayer) || ClassContains($attackID, "NINJA", $mainPlayer));
-      case "UPR060": case "UPR061": case "UPR062": return true;
-      case "UPR081": case "UPR082": case "UPR083": return true;
-      case "UPR088": return TalentContains($attackID, "DRACONIC", $mainPlayer);
-      case "UPR091": return true;
-      case "UPR094": return true;
-      case "UPR151": return $attackID == "UPR551";
-      case "UPR154": return ClassContains($attackID, "ILLUSIONIST", $mainPlayer);
-      case "UPR155": case "UPR156": case "UPR157": return CardType($attackID) == "AA";
-      case "UPR158": return true;
-      case "UPR191": case "UPR192": case "UPR193": return true;
-      case "UPR412": return true;
+      case "skittering_sands_red": case "skittering_sands_yellow": case "skittering_sands_blue": return true;
+      case "heat_wave": return IsCardNamed($mainPlayer, $attackID, "Phoenix Flame");
+      case "spreading_flames_red": return TalentContains($attackID, "DRACONIC", $mainPlayer) && AttackValue($attackID) < NumDraconicChainLinks();
+      case "mounting_anger_red": case "mounting_anger_yellow": case "mounting_anger_blue": return true;
+      case "rise_from_the_ashes_red": case "rise_from_the_ashes_yellow": case "rise_from_the_ashes_blue": return CardType($attackID) == "AA" && (TalentContains($attackID, "DRACONIC", $mainPlayer) || ClassContains($attackID, "NINJA", $mainPlayer));
+      case "brand_with_cinderclaw_red": case "brand_with_cinderclaw_yellow": case "brand_with_cinderclaw_blue": return true;
+      case "soaring_strike_red": case "soaring_strike_yellow": case "soaring_strike_blue": return true;
+      case "uprising_red": return TalentContains($attackID, "DRACONIC", $mainPlayer);
+      case "rise_up_red": return true;
+      case "burn_away_red": return true;
+      case "ghostly_touch": return $attackID == "UPR551";
+      case "semblance_blue": return ClassContains($attackID, "ILLUSIONIST", $mainPlayer);
+      case "transmogrify_red": case "transmogrify_yellow": case "transmogrify_blue": return CardType($attackID) == "AA";
+      case "tiger_stripe_shuko": return true;
+      case "flex_red": case "flex_yellow": case "flex_blue": return true;
+      case "miragai": return true;
       default: return false;
     }
   }
@@ -146,12 +146,12 @@ function UPRDealDamageEffect($cardID)
   {
     switch($cardID)
     {
-      case "UPR004": return 1;
-      case "UPR047": return 1;
-      case "UPR125": return 1;
-      case "UPR184": return 1;
-      case "UPR185": return 1;
-      case "UPR186": return 1;
+      case "silken_form": return 1;
+      case "heat_wave": return 1;
+      case "conduit_of_frostburn": return 1;
+      case "quelling_robe": return 1;
+      case "quelling_sleeves": return 1;
+      case "quelling_slippers": return 1;
       default: return 0;
     }
   }

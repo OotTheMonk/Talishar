@@ -2,9 +2,9 @@
 function AAZAbilityType($cardID, $index = -1, $from = "-"): string
 {
   return match ($cardID) {
-    "AAZ004", "AAZ006" => "A",
-    "AAZ005" => "I",
-    "AAZ007" => "AR",
+    "target_totalizer", "sharp_shooters" => "A",
+    "hidden_agenda" => "I",
+    "flight_path" => "AR",
     default => ""
   };
 }
@@ -12,7 +12,7 @@ function AAZAbilityType($cardID, $index = -1, $from = "-"): string
 function AAZAbilityHasGoAgain($cardID): bool
 {
   return match ($cardID) {
-    "AAZ004", "AAZ006" => true,
+    "target_totalizer", "sharp_shooters" => true,
     default => false
   };
 }
@@ -20,9 +20,9 @@ function AAZAbilityHasGoAgain($cardID): bool
 function AAZCombatEffectActive($cardID, $attackID): bool
 {
   return match ($cardID) {
-    "AAZ024", "AAZ007" => CardSubType($attackID) == "Arrow",
-    "AAZ004" => CardSubType($attackID) == "Arrow" && HasAimCounter(),
-    "AAZ016" => true,
+    "line_it_up_yellow", "flight_path" => CardSubType($attackID) == "Arrow",
+    "target_totalizer" => CardSubType($attackID) == "Arrow" && HasAimCounter(),
+    "stone_rain_red" => true,
     default => false
   };
 }
@@ -30,7 +30,7 @@ function AAZCombatEffectActive($cardID, $attackID): bool
 function AAZEffectAttackModifier($cardID): int
 {
   return match ($cardID) {
-    "AAZ024" => 3,
+    "line_it_up_yellow" => 3,
     default => 0
   };
 }
@@ -39,25 +39,25 @@ function AAZPlayAbility($cardID, $from, $resourcesPaid, $target = "-", $addition
 {
   global $currentPlayer;
   switch ($cardID) {
-    case "AAZ004":
+    case "target_totalizer":
       AddCurrentTurnEffect($cardID, $currentPlayer);
       return "";
-    case "AAZ006":
+    case "sharp_shooters":
       LoadArrow($currentPlayer, "UP", 1);
       return "";
-    case "AAZ007":
+    case "flight_path":
       GiveAttackGoAgain();
       return "";
-    case "AAZ005":
+    case "hidden_agenda":
       AddCurrentTurnEffect($cardID, $currentPlayer);
       GainResources($currentPlayer, 1);
       return "";
-    case "AAZ016":
+    case "stone_rain_red":
       if (HasAimCounter()) {
         AddCurrentTurnEffect($cardID, $currentPlayer);
       }
       return "";
-    case "AAZ024":
+    case "line_it_up_yellow":
       AddCurrentTurnEffect($cardID, $currentPlayer);
       $arsenal = &GetArsenal($currentPlayer);
       for ($i = 0; $i < count($arsenal); $i += ArsenalPieces()) {
@@ -78,7 +78,7 @@ function AAZHitEffect($cardID): void
 {
   global $defPlayer;
   switch ($cardID) {
-    case "AAZ016":
+    case "stone_rain_red":
       AddDecisionQueue("FINDINDICES", $defPlayer, "HAND");
       AddDecisionQueue("SETDQCONTEXT", $defPlayer, "Choose a card to banish", 1);
       AddDecisionQueue("CHOOSEHAND", $defPlayer, "<-", 1);

@@ -130,7 +130,7 @@ function ROGUECombatEffectActive($cardID, $attackID)
         case "ROGUE008": return true;
         case "ROGUE018": return true;
         case "ROGUE506": return CardType($attackID) == "AA";
-        case "ROGUE509": return $attackID == "DYN065";
+        case "ROGUE509": return $attackID == "crouching_tiger";
         case "ROGUE512": return CardType($attackID) == "AA" && CardCost($attackID) <= 1;
         case "ROGUE513": return CardType($attackID) == "AA" && CardCost($attackID) >= 2;
         case "ROGUE517": return true;
@@ -140,7 +140,7 @@ function ROGUECombatEffectActive($cardID, $attackID)
         case "ROGUE523": return true;
 
         case "ROGUE601": return true;
-        case "ROGUE603": return $attackID == "DYN065";
+        case "ROGUE603": return $attackID == "crouching_tiger";
         case "ROGUE605-first": return true;
         case "ROGUE605-second": return GetClassState($currentPlayer, $CS_NumAttacks) == 2;
         case "ROGUE607": return true;
@@ -532,7 +532,7 @@ function ROGUEPlayAbility($cardID, $from, $resourcesPaid, $target, $additionalCo
     switch ($cardID) {
       case "ROGUE007":
         $hand = &GetHand($currentPlayer);
-        array_unshift($hand, "ELE191");
+        array_unshift($hand, "lightning_surge_blue");
         return "";
       case "ROGUE501":
         PutPermanentIntoPlay($currentPlayer, $cardID);
@@ -585,12 +585,12 @@ function ROGUEPowerStart()
         break;
       case "ROGUE524":
         $deck = &GetDeck($mainPlayer);
-        array_unshift($deck, "CRU181", "CRU181", "CRU181");
+        array_unshift($deck, "gorganian_tome", "gorganian_tome", "gorganian_tome");
         break;
 
       case "ROGUE604":
         $deck = &GetDeck($mainPlayer);
-        array_unshift($deck, "CRU181", "CRU181", "CRU181");
+        array_unshift($deck, "gorganian_tome", "gorganian_tome", "gorganian_tome");
         break;
       case "ROGUE609":
         $health = &GetHealth($mainPlayer);

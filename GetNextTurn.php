@@ -375,7 +375,7 @@ if ($lastUpdate != 0 && $cacheVal <= $lastUpdate) {
       array_push($opponentDeckArr, JSONRenderedCard($theirDeck[$i]));
     }
   }
-  $theirBlessingsCount = SearchCount(SearchDiscardForCard($otherPlayer, "ROS223", "ROS224", "ROS225"));
+  $theirBlessingsCount = SearchCount(SearchDiscardForCard($otherPlayer, "count_your_blessings_red", "count_your_blessings_yellow", "count_your_blessings_blue"));
   if ($theirBlessingsCount > 0) {
     $response->opponentBlessingsCount = $theirBlessingsCount;
   }
@@ -517,7 +517,7 @@ if ($lastUpdate != 0 && $cacheVal <= $lastUpdate) {
     $border = CardBorderColor($myDiscard[$i], "GY", ($action == 36));
     array_push($playerDiscardArr, JSONRenderedCard($myDiscard[$i], action: $action, borderColor: $border, actionDataOverride: strval($i)));
   }
-  $myBlessingsCount = SearchCount(SearchDiscardForCard($playerID, "ROS223", "ROS224", "ROS225"));
+  $myBlessingsCount = SearchCount(SearchDiscardForCard($playerID, "count_your_blessings_red", "count_your_blessings_yellow", "count_your_blessings_blue"));
   if ($myBlessingsCount > 0) {
     $response->myBlessingsCount = $myBlessingsCount;
   }
@@ -532,7 +532,7 @@ if ($lastUpdate != 0 && $cacheVal <= $lastUpdate) {
 
   $response->playerDeckCount = count($myDeck);
   $playerHero = ShiyanaCharacter($myCharacter[0], $playerID);
-  if($playerID < 3 && count($myDeck) > 0 && $myCharacter[1] < 3 && ($playerHero == "EVO002" || $playerHero == "EVO001") && $turn[0] != "OPT" && $turn[0] != "P" && $turn[0] != "CHOOSETOPOPPONENT" && $turn[0] != "DOCRANK") {
+  if($playerID < 3 && count($myDeck) > 0 && $myCharacter[1] < 3 && ($playerHero == "dash_database" || $playerHero == "dash_io") && $turn[0] != "OPT" && $turn[0] != "P" && $turn[0] != "CHOOSETOPOPPONENT" && $turn[0] != "DOCRANK") {
     $playable = $playerID == $currentPlayer && IsPlayable($myDeck[0], $turn[0], "DECK", 0);
     $response->playerDeckCard = JSONRenderedCard($myDeck[0], action:($playable ? 35 : 0), actionDataOverride:strval(0), borderColor: ($playable ? 6 : 0), controller:$playerID);
   }
@@ -783,7 +783,7 @@ if ($lastUpdate != 0 && $cacheVal <= $lastUpdate) {
   $theirPermanentsOutput = array();
   $theirPermanents = GetPermanents($playerID == 1 ? 2 : 1);
   for ($i = 0; $i + PermanentPieces() - 1 < count($theirPermanents); $i += PermanentPieces()) {
-    if($theirPermanents[$i] == "DTD164") continue;//Cards in inventory should not be shown to opponent
+    if($theirPermanents[$i] == "levia_redeemed") continue;//Cards in inventory should not be shown to opponent
     $type = CardType($theirPermanents[$i]);
     $sType = CardSubType($theirPermanents[$i]);
     array_push($theirPermanentsOutput, JSONRenderedCard(cardNumber: $theirPermanents[$i], controller: $otherPlayer, type: $type, sType: $sType));
@@ -827,7 +827,7 @@ if ($lastUpdate != 0 && $cacheVal <= $lastUpdate) {
   $myAurasOutput = array();
   for ($i = 0; $i + AuraPieces() - 1 < count($myAuras); $i += AuraPieces()) {
     $playable = ($currentPlayer == $playerID ? $myAuras[$i + 1] == 2 && IsPlayable($myAuras[$i], $turn[0], "PLAY", $i, $restriction) : false);
-    if($myAuras[$i] == "MST133" && $currentPlayer == $playerID && IsPlayable($myAuras[$i], $turn[0], "PLAY", $i, $restriction)) $playable = true;
+    if($myAuras[$i] == "restless_coalescence_yellow" && $currentPlayer == $playerID && IsPlayable($myAuras[$i], $turn[0], "PLAY", $i, $restriction)) $playable = true;
     $border = CardBorderColor($myAuras[$i], "PLAY", $playable);
     $counters = $myAuras[$i + 2];
     $atkCounters = $myAuras[$i + 3];
@@ -938,8 +938,8 @@ if ($lastUpdate != 0 && $cacheVal <= $lastUpdate) {
   for ($i = 0; $i + CurrentTurnEffectsPieces() - 1 < count($currentTurnEffects); $i += CurrentTurnEffectsPieces()) {
       $cardID = explode("-", $currentTurnEffects[$i])[0];
       $cardID = explode(",", $cardID)[0];
-      $cardID = explode("_", $cardID)[0];
-      if(AdministrativeEffect($cardID) || $cardID == "HVY254-1" || $cardID == "HVY254-2") continue; //Don't show useless administrative effect
+      // $cardID = explode("_", $cardID)[0]; TODO: keep an eye on if removing this breaks anything
+      if(AdministrativeEffect($cardID) || $cardID == "luminaris_angels_glow-1" || $cardID == "luminaris_angels_glow-2") continue; //Don't show useless administrative effect
       $isFriendly = ($playerID == $currentTurnEffects[$i + 1] || $playerID == 3 && $otherPlayer != $currentTurnEffects[$i + 1]);
 
       if ($isFriendly) {
@@ -955,14 +955,14 @@ if ($lastUpdate != 0 && $cacheVal <= $lastUpdate) {
   for ($i = 0; $i + CurrentTurnEffectsPieces() - 1 < count($currentTurnEffects); $i += CurrentTurnEffectsPieces()) {
       $cardID = explode("-", $currentTurnEffects[$i])[0];
       $cardID = explode(",", $cardID)[0];
-      $cardID = explode("_", $cardID)[0];
-      if(AdministrativeEffect($cardID) || $cardID == "HVY254-1" || $cardID == "HVY254-2") continue; //Don't show useless administrative effect
+      // $cardID = explode("_", $cardID)[0]; TODO: keep an eye on if removing this breaks anything
+      if(AdministrativeEffect($cardID) || $cardID == "luminaris_angels_glow-1" || $cardID == "luminaris_angels_glow-2") continue; //Don't show useless administrative effect
       $isFriendly = ($playerID == $currentTurnEffects[$i + 1] || $playerID == 3 && $otherPlayer != $currentTurnEffects[$i + 1]);
       $BorderColor = ($isFriendly ? "blue" : "red");
 
       $counters = ($isFriendly ? $friendlyCounts[$cardID] : $opponentCounts[$cardID]);
 
-      if($cardID == "HNT222" || $cardID == "HNT230") {
+      if($cardID == "shelter_from_the_storm_red" || $cardID == "calming_breeze_red") {
         $counters = $currentTurnEffects[$i + 3];
       }
 
@@ -1082,7 +1082,7 @@ if ($lastUpdate != 0 && $cacheVal <= $lastUpdate) {
     for ($i = 0; $i < count($options); ++$i) {
       array_push($playerInputButtons, CreateButtonAPI($playerID, str_replace("_", " ", $options[$i]), 17, strval($options[$i]), "24px"));
     }
-    if(isset($vars[1]) && $vars[1] == "ARC112")
+    if(isset($vars[1]) && $vars[1] == "runechant")
     {
       array_push($playerInputButtons, CreateButtonAPI($playerID, "Skip All Runechants", 105, 0, "24px"));
     }
@@ -1289,7 +1289,7 @@ if ($lastUpdate != 0 && $cacheVal <= $lastUpdate) {
 
       //Bonds of Agony - add indication for hand, graveyard and deck
       if(count($combatChain) > 0) {
-        if($combatChain[0] == "MST103" && $turn[0] == "MAYCHOOSEMULTIZONE") {
+        if($combatChain[0] == "bonds_of_agony_blue" && $turn[0] == "MAYCHOOSEMULTIZONE") {
           if($option[0] == "THEIRHAND") $label = "Hand"; 
           elseif ($option[0] == "THEIRDECK") $label = "Deck";
           elseif ($option[0] == "THEIRDISCARD") $label = "Graveyard";  
@@ -1299,7 +1299,7 @@ if ($lastUpdate != 0 && $cacheVal <= $lastUpdate) {
       //Add indication for Crown of Providence if you have the same card in hand and in the arsenal.
       if ($option[0] == "MYARS") $label = "Arsenal";
       //Add indication for Attacking Mechanoid
-      if (($option[0] == "CC" || $option[0] == "LAYER") && (GetMZCard($currentPlayer, $options[$i]) == "DYN492a" || GetMZCard($currentPlayer, $options[$i]) == "EVO410a")) $label = "Attacking";
+      if (($option[0] == "CC" || $option[0] == "LAYER") && (GetMZCard($currentPlayer, $options[$i]) == "nitro_mechanoida" || GetMZCard($currentPlayer, $options[$i]) == "teklovossen_the_mechropotenta")) $label = "Attacking";
 
       $index = intval($option[1]);
       $card = ($option[0] != "CARDID") ? $source[$index] : $option[1];
@@ -1588,7 +1588,7 @@ function ChoosePopup($zone, $options, $mode, $caption = "", $zoneSize = 1, $addi
 
 function ItemOverlay($item, $isReady, $numUses)
 {
-  if ($item == "EVR070" && $numUses < 3) return 1;
+  if ($item == "microprocessor_blue" && $numUses < 3) return 1;
   return ($isReady != 2 ? 1 : 0);
 }
 
@@ -1600,5 +1600,5 @@ function GetPhaseHelptext()
 }
 
 function skipEffectUIStacking($cardID) {
-  return $cardID != "HNT222" && $cardID != "HNT230";
+  return $cardID != "shelter_from_the_storm_red" && $cardID != "calming_breeze_red";
 }

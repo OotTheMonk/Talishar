@@ -93,7 +93,7 @@ function PrependDecisionQueue($phase, $player, $parameter1="-", $parameter2="-",
             break;
           case "Learn":
             WriteLog("You studied and learned a powerful specialization.");
-            PrependDecisionQueue("CHOOSECARD", $player, "WTR119,DVR008,WTR121");
+            PrependDecisionQueue("CHOOSECARD", $player, "steelblade_supremacy_red,glistening_steelblade_yellow,singing_steelblade_yellow");
             break;
           case "Reflect":
             WriteLog("You reflected on the trials of the day, and may remove a card.");
@@ -107,13 +107,13 @@ function PrependDecisionQueue($phase, $player, $parameter1="-", $parameter2="-",
         {
           case "Loot":
             WriteLog("You've found some equipment to salvage, and a gold piece in the pocket of one of the fallen.");
-            PrependDecisionQueue("CHOOSECARD", $player, "WTR155", "-", "NoReroll");
+            PrependDecisionQueue("CHOOSECARD", $player, "ironrot_helm", "-", "NoReroll");
             $encounter = &GetZone(1, "Encounter");
             $encounter->gold += 1;
             break;
           case "Pay_Respects":
             WriteLog("You honor the fallen. While their mortal form is gone, their stories live on. You carry their spirit with you. You gain 2 health.");
-            PrependDecisionQueue("CHOOSECARD", $player, "WTR163", "-", "NoReroll");
+            PrependDecisionQueue("CHOOSECARD", $player, "remembrance_yellow", "-", "NoReroll");
             $health = &GetZone(1, "Health");
             $health[0] += 2;
             break;
@@ -187,88 +187,88 @@ function PrependDecisionQueue($phase, $player, $parameter1="-", $parameter2="-",
         {
           case "The_Volcai_Sellsword":
             $encounter->background = "Saber";
-            array_push($character, "CRU079", "CRU080"); //Cintari Sabers, both
-            array_push($deck, "EVR062", "EVR058", "EVR066"); //Blade Runner B, Slice and Dice Y, Outland Skirmish R
+            array_push($character, "cintari_saber", "cintari_saber"); //Cintari Sabers, both
+            array_push($deck, "blade_runner_blue", "slice_and_dice_yellow", "outland_skirmish_red"); //Blade Runner B, Slice and Dice Y, Outland Skirmish R
             break;
           case "The_Lowly_Solanian":
             $encounter->background = "Dawnblade";
-            array_push($character, "WTR115");
-            array_push($deck, "WTR125", "WTR133", "MON113"); //Overpower B, Ironsong Response Y, Plow Through R
+            array_push($character, "dawnblade");
+            array_push($deck, "overpower_blue", "ironsong_response_yellow", "plow_through_red"); //Overpower B, Ironsong Response Y, Plow Through R
             break;
           case "The_Fierce_Warrior":
             $encounter->background = "Hatchet";
-            array_push($character, "MON105", "MON106"); //Body and Mind
-            array_push($deck, "EVR062", "DYN083", "EVR066"); //Blade Runner B, Felling Swing y, Outland Skirmish R
+            array_push($character, "hatchet_of_body", "hatchet_of_mind"); //Body and Mind
+            array_push($deck, "blade_runner_blue", "felling_swing_yellow", "outland_skirmish_red"); //Blade Runner B, Felling Swing y, Outland Skirmish R
             break;
           case "Spiders_Deserter":
             $encounter->background = "Battleaxe";
-            array_push($character, "DYN068");
-            array_push($deck, "WTR125", "WTR142", "DYN082"); //Overpower B, Sharpen Steel Y, Felling Swing R
+            array_push($character, "merciless_battleaxe");
+            array_push($deck, "overpower_blue", "sharpen_steel_yellow", "felling_swing_red"); //Overpower B, Sharpen Steel Y, Felling Swing R
             break;
           case "The_Everfest_Showman":
             $encounter->background = "Anothos";
-            array_push($character, "WTR040");
-            array_push($deck, "EVR024", "WTR065", "WTR066", "CRU035", "WTR206", "MON293");
+            array_push($character, "anothos");
+            array_push($deck, "thunder_quake_red", "crush_confidence_blue", "debilitate_red", "chokeslam_red", "pummel_red", "zealous_belting_red");
             break;
           case "The_Reclusive_Blacksmith":
             $encounter->background = "TitanFist";
-            array_push($character, "ELE202", "DYN026"); //Titan's Fist and Seasoned Saviour
-            array_push($deck, "DYN031", "DYN038", "WTR063", "WTR064", "ARC202", "WTR212");
+            array_push($character, "titans_fist", "seasoned_saviour"); //Titan's Fist and Seasoned Saviour
+            array_push($deck, "shield_bash_yellow", "shield_wall_blue", "crush_confidence_red", "crush_confidence_yellow", "fate_foreseen_blue", "unmovable_red");
             break;
           case "The_Slumbering_Giant":
             $encounter->background = "Sledge";
-            array_push($character, "CRU024");
-            array_push($deck, "ELE208", "EVR030", "WTR070", "CRU040", "WTR190", "ARC211");
+            array_push($character, "sledge_of_anvilheim");
+            array_push($deck, "embolden_blue", "seismic_stir_red", "emerging_power_yellow", "emerging_dominance_blue", "raging_onslaught_blue", "lead_the_charge_blue");
             break;
           case "The_Ancient_Ollin":
             $encounter->background = "Shiver";
-            array_push($character, "ELE033");
-            array_push($deck, "ELE044", "ELE045", "ELE057", "ELE058", "ELE153", "ELE154", "ELE171", "ELE168");
+            array_push($character, "shiver");
+            array_push($deck, "blizzard_bolt_red", "blizzard_bolt_yellow", "flake_out_yellow", "flake_out_blue", "ice_quake_blue", "weave_ice_red", "winters_bite_blue", "polar_blast_blue");
             break;
           case "The_Exuberant_Adventurer":
             $encounter->background = "Voltaire";
-            array_push($character, "ELE034");
-            array_push($deck, "ELE048", "ELE059", "ELE054", "ELE055", "ELE180", "ELE185", "ELE199", "ELE186");
+            array_push($character, "voltaire_strike_twice");
+            array_push($deck, "buzz_bolt_yellow", "frazzle_red", "dazzling_crescendo_yellow", "dazzling_crescendo_blue", "weave_lightning_red", "lightning_press_blue", "electrify_yellow", "ball_lightning_red");
             break;
           case "The_Hired_Crow":
             $encounter->background = "DeathDealer";
-            array_push($character, "ARC040");
-            array_push($deck, "ELE044", "ELE051", "ELE060", "ELE047", "ELE200", "ELE183", "ELE168", "ELE152");
+            array_push($character, "death_dealer");
+            array_push($deck, "blizzard_bolt_red", "chilling_icevein_yellow", "frazzle_yellow", "buzz_bolt_red", "electrify_blue", "lightning_press_red", "polar_blast_blue", "ice_quake_yellow");
             break;
           case "The_Roadside_Bandit":
             $encounter->background = "RedLiner";
-            array_push($character, "CRU121");
-            array_push($deck, "ELE216", "ELE217", "ARC069", "ARC070", "ARC054", "ARC055", "EVR100", "EVR101");
+            array_push($character, "red_liner");
+            array_push($deck, "boltn_shot_red", "boltn_shot_yellow", "searing_shot_red", "searing_shot_yellow", "take_aim_red", "take_aim_yellow", "read_the_glide_path_red", "read_the_glide_path_yellow");
             break;
           case "The_Rebel_Organizer":
             $encounter->background = "Emberblade";
-            array_push($character, "UPR046");
-            array_push($deck, "UPR101", "UPR101", "UPR057", "UPR096", "UPR097");
+            array_push($character, "searing_emberblade");
+            array_push($deck, "phoenix_flame_red", "phoenix_flame_red", "rise_from_the_ashes_red", "flamecall_awakening_red", "inflame_red");
             break;
           case "The_Travelling_Duo":
             $encounter->background = "Kodachi";
-            array_push($character, "WTR078", "WTR078");
-            array_push($deck, "UPR098", "UPR099", "UPR093", "UPR062", "UPR071");
+            array_push($character, "harmonized_kodachi", "harmonized_kodachi");
+            array_push($deck, "lava_burst_red", "searing_touch_red", "breaking_point_red", "brand_with_cinderclaw_blue", "lava_vein_loyalty_blue");
             break;
           case "The_Archaeologist":
             $encounter->background = "Edge";
-            array_push($character, "CRU050");
-            array_push($deck, "UPR051", "UPR052", "UPR072", "UPR074", "WTR208");
+            array_push($character, "edge_of_autumn");
+            array_push($deck, "engulfing_flamewave_red", "engulfing_flamewave_yellow", "rebellious_rush_red", "rebellious_rush_blue", "pummel_blue");
             break;
           case "The_Emperor":
             $encounter->background = "Contract";
-            array_push($character, "DYN115", "OUT010");
-            array_push($deck, "DYN149", "DYN138", "DYN142", "DYN124", "DYN128");
+            array_push($character, "spiders_bite", "scale_peeler");
+            array_push($deck, "cut_to_the_chase_yellow", "fleece_the_frail_blue", "sack_the_shifty_red", "plunder_the_poor_red", "rob_the_rich_yellow");
             break;
           case "The_Doctor":
             $encounter->background = "Stealth";
-            array_push($character, "DYN115", "OUT005");
-            array_push($deck, "OUT034", "OUT024", "OUT036", "OUT039", "OUT017");
+            array_push($character, "spiders_bite", "nerve_scalpel");
+            array_push($deck, "prowl_yellow", "infect_red", "sedate_red", "wither_red", "back_stab_blue");
             break;
           case "The_Warrior":
             $encounter->background = "Reaction";
-            array_push($character, "DYN115", "OUT008");
-            array_push($deck, "OUT027", "OUT030", "OUT042", "OUT044", "OUT021");
+            array_push($character, "spiders_bite", "orbitoclast");
+            array_push($deck, "isolate_red", "malign_red", "razors_edge_red", "razors_edge_blue", "spike_with_bloodrot_red");
             break;
         }
         return 1;
@@ -288,7 +288,7 @@ function PrependDecisionQueue($phase, $player, $parameter1="-", $parameter2="-",
             AddDecisionQueue("SETENCOUNTER", $player, "005-PickMode");
             break;
           /*case "Shop_Test":
-            AddDecisionQueue("SHOP", $player, "EVR060,DYN073,DYN071,MON107,WTR156,ROGUE501");
+            AddDecisionQueue("SHOP", $player, "blade_runner_red,blessing_of_steel_red,cleave_red,valiant_dynamo,ironrot_plate,ROGUE501");
             break;*/
         }
         return 1;
@@ -443,24 +443,24 @@ function PrependDecisionQueue($phase, $player, $parameter1="-", $parameter2="-",
             switch($encounter->hero)
             {
               case "Dorinthea":
-                PrependDecisionQueue("CHOOSECARD", $player, "WTR119", "-", "NoReroll");
-                PrependDecisionQueue("CHOOSECARD", $player, "WTR119,WTR119", "-", "NoReroll");
+                PrependDecisionQueue("CHOOSECARD", $player, "steelblade_supremacy_red", "-", "NoReroll");
+                PrependDecisionQueue("CHOOSECARD", $player, "steelblade_supremacy_red,steelblade_supremacy_red", "-", "NoReroll");
                 break;
               case "Bravo":
-                PrependDecisionQueue("CHOOSECARD", $player, "WTR043", "-", "NoReroll");
-                PrependDecisionQueue("CHOOSECARD", $player, "WTR043,WTR043", "-", "NoReroll");
+                PrependDecisionQueue("CHOOSECARD", $player, "crippling_crush_red", "-", "NoReroll");
+                PrependDecisionQueue("CHOOSECARD", $player, "crippling_crush_red,crippling_crush_red", "-", "NoReroll");
                 break;
               case "Fai":
-                PrependDecisionQueue("CHOOSECARD", $player, "UPR091", "-", "NoReroll");
-                PrependDecisionQueue("CHOOSECARD", $player, "UPR091,UPR091", "-", "NoReroll");
+                PrependDecisionQueue("CHOOSECARD", $player, "rise_up_red", "-", "NoReroll");
+                PrependDecisionQueue("CHOOSECARD", $player, "rise_up_red,rise_up_red", "-", "NoReroll");
                 break;
               case "Lexi":
-                PrependDecisionQueue("CHOOSECARD", $player, "ELE036", "-", "NoReroll");
-                PrependDecisionQueue("CHOOSECARD", $player, "ELE036,ELE036", "-", "NoReroll");
+                PrependDecisionQueue("CHOOSECARD", $player, "light_it_up_yellow", "-", "NoReroll");
+                PrependDecisionQueue("CHOOSECARD", $player, "light_it_up_yellow,light_it_up_yellow", "-", "NoReroll");
                 break;
               case "Arakni":
-                PrependDecisionQueue("CHOOSECARD", $player, "DYN121", "-", "NoReroll");
-                PrependDecisionQueue("CHOOSECARD", $player, "DYN121,DYN121", "-", "NoReroll");
+                PrependDecisionQueue("CHOOSECARD", $player, "regicide_blue", "-", "NoReroll");
+                PrependDecisionQueue("CHOOSECARD", $player, "regicide_blue,regicide_blue", "-", "NoReroll");
                 break;
             }
             break;
@@ -468,11 +468,11 @@ function PrependDecisionQueue($phase, $player, $parameter1="-", $parameter2="-",
             $encounter = &GetZone($player, "Encounter");
             switch($encounter->hero)
             {
-              case "Dorinthea": $cardChoices = array("EVR070", "ARC007", "EVR055"); break;
-              case "Bravo": $cardChoices = array("WTR006", "ARC080", "OUT013"); break;
-              case "Fai": $cardChoices = array("ELE066", "CRU074", "EVR039"); break;
-              case "Lexi": $cardChoices = array("ARC043", "UPR126", "ELE004"); break;
-              case "Arakni": $cardChoices = array("WTR119", "WTR043", "MON199"); break;
+              case "Dorinthea": $cardChoices = array("microprocessor_blue", "teklo_core_blue", "blood_on_her_hands_yellow"); break;
+              case "Bravo": $cardChoices = array("alpha_rampage_red", "arknight_ascendancy_red", "shake_down_red"); break;
+              case "Fai": $cardChoices = array("force_of_nature_blue", "whirling_mist_blossom_yellow", "spring_tidings_yellow"); break;
+              case "Lexi": $cardChoices = array("red_in_the_ledger_red", "frost_hex_blue", "endless_winter_red"); break;
+              case "Arakni": $cardChoices = array("steelblade_supremacy_red", "crippling_crush_red", "soul_reaping_red"); break;
             }
             $randNum = rand(0, 2);
             PrependDecisionQueue("CHOOSECARD", $player, $cardChoices[$randNum], "-", "NoReroll");
@@ -611,44 +611,44 @@ function PrependDecisionQueue($phase, $player, $parameter1="-", $parameter2="-",
             switch($encounter->hero)
             {
               case "Dorinthea":
-                PrependDecisionQueue("CHOOSECARD", $player, "CRU139", "-", "NoReroll");
-                PrependDecisionQueue("CHOOSECARD", $player, "MON221", "-", "NoReroll");
-                PrependDecisionQueue("CHOOSECARD", $player, "CRU100", "-", "NoReroll");
-                PrependDecisionQueue("CHOOSECARD", $player, "CRU052", "-", "NoReroll");
-                PrependDecisionQueue("CHOOSECARD", $player, "CRU052,CRU052", "-", "NoReroll");
+                PrependDecisionQueue("CHOOSECARD", $player, "nebula_blade", "-", "NoReroll");
+                PrependDecisionQueue("CHOOSECARD", $player, "ravenous_meataxe", "-", "NoReroll");
+                PrependDecisionQueue("CHOOSECARD", $player, "teklo_plasma_pistol", "-", "NoReroll");
+                PrependDecisionQueue("CHOOSECARD", $player, "zephyr_needle", "-", "NoReroll");
+                PrependDecisionQueue("CHOOSECARD", $player, "zephyr_needle,zephyr_needle", "-", "NoReroll");
                 $encounter->background = "AllWeps";
                 break;
               case "Bravo":
-                PrependDecisionQueue("CHOOSECARD", $player, "MON229", "-", "NoReroll");
-                PrependDecisionQueue("CHOOSECARD", $player, "MON221", "-", "NoReroll");
-                PrependDecisionQueue("CHOOSECARD", $player, "EVR121", "-", "NoReroll");
-                PrependDecisionQueue("CHOOSECARD", $player, "OUT008", "-", "NoReroll");
-                PrependDecisionQueue("CHOOSECARD", $player, "OUT008,OUT008", "-", "NoReroll");
+                PrependDecisionQueue("CHOOSECARD", $player, "dread_scythe", "-", "NoReroll");
+                PrependDecisionQueue("CHOOSECARD", $player, "ravenous_meataxe", "-", "NoReroll");
+                PrependDecisionQueue("CHOOSECARD", $player, "krakens_aethervein", "-", "NoReroll");
+                PrependDecisionQueue("CHOOSECARD", $player, "orbitoclast", "-", "NoReroll");
+                PrependDecisionQueue("CHOOSECARD", $player, "orbitoclast,orbitoclast", "-", "NoReroll");
                 break;
               case "Fai":
-                PrependDecisionQueue("CHOOSECARD", $player, "OUT009", "-", "NoReroll");
-                PrependDecisionQueue("CHOOSECARD", $player, "OUT009,OUT009", "-", "NoReroll");
-                PrependDecisionQueue("CHOOSECARD", $player, "DYN115", "-", "NoReroll");
-                PrependDecisionQueue("CHOOSECARD", $player, "DYN115,DYN115", "-", "NoReroll");
-                PrependDecisionQueue("CHOOSECARD", $player, "ELE222", "-", "NoReroll");
-                PrependDecisionQueue("CHOOSECARD", $player, "ELE003", "-", "NoReroll");
+                PrependDecisionQueue("CHOOSECARD", $player, "scale_peeler", "-", "NoReroll");
+                PrependDecisionQueue("CHOOSECARD", $player, "scale_peeler,scale_peeler", "-", "NoReroll");
+                PrependDecisionQueue("CHOOSECARD", $player, "spiders_bite", "-", "NoReroll");
+                PrependDecisionQueue("CHOOSECARD", $player, "spiders_bite,spiders_bite", "-", "NoReroll");
+                PrependDecisionQueue("CHOOSECARD", $player, "rosetta_thorn", "-", "NoReroll");
+                PrependDecisionQueue("CHOOSECARD", $player, "winters_wail", "-", "NoReroll");
                 break;
               case "Lexi":
-                PrependDecisionQueue("CHOOSECARD", $player, "OUT093", "-", "NoReroll");
-                PrependDecisionQueue("CHOOSECARD", $player, "EVR087", "-", "NoReroll");
-                PrependDecisionQueue("CHOOSECARD", $player, "DYN151", "-", "NoReroll");
+                PrependDecisionQueue("CHOOSECARD", $player, "barbed_castaway", "-", "NoReroll");
+                PrependDecisionQueue("CHOOSECARD", $player, "dreadbore", "-", "NoReroll");
+                PrependDecisionQueue("CHOOSECARD", $player, "sandscour_greatbow", "-", "NoReroll");
                 break;
               case "Arakni":
-                PrependDecisionQueue("CHOOSECARD", $player, "WTR078", "-", "NoReroll");
-                PrependDecisionQueue("CHOOSECARD", $player, "ELE203", "-", "NoReroll");
-                PrependDecisionQueue("CHOOSECARD", $player, "CRU051", "-", "NoReroll");
+                PrependDecisionQueue("CHOOSECARD", $player, "harmonized_kodachi", "-", "NoReroll");
+                PrependDecisionQueue("CHOOSECARD", $player, "rampart_of_the_rams_head", "-", "NoReroll");
+                PrependDecisionQueue("CHOOSECARD", $player, "zephyr_needle", "-", "NoReroll");
                 break;
             }
             break;
           case "Put_the_bodies_to_rest":
-            PrependDecisionQueue("CHOOSECARD", $player, "WTR173", "-", "NoReroll");
-            //PrependDecisionQueue("CHOOSECARD", $player, "WTR173,WTR173", "-", "NoReroll");
-            //PrependDecisionQueue("CHOOSECARD", $player, "WTR173,WTR173,WTR173", "-", "NoReroll");
+            PrependDecisionQueue("CHOOSECARD", $player, "sigil_of_solace_red", "-", "NoReroll");
+            //PrependDecisionQueue("CHOOSECARD", $player, "sigil_of_solace_red,sigil_of_solace_red", "-", "NoReroll");
+            //PrependDecisionQueue("CHOOSECARD", $player, "sigil_of_solace_red,sigil_of_solace_red,sigil_of_solace_red", "-", "NoReroll");
             break;
         }
         return 1;
@@ -680,8 +680,8 @@ function PrependDecisionQueue($phase, $player, $parameter1="-", $parameter2="-",
             break;
           case "Save_some_for_later":
             AddDecisionQueue("SETENCOUNTER", $player, "009-PickMode");
-            PrependDecisionQueue("CHOOSECARD", $player, "MON191", "-", "NoReroll");
-            PrependDecisionQueue("CHOOSECARD", $player, "MON191,MON191", "-", "NoReroll");
+            PrependDecisionQueue("CHOOSECARD", $player, "mutated_mass_blue", "-", "NoReroll");
+            PrependDecisionQueue("CHOOSECARD", $player, "mutated_mass_blue,mutated_mass_blue", "-", "NoReroll");
             break;
           case "Leave":
             WriteLog("The Witch is dissapointed in your rush to leave, but understands.");
@@ -698,9 +698,9 @@ function PrependDecisionQueue($phase, $player, $parameter1="-", $parameter2="-",
             $encounter->rerolls = 20;
             break;
           case "Take_the_sigil":
-            PrependDecisionQueue("CHOOSECARD", $player, "WTR173", "-", "NoReroll");
-            PrependDecisionQueue("CHOOSECARD", $player, "WTR173,WTR173", "-", "NoReroll");
-            PrependDecisionQueue("CHOOSECARD", $player, "WTR173,WTR173,WTR173", "-", "NoReroll");
+            PrependDecisionQueue("CHOOSECARD", $player, "sigil_of_solace_red", "-", "NoReroll");
+            PrependDecisionQueue("CHOOSECARD", $player, "sigil_of_solace_red,sigil_of_solace_red", "-", "NoReroll");
+            PrependDecisionQueue("CHOOSECARD", $player, "sigil_of_solace_red,sigil_of_solace_red,sigil_of_solace_red", "-", "NoReroll");
             break;
         }
         return 1;

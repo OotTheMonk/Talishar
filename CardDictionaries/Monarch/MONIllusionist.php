@@ -6,16 +6,16 @@
     $otherPlayer = ($currentPlayer == 1 ? 2 : 1);
     switch($cardID)
     {
-      case "MON001": case "MON002":
-        PlayAura("MON104", $currentPlayer);
+      case "prism_sculptor_of_arc_light": case "prism":
+        PlayAura("spectral_shield", $currentPlayer);
         return "";
-      case "MON008": case "MON009": case "MON010":
+      case "herald_of_triumph_red": case "herald_of_triumph_yellow": case "herald_of_triumph_blue":
         AddCurrentTurnEffect($cardID, $defPlayer);
         return "";
-      case "MON090":
+      case "dream_weavers":
         AddCurrentTurnEffect($cardID, $currentPlayer);
         return "";
-      case "MON091":
+      case "phantasmaclasm_red":
         if(!IsAllyAttackTarget()) {
           AddDecisionQueue("SHOWHANDWRITELOG", $otherPlayer, "<-", 1);
           AddDecisionQueue("FINDINDICES", $otherPlayer, "HAND");
@@ -27,10 +27,10 @@
           AddDecisionQueue("DRAW", $otherPlayer, "-");
         }
         return "";
-      case "MON092": PlayAura("MON104", $currentPlayer, 3); return "";
-      case "MON093": PlayAura("MON104", $currentPlayer, 2); return "";
-      case "MON094": PlayAura("MON104", $currentPlayer, 1); return "";
-      case "MON095": case "MON096": case "MON097":
+      case "prismatic_shield_red": PlayAura("spectral_shield", $currentPlayer, 3); return "";
+      case "prismatic_shield_yellow": PlayAura("spectral_shield", $currentPlayer, 2); return "";
+      case "prismatic_shield_blue": PlayAura("spectral_shield", $currentPlayer, 1); return "";
+      case "phantasmify_red": case "phantasmify_yellow": case "phantasmify_blue":
         AddCurrentTurnEffect($cardID, $currentPlayer);
         return "";
       default: return "";
@@ -42,13 +42,13 @@
     global $combatChainState, $CCS_GoesWhereAfterLinkResolves, $mainPlayer, $defPlayer;
     switch($cardID)
     {
-      case "MON004":
+      case "herald_of_erudition_yellow":
         $combatChainState[$CCS_GoesWhereAfterLinkResolves] = "-"; 
         AddSoul($cardID, $mainPlayer, "CC");
         Draw($mainPlayer);
         Draw($mainPlayer);
         break;
-      case "MON007":
+      case "herald_of_judgment_yellow":
         if(!IsAllyAttackTarget()) {
           AddCurrentTurnEffect($cardID, $defPlayer);
           AddNextTurnEffect($cardID, $defPlayer);
@@ -56,21 +56,21 @@
         $combatChainState[$CCS_GoesWhereAfterLinkResolves] = "-"; 
         AddSoul($cardID, $mainPlayer, "CC");
         break;
-      case "MON008": case "MON009": case "MON010": 
+      case "herald_of_triumph_red": case "herald_of_triumph_yellow": case "herald_of_triumph_blue": 
         $combatChainState[$CCS_GoesWhereAfterLinkResolves] = "-"; 
         AddSoul($cardID, $mainPlayer, "CC");
         break;
-      case "MON014": case "MON015": case "MON016":
+      case "herald_of_protection_red": case "herald_of_protection_yellow": case "herald_of_protection_blue":
         $combatChainState[$CCS_GoesWhereAfterLinkResolves] = "-"; 
         AddSoul($cardID, $mainPlayer, "CC");
-        PlayAura("MON104", $mainPlayer);
+        PlayAura("spectral_shield", $mainPlayer);
         break;
-      case "MON017": case "MON018": case "MON019":
+      case "herald_of_ravages_red": case "herald_of_ravages_yellow": case "herald_of_ravages_blue":
         DealArcane(1, 0, "PLAYCARD", $cardID, false, $mainPlayer);
         $combatChainState[$CCS_GoesWhereAfterLinkResolves] = "-"; 
         AddSoul($cardID, $mainPlayer, "CC");
         break;
-      case "MON020": case "MON021": case "MON022":
+      case "herald_of_rebirth_red": case "herald_of_rebirth_yellow": case "herald_of_rebirth_blue":
         AddDecisionQueue("FINDINDICES", $mainPlayer, $cardID);
         AddDecisionQueue("MAYCHOOSEDISCARD", $mainPlayer, "<-", 1);
         AddDecisionQueue("MULTIREMOVEDISCARD", $mainPlayer, "-", 1);
@@ -80,11 +80,11 @@
         $combatChainState[$CCS_GoesWhereAfterLinkResolves] = "-"; 
         AddSoul($cardID, $mainPlayer, "CC");
         break;
-      case "MON023": case "MON024": case "MON025": 
+      case "herald_of_tenacity_red": case "herald_of_tenacity_yellow": case "herald_of_tenacity_blue": 
         $combatChainState[$CCS_GoesWhereAfterLinkResolves] = "-"; 
         AddSoul($cardID, $mainPlayer, "CC");
         break;
-      case "MON026": case "MON027": case "MON028": 
+      case "wartune_herald_red": case "wartune_herald_yellow": case "wartune_herald_blue": 
         $combatChainState[$CCS_GoesWhereAfterLinkResolves] = "-"; 
         AddSoul($cardID, $mainPlayer, "CC");
         break;
@@ -96,16 +96,16 @@
   {
     switch($cardID)
     {
-      case "MON004": case "MON007": case "MON008": case "MON009": case "MON010": case "MON014":
-      case "MON015": case "MON016": case "MON017": case "MON018": case "MON019": case "MON020":
-      case "MON021": case "MON022": case "MON023": case "MON024": case "MON025": case "MON026":
-      case "MON027": case "MON028": case "MON091": case "MON098": case "MON099": case "MON100":
-      case "MON101": case "MON102": case "MON103": return true;
-      case "EVR138": return FractalReplicationStats("HasPhantasm");
-      case "EVR139": case "EVR144": case "EVR145": case "EVR146": case "EVR147": case "EVR148": case "EVR149": return true;
-      case "UPR021": case "UPR022": case "UPR023": case "UPR027": case "UPR028": case "UPR029": case "UPR153": case "UPR551": return true;
-      case "DYN215": case "DYN216": case "DYN224": case "DYN225": case "DYN226": case "DYN227": case "DYN228": case "DYN229":
-      case "EVO244":
+      case "herald_of_erudition_yellow": case "herald_of_judgment_yellow": case "herald_of_triumph_red": case "herald_of_triumph_yellow": case "herald_of_triumph_blue": case "herald_of_protection_red":
+      case "herald_of_protection_yellow": case "herald_of_protection_blue": case "herald_of_ravages_red": case "herald_of_ravages_yellow": case "herald_of_ravages_blue": case "herald_of_rebirth_red":
+      case "herald_of_rebirth_yellow": case "herald_of_rebirth_blue": case "herald_of_tenacity_red": case "herald_of_tenacity_yellow": case "herald_of_tenacity_blue": case "wartune_herald_red":
+      case "wartune_herald_yellow": case "wartune_herald_blue": case "phantasmaclasm_red": case "enigma_chimera_red": case "enigma_chimera_yellow": case "enigma_chimera_blue":
+      case "spears_of_surreality_red": case "spears_of_surreality_yellow": case "spears_of_surreality_blue": return true;
+      case "fractal_replication_red": return FractalReplicationStats("HasPhantasm");
+      case "miraging_metamorph_red": case "coalescence_mirage_red": case "coalescence_mirage_yellow": case "coalescence_mirage_blue": case "phantasmal_haze_red": case "phantasmal_haze_yellow": case "phantasmal_haze_blue": return true;
+      case "dunebreaker_cenipai_red": case "dunebreaker_cenipai_yellow": case "dunebreaker_cenipai_blue": case "embermaw_cenipai_red": case "embermaw_cenipai_yellow": case "embermaw_cenipai_blue": case "frightmare_red": case "UPR551": return true;
+      case "phantasmal_symbiosis_yellow": case "spectral_procession_red": case "spectral_prowler_red": case "spectral_prowler_yellow": case "spectral_prowler_blue": case "spectral_rider_red": case "spectral_rider_yellow": case "spectral_rider_blue":
+      case "phantom_tidemaw_blue":
         return true;
       default: return false;
     }
@@ -116,21 +116,21 @@
     global $CombatChain, $mainPlayer, $combatChainState, $CCS_WeaponIndex;
     if(!$CombatChain->HasCurrentLink()) return false;
     $attackID = $CombatChain->AttackCard()->ID();
-    if((SearchCurrentTurnEffects("MON090", $mainPlayer) && CardType($attackID) == "AA") || SearchCurrentTurnEffects("EVR142", $mainPlayer) || SearchCurrentTurnEffects("UPR154", $mainPlayer) || SearchCurrentTurnEffects("UPR412", $mainPlayer)) { return false; }
-    if(SearchCurrentTurnEffectsForCycle("EVR150", "EVR151", "EVR152", $mainPlayer)) return true;
-    if(SearchCurrentTurnEffectsForCycle("MON095", "MON096", "MON097", $mainPlayer)) return true;
-    if(SearchCurrentTurnEffectsForCycle("UPR155", "UPR156", "UPR157", $mainPlayer)) return true;
+    if((SearchCurrentTurnEffects("dream_weavers", $mainPlayer) && CardType($attackID) == "AA") || SearchCurrentTurnEffects("passing_mirage_blue", $mainPlayer) || SearchCurrentTurnEffects("semblance_blue", $mainPlayer) || SearchCurrentTurnEffects("miragai", $mainPlayer)) { return false; }
+    if(SearchCurrentTurnEffectsForCycle("veiled_intentions_red", "veiled_intentions_yellow", "veiled_intentions_blue", $mainPlayer)) return true;
+    if(SearchCurrentTurnEffectsForCycle("phantasmify_red", "phantasmify_yellow", "phantasmify_blue", $mainPlayer)) return true;
+    if(SearchCurrentTurnEffectsForCycle("transmogrify_red", "transmogrify_yellow", "transmogrify_blue", $mainPlayer)) return true;
     if($combatChainState[$CCS_WeaponIndex] != "-1" && DelimStringContains(CardSubType($attackID), "Ally"))
     {
       $allies = &GetAllies($mainPlayer);
       if(isset($allies[$combatChainState[$CCS_WeaponIndex] + 4])){
-        if(DelimStringContains($allies[$combatChainState[$CCS_WeaponIndex] + 4], "UPR043")) return true;
-        else if(DelimStringContains($allies[$combatChainState[$CCS_WeaponIndex] + 4], "DYN002") && !CardNameContains($allies[$combatChainState[$CCS_WeaponIndex]], "Themai")) return true;
-        else if(DelimStringContains($allies[$combatChainState[$CCS_WeaponIndex] + 4], "DYN003") && !CardNameContains($allies[$combatChainState[$CCS_WeaponIndex]], "Vynserakai")) return true;
-        else if(DelimStringContains($allies[$combatChainState[$CCS_WeaponIndex] + 4], "DYN004") && !CardNameContains($allies[$combatChainState[$CCS_WeaponIndex]], "Nekria")) return true;
-        else if(DelimStringContains($allies[$combatChainState[$CCS_WeaponIndex] + 4], "EVO246") && !CardNameContains($allies[$combatChainState[$CCS_WeaponIndex]], "Cromai")) return true;
-        else if(DelimStringContains($allies[$combatChainState[$CCS_WeaponIndex] + 4], "MST235") && !CardNameContains($allies[$combatChainState[$CCS_WeaponIndex]], "Miragai")) return true;  
-        else if(DelimStringContains($allies[$combatChainState[$CCS_WeaponIndex] + 4], "ROS252") && !CardNameContains($allies[$combatChainState[$CCS_WeaponIndex]], "Ouvia")) return true;
+        if(DelimStringContains($allies[$combatChainState[$CCS_WeaponIndex] + 4], "ash")) return true;
+        else if(DelimStringContains($allies[$combatChainState[$CCS_WeaponIndex] + 4], "dust_from_the_golden_plains_red") && !CardNameContains($allies[$combatChainState[$CCS_WeaponIndex]], "Themai")) return true;
+        else if(DelimStringContains($allies[$combatChainState[$CCS_WeaponIndex] + 4], "dust_from_the_red_desert_red") && !CardNameContains($allies[$combatChainState[$CCS_WeaponIndex]], "Vynserakai")) return true;
+        else if(DelimStringContains($allies[$combatChainState[$CCS_WeaponIndex] + 4], "dust_from_the_shadow_crypts_red") && !CardNameContains($allies[$combatChainState[$CCS_WeaponIndex]], "Nekria")) return true;
+        else if(DelimStringContains($allies[$combatChainState[$CCS_WeaponIndex] + 4], "dust_from_the_chrome_caverns_red") && !CardNameContains($allies[$combatChainState[$CCS_WeaponIndex]], "Cromai")) return true;
+        else if(DelimStringContains($allies[$combatChainState[$CCS_WeaponIndex] + 4], "dust_from_stillwater_shrine_red") && !CardNameContains($allies[$combatChainState[$CCS_WeaponIndex]], "Miragai")) return true;  
+        else if(DelimStringContains($allies[$combatChainState[$CCS_WeaponIndex] + 4], "dust_from_the_fertile_fields_red") && !CardNameContains($allies[$combatChainState[$CCS_WeaponIndex]], "Ouvia")) return true;
       }
     }
     return HasPhantasm($attackID);
@@ -167,7 +167,7 @@
       if(DoesBlockTriggerPhantasm($i)) $blockGreaterThan6 = true;
     }
     if(!$blockGreaterThan6) return false;
-    if((SearchCurrentTurnEffects("MON090", $mainPlayer) && CardType($CombatChain->AttackCard()->ID()) == "AA") || SearchCurrentTurnEffects("EVR142", $mainPlayer) || SearchCurrentTurnEffects("UPR154", $mainPlayer) || SearchCurrentTurnEffects("UPR412", $mainPlayer)) { return false; }
+    if((SearchCurrentTurnEffects("dream_weavers", $mainPlayer) && CardType($CombatChain->AttackCard()->ID()) == "AA") || SearchCurrentTurnEffects("passing_mirage_blue", $mainPlayer) || SearchCurrentTurnEffects("semblance_blue", $mainPlayer) || SearchCurrentTurnEffects("miragai", $mainPlayer)) { return false; }
     return true;
   }
 
@@ -182,7 +182,7 @@
         GhostlyTouchPhantasmDestroy();
         if(!SubtypeContains($attackID, "Aura", $mainPlayer)) PhantomTidemawDestroy($mainPlayer);//Aura destroy is handled elsewhere
       }
-      if($attackID != "EVO244") AttackDestroyed($attackID); //Need to skip PhantomTidemaw Phatasm once or it triggers twice. Here and in DestroyAura
+      if($attackID != "phantom_tidemaw_blue") AttackDestroyed($attackID); //Need to skip PhantomTidemaw Phatasm once or it triggers twice. Here and in DestroyAura
       if(CardType($attackID) == "AA") {
         IncrementClassState($mainPlayer, $CS_NumPhantasmAADestroyed);
       } else if(SubtypeContains($attackID, "Aura", $mainPlayer)) {
@@ -209,8 +209,8 @@
   {
     switch($cardID)
     {
-      case "MON005": case "MON006": case "MON011": case "MON012": case "MON013": return true;
-      case "EVR140": case "EVR141": case "EVR142": case "EVR143": return true;
+      case "arc_light_sentinel_yellow": case "genesis_yellow": case "parable_of_humility_yellow": case "merciful_retribution_yellow": case "ode_to_wrath_yellow": return true;
+      case "shimmers_of_silver_blue": case "haze_bending_blue": case "passing_mirage_blue": case "pierce_reality_blue": return true;
       default: return false;
     }
   }

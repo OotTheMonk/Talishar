@@ -7,7 +7,7 @@ function PutPermanentIntoPlay($player, $cardID, $number=1, $isToken=false, $from
   $otherPlayer = ($player == 1 ? 2 : 1);
   if(TypeContains($cardID, "T", $player)) $isToken = true;
   $numMinusTokens = 0;
-  $numMinusTokens = CountCurrentTurnEffects("HVY209", $player) + CountCurrentTurnEffects("HVY209", $otherPlayer);
+  $numMinusTokens = CountCurrentTurnEffects("ripple_away_blue", $player) + CountCurrentTurnEffects("ripple_away_blue", $otherPlayer);
   if($numMinusTokens > 0 && $isToken && (TypeContains($EffectContext, "AA", $player) || TypeContains($EffectContext, "A", $player))) $number -= $numMinusTokens;
   for($i = 0; $i < $number; ++$i) {
     array_push($permanents, $cardID);
@@ -173,18 +173,18 @@ function PermanentTakeDamageAbilities($player, $damage, $type, $source)
         break;
     }
     if ($remove == 1) {
-      if (HasWard($permanents[$i], $player) && SearchCharacterActive($player, "DYN213") && CardType($permanents[$i]) != "T") {
-        $index = FindCharacterIndex($player, "DYN213");
+      if (HasWard($permanents[$i], $player) && SearchCharacterActive($player, "celestial_kimono") && CardType($permanents[$i]) != "T") {
+        $index = FindCharacterIndex($player, "celestial_kimono");
         $char[$index + 1] = 1;
         GainResources($player, 1);
-        WriteLog("Player " . $player . " gained 1 resource from " . CardLink("DYN213", "DYN213"));
+        WriteLog("Player " . $player . " gained 1 resource from " . CardLink("celestial_kimono", "celestial_kimono"));
       }
       DestroyPermanent($player, $i);
     }
   }
-  if (SearchCurrentTurnEffects("OUT174", $player) != "" && $preventedDamage > 0) {//vambrace
+  if (SearchCurrentTurnEffects("vambrace_of_determination", $player) != "" && $preventedDamage > 0) {//vambrace
     $preventedDamage -= 1;
-    SearchCurrentTurnEffects("OUT174", $player, remove:true);
+    SearchCurrentTurnEffects("vambrace_of_determination", $player, remove:true);
   }
   $damage -= $preventedDamage;
   if ($damage <= 0) $damage = 0;
@@ -206,7 +206,7 @@ function PermanentStartTurnAbilities()
         array_push($hand, $hand[rand(0, count($hand)-1)]);
         break;
       case "ROGUE503":
-        $choices = array("WTR098", "WTR099", "WTR100");
+        $choices = array("head_jab_red", "head_jab_yellow", "head_jab_blue");
         array_push($hand, $choices[rand(0, count($choices)-1)]);
         break;
       case "ROGUE504":
@@ -224,12 +224,12 @@ function PermanentStartTurnAbilities()
       case "ROGUE507":
         $items = &GetItems($mainPlayer);
         $found = false;
-        for($j = 0; $j < count($items)-1; ++$j) { if($items[$j] == "DYN243") $found = true; continue; }
-        if(!$found) AddDecisionQueue("STARTOFGAMEPUTPLAY", 1, "DYN243");
+        for($j = 0; $j < count($items)-1; ++$j) { if($items[$j] == "gold") $found = true; continue; }
+        if(!$found) AddDecisionQueue("STARTOFGAMEPUTPLAY", 1, "gold");
         break;
       case "ROGUE509":
         AddCurrentTurnEffect($permanents[$i], $mainPlayer);
-        array_unshift($hand, "DYN065");
+        array_unshift($hand, "crouching_tiger");
         break;
       case "ROGUE512": case "ROGUE513":
         AddCurrentTurnEffect($permanents[$i], $mainPlayer);
@@ -265,10 +265,10 @@ function PermanentStartTurnAbilities()
         break;
       case "ROGUE527":
         $trinkets = array(
-          "WTR162", "WTR170", "WTR171", "WTR172",
-          "ARC163",
-          "MON302",
-          "EVR176", "EVR177", "EVR178", "EVR179", "EVR180", "EVR181", "EVR182", "EVR183", "EVR184", "EVR185", "EVR186", "EVR187", "EVR188", "EVR189", "EVR190", "EVR191", "EVR192", "EVR193"
+          "crazy_brew_blue", "energy_potion_blue", "potion_of_strength_blue", "timesnap_potion_blue",
+          "rusted_relic_blue",
+          "talisman_of_dousing_yellow",
+          "amulet_of_assertiveness_yellow", "amulet_of_echoes_blue", "amulet_of_havencall_blue", "amulet_of_ignition_yellow", "amulet_of_intervention_blue", "amulet_of_oblation_blue", "clarity_potion_blue", "healing_potion_blue", "potion_of_seeing_blue", "potion_of_deja_vu_blue", "potion_of_ironhide_blue", "potion_of_luck_blue", "talisman_of_balance_blue", "talisman_of_cremation_blue", "talisman_of_featherfoot_yellow", "talisman_of_recompense_yellow", "talisman_of_tithes_blue", "talisman_of_warfare_yellow"
         );
         AddDecisionQueue("STARTOFGAMEPUTPLAY", 1, $trinkets[rand(0, count($trinkets)-1)]);
         break;
@@ -286,7 +286,7 @@ function PermanentStartTurnAbilities()
         break;
       case "ROGUE603":
         AddCurrentTurnEffect($permanents[$i], $mainPlayer);
-        array_unshift($hand, "DYN065");
+        array_unshift($hand, "crouching_tiger");
         break;
       case "ROGUE605":
         AddCurrentTurnEffect("ROGUE605-first", $mainPlayer);
@@ -298,8 +298,8 @@ function PermanentStartTurnAbilities()
       case "ROGUE608":
         $items = &GetItems($mainPlayer);
         $found = false;
-        for($j = 0; $j < count($items)-1; ++$j) { if($items[$j] == "DYN243") $found = true; continue; }
-        if(!$found) PutItemIntoPlayForPlayer("DYN243", $mainPlayer, effectController:$mainPlayer);
+        for($j = 0; $j < count($items)-1; ++$j) { if($items[$j] == "gold") $found = true; continue; }
+        if(!$found) PutItemIntoPlayForPlayer("gold", $mainPlayer, effectController:$mainPlayer);
         break;
       case "ROGUE610":
         AddDecisionQueue("FINDINDICES", $mainPlayer, "HAND");

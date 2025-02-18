@@ -7,23 +7,23 @@
     $rv = "";
     switch($cardID)
     {
-      case "MON153": case "MON154":
-        PlayAura("MON186", $currentPlayer, 1, true);
+      case "chane_bound_by_shadow": case "chane":
+        PlayAura("soul_shackle", $currentPlayer, 1, true);
         AddCurrentTurnEffect($cardID, $currentPlayer);
         return "";
-      case "MON158":
+      case "invert_existence_blue":
         AddDecisionQueue("FINDINDICES", $otherPlayer, $cardID);
         AddDecisionQueue("MULTICHOOSETHEIRDISCARD", $currentPlayer, "<-", 1);
         AddDecisionQueue("MULTIREMOVEDISCARD", $otherPlayer, "-", 1);
         AddDecisionQueue("MULTIBANISH", $otherPlayer, "DISCARD", 1);
         AddDecisionQueue("INVERTEXISTENCE", $currentPlayer, "-", 1);
         return "";
-      case "MON159": case "MON160": case "MON161":
+      case "unhallowed_rites_red": case "unhallowed_rites_yellow": case "unhallowed_rites_blue":
         MZMoveCard($currentPlayer, "MYDISCARD:bloodDebtOnly=true;type=A", "MYBOTDECK", may:true);
         return "";
-      case "MON162": case "MON163": case "MON164":
-        if($cardID == "MON162") $optAmt = 3;
-        else if($cardID == "MON163") $optAmt = 2;
+      case "dimenxxional_gateway_red": case "dimenxxional_gateway_yellow": case "dimenxxional_gateway_blue":
+        if($cardID == "dimenxxional_gateway_red") $optAmt = 3;
+        else if($cardID == "dimenxxional_gateway_yellow") $optAmt = 2;
         else $optAmt = 1;
         Opt($cardID, $optAmt);
         AddDecisionQueue("FINDINDICES", $currentPlayer, "TOPDECK");
@@ -31,28 +31,28 @@
         AddDecisionQueue("REVEALCARDS", $currentPlayer, "-", 1);
         AddDecisionQueue("SPECIFICCARD", $currentPlayer, "DIMENXXIONALGATEWAY", 1);
         return "";
-      case "MON165": case "MON166": case "MON167":
+      case "seeping_shadows_red": case "seeping_shadows_yellow": case "seeping_shadows_blue":
         AddCurrentTurnEffect($cardID, $currentPlayer);
         return "";
-      case "MON168": case "MON169": case "MON170":
+      case "bounding_demigon_red": case "bounding_demigon_yellow": case "bounding_demigon_blue":
         if($from == "BANISH") AddCurrentTurnEffect($cardID, $currentPlayer);
         return "";
-      case "MON174": case "MON175": case "MON176":
+      case "rift_bind_red": case "rift_bind_yellow": case "rift_bind_blue":
         if($from == "BANISH") AddCurrentTurnEffect($cardID, $currentPlayer);
         return "";
-      case "MON177": case "MON178": case "MON179":
+      case "rifted_torment_red": case "rifted_torment_yellow": case "rifted_torment_blue":
         if($from == "BANISH") DealArcane(1, 0, "PLAYCARD", $cardID);
         return "";
-      case "MON183": case "MON184": case "MON185":
+      case "seeds_of_agony_red": case "seeds_of_agony_yellow": case "seeds_of_agony_blue":
         AddCurrentTurnEffect($cardID, $currentPlayer);
         return "";
-      case "MON229":
+      case "dread_scythe":
         if(!IsAllyAttackTarget()) DealArcane(1, 0, "PLAYCARD", $cardID);
         return "";
-      case "MON230":
+      case "aether_ironweave":
         GainResources($currentPlayer, 2);
         return "";
-      case "MON231":
+      case "sonata_arcanix_red":
         $xVal = $resourcesPaid/2;
         $numRevealed = 3 + $xVal;
         WriteLog(CardLink($cardID, $cardID) . " reveals " . $numRevealed . " cards.");
@@ -66,10 +66,10 @@
         AddDecisionQueue("SONATAARCANIXSTEP2", $currentPlayer, "-", 1);
         AddDecisionQueue("SHUFFLEDECK", $currentPlayer, "-");
         return "";
-      case "MON232": case "MON233": case "MON234":
+      case "vexing_malice_red": case "vexing_malice_yellow": case "vexing_malice_blue":
         DealArcane(2, 0, "PLAYCARD", $cardID);
         return "";
-      case "MON235": case "MON236": case "MON237":
+      case "arcanic_crackle_red": case "arcanic_crackle_yellow": case "arcanic_crackle_blue":
         DealArcane(1, 0, "PLAYCARD", $cardID);
         return "";
       default: return "";
@@ -80,8 +80,8 @@
   {
     global $mainPlayer;
     switch($cardID) {
-      case "MON155":
-        if(IsHeroAttackTarget()) DealArcane(1, 0, "PLAYCARD", "MON155", false, $mainPlayer);
+      case "galaxxi_black":
+        if(IsHeroAttackTarget()) DealArcane(1, 0, "PLAYCARD", "galaxxi_black", false, $mainPlayer);
         break;
       default: break;
     }
@@ -103,18 +103,18 @@
     $type = CardType($cardID);
     if(($type == "AA" && GetClassState($currentPlayer, $CS_NumAttackCards) == 0) || DelimStringContains($type, "A") && GetClassState($currentPlayer, $CS_NumNonAttackCards) == 1)
     {
-      DealArcane(1, 0, "PLAYCARD", "MON157");
+      DealArcane(1, 0, "PLAYCARD", "dimenxxional_crossroads_yellow");
     }
   }
 
   function LordSutcliffeAbility($player, $index)
   {
     global $currentPlayer;
-    WriteLog(CardLink("MON407", "MON407") . " deals 1 arcane damage to each player");
-    DealArcane(1, 0, "ABILITY", "MON407", false, 1);
+    WriteLog(CardLink("lord_sutcliffe", "lord_sutcliffe") . " deals 1 arcane damage to each player");
+    DealArcane(1, 0, "ABILITY", "lord_sutcliffe", false, 1);
     AddDecisionQueue("LESSTHANPASS", $currentPlayer, "1");
     AddDecisionQueue("LORDSUTCLIFFE", $currentPlayer, $index, 1);
-    DealArcane(1, 0, "ABILITY", "MON407", false, 2);
+    DealArcane(1, 0, "ABILITY", "lord_sutcliffe", false, 2);
     AddDecisionQueue("LESSTHANPASS", $currentPlayer, "1");
     AddDecisionQueue("LORDSUTCLIFFE", $currentPlayer, $index, 1);
   }

@@ -40,7 +40,7 @@ function ProcessMacros()
             $subtype = CardSubType($layers[2]);
             if(DelimStringContains($subtype, "Aura") && GetAuraGemState($layers[1], $layers[2]) == 0 && HoldPrioritySetting($currentPlayer) != "1") { $somethingChanged = true; PassInput(); }
             else if(DelimStringContains($subtype, "Item") && GetItemGemState($layers[1], $layers[2]) == 0 && HoldPrioritySetting($currentPlayer) != "1") { $somethingChanged = true; PassInput(); }
-            else if($layers[2] == "DTD564" && GetCharacterGemState($layers[1], $layers[2]) == 0 && HoldPrioritySetting($currentPlayer) != "1") { $somethingChanged = true; PassInput(); }
+            else if($layers[2] == "levia_redeemed" && GetCharacterGemState($layers[1], $layers[2]) == 0 && HoldPrioritySetting($currentPlayer) != "1") { $somethingChanged = true; PassInput(); }
           }
         }
       }
@@ -59,7 +59,7 @@ function ProcessMacros()
         $somethingChanged = true; 
         SetClassState($currentPlayer, $CS_SkipAllRunechants, 0); 
       }
-      else if (!IsGameOver() && isset($layers[2]) && $layers[2] == "ARC112" && GetClassState($currentPlayer, $CS_SkipAllRunechants) == 1) { 
+      else if (!IsGameOver() && isset($layers[2]) && $layers[2] == "runechant" && GetClassState($currentPlayer, $CS_SkipAllRunechants) == 1) { 
         $somethingChanged = true; 
         ContinueDecisionQueue("0"); 
       }
@@ -125,7 +125,7 @@ function HasPlayableCard($player, $phase)
     if(IsPlayable($auras[$i], $phase, "PLAY", $i, $restriction, $player)) return true;
   }
   $character = GetPlayerCharacter($player);
-  if ($character[0] == "EVO001" || $character[0] == "EVO002") {
+  if ($character[0] == "dash_io" || $character[0] == "dash_database") {
     $deck = &GetDeck($player);
     if(count($deck) > 0 && $character[1] == 2) {
       if(IsPlayable($deck[0], $phase, "DECK", 0)) return true;

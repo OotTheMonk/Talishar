@@ -8,67 +8,67 @@ function EffectHitEffect($cardID, $from, $source = "-")
   global $CID_BloodRotPox, $CID_Frailty, $CID_Inertia, $Card_LifeBanner, $Card_ResourceBanner, $layers;
   $attackID = $CombatChain->AttackCard()->ID();
   if ($source == "-") {
-    if (CardType($attackID) == "AA" && SearchCurrentTurnEffects("OUT108", $mainPlayer, count($layers) < LayerPieces())) {
-      WriteLog("Hit effect prevented by " . CardLink("OUT108", "OUT108"));
+    if (CardType($attackID) == "AA" && SearchCurrentTurnEffects("tarpit_trap_yellow", $mainPlayer, count($layers) < LayerPieces())) {
+      WriteLog("Hit effect prevented by " . CardLink("tarpit_trap_yellow", "tarpit_trap_yellow"));
       return true;
     }
   }
-  else if (CardType($source) == "AA" && SearchCurrentTurnEffects("OUT108", $mainPlayer, count($layers) < LayerPieces())) {
-    WriteLog("Hit effect prevented by " . CardLink("OUT108", "OUT108"));
+  else if (CardType($source) == "AA" && SearchCurrentTurnEffects("tarpit_trap_yellow", $mainPlayer, count($layers) < LayerPieces())) {
+    WriteLog("Hit effect prevented by " . CardLink("tarpit_trap_yellow", "tarpit_trap_yellow"));
     return true;
   }
   $effectArr = explode(",", $cardID);
   $cardID = $effectArr[0];
   switch ($cardID) {
-    case "WTR129":
-    case "WTR130":
-    case "WTR131":
+    case "warriors_valor_red":
+    case "warriors_valor_yellow":
+    case "warriors_valor_blue":
       GiveAttackGoAgain();
       break;
-    case "WTR147":
-    case "WTR148":
-    case "WTR149":
+    case "natures_path_pilgrimage_red":
+    case "natures_path_pilgrimage_yellow":
+    case "natures_path_pilgrimage_blue":
       NaturesPathPilgrimageHit();
       break;
-    case "WTR206":
-    case "WTR207":
-    case "WTR208":
+    case "pummel_red":
+    case "pummel_yellow":
+    case "pummel_blue":
       if (IsHeroAttackTarget() && CardType($attackID) == "AA") PummelHit();
       break;
-    case "WTR209":
-    case "WTR210":
-    case "WTR211":
+    case "razor_reflex_red":
+    case "razor_reflex_yellow":
+    case "razor_reflex_blue":
       if (CardType($attackID) == "AA") GiveAttackGoAgain();
       break;
-    case "ARC170-1":
-    case "ARC171-1":
-    case "ARC172-1":
+    case "plunder_run_red-1":
+    case "plunder_run_yellow-1":
+    case "plunder_run_blue-1":
       Draw($mainPlayer);
       return 1;
-    case "CRU124":
+    case "poison_the_tips_yellow":
       if (IsHeroAttackTarget()) PummelHit();
       break;
-    case "CRU145":
-    case "CRU146":
-    case "CRU147":
+    case "mauvrion_skies_red":
+    case "mauvrion_skies_yellow":
+    case "mauvrion_skies_blue":
       if (ClassContains($attackID, "RUNEBLADE", $mainPlayer)) {
-        if ($cardID == "CRU145") $amount = 3;
-        else if ($cardID == "CRU146") $amount = 2;
+        if ($cardID == "mauvrion_skies_red") $amount = 3;
+        else if ($cardID == "mauvrion_skies_yellow") $amount = 2;
         else $amount = 1;
-        PlayAura("ARC112", $mainPlayer, $amount);
+        PlayAura("runechant", $mainPlayer, $amount);
       }
       break;
-    case "ROS119":
+    case "succumb_to_temptation_yellow":
       AddDecisionQueue("MULTIZONEINDICES", $mainPlayer, "THEIRHAND");
       AddDecisionQueue("SETDQCONTEXT", $mainPlayer, "Choose which card you want your opponent to discard", 1);
       AddDecisionQueue("CHOOSEMULTIZONE", $mainPlayer, "<-", 1);
       AddDecisionQueue("MZDISCARD", $mainPlayer, "HAND," . $mainPlayer, 1);
       AddDecisionQueue("MZREMOVE", $mainPlayer, "-", 1);
       return 1;
-    case "CRU084-2":
-      PutItemIntoPlayForPlayer("CRU197", $mainPlayer, 0, 2);
+    case "spoils_of_war_red-2":
+      PutItemIntoPlayForPlayer("copper", $mainPlayer, 0, 2);
       break;
-    case "MON034":
+    case "lumina_ascension_yellow":
       $deck = new Deck($mainPlayer);
       if (!$deck->Reveal()) return;
       $top = $deck->Top(remove: true);
@@ -77,32 +77,32 @@ function EffectHitEffect($cardID, $from, $source = "-")
         GainHealth(1, $mainPlayer);
       } else $deck->AddBottom($top, "DECK");
       break;
-    case "MON081":
-    case "MON082":
-    case "MON083":
+    case "seek_enlightenment_red":
+    case "seek_enlightenment_yellow":
+    case "seek_enlightenment_blue":
       $combatChainState[$CCS_GoesWhereAfterLinkResolves] = "SOUL";
       break;
-    case "MON110":
-    case "MON111":
-    case "MON112":
+    case "dusk_path_pilgrimage_red":
+    case "dusk_path_pilgrimage_yellow":
+    case "dusk_path_pilgrimage_blue":
       DuskPathPilgrimageHit();
       break;
-    case "MON193":
+    case "shadow_puppetry_red":
       ShadowPuppetryHitEffect();
       break;
-    case "MON218":
+    case "eclipse_existence_blue":
       if (count(GetSoul($defPlayer)) > 0) {
         BanishFromSoul($defPlayer);
         LoseHealth(1, $defPlayer);
       }
       break;
-    case "MON299":
-    case "MON300":
-    case "MON301":
+    case "warmongers_recital_red":
+    case "warmongers_recital_yellow":
+    case "warmongers_recital_blue":
       if (substr($from, 0, 5) != "THEIR") $combatChainState[$CCS_GoesWhereAfterLinkResolves] = "BOTDECK";
       else $combatChainState[$CCS_GoesWhereAfterLinkResolves] = "THEIRBOTDECK";
       break;
-    case "ELE005":
+    case "oaken_old_red":
       if (IsHeroAttackTarget()) {
         $hand = &GetHand($defPlayer);
         $cards = "";
@@ -116,9 +116,9 @@ function EffectHitEffect($cardID, $from, $source = "-")
         if ($cards != "") AddDecisionQueue("CHOOSEBOTTOM", $defPlayer, $cards);
       }
       break;   
-    case "ELE019":
-    case "ELE020":
-    case "ELE021":
+    case "mulch_red":
+    case "mulch_yellow":
+    case "mulch_blue":
       if (IsHeroAttackTarget()) {
         AddDecisionQueue("MULTIZONEINDICES", $mainPlayer, "THEIRARS", 1);
         AddDecisionQueue("SETDQCONTEXT", $mainPlayer, "Choose which card you want to put on the bottom of the deck", 1);
@@ -127,102 +127,102 @@ function EffectHitEffect($cardID, $from, $source = "-")
         AddDecisionQueue("MZREMOVE", $mainPlayer, "-", 1);
       }
       break;
-    case "ELE022":
-    case "ELE023":
-    case "ELE024":
-      if (IsHeroAttackTarget()) PlayAura("ELE111", $defPlayer, effectController: $mainPlayer);
+    case "snow_under_red":
+    case "snow_under_yellow":
+    case "snow_under_blue":
+      if (IsHeroAttackTarget()) PlayAura("frostbite", $defPlayer, effectController: $mainPlayer);
       break;
-    case "ELE035-2":
+    case "frost_lock_blue-2":
       if (IsHeroAttackTarget()) {
-        AddCurrentTurnEffect("ELE035-3", $defPlayer);
-        AddNextTurnEffect("ELE035-3", $defPlayer);
+        AddCurrentTurnEffect("frost_lock_blue-3", $defPlayer);
+        AddNextTurnEffect("frost_lock_blue-3", $defPlayer);
       }
       break;
-    case "ELE037-2":
-      if (IsHeroAttackTarget()) DamageTrigger($defPlayer, 1, "ATTACKHIT", "ELE037");
+    case "ice_storm_red-2":
+      if (IsHeroAttackTarget()) DamageTrigger($defPlayer, 1, "ATTACKHIT", "ice_storm_red");
       break;
-    case "ELE047":
-    case "ELE048":
-    case "ELE049":
+    case "buzz_bolt_red":
+    case "buzz_bolt_yellow":
+    case "buzz_bolt_blue":
       if (IsHeroAttackTarget()) DamageTrigger($defPlayer, 1, "ATTACKHIT", $cardID);
       break;
-    case "ELE066-TRIGGER":
+    case "force_of_nature_blue-TRIGGER":
       if (HasIncreasedAttack()) Draw($mainPlayer);
       break;
-    case "ELE092-BUFF":
+    case "flashfreeze_red-BUFF":
       if (IsHeroAttackTarget()) DamageTrigger($defPlayer, 3, "ATTACKHIT", $cardID);
       break;
-    case "ELE151-HIT":
-    case "ELE152-HIT":
-    case "ELE153-HIT":
-      if (IsHeroAttackTarget()) PlayAura("ELE111", $defPlayer, effectController: $mainPlayer);
+    case "ice_quake_red-HIT":
+    case "ice_quake_yellow-HIT":
+    case "ice_quake_blue-HIT":
+      if (IsHeroAttackTarget()) PlayAura("frostbite", $defPlayer, effectController: $mainPlayer);
       break;
-    case "ELE163":
-      if (IsHeroAttackTarget()) PlayAura("ELE111", $defPlayer, 3, effectController: $mainPlayer);
+    case "chill_to_the_bone_red":
+      if (IsHeroAttackTarget()) PlayAura("frostbite", $defPlayer, 3, effectController: $mainPlayer);
       break;
-    case "ELE164":
-      if (IsHeroAttackTarget()) PlayAura("ELE111", $defPlayer, 2, effectController: $mainPlayer);
+    case "chill_to_the_bone_yellow":
+      if (IsHeroAttackTarget()) PlayAura("frostbite", $defPlayer, 2, effectController: $mainPlayer);
       break;
-    case "ELE165":
-      if (IsHeroAttackTarget()) PlayAura("ELE111", $defPlayer, effectController: $mainPlayer);
+    case "chill_to_the_bone_blue":
+      if (IsHeroAttackTarget()) PlayAura("frostbite", $defPlayer, effectController: $mainPlayer);
       break;
-    case "ELE173":
+    case "shock_charmers":
       if (IsHeroAttackTarget()) DamageTrigger($defPlayer, 1, "ATTACKHIT", $cardID);
       return 1;
-    case "ELE195":
-    case "ELE196":
-    case "ELE197":
+    case "shock_striker_red":
+    case "shock_striker_yellow":
+    case "shock_striker_blue":
       if (IsHeroAttackTarget()) DamageTrigger($defPlayer, 1, "ATTACKHIT", $cardID);
       break;
-    case "ELE198":
-    case "ELE199":
-    case "ELE200":
+    case "electrify_red":
+    case "electrify_yellow":
+    case "electrify_blue":
       if (IsHeroAttackTarget()) {
-        if ($cardID == "ELE198") $damage = 3;
-        else if ($cardID == "ELE199") $damage = 2;
+        if ($cardID == "electrify_red") $damage = 3;
+        else if ($cardID == "electrify_yellow") $damage = 2;
         else $damage = 1;
         DamageTrigger($defPlayer, $damage, "ATTACKHIT", $cardID);
         return 1;
       }
       break;
-    case "ELE205":
+    case "tear_asunder_blue":
       if (IsHeroAttackTarget()) {
         PummelHit();
         PummelHit();
       }
       break;
-    case "ELE215":
+    case "seek_and_destroy_red":
       if (IsHeroAttackTarget()) {
         AddNextTurnEffect($cardID . "-1", $defPlayer);
       }
       break;
-    case "EVR047-1":
-    case "EVR048-1":
-    case "EVR049-1":
+    case "twin_twisters_red-1":
+    case "twin_twisters_yellow-1":
+    case "twin_twisters_blue-1":
       $idArr = explode("-", $cardID);
       AddCurrentTurnEffectFromCombat($idArr[0] . "-2", $mainPlayer);
       break;
-    case "EVR066-1":
-    case "EVR067-1":
-    case "EVR068-1":
-      PutItemIntoPlayForPlayer("CRU197", $mainPlayer);
+    case "outland_skirmish_red-1":
+    case "outland_skirmish_yellow-1":
+    case "outland_skirmish_blue-1":
+      PutItemIntoPlayForPlayer("copper", $mainPlayer);
       return 1;
-    case "EVR161-1":
-    case "EVR162-1":
-    case "EVR163-1":
+    case "life_of_the_party_red-1":
+    case "life_of_the_party_yellow-1":
+    case "life_of_the_party_blue-1":
       GainHealth(2, $mainPlayer);
       break;
-    case "EVR164":
-    case "EVR165":
-    case "EVR166":
-      if ($cardID == "EVR164") $amount = 6;
-      else if ($cardID == "EVR165") $amount = 4;
+    case "high_striker_red":
+    case "high_striker_yellow":
+    case "high_striker_blue":
+      if ($cardID == "high_striker_red") $amount = 6;
+      else if ($cardID == "high_striker_yellow") $amount = 4;
       else $amount = 2;
-      PutItemIntoPlayForPlayer("CRU197", $mainPlayer, 0, $amount);
+      PutItemIntoPlayForPlayer("copper", $mainPlayer, 0, $amount);
       return 1;
-    case "EVR170-1":
-    case "EVR171-1":
-    case "EVR172-1":
+    case "smashing_good_time_red-1":
+    case "smashing_good_time_yellow-1":
+    case "smashing_good_time_blue-1":
       if (IsHeroAttackTarget()) {
         AddDecisionQueue("MULTIZONEINDICES", $mainPlayer, "THEIRITEMS:minCost=0;maxCost=2");
         AddDecisionQueue("MAYCHOOSEMULTIZONE", $mainPlayer, "<-", 1);
@@ -230,22 +230,22 @@ function EffectHitEffect($cardID, $from, $source = "-")
         return 1;
       }
       break;
-    case "DVR008-1":
+    case "glistening_steelblade_yellow-1":
       $char = &GetPlayerCharacter($mainPlayer);
       if (IsHeroAttackTarget()) {
         ++$char[$combatChainState[$CCS_WeaponIndex] + 3];
       }
       break;
-    case "DYN028":
+    case "buckle_blue":
       if(IsHeroAttackTarget()) Mangle();
       break;
-    case "DYN071":
+    case "cleave_red":
       AddDecisionQueue("MULTIZONEINDICES", $mainPlayer, "THEIRALLY", 1);
       AddDecisionQueue("SETDQCONTEXT", $mainPlayer, "Choose a target to deal " . $combatChainState[$CCS_DamageDealt] . " damage.");
       AddDecisionQueue("MAYCHOOSEMULTIZONE", $mainPlayer, "<-", 1);
       AddDecisionQueue("MZDAMAGE", $mainPlayer, $combatChainState[$CCS_DamageDealt] . ",DAMAGE," . $cardID, 1);
       break;
-    case "DYN155":
+    case "dead_eye_yellow":
       if (IsHeroAttackTarget() && HasAimCounter()) {
         AddDecisionQueue("MULTIZONEINDICES", $mainPlayer, "THEIRHAND");
         AddDecisionQueue("SETDQCONTEXT", $mainPlayer, "Choose which card you want your opponent to discard", 1);
@@ -254,26 +254,26 @@ function EffectHitEffect($cardID, $from, $source = "-")
         AddDecisionQueue("MZREMOVE", $mainPlayer, "-", 1);
       }
       break;
-    case "DYN185-HIT":
-    case "DYN186-HIT":
-    case "DYN187-HIT":
+    case "runic_reaping_red-HIT":
+    case "runic_reaping_yellow-HIT":
+    case "runic_reaping_blue-HIT":
       if (ClassContains($attackID, "RUNEBLADE", $mainPlayer)) {
-        if ($cardID == "DYN185-HIT") $amount = 3;
-        else if ($cardID == "DYN186-HIT") $amount = 2;
+        if ($cardID == "runic_reaping_red-HIT") $amount = 3;
+        else if ($cardID == "runic_reaping_yellow-HIT") $amount = 2;
         else $amount = 1;
-        PlayAura("ARC112", $mainPlayer, $amount, true);
+        PlayAura("runechant", $mainPlayer, $amount, true);
       }
       break;
-    case "OUT021":
+    case "spike_with_bloodrot_red":
       if (IsHeroAttackTarget()) PlayAura($CID_BloodRotPox, $defPlayer, effectController: $mainPlayer);
       break;
-    case "OUT022":
+    case "spike_with_frailty_red":
       if (IsHeroAttackTarget()) PlayAura($CID_Frailty, $defPlayer, effectController: $mainPlayer);
       break;
-    case "OUT023":
+    case "spike_with_inertia_red":
       if (IsHeroAttackTarget()) PlayAura($CID_Inertia, $defPlayer, effectController: $mainPlayer);
       break;
-    case "OUT105":
+    case "melting_point_red":
       if (IsHeroAttackTarget() && HasAimCounter()) {
         AddDecisionQueue("MULTIZONEINDICES", $mainPlayer, "THEIRCHAR:minAttack=1;maxAttack=1;type=W;is1h=true");
         AddDecisionQueue("SETDQCONTEXT", $mainPlayer, "Choose a weapon to destroy");
@@ -281,20 +281,20 @@ function EffectHitEffect($cardID, $from, $source = "-")
         AddDecisionQueue("MZDESTROY", $mainPlayer, "-", 1);
       }
       break;
-    case "OUT112":
+    case "lace_with_bloodrot_red":
       if (IsHeroAttackTarget()) PlayAura($CID_BloodRotPox, $defPlayer, effectController: $mainPlayer);
       break;
-    case "OUT113":
+    case "lace_with_frailty_red":
       if (IsHeroAttackTarget()) PlayAura($CID_Frailty, $defPlayer, effectController: $mainPlayer);
       break;
-    case "OUT114":
+    case "lace_with_inertia_red":
       if (IsHeroAttackTarget()) PlayAura($CID_Inertia, $defPlayer, effectController: $mainPlayer);
       break;
-    case "OUT140":
+    case "mask_of_shifting_perspectives":
       WriteLog("Mask of Shifting Perspectives lets you sink a card");
       BottomDeck($mainPlayer, true, shouldDraw: true);
       break;
-    case "OUT143":
+    case "concealed_blade_blue":
       $weapons = "";
       $char = &GetPlayerCharacter($mainPlayer);
       $inventory = &GetInventory($mainPlayer);
@@ -315,46 +315,46 @@ function EffectHitEffect($cardID, $from, $source = "-")
         AddDecisionQueue("EQUIPCARDINVENTORY", $mainPlayer, "<-");
       }
       break;
-    case "OUT158":
+    case "toxic_tips":
       if (IsHeroAttackTarget()) {
         AddDecisionQueue("CHOOSECARD", $mainPlayer, $CID_BloodRotPox . "," . $CID_Frailty . "," . $CID_Inertia);
         AddDecisionQueue("PUTPLAY", $defPlayer, $mainPlayer, 1);
       }
       break;
-    case "OUT165":
+    case "toxicity_red":
       LoseHealth(5, $defPlayer);
       break;
-    case "OUT166":
+    case "toxicity_yellow":
       LoseHealth(4, $defPlayer);
       break;
-    case "OUT167":
+    case "toxicity_blue":
       LoseHealth(3, $defPlayer);
       break;
-    case "OUT188_1":
+    case "premeditate_red_1":
       if (IsHeroAttackTarget()) {
-        PlayAura("DYN244", $mainPlayer);
+        PlayAura("ponder", $mainPlayer);
         return 1;
       }
       break;
-    case "DTD051":
+    case "beckoning_light_red":
       MZMoveCard($mainPlayer, "MYDISCARD:type=AA", "MYTOPDECK", may: true);
       break;
-    case "DTD052":
-      PlayAura("DTD232", $mainPlayer);
+    case "spirit_of_war_red":
+      PlayAura("courage", $mainPlayer);
       break;
-    case "DTD066":
-    case "DTD067":
-    case "DTD068":
+    case "light_the_way_red":
+    case "light_the_way_yellow":
+    case "light_the_way_blue":
       GiveAttackGoAgain();
       break;
-    case "DTD080-2":
+    case "lumina_lance_yellow-2":
       Draw($mainPlayer);
       break;
-    case "DTD080-3":
+    case "lumina_lance_yellow-3":
       GiveAttackGoAgain();
       break;
-    case "DTD207":
-      if (IsHeroAttackTarget()) PlayAura("DTD232", $mainPlayer);
+    case "ironsong_versus":
+      if (IsHeroAttackTarget()) PlayAura("courage", $mainPlayer);
       break;
     case $Card_LifeBanner:
       GainHealth(1, $mainPlayer);
@@ -362,13 +362,13 @@ function EffectHitEffect($cardID, $from, $source = "-")
     case $Card_ResourceBanner:
       GainResources($mainPlayer, 1);
       return 1;
-    case "DTD229-HIT":
+    case "hack_to_reality_yellow-HIT":
       if (IsHeroAttackTarget()) {
         MZChooseAndDestroy($mainPlayer, "THEIRAURAS:type=A;maxCost=" . $combatChainState[$CCS_DamageDealt] . "&THEIRAURAS:type=I;maxCost=" . $combatChainState[$CCS_DamageDealt]);
         return 1;
       }
       break;
-    case "EVO155":
+    case "smash_and_grab_red":
       if (IsHeroAttackTarget()) {
         AddDecisionQueue("MULTIZONEINDICES", $mainPlayer, "THEIRITEMS");
         AddDecisionQueue("SETDQCONTEXT", $mainPlayer, "Choose an item to take");
@@ -376,105 +376,105 @@ function EffectHitEffect($cardID, $from, $source = "-")
         AddDecisionQueue("MZOP", $mainPlayer, "GAINCONTROL", 1);
       }
       break;
-    case "EVO434":
+    case "evo_command_center_yellow_equip":
       Draw($mainPlayer);
       break;
-    case "HVY090":
-    case "HVY091":
-      if (IsHeroAttackTarget()) PutItemIntoPlayForPlayer("DYN243", $mainPlayer, effectController: $mainPlayer);
+    case "kassai_of_the_golden_sand":
+    case "kassai":
+      if (IsHeroAttackTarget()) PutItemIntoPlayForPlayer("gold", $mainPlayer, effectController: $mainPlayer);
       return 1;
-    case "HVY099":
+    case "hood_of_red_sand":
       Draw($mainPlayer);
       break;
-    case "HVY136":
+    case "talk_a_big_game_blue":
       if ($combatChainState[$CCS_DamageDealt] >= $effectArr[1]) {
-        PlayAura("HVY241", $mainPlayer, $effectArr[1]);
+        PlayAura("might", $mainPlayer, $effectArr[1]);
         return 1;
       }
       break;
-    case "MST105-HIT":
+    case "just_a_nick_red-HIT":
       if (IsHeroAttackTarget()) {
         $deck = new Deck($defPlayer);
         $deck->BanishTop("Source-" . $attackID, banishedBy: $attackID);
       }
       break;
-    case "MST162-HIT":
-      BanishCardForPlayer("DYN065", $mainPlayer, "-", "TT", $mainPlayer);
-      BanishCardForPlayer("DYN065", $mainPlayer, "-", "TT", $mainPlayer);
+    case "maul_yellow-HIT":
+      BanishCardForPlayer("crouching_tiger", $mainPlayer, "-", "TT", $mainPlayer);
+      BanishCardForPlayer("crouching_tiger", $mainPlayer, "-", "TT", $mainPlayer);
       break;
-    case "AAZ004":
+    case "target_totalizer":
       Draw($mainPlayer);
       break;
-    case "ROS012":
+    case "burn_up__shock_red":
       if (IsHeroAttackTarget()) DealArcane(4, 1, "PLAYCARD", $cardID, false, $mainPlayer);
       return 1;
-    case "HNT003-HIT":
+    case "arakni_black_widow-HIT":
       AddDecisionQueue("FINDINDICES", $defPlayer, "HAND");
       AddDecisionQueue("SETDQCONTEXT", $defPlayer, "Choose a card to banish", 1);
       AddDecisionQueue("CHOOSEHAND", $defPlayer, "<-", 1);
       AddDecisionQueue("MULTIREMOVEHAND", $defPlayer, "-", 1);
       AddDecisionQueue("BANISHCARD", $defPlayer, "HAND,-", 1);
       return 0;
-    case "HNT004-HIT":
+    case "arakni_funnel_web-HIT":
       AddDecisionQueue("MULTIZONEINDICES", $mainPlayer, "THEIRARS");
       AddDecisionQueue("SETDQCONTEXT", $mainPlayer, "Choose a card to banish", 1);
       AddDecisionQueue("CHOOSEMULTIZONE", $mainPlayer, "<-", 1);
       AddDecisionQueue("MZREMOVE", $mainPlayer, "-", 1);
       AddDecisionQueue("BANISHCARD", $defPlayer, "MYARS,-,$source", 1);
       return 0;
-    case "HNT051-ATTACK":
+    case "two_sides_to_the_blade_red-ATTACK":
       if (IsHeroAttackTarget()) MarkHero($defPlayer);
       break;
-    case "HNT102-MARK":
+    case "long_whisker_loyalty_red-MARK":
       $character = &GetPlayerCharacter($mainPlayer);
       if (IsHeroAttackTarget() && $character[$combatChainState[$CCS_WeaponIndex] + 11] == $effectArr[1]) {
         MarkHero($defPlayer);
         return 1;
       }
       break;
-    case "HNT111":
-    case "HNT114":
+    case "searing_gaze_red":
+    case "stabbing_pain_red":
       MarkHero($defPlayer);
       break;
-    case "HNT122":
-    case "HNT123":
-    case "HNT124":
+    case "twist_and_turn_red":
+    case "twist_and_turn_yellow":
+    case "twist_and_turn_blue":
       $character = &GetPlayerCharacter($mainPlayer);
       $character[$combatChainState[$CCS_WeaponIndex] + 1] = 2;
       ++$character[$combatChainState[$CCS_WeaponIndex] + 5];
       return 0;
-    case "HNT131":
-    case "HNT132":
-    case "HNT133":
+    case "hunt_a_killer_red":
+    case "hunt_a_killer_yellow":
+    case "hunt_a_killer_blue":
       if (IsHeroAttackTarget()) MarkHero($defPlayer);
       break;
-    case "HNT140":
-    case "HNT141":
-    case "HNT142":
+    case "sworn_vengeance_red":
+    case "sworn_vengeance_yellow":
+    case "sworn_vengeance_blue":
       if (IsHeroAttackTarget()) MarkHero($defPlayer);
       break;
-    case "HNT185":
-    case "HNT186":
-    case "HNT187":
+    case "poisoned_blade_red":
+    case "poisoned_blade_yellow":
+    case "poisoned_blade_blue":
       WriteLog("The " . CardLink($cardID, $cardID) . " drains 1 health");
       LoseHealth(1, $defPlayer);
       break;
-    case "HNT198-HIT":
-      Draw($mainPlayer, effectSource:"HNT198");
+    case "savor_bloodshed_red-HIT":
+      Draw($mainPlayer, effectSource:"savor_bloodshed_red");
       return 1;
-    case "HNT208":
-    case "HNT209":
-    case "HNT210":
+    case "scar_tissue_red":
+    case "scar_tissue_yellow":
+    case "scar_tissue_blue":
       MarkHero($defPlayer);
       return 1;
-    case "HNT211":
-    case "HNT212":
-    case "HNT213":
+    case "take_a_stab_red":
+    case "take_a_stab_yellow":
+    case "take_a_stab_blue":
       $character = &GetPlayerCharacter($mainPlayer);
       $character[$combatChainState[$CCS_WeaponIndex] + 1] = 2;
       ++$character[$combatChainState[$CCS_WeaponIndex] + 5];
       return 1;
-    case "HNT228-HIT":
+    case "imperial_seal_of_command_red-HIT":
       DestroyArsenal($defPlayer, effectController:$mainPlayer);
       return 1;
     default:
@@ -510,7 +510,7 @@ function EffectAttackModifier($cardID)
   else if ($set == "AJV") return AJVEffectAttackModifier($cardID);
   else if ($set == "HNT") return HNTEffectAttackModifier($cardID);
   switch ($cardID) {
-    case "HER123":
+    case "ira_scarlet_revenger":
       return 1;
     default:
       return 0;
@@ -520,33 +520,33 @@ function EffectAttackModifier($cardID)
 function EffectHasBlockModifier($cardID)
 {
   switch ($cardID) {
-    case "MON089":
-    case "ELE000-2":
-    case "ELE143":
-    case "ELE203":
-    case "DYN115":
-    case "DYN116":
-    case "OUT005":
-    case "OUT006":
-    case "OUT007":
-    case "OUT008":
-    case "OUT009":
-    case "OUT010":
-    case "OUT109":
-    case "OUT110":
-    case "OUT111":
-    case "DTD094":
-    case "DTD095":
-    case "DTD096":
-    case "TCC035":
-    case "HVY063":
-    case "HVY052":
-    case "HVY202":
-    case "HVY203":
-    case "HVY204":
-    case "HVY205":
-    case "HVY206":
-    case "HVY245":
+    case "phantasmal_footsteps":
+    case "korshem_crossroad_of_elements-2":
+    case "amulet_of_earth_blue":
+    case "rampart_of_the_rams_head":
+    case "spiders_bite":
+    case "spiders_bite":
+    case "nerve_scalpel":
+    case "nerve_scalpel":
+    case "orbitoclast":
+    case "orbitoclast":
+    case "scale_peeler":
+    case "scale_peeler":
+    case "fletch_a_red_tail_red":
+    case "fletch_a_yellow_tail_yellow":
+    case "fletch_a_blue_tail_blue":
+    case "defender_of_daybreak_red":
+    case "defender_of_daybreak_yellow":
+    case "defender_of_daybreak_blue":
+    case "lay_down_the_law_red":
+    case "lay_down_the_law_red":
+    case "stonewall_impasse":
+    case "headliner_helm":
+    case "stadium_centerpiece":
+    case "ticket_puncher":
+    case "grandstand_legplates":
+    case "bloodied_oval":
+    case "graven_call":
       return true;
     default:
       return false;
@@ -557,42 +557,42 @@ function EffectBlockModifier($cardID, $index, $from)
 {
   global $CombatChain, $defPlayer, $mainPlayer;
   switch ($cardID) {
-    case "MON089":
+    case "phantasmal_footsteps":
       if ($CombatChain->Card($index)->ID() == $cardID) return 1;
       return 0;
-    case "ELE000-2":
+    case "korshem_crossroad_of_elements-2":
       return 1;
-    case "ELE143":
+    case "amulet_of_earth_blue":
       return 1;
-    case "ELE203":
+    case "rampart_of_the_rams_head":
       return ($CombatChain->Card($index)->ID() == $cardID ? 1 : 0);
-    case "OUT109":
+    case "fletch_a_red_tail_red":
       return (PitchValue($CombatChain->Card($index)->ID()) == 1 && HasAimCounter() ? -1 : 0);
-    case "OUT110":
+    case "fletch_a_yellow_tail_yellow":
       return (PitchValue($CombatChain->Card($index)->ID()) == 2 && HasAimCounter() ? -1 : 0);
-    case "OUT111":
+    case "fletch_a_blue_tail_blue":
       return (PitchValue($CombatChain->Card($index)->ID()) == 3 && HasAimCounter() ? -1 : 0);
-    case "DTD094":
-    case "DTD095":
-    case "DTD096":
+    case "defender_of_daybreak_red":
+    case "defender_of_daybreak_yellow":
+    case "defender_of_daybreak_blue":
       return (CardType($CombatChain->Card($index)->ID()) != "E" && TalentContains($CombatChain->Card($index)->ID(), "LIGHT", $defPlayer) && TalentContains($CombatChain->AttackCard()->ID(), "SHADOW", $mainPlayer) ? 1 : 0);
-    case "TCC035":
-    case "HVY063":
+    case "lay_down_the_law_red":
+    case "lay_down_the_law_red":
       return (CachedTotalAttack() >= 13 && !TypeContains($CombatChain->Card($index)->ID(), "E") && !DelimStringContains(CardSubType($CombatChain->Card($index)->ID()), "Evo")) ? -1 : 0;
-    case "EVO105":
-    case "EVO106":
-    case "EVO107":
+    case "ratchet_up_red":
+    case "ratchet_up_yellow":
+    case "ratchet_up_blue":
       return IsActionCard($CombatChain->Card($index)->ID()) ? -1 : 0;
-    case "HVY202":
-    case "HVY203":
-    case "HVY204":
-    case "HVY205":
-    case "HVY206":
+    case "headliner_helm":
+    case "stadium_centerpiece":
+    case "ticket_puncher":
+    case "grandstand_legplates":
+    case "bloodied_oval":
       return $CombatChain->Card($index)->ID() == $cardID && PlayerHasLessHealth($defPlayer) ? 1 : 0;
-    case "MST085":
+    case "wide_blue_yonder_blue":
       return SearchPitchForColor($mainPlayer, 3);
-    case "AIO003":
-    case "AIO005":
+    case "heavy_industry_surveillance":
+    case "heavy_industry_ram_stop":
       return 1;
     default:
       return 0;
@@ -612,54 +612,54 @@ function RemoveEffectsFromCombatChain($cardID = "")
     }
     else $searchedEffect = $cardID;
     switch ($searchedEffect) {
-      case "WTR079":
-      case "CRU106":
-      case "CRU107":
-      case "CRU108": //High Speed Impact
-      case "CRU109":
-      case "CRU110":
-      case "CRU111": // Combustible Courier
-      case "MON035": //V of the Vanguard
-      case "MON245": //Exude Confidence
-      case "ELE067":
-      case "ELE068":
-      case "ELE069": //Explosive Growth
-      case "ELE186":
-      case "ELE187":
-      case "ELE188": //Ball Lightning
-      case "UPR049": //Spreading Flames
-      case "UPR060":
-      case "UPR061":
-      case "UPR062": //Brand with Cinderclaw
-      case "DYN095":
-      case "DYN096":
-      case "DYN097": //Scramble Pulse
-      case "OUT033":
-      case "OUT034":
-      case "OUT035": //Prowl
-      case "OUT052": //Head Leads the Tail
-      case "OUT071":
-      case "OUT072":
-      case "OUT073": //Deadly Duo
-      case "DTD052"://Spirit of War
-      case "TCC086":
-      case "TCC094"://Growl
-      case "HVY246"://Coercive Tendency
-      case "MST159": //Tiger Taming
-      case "MST161"://Chase the Tail
-      case "MST185":
-      case "MST186":
-      case "MST187": //Untamed
-      case "MST190": //Stonewall Gauntlet
-      case "MST212":
-      case "MST213":
-      case "MST214": //Water the Seeds
-      case "HNT061":
-      case "HNT083":
-      case "HNT185":
-      case "HNT186":
-      case "HNT187":
-      case "HNT215":
+      case "mask_of_momentum":
+      case "high_speed_impact_red":
+      case "high_speed_impact_yellow":
+      case "high_speed_impact_blue": //High Speed Impact
+      case "combustible_courier_red":
+      case "combustible_courier_yellow":
+      case "combustible_courier_blue": // Combustible Courier
+      case "v_of_the_vanguard_yellow": //V of the Vanguard
+      case "exude_confidence_red": //Exude Confidence
+      case "explosive_growth_red":
+      case "explosive_growth_yellow":
+      case "explosive_growth_blue": //Explosive Growth
+      case "ball_lightning_red":
+      case "ball_lightning_yellow":
+      case "ball_lightning_blue": //Ball Lightning
+      case "spreading_flames_red": //Spreading Flames
+      case "brand_with_cinderclaw_red":
+      case "brand_with_cinderclaw_yellow":
+      case "brand_with_cinderclaw_blue": //Brand with Cinderclaw
+      case "scramble_pulse_red":
+      case "scramble_pulse_yellow":
+      case "scramble_pulse_blue": //Scramble Pulse
+      case "prowl_red":
+      case "prowl_yellow":
+      case "prowl_blue": //Prowl
+      case "head_leads_the_tail_red": //Head Leads the Tail
+      case "deadly_duo_red":
+      case "deadly_duo_yellow":
+      case "deadly_duo_blue": //Deadly Duo
+      case "spirit_of_war_red"://Spirit of War
+      case "growl_red":
+      case "growl_yellow"://Growl
+      case "coercive_tendency_blue"://Coercive Tendency
+      case "tiger_taming_khakkara": //Tiger Taming
+      case "chase_the_tail_red"://Chase the Tail
+      case "untamed_red":
+      case "untamed_yellow":
+      case "untamed_blue": //Untamed
+      case "stonewall_gauntlet": //Stonewall Gauntlet
+      case "water_the_seeds_red":
+      case "water_the_seeds_yellow":
+      case "water_the_seeds_blue": //Water the Seeds
+      case "wrath_of_retribution_red":
+      case "fire_tenet_strike_first_red":
+      case "poisoned_blade_red":
+      case "poisoned_blade_yellow":
+      case "poisoned_blade_blue":
+      case "quickdodge_flexors":
         $remove = 1;
         break;
       default:
@@ -677,85 +677,85 @@ function OnAttackEffects($attack)
     $remove = false;
     if ($currentTurnEffects[$i + 1] == $mainPlayer) {
       switch ($currentTurnEffects[$i]) {
-        case "ELE085":
-        case "ELE086":
-        case "ELE087":
+        case "bramble_spark_red":
+        case "bramble_spark_yellow":
+        case "bramble_spark_blue":
           if ($attackType == "AA") {
             AddLayer("TRIGGER", $mainPlayer, $currentTurnEffects[$i], $attack);
             $remove = true;
           }
           break;
-        case "ELE092-DOM":
+        case "flashfreeze_red-DOM":
           AddDecisionQueue("SETDQCONTEXT", $defPlayer, "Do you want to pay 2 to prevent this attack from getting dominate?", 1);
           AddDecisionQueue("BUTTONINPUT", $defPlayer, "0,2", 0, 1);
           AddDecisionQueue("PAYRESOURCES", $defPlayer, "<-", 1);
           AddDecisionQueue("GREATERTHANPASS", $defPlayer, "0", 1);
           AddDecisionQueue("ADDCURRENTEFFECT", $mainPlayer, $currentTurnEffects[$i] . "ATK!PLAY", 1);
           break;
-        case "EVO247":
+        case "warband_of_bellona":
           Charge(may: true, player: $mainPlayer);
           AddDecisionQueue("ALLCARDPITCHORPASS", $mainPlayer, "2", 1);
           AddDecisionQueue("DRAW", $mainPlayer, "-", 1);
           $remove = true;
           break;
-        case "HVY055-PAID":
+        case "good_time_chapeau-PAID":
           if (IsCombatEffectActive($currentTurnEffects[$i]) && IsHeroAttackTarget()) {
-            AskWager(substr($currentTurnEffects[$i], 0, 6));
+            AskWager(ExtractCardID($currentTurnEffects[$i]));
           }
           break;
-        case "HVY083-BUFF":
-        case "HVY084-BUFF":
-        case "HVY085-BUFF":
+        case "big_bop_red-BUFF":
+        case "big_bop_yellow-BUFF":
+        case "big_bop_blue-BUFF":
           if (IsCombatEffectActive($currentTurnEffects[$i]) && IsHeroAttackTarget()) {
-            AskWager(substr($currentTurnEffects[$i], 0, 6));
+            AskWager(ExtractCardID($currentTurnEffects[$i]));
           }
           break;
-        case "HVY086-BUFF":
-        case "HVY087-BUFF":
-        case "HVY088-BUFF":
+        case "bigger_than_big_red-BUFF":
+        case "bigger_than_big_yellow-BUFF":
+        case "bigger_than_big_blue-BUFF":
           if (IsCombatEffectActive($currentTurnEffects[$i]) && IsHeroAttackTarget()) {
-            AskWager(substr($currentTurnEffects[$i], 0, 6));
+            AskWager(ExtractCardID($currentTurnEffects[$i]));
           }
           break;
-        case "HVY124-BUFF":
-        case "HVY125-BUFF":
-        case "HVY126-BUFF":
+        case "edge_ahead_red-BUFF":
+        case "edge_ahead_yellow-BUFF":
+        case "edge_ahead_blue-BUFF":
           if (IsCombatEffectActive($currentTurnEffects[$i]) && IsHeroAttackTarget()) {
-            AskWager(substr($currentTurnEffects[$i], 0, 6));
+            AskWager(ExtractCardID($currentTurnEffects[$i]));
           }
           break;
-        case "HVY130-BUFF":
-        case "HVY131-BUFF":
-        case "HVY132-BUFF":
+        case "hold_em_red-BUFF":
+        case "hold_em_yellow-BUFF":
+        case "hold_em_blue-BUFF":
           if (IsCombatEffectActive($currentTurnEffects[$i]) && IsHeroAttackTarget()) {
-            AskWager(substr($currentTurnEffects[$i], 0, 6));
+            AskWager(ExtractCardID($currentTurnEffects[$i]));
           }
           break;
-        case "HVY235-BUFF":
-        case "HVY236-BUFF":
-        case "HVY237-BUFF":
+        case "money_where_ya_mouth_is_red-BUFF":
+        case "money_where_ya_mouth_is_yellow-BUFF":
+        case "money_where_ya_mouth_is_blue-BUFF":
           if (IsCombatEffectActive($currentTurnEffects[$i]) && IsHeroAttackTarget()) {
-            AskWager(substr($currentTurnEffects[$i], 0, 6));
+            AskWager(ExtractCardID($currentTurnEffects[$i]));
           }
           break;
-        case "MST052":
+        case "shifting_winds_of_the_mystic_beast_blue":
           if (CardNameContains($attack, "Crouching Tiger", $mainPlayer)) {
             AddDecisionQueue("INPUTCARDNAME", $mainPlayer, "-");
             AddDecisionQueue("SETDQVAR", $mainPlayer, "0");
-            AddDecisionQueue("PREPENDLASTRESULT", $mainPlayer, "DYN065-");
+            AddDecisionQueue("PREPENDLASTRESULT", $mainPlayer, "crouching_tiger-");
             AddDecisionQueue("ADDCURRENTEFFECT", $mainPlayer, "<-");
             AddDecisionQueue("WRITELOG", $mainPlayer, "📣<b>{0}</b> was chosen");
           }
           break;
-        case "MST092":
+        case "first_tenet_of_chi_moon_blue":
           if (PitchValue($attack) == 3) {
             Draw($mainPlayer);
             $remove = true;
           }
-        case "ROS248":
+        case "unsheathed_red":
           if (IsCombatEffectActive($currentTurnEffects[$i])){
             CacheCombatResult();
-            if (IsWeaponGreaterThanTwiceBasePower()) GiveAttackGoAgain(); // borrowing ideas from merciless battleaxe (DYN068) and shift the tide of battle (HVY102)
+            if (IsWeaponGreaterThanTwiceBasePower()) GiveAttackGoAgain(); // borrowing ideas from merciless battleaxe (merciless_battleaxe) and shift the tide of battle (shift_the_tide_of_battle_yellow)
           }
           break;
         default:
@@ -773,13 +773,13 @@ function CurrentEffectBaseAttackSet()
   for ($i = count($currentTurnEffects) - CurrentTurnEffectsPieces(); $i >= 0; $i -= CurrentTurnEffectsPieces()) {
     if ($currentTurnEffects[$i + 1] == $currentPlayer && IsCombatEffectActive($currentTurnEffects[$i])) {
       switch ($currentTurnEffects[$i]) {
-        case "UPR155":
+        case "transmogrify_red":
           if ($mod < 8) $mod = 8;
           break;
-        case "UPR156":
+        case "transmogrify_yellow":
           if ($mod < 7) $mod = 7;
           break;
-        case "UPR157":
+        case "transmogrify_blue":
           if ($mod < 6) $mod = 6;
           break;
         default:
@@ -798,7 +798,7 @@ function CurrentEffectCostModifiers($cardID, $from)
   for ($i = count($currentTurnEffects) - CurrentTurnEffectsPieces(); $i >= 0; $i -= CurrentTurnEffectsPieces()) {
     $remove = false;
     if ($currentTurnEffects[$i + 1] == $currentPlayer) {
-      if (DelimStringContains($currentTurnEffects[$i], "HNT071", true)) {
+      if (DelimStringContains($currentTurnEffects[$i], "art_of_the_dragon_blood_red", true)) {
         $cardType = CardType($cardID);
         if(TalentContains($cardID, "DRACONIC", $currentPlayer) && !IsStaticType($cardType, $from, $cardID)) {
           $costModifier -= 1;
@@ -807,132 +807,132 @@ function CurrentEffectCostModifiers($cardID, $from)
         }
       }
       switch ($currentTurnEffects[$i]) {
-        case "WTR060":
-        case "WTR061":
-        case "WTR062":
+        case "cartilage_crush_red":
+        case "cartilage_crush_yellow":
+        case "cartilage_crush_blue":
           if (IsAction($cardID, $from)) {
             $costModifier += 1;
             $remove = true;
           }
           break;
-        case "WTR075":
+        case "seismic_surge":
           if (ClassContains($cardID, "GUARDIAN", $currentPlayer) && CardType($cardID) == "AA") {
             $costModifier -= 1;
             $remove = true;
           }
           break;
-        case "WTR152":
+        case "heartened_cross_strap":
           if (CardType($cardID) == "AA" && (GetResolvedAbilityType($cardID, $from) == "AA" || GetResolvedAbilityType($cardID, $from) == "")) {
             $costModifier -= 2;
             $remove = true;
           }
           break;
-        case "CRU081":
+        case "courage_of_bladehold":
           if (TypeContains($cardID, "W", $currentPlayer) && CardSubType($cardID) == "Sword") {
             $costModifier -= 1;
           }
           break;
-        case "CRU085-2":
-        case "CRU086-2":
-        case "CRU087-2":
+        case "dauntless_red-2":
+        case "dauntless_yellow-2":
+        case "dauntless_blue-2":
           if (CardType($cardID) == "DR") {
             $costModifier += 1;
             $remove = true;
           }
           break;
-        case "CRU141-AA":
+        case "bloodsheath_skeleta-AA":
           if (CardType($cardID) == "AA") {
-            $costModifier -= CountAura("ARC112", $currentPlayer);
+            $costModifier -= CountAura("runechant", $currentPlayer);
             $remove = true;
           }
           break;
-        case "CRU141-NAA":
+        case "bloodsheath_skeleta-NAA":
           if (CardType($cardID) == "A") {
-            $costModifier -= CountAura("ARC112", $currentPlayer);
+            $costModifier -= CountAura("runechant", $currentPlayer);
             $remove = true;
           }
           break;
-        case "ARC060":
-        case "ARC061":
-        case "ARC062":
+        case "hamstring_shot_red":
+        case "hamstring_shot_yellow":
+        case "hamstring_shot_blue":
           if ((CardType($cardID) == "AA" || GetResolvedAbilityType($cardID, $from) == "AA") && (GetResolvedAbilityType($cardID, $from) == "AA" || GetResolvedAbilityType($cardID, $from) == "")) {
             $costModifier += 1;
             $remove = true;
           }
           break;
-        case "ELE035-1":
+        case "frost_lock_blue-1":
           $costModifier += 1;
           break;
-        case "ELE038":
-        case "ELE039":
-        case "ELE040":
+        case "cold_wave_red":
+        case "cold_wave_yellow":
+        case "cold_wave_blue":
           $costModifier += 1;
           break;
-        case "ELE144":
+        case "heart_of_ice":
           $costModifier += 1;
           break;
-        case "EVR179":
+        case "amulet_of_ignition_yellow":
           if (IsStaticType(CardType($cardID), $from, $cardID)) {
             $costModifier -= 1;
             $remove = true;
           }
           break;
-        case "UPR000":
+        case "blood_of_the_dracai_red":
           if (TalentContains($cardID, "DRACONIC", $currentPlayer) && $from != "PLAY" && $from != "EQUIP") {
             $costModifier -= 1;
             --$currentTurnEffects[$i + 3];
             if ($currentTurnEffects[$i + 3] <= 0) $remove = true;
           }
           break;
-        case "UPR075":
-        case "UPR076":
-        case "UPR077":
+        case "rising_resentment_red":
+        case "rising_resentment_yellow":
+        case "rising_resentment_blue":
           if (GetClassState($currentPlayer, $CS_PlayUniqueID) == $currentTurnEffects[$i + 2]) {
             --$costModifier;
             $remove = true;
           }
           break;
-        case "UPR166":
+        case "alluvion_constellas":
           if (IsStaticType(CardType($cardID), $from, $cardID) && DelimStringContains(CardSubType($cardID), "Staff")) {
             $costModifier -= 3;
             $remove = true;
           }
           break;
-        case "OUT011":
+        case "redback_shroud":
           if (CardType($cardID) == "AR") {
             $costModifier -= 1;
             $remove = true;
           }
           break;
-        case "OUT179_1":
+        case "silken_gi_1":
           if (CardType($cardID) == "AA") {
             $costModifier -= 1;
             $remove = true;
           }
           break;
-        case "DTD004":
+        case "empyrean_rapture":
           if (CardType($cardID) == "C") {
             $costModifier -= 2;
             $remove = true;
           }
           break;
-        case "DTD212":
+        case "bequest_the_vast_beyond_red":
           if (CardType($cardID) == "AA" && ClassContains($cardID, "RUNEBLADE", $currentPlayer)) {
-            $costModifier -= CountAura("ARC112", $currentPlayer);
+            $costModifier -= CountAura("runechant", $currentPlayer);
             $remove = true;
           }
           break;
-        case "TCC038":
-        case "TCC043":
+        case "earthlore_empowerment_red":
+        case "earthlore_empowerment_yellow":
           if (ClassContains($cardID, "GUARDIAN", $currentPlayer) && CardType($cardID) == "AA") $costModifier -= 1;
           break;
-        case "EVO435":
+        case "evo_engine_room_yellow_equip":
           if (TypeContains($cardID, "W", $currentPlayer)) {
             $costModifier -= 1;
             $remove = true;
           }
           break;
-        case "AKO004":
+        case "savage_sash":
           $attack = 0;
           for ($j = count($currentTurnEffects) - CurrentTurnEffectsPieces(); $j >= 0; $j -= CurrentTurnEffectsPieces()) {
             if (IsCombatEffectActive($currentTurnEffects[$j], $cardID)) {
@@ -944,19 +944,19 @@ function CurrentEffectCostModifiers($cardID, $from)
           $attack += ModifiedAttackValue($cardID, $currentPlayer, $from);
           if (CardType($cardID) == "AA" && $attack >= 6) $costModifier -= 1;
           break;
-        case "MST229":
+        case "evo_heartdrive_blue":
           if (CardType($cardID) == "AA") {
             $costModifier -= 1;
             $remove = true;
           }
           break;
-        case "HNT058":
+        case "ignite_red":
           if (TalentContains($cardID, "DRACONIC", $currentPlayer)) {
             $costModifier -= 1;
             $remove = true;
           }
           break;
-        case "HNT061":
+        case "wrath_of_retribution_red":
           if (SubtypeContains($cardID, "Dagger", $currentPlayer)) {
             $costModifier -= 1;
           }
@@ -969,16 +969,16 @@ function CurrentEffectCostModifiers($cardID, $from)
         case "ROGUE024":
           $costModifier += 1;
           break;
-        case "ASB004":
+        case "solar_plexus":
           if (PitchValue($cardID) == 2) $costModifier -= 1;
           break;
-        case "ROS249":
+        case "calming_cloak":
           if (SubtypeContains($cardID, "Aura") && $from != "PLAY") {
             $costModifier -= 2;
             $remove = true;
           }
           break;
-        case "HNT145":
+        case "heart_of_vengeance":
           $otherChar = &GetPlayerCharacter(player: $otherPlayer);
           $isAttack = GetResolvedAbilityType($cardID, $from) == "AA" || (GetResolvedAbilityType($cardID, $from) == "" && CardType($cardID) == "AA");
           if (CardNameContains($otherChar[0], "Arakni") && $isAttack) {
@@ -986,7 +986,7 @@ function CurrentEffectCostModifiers($cardID, $from)
             $remove = true;
           }
           break;
-        case "HNT197":
+        case "perforate_yellow":
           if (GetClassState($currentPlayer, $CS_PlayUniqueID) == $currentTurnEffects[$i + 2]) $costModifier -= 1;
           break;
         default:
@@ -1006,26 +1006,26 @@ function CurrentEffectPreventDamagePrevention($player, $type, $damage, $source)
     $remove = false;
     if ($preventedDamage < $damage && $currentTurnEffects[$i + 1] == $player) {
       switch ($currentTurnEffects[$i]) {
-        case "MST137":
+        case "essence_of_ancestry_body_red":
           if (PitchValue($source) == 1) {
             $preventedDamage += $damage;
             RemoveCurrentTurnEffect($i);
           }
           break;
-        case "MST138":
+        case "essence_of_ancestry_soul_yellow":
           if (PitchValue($source) == 2) {
             $preventedDamage += $damage;
             RemoveCurrentTurnEffect($i);
           }
           break;
-        case "MST139":
+        case "essence_of_ancestry_mind_blue":
           if (PitchValue($source) == 3) {
             $preventedDamage += $damage;
             RemoveCurrentTurnEffect($i);
           }
           break;
-        case "HNT222":
-        case "HNT230":
+        case "shelter_from_the_storm_red":
+        case "calming_breeze_red":
           $preventedDamage += 1;
           --$currentTurnEffects[$i + 3];
           if ($currentTurnEffects[$i + 3] == 0) $remove = true;
@@ -1036,9 +1036,9 @@ function CurrentEffectPreventDamagePrevention($player, $type, $damage, $source)
     }
     if ($remove) RemoveCurrentTurnEffect($i);
   }
-  if ($preventedDamage > 0 && SearchCurrentTurnEffects("OUT174", $player) != "") {
+  if ($preventedDamage > 0 && SearchCurrentTurnEffects("vambrace_of_determination", $player) != "") {
     $preventedDamage -= 1;
-    SearchCurrentTurnEffects("OUT174", $player, remove:true);
+    SearchCurrentTurnEffects("vambrace_of_determination", $player, remove:true);
   }
   $damage -= $preventedDamage;
   return $damage;
@@ -1048,7 +1048,7 @@ function CurrentEffectDamagePrevention($player, $type, $damage, $source, $preven
 {
   global $currentTurnEffects;
   $otherPlayer = ($player == 1 ? 2 : 1);
-  $vambraceAvailable = SearchCurrentTurnEffects("OUT174", $player) != "";
+  $vambraceAvailable = SearchCurrentTurnEffects("vambrace_of_determination", $player) != "";
   $vambraceRemove = false;
   for ($i = count($currentTurnEffects) - CurrentTurnEffectPieces(); $i >= 0 && $damage > 0; $i -= CurrentTurnEffectPieces()) {
     $remove = false;
@@ -1056,31 +1056,31 @@ function CurrentEffectDamagePrevention($player, $type, $damage, $source, $preven
       $preventedDamage = 0;
       $effects = explode("-", $currentTurnEffects[$i]);
       switch ($effects[0]) {
-        case "ARC035":
+        case "dissipation_shield_yellow":
           if ($preventable) $preventedDamage += intval($effects[1]);
           $remove = true;
           break;
-        case "CRU041":
+        case "blessing_of_serenity_red":
           if ($type == "COMBAT") {
             if ($preventable) $preventedDamage += 3;
             $remove = true;
           }
           break;
-        case "CRU042":
+        case "blessing_of_serenity_yellow":
           if ($type == "COMBAT") {
             if ($preventable) $preventedDamage += 2;
             $remove = true;
           }
           break;
-        case "CRU043":
+        case "blessing_of_serenity_blue":
           if ($type == "COMBAT") {
             if ($preventable) $preventedDamage += 1;
             $remove = true;
           }
           break;
-        case "EVR033":
-        case "EVR034":
-        case "EVR035":
+        case "steadfast_red":
+        case "steadfast_yellow":
+        case "steadfast_blue":
           if ($source == $currentTurnEffects[$i + 2]) {
             if ($preventable) {
               $origDamage = $damage;
@@ -1091,10 +1091,10 @@ function CurrentEffectDamagePrevention($player, $type, $damage, $source, $preven
             if ($currentTurnEffects[$i + 3] <= 0) $remove = true;
           }
           break;
-        case "EVR180":
+        case "amulet_of_intervention_blue":
           $remove = true;
           break;
-        case "UPR183":
+        case "helios_mitre":
           if ($source == $currentTurnEffects[$i + 2]) {
             if ($preventable) {
               $sourceDamage = $damage;
@@ -1102,12 +1102,12 @@ function CurrentEffectDamagePrevention($player, $type, $damage, $source, $preven
               $currentTurnEffects[$i + 3] -= $sourceDamage;
             }
             if ($currentTurnEffects[$i + 3] <= 0) $remove = true;
-            if ($source == "ARC112" || $source == "UPR042") $remove = true; //To be removed when coded with Unique ID instead of cardID name as $source
+            if ($source == "runechant" || $source == "aether_ashwing") $remove = true; //To be removed when coded with Unique ID instead of cardID name as $source
           }
           break;
-        case "UPR221":
-        case "UPR222":
-        case "UPR223":
+        case "oasis_respite_red":
+        case "oasis_respite_yellow":
+        case "oasis_respite_blue":
           if ($source == $currentTurnEffects[$i + 2]) {
             if ($preventable) {
               $sourceDamage = $damage;
@@ -1115,163 +1115,163 @@ function CurrentEffectDamagePrevention($player, $type, $damage, $source, $preven
               $currentTurnEffects[$i + 3] -= $sourceDamage;
             }
             if ($currentTurnEffects[$i + 3] <= 0) $remove = true;
-            if (TypeContains($source, "AA") || $source == "ARC112" || $source == "UPR042") $remove = true; //To be removed when coded with Unique ID instead of cardID name as $source
+            if (TypeContains($source, "AA") || $source == "runechant" || $source == "aether_ashwing") $remove = true; //To be removed when coded with Unique ID instead of cardID name as $source
           }
           break;
-        case "OUT175":
-        case "OUT176":
-        case "OUT177":
-        case "OUT178":
+        case "seekers_hood":
+        case "seekers_gilet":
+        case "seekers_mitts":
+        case "seekers_leggings":
           if ($preventable) {
             $preventedDamage += 1;
           }
           $remove = true;
           break;
-        case "OUT228":
+        case "brush_off_red":
           if ($preventable && $damage <= 3) {
             $preventedDamage = $damage;
             $remove = true;
           }
           break;
-        case "OUT229":
+        case "brush_off_yellow":
           if ($preventable && $damage <= 2) {
             $preventedDamage = $damage;
             $remove = true;
           }
           break;
-        case "OUT230":
+        case "brush_off_blue":
           if ($preventable && $damage == 1) {
             $preventedDamage = $damage;
             $remove = true;
           }
           break;
-        case "OUT231":
+        case "peace_of_mind_red":
           if ($type == "COMBAT") {
             if ($preventable) $preventedDamage += 4;
             $remove = true;
           }
           break;
-        case "OUT232":
+        case "peace_of_mind_yellow":
           if ($type == "COMBAT") {
             if ($preventable) $preventedDamage += 3;
             $remove = true;
           }
           break;
-        case "OUT233":
+        case "peace_of_mind_blue":
           if ($type == "COMBAT") {
             if ($preventable) $preventedDamage += 2;
             $remove = true;
           }
           break;
-        case "DTD100":
-        case "DTD101":
-        case "DTD102":
-          if ($effects[0] == "DTD100") $prevention = 4;
-          else if ($effects[0] == "DTD101") $prevention = 3;
-          else if ($effects[0] == "DTD102") $prevention = 2;
+        case "break_of_dawn_red":
+        case "break_of_dawn_yellow":
+        case "break_of_dawn_blue":
+          if ($effects[0] == "break_of_dawn_red") $prevention = 4;
+          else if ($effects[0] == "break_of_dawn_yellow") $prevention = 3;
+          else if ($effects[0] == "break_of_dawn_blue") $prevention = 2;
           if (TalentContains($source, "SHADOW", $otherPlayer)) {
             if ($preventable) $preventedDamage += $prevention;
             $remove = true;
           }
           break;
-        case "TCC058":
+        case "interlude_red":
           if ($preventable) $preventedDamage += 3;
           $remove = true;
           break;
-        case "TCC062":
+        case "interlude_yellow":
           if ($preventable) $preventedDamage += 2;
           $remove = true;
           break;
-        case "TCC075":
+        case "interlude_blue":
           if ($preventable) $preventedDamage += 1;
           $remove = true;
           break;
-        case "EVO087":
-        case "EVO088":
-        case "EVO089":
+        case "dissolving_shield_red":
+        case "dissolving_shield_yellow":
+        case "dissolving_shield_blue":
           $remove = true;
           break;
-        case "EVO030":
-        case "EVO031":
-        case "EVO032":
-        case "EVO033": //Card
-        case "EVO430":
-        case "EVO431":
-        case "EVO432":
-        case "EVO433": //Equipment
+        case "evo_circuit_breaker_red":
+        case "evo_atom_breaker_red":
+        case "evo_face_breaker_red":
+        case "evo_mach_breaker_red": //Card
+        case "evo_circuit_breaker_red_equip":
+        case "evo_atom_breaker_red_equip":
+        case "evo_face_breaker_red_equip":
+        case "evo_mach_breaker_red_equip": //Equipment
           if ($preventable) $preventedDamage += intval($effects[1]);
           $remove = true;
           break;
-        case "HVY016":
+        case "no_fear_red":
           if ($preventable) $preventedDamage += 2 + intval($effects[1]);
           $remove = true;
           break;
-        case "HVY140":
+        case "battered_not_broken_red":
           if ($preventable) {
             $preventedDamage += 2;
-            PlayAura("HVY241", $player); //Might
+            PlayAura("might", $player); //Might
           }
           $remove = true;
           break;
-        case "HVY160":
+        case "take_it_on_the_chin_red":
           if ($preventable) {
             $preventedDamage += 2;
-            PlayAura("HVY240", $player); //Agility
+            PlayAura("agility", $player); //Agility
           }
           $remove = true;
           break;
-        case "HVY180":
+        case "slaphappy_red":
           if ($preventable) {
             $preventedDamage += 2;
-            PlayAura("HVY242", $player); //Vigor
+            PlayAura("vigor", $player); //Vigor
           }
           $remove = true;
           break;
-        case "HVY197":
+        case "sheltered_cove":
           if ($preventable) $preventedDamage += 2;
           $remove = true;
           break;
-        case "AKO019":
-        case "MST203":
-        case "MST204":
-        case "MST205":
+        case "battlefront_bastion_blue":
+        case "battlefront_bastion_red":
+        case "battlefront_bastion_yellow":
+        case "battlefront_bastion_blue":
           $remove = true;
           break;
-        case "MST034":
+        case "moon_chakra_red":
           if ($preventable) {
-            if ($currentTurnEffects[$i] == "MST034-1") $preventedDamage += 3;
+            if ($currentTurnEffects[$i] == "moon_chakra_red-1") $preventedDamage += 3;
             else $preventedDamage += 5;
           }
           $remove = true;
           break;
-        case "MST035":
+        case "moon_chakra_yellow":
           if ($preventable) {
-            if ($currentTurnEffects[$i] == "MST035-1") $preventedDamage += 2;
+            if ($currentTurnEffects[$i] == "moon_chakra_yellow-1") $preventedDamage += 2;
             else $preventedDamage += 4;
           }
           $remove = true;
           break;
-        case "MST036":
+        case "moon_chakra_blue":
           if ($preventable) {
-            if ($currentTurnEffects[$i] == "MST036-1") $preventedDamage += 1;
+            if ($currentTurnEffects[$i] == "moon_chakra_blue-1") $preventedDamage += 1;
             else $preventedDamage += 3;
           }
           $remove = true;
           break;
-        case "AUR023":
-        case "TER020":
+        case "cloud_cover_yellow":
+        case "sigil_of_shelter_yellow":
           if ($preventable) {
             $preventedDamage += 2;
           }
           $remove = true;
           break;
-        case "TER026":
+        case "sigil_of_shelter_blue":
           if ($preventable) {
             $preventedDamage += 1;
           }
           $remove = true;
           break;
-        case "ROS027":
+        case "sanctuary_of_aria":
           if ($source == $currentTurnEffects[$i + 2]) {
             if ($preventable) {
               $sourceDamage = $damage;
@@ -1281,7 +1281,7 @@ function CurrentEffectDamagePrevention($player, $type, $damage, $source, $preven
             if ($currentTurnEffects[$i + 3] <= 0) $remove = true;
           }
           break;
-        case "HNT250":
+        case "misfire_dampener":
           if ($preventable) {
             $preventedDamage += intval($effects[1]);
             $remove = true;
@@ -1301,7 +1301,7 @@ function CurrentEffectDamagePrevention($player, $type, $damage, $source, $preven
       $damage -= $preventedDamage;
     }
   }
-  if ($vambraceRemove) SearchCurrentTurnEffects("OUT174", $player, remove:true);
+  if ($vambraceRemove) SearchCurrentTurnEffects("vambrace_of_determination", $player, remove:true);
   return $damage;
 }
 
@@ -1316,17 +1316,17 @@ function CurrentEffectAttackAbility()
     $remove = false;
     if ($currentTurnEffects[$i + 1] == $mainPlayer) {
       switch ($currentTurnEffects[$i]) {
-        case "EVR056":
+        case "oath_of_steel_red":
           if ($attackType == "W") {
             $character = &GetPlayerCharacter($mainPlayer);
             ++$character[GetClassState($mainPlayer, $CS_PlayIndex) + 3];
           }
           break;
-        case "MON183":
-        case "MON184":
-        case "MON185":
-          if ($currentTurnEffects[$i] == "MON183") $maxCost = 2;
-          else if ($currentTurnEffects[$i] == "MON184") $maxCost = 1;
+        case "seeds_of_agony_red":
+        case "seeds_of_agony_yellow":
+        case "seeds_of_agony_blue":
+          if ($currentTurnEffects[$i] == "seeds_of_agony_red") $maxCost = 2;
+          else if ($currentTurnEffects[$i] == "seeds_of_agony_yellow") $maxCost = 1;
           else $maxCost = 0;
           if ($attackType == "AA" && CardCost($attackID) <= $maxCost) {
             WriteLog(CardLink($currentTurnEffects[$i], $currentTurnEffects[$i]) . " dealt 1 damage.");
@@ -1352,21 +1352,21 @@ function CurrentEffectPlayAbility($cardID, $from)
     $remove = false;
     if ($currentTurnEffects[$i + 1] == $currentPlayer) {
       switch ($currentTurnEffects[$i]) {
-        case "ARC209":
+        case "lead_the_charge_red":
           $cardType = CardType($cardID);
           if ((DelimStringContains($cardType, "A") || $cardType == "AA") && $cost >= 0) {
             ++$actionPoints;
             $remove = true;
           }
           break;
-        case "ARC210":
+        case "lead_the_charge_yellow":
           $cardType = CardType($cardID);
           if ((DelimStringContains($cardType, "A") || $cardType == "AA") && $cost >= 1) {
             ++$actionPoints;
             $remove = true;
           }
           break;
-        case "ARC211":
+        case "lead_the_charge_blue":
           $cardType = CardType($cardID);
           if ((DelimStringContains($cardType, "A") || $cardType == "AA") && $cost >= 2) {
             ++$actionPoints;
@@ -1390,8 +1390,8 @@ function CurrentEffectPlayOrActivateAbility($cardID, $from)
       $remove = false;
       $effectArr = explode(",", $currentTurnEffects[$i]);
       switch ($effectArr[0]) {
-        case "MON153":
-        case "MON154":
+        case "chane_bound_by_shadow":
+        case "chane":
           $cardType = CardType($cardID);
           if (($cardType == "AA" || $cardType == "W" || $cardType == "T") && (ClassContains($cardID, "RUNEBLADE", $currentPlayer) || TalentContains($cardID, "SHADOW", $currentPlayer))) {
             GiveAttackGoAgain();
@@ -1416,9 +1416,9 @@ function CurrentEffectAfterPlayOrActivateAbility($cache = true)
       $remove = false;
       $effectArr = explode(",", $currentTurnEffects[$i]);
       switch ($effectArr[0]) {
-        case "HVY053":
+        case "gauntlets_of_iron_will":
           if ($cache) CacheCombatResult();
-          if ($effectArr[1] != "ACTIVE" && CachedTotalAttack() > intval($effectArr[1])) $currentTurnEffects[$i] = "HVY053,ACTIVE";
+          if ($effectArr[1] != "ACTIVE" && CachedTotalAttack() > intval($effectArr[1])) $currentTurnEffects[$i] = "gauntlets_of_iron_will,ACTIVE";
           break;
         default:
           break;
@@ -1437,7 +1437,7 @@ function CurrentEffectGrantsInstantGoAgain($cardID, $from)
   for ($i = count($currentTurnEffects) - CurrentTurnEffectsPieces(); $i >= 0; $i -= CurrentTurnEffectsPieces()) {
     if ($currentTurnEffects[$i + 1] == $currentPlayer) {
       switch ($currentTurnEffects[$i]) {
-        case "ROS071": 
+        case "lightning_greaves": 
           $hasGoAgain = true;
           break;
         default:
@@ -1458,60 +1458,60 @@ function CurrentEffectGrantsNonAttackActionGoAgain($cardID, $from)
       if (strlen($currentTurnEffects[$i]) > 6) $turnEffects = explode(",", $currentTurnEffects[$i]);
       else $turnEffects[0] = $currentTurnEffects[$i];
       switch ($turnEffects[0]) {
-        case "WTR007-GOAGAIN":
+        case "bloodrush_bellow_yellow-GOAGAIN":
           $hasGoAgain = true;
           $remove = true;
           break;
-        case "MON153":
-        case "MON154":
+        case "chane_bound_by_shadow":
+        case "chane":
           if (ClassContains($cardID, "RUNEBLADE", $currentPlayer) || TalentContains($cardID, "SHADOW", $currentPlayer)) {
             $hasGoAgain = true;
             $remove = true;
           }
           break;
-        case "ELE177":
+        case "flash_red":
           if (CardCost($cardID) >= 0) {
             $hasGoAgain = true;
             $remove = true;
           }
           break;
-        case "ELE178":
+        case "flash_yellow":
           if (CardCost($cardID) >= 1) {
             $hasGoAgain = true;
             $remove = true;
           }
           break;
-        case "ELE179":
+        case "flash_blue":
           if (CardCost($cardID) >= 2) {
             $hasGoAgain = true;
             $remove = true;
           }
           break;
-        case "ELE201":
+        case "amulet_of_lightning_blue":
           $hasGoAgain = true;
           $remove = true;
           break;
-        case "ARC185-GA":
-          $hasGoAgain = ($cardID == "ARC212" || $cardID == "ARC213" || $cardID == "ARC214");
+        case "moon_wish_red-GA":
+          $hasGoAgain = ($cardID == "sun_kiss_red" || $cardID == "sun_kiss_yellow" || $cardID == "sun_kiss_blue");
           break;
-        case "DTD190":
-        case "DTD191":
-        case "DTD192":
+        case "tear_through_the_portal_red":
+        case "tear_through_the_portal_yellow":
+        case "tear_through_the_portal_blue":
           if (SearchCurrentTurnEffects($turnEffects[0] . "," . $cardID, $currentPlayer) && $from == "BANISH") {
             $hasGoAgain = true;
             $remove = true;
           }
           break;
-        case "MST094":
+        case "first_tenet_of_chi_wind_blue":
           if (ColorContains($cardID, 3, $currentPlayer)) {
             $hasGoAgain = true;
             if ($cardID != $turnEffects[0]) $remove = true;
           }
           break;
-        case "ROS010-GOAGAIN":
-          if(SearchCurrentTurnEffects("ROS010", $currentPlayer) && !IsMeldInstantName(GetClassState($currentPlayer, $CS_AdditionalCosts)) && (GetClassState($currentPlayer, $CS_AdditionalCosts) != "Both" || $from == "MELD")) {
+        case "arc_lightning_yellow-GOAGAIN":
+          if(SearchCurrentTurnEffects("arc_lightning_yellow", $currentPlayer) && !IsMeldInstantName(GetClassState($currentPlayer, $CS_AdditionalCosts)) && (GetClassState($currentPlayer, $CS_AdditionalCosts) != "Both" || $from == "MELD")) {
             $hasGoAgain = true;
-            if ($cardID != "ROS010") $remove = true;
+            if ($cardID != "arc_lightning_yellow") $remove = true;
           }
           break;
         default:
@@ -1532,130 +1532,130 @@ function CurrentEffectGrantsGoAgain()
       if (strlen($currentTurnEffects[$i]) > 6) $turnEffects = explode(",", $currentTurnEffects[$i]);
       else $turnEffects[0] = $currentTurnEffects[$i];
       switch ($turnEffects[0]) {
-        case "WTR144":
-        case "WTR145":
-        case "WTR146":
+        case "driving_blade_red":
+        case "driving_blade_yellow":
+        case "driving_blade_blue":
           return true;
-        case "WTR154":
+        case "snapdragon_scalers":
           return true;
-        case "ARC047":
+        case "rapid_fire_yellow":
           return true;
-        case "ARC160-3":
+        case "art_of_war_yellow-3":
           return true;
-        case "CRU053":
+        case "breeze_rider_boots":
           return true;
-        case "CRU055":
+        case "flood_of_force_yellow":
           return true;
-        case "CRU084":
+        case "spoils_of_war_red":
           return true;
-        case "CRU091-1":
-        case "CRU092-1":
-        case "CRU093-1":
+        case "hit_and_run_red-1":
+        case "hit_and_run_yellow-1":
+        case "hit_and_run_blue-1":
           return true;
-        case "CRU122":
+        case "perch_grapplers":
           return true;
-        case "CRU145":
-        case "CRU146":
-        case "CRU147":
+        case "mauvrion_skies_red":
+        case "mauvrion_skies_yellow":
+        case "mauvrion_skies_blue":
           return true;
-        case "MON141":
-        case "MON142":
-        case "MON143":
+        case "dread_screamer_red":
+        case "dread_screamer_yellow":
+        case "dread_screamer_blue":
           return true;
-        case "MON165":
-        case "MON166":
-        case "MON167":
+        case "seeping_shadows_red":
+        case "seeping_shadows_yellow":
+        case "seeping_shadows_blue":
           return true;
-        case "MON193":
+        case "shadow_puppetry_red":
           return true;
-        case "MON247":
+        case "rouse_the_ancients_blue":
           return true;
-        case "MON260-2":
-        case "MON261-2":
-        case "MON262-2":
+        case "captains_call_red-2":
+        case "captains_call_yellow-2":
+        case "captains_call_blue-2":
           return true;
-        case "ELE031-1":
+        case "lexi_livewire-1":
           return true;
-        case "ELE034-2":
+        case "voltaire_strike_twice-2":
           return true;
-        case "ELE091-GA":
+        case "fulminate_yellow-GA":
           return true;
-        case "ELE177":
-        case "ELE178":
-        case "ELE179":
+        case "flash_red":
+        case "flash_yellow":
+        case "flash_blue":
           return true;
-        case "ELE180":
-        case "ELE181":
-        case "ELE182":
+        case "weave_lightning_red":
+        case "weave_lightning_yellow":
+        case "weave_lightning_blue":
           if ($combatChainState[$CCS_AttackFused] == 1) return true;
           else break;
-        case "ELE201":
+        case "amulet_of_lightning_blue":
           return true;
-        case "EVR017":
+        case "bravo_star_of_the_show":
           return true;
-        case "EVR044":
-        case "EVR045":
-        case "EVR046":
+        case "ride_the_tailwind_red":
+        case "ride_the_tailwind_yellow":
+        case "ride_the_tailwind_blue":
           return true;
-        case "EVR161-3":
-        case "EVR162-3":
-        case "EVR163-3":
+        case "life_of_the_party_red-3":
+        case "life_of_the_party_yellow-3":
+        case "life_of_the_party_blue-3":
           return true;
-        case "DVR008":
+        case "glistening_steelblade_yellow":
           return true;
-        case "DVR019":
+        case "on_a_knife_edge_yellow":
           return true;
-        case "UPR081":
-        case "UPR082":
-        case "UPR083":
+        case "soaring_strike_red":
+        case "soaring_strike_yellow":
+        case "soaring_strike_blue":
           return true;
-        case "UPR094":
+        case "burn_away_red":
           return true;
-        case "DYN076":
-        case "DYN077":
-        case "DYN078":
+        case "precision_press_red":
+        case "precision_press_yellow":
+        case "precision_press_blue":
           return true;
-        case "DTD190":
-        case "DTD191":
-        case "DTD192":
+        case "tear_through_the_portal_red":
+        case "tear_through_the_portal_yellow":
+        case "tear_through_the_portal_blue":
           return true;
-        case "HVY240":
+        case "agility":
           return true;
-        case "HVY254-1":
-        case "HVY254-2":
+        case "luminaris_angels_glow-1":
+        case "luminaris_angels_glow-2":
           if (SearchPitchForColor($mainPlayer, 2) > 0) return true;
           else break;
-        case "HVY246":
+        case "coercive_tendency_blue":
           return true;
-        case "MST003":
+        case "beckoning_mistblade":
           return true;
-        case "MST024":
+        case "slither":
           return true;
-        case "MST094":
+        case "first_tenet_of_chi_wind_blue":
           return true;
-        case "MST236-2":
+        case "shadowrealm_horror_red-2":
           return true;
         case "ROGUE710-GA":
           return true;
-        case "AAZ007":
+        case "flight_path":
           return true;
-        case "ROS010-GOAGAIN":
+        case "arc_lightning_yellow-GOAGAIN":
           return true;
-        case "ROS118":
+        case "machinations_of_dominion_blue":
           if(GetClassState($mainPlayer, $CS_NumAuras) >= 1) return true;
           else break;
-        case "HNT125":
+        case "agility_stance_yellow":
           return true;
-        case "HNT134-GOAGAIN":
-        case "HNT135-GOAGAIN":
-        case "HNT136-GOAGAIN":
+        case "knife_through_butter_red-GOAGAIN":
+        case "knife_through_butter_yellow-GOAGAIN":
+        case "knife_through_butter_blue-GOAGAIN":
           return IsHeroAttackTarget() && CheckMarked($defPlayer);
-        case "HNT143":
-        case "HNT147":
+        case "dragonscaler_flight_path":
+        case "path_of_vengeance":
           return true;
-        case "HNT240":
+        case "trot_along_blue":
           return true;
-        case "HNT407":
+        case "the_hand_that_pulls_the_strings":
           return true;
         default:
           break;
@@ -1672,7 +1672,7 @@ function CurrentEffectPreventsGoAgain($cardID, $from="-")
     if (!isset($currentTurnEffects[$i + 1])) continue;
     if ($currentTurnEffects[$i + 1] == $mainPlayer) {
       switch ($currentTurnEffects[$i]) {
-        case "WTR044":
+        case "spinal_crush_red":
           if(HasMeld($cardID) && !IsMeldInstantName(GetClassState($mainPlayer, $CS_AdditionalCosts))
           || DelimStringContains(CardType($cardID), "AA") 
           || DelimStringContains(CardType($cardID), "A") 
@@ -1697,17 +1697,17 @@ function CurrentEffectPreventsDefenseReaction($from)
     if (!isset($currentTurnEffects[$i + 1])) continue;
     if ($currentTurnEffects[$i + 1] == $currentPlayer) {
       switch ($currentTurnEffects[$i]) {
-        case "CRU123":
+        case "remorseless_red":
           if ($from == "ARS" && IsCombatEffectActive($currentTurnEffects[$i])) $reactionPrevented = true;
           break;
-        case "CRU135-1":
-        case "CRU136-1":
-        case "CRU137-1":
+        case "increase_the_tension_red-1":
+        case "increase_the_tension_yellow-1":
+        case "increase_the_tension_blue-1":
           if ($from == "HAND" && IsCombatEffectActive($currentTurnEffects[$i])) $reactionPrevented = true;
           break;
-        case "EVR091-1":
-        case "EVR092-1":
-        case "EVR093-1":
+        case "release_the_tension_red-1":
+        case "release_the_tension_yellow-1":
+        case "release_the_tension_blue-1":
           if ($from == "ARS" && IsCombatEffectActive($currentTurnEffects[$i])) $reactionPrevented = true;
           break;
         default:
@@ -1724,7 +1724,7 @@ function CurrentEffectPreventsDraw($player, $isMainPhase)
   for ($i = 0; $i < count($currentTurnEffects); $i += CurrentTurnEffectPieces()) {
     if ($currentTurnEffects[$i + 1] == $player) {
       switch ($currentTurnEffects[$i]) {
-        case "WTR045":
+        case "cranial_crush_blue":
           if ($isMainPhase) WriteLog("Draw prevented by " . CardLink($currentTurnEffects[$i], $currentTurnEffects[$i]));
           return $isMainPhase;
         default:
@@ -1741,22 +1741,22 @@ function CurrentEffectIntellectModifier($remove = false)
   $intellectModifier = 0;
   for ($i = count($currentTurnEffects) - CurrentTurnEffectPieces(); $i >= 0; $i -= CurrentTurnEffectPieces()) {
     if ($currentTurnEffects[$i + 1] == $mainPlayer) {
-      $cardID = substr($currentTurnEffects[$i], 0, 6);
+      $cardID = ExtractCardID($currentTurnEffects[$i]);
       switch ($cardID) {
-        case "WTR042":
-        case "ARC161":
-        case "CRU028":
-        case "MON000":
-        case "MON246":
-        case "EVO026":
-        case "EVO426":
+        case "helm_of_isens_peak":
+        case "pursuit_of_knowledge_blue":
+        case "stamp_authority_blue":
+        case "great_library_of_solana":
+        case "nourishing_emptiness_red":
+        case "evo_steel_soul_memory_blue":
+        case "evo_steel_soul_memory_blue_equip":
           if($remove){// Handle transformations (Blasmophet, Dishonor, etc) restarting Intellect
             RemoveCurrentTurnEffect($i);
             break;
           }
           $intellectModifier += 1;
           break;
-        case "HVY009":
+        case "knucklehead":
           if($remove){// Handle transformations (Blasmophet, Dishonor, etc) restarting Intellect
             RemoveCurrentTurnEffect($i);
             break;
@@ -1764,7 +1764,7 @@ function CurrentEffectIntellectModifier($remove = false)
           $characters = GetPlayerCharacter($mainPlayer);
           $intellectModifier -= CharacterIntellect($characters[0]) - substr($currentTurnEffects[$i], -1);
           break;
-        case "ROS217":
+        case "ten_foot_tall_and_bulletproof_red":
           if($remove){// Handle transformations (Blasmophet, Dishonor, etc) restarting Intellect
             RemoveCurrentTurnEffect($i);
             break;
@@ -1784,15 +1784,15 @@ function CurrentEffectEndTurnAbilities()
   global $currentTurnEffects, $mainPlayer;
   for ($i = count($currentTurnEffects) - CurrentTurnEffectsPieces(); $i >= 0; $i -= CurrentTurnEffectsPieces()) {
     $remove = false;
-    $cardID = substr($currentTurnEffects[$i], 0, 6);
+    $cardID = ExtractCardID($currentTurnEffects[$i]);
     if (SearchCurrentTurnEffects($cardID . "-UNDER", $currentTurnEffects[$i + 1])) {
       AddNextTurnEffect($currentTurnEffects[$i], $currentTurnEffects[$i + 1]);
     }
     switch ($cardID) {
-      case "MON069":
-      case "MON070":
-      case "MON071":
-      case "EVR056":
+      case "glisten_red":
+      case "glisten_yellow":
+      case "glisten_blue":
+      case "oath_of_steel_red":
         if ($mainPlayer == $currentTurnEffects[$i + 1]) {
           $char = &GetPlayerCharacter($currentTurnEffects[$i + 1]);
           for ($j = 0; $j < count($char); $j += CharacterPieces()) {
@@ -1801,7 +1801,7 @@ function CurrentEffectEndTurnAbilities()
           $remove = true;
         }
         break;
-      case "EVO013": case "ROS246": case "ELE111":
+      case "adaptive_plating": case "adaptive_dissolver": case "frostbite":
         AddNextTurnEffect($currentTurnEffects[$i], $currentTurnEffects[$i + 1]);
         break;
       default:
@@ -1844,11 +1844,11 @@ function IsCombatEffectActive($cardID, $defendingCard = "", $SpectraTarget = fal
   else if ($set == "AJV") return AJVCombatEffectActive($cardID, $cardToCheck);
   else if ($set == "HNT") return HNTCombatEffectActive($cardID, $cardToCheck, $flicked);
   switch ($cardID) {
-    case "LGS180":
+    case "banneret_of_salvation_yellow":
       return DTDCombatEffectActive($cardID, $cardToCheck);
-    case "LGS181":
+    case "banneret_of_vigor_yellow":
       return DTDCombatEffectActive($cardID, $cardToCheck);
-    case "HER123":
+    case "ira_scarlet_revenger":
       return true;
     default:
       return;
@@ -1860,190 +1860,190 @@ function IsCombatEffectPersistent($cardID)
   global $Card_LifeBanner, $Card_ResourceBanner;
   $effectArr = explode(",", $cardID);
   $cardID = ShiyanaCharacter($effectArr[0]);
-  if (DelimStringContains($cardID, "HNT071", true)) return true;
+  if (DelimStringContains($cardID, "art_of_the_dragon_blood_red", true)) return true;
   switch ($cardID) {
-    case "WTR007":
-    case "WTR038":
-    case "WTR039":
+    case "bloodrush_bellow_yellow":
+    case "bravo_showstopper":
+    case "bravo":
       return true;
-    case "ARC047":
+    case "rapid_fire_yellow":
       return true;
-    case "ARC160-1":
+    case "art_of_war_yellow-1":
       return true;
-    case "ARC170-1":
-    case "ARC171-1":
-    case "ARC172-1":
+    case "plunder_run_red-1":
+    case "plunder_run_yellow-1":
+    case "plunder_run_blue-1":
       return true;
-    case "CRU025":
-    case "CRU053":
-    case "CRU084-2":
-    case "CRU105":
-    case "CRU122":
-    case "CRU124":
-    case "CRU188":
+    case "crater_fist":
+    case "breeze_rider_boots":
+    case "spoils_of_war_red-2":
+    case "plasma_purifier_red":
+    case "perch_grapplers":
+    case "poison_the_tips_yellow":
+    case "cash_in_yellow":
       return true;
-    case "MON034":
-    case "MON035":
-    case "MON087":
-    case "MON089":
-    case "MON108":
-    case "MON109":
-    case "MON218":
-    case "MON239":
-    case "MON245":
+    case "lumina_ascension_yellow":
+    case "v_of_the_vanguard_yellow":
+    case "ray_of_hope_yellow":
+    case "phantasmal_footsteps":
+    case "gallantry_gold":
+    case "spill_blood_red":
+    case "eclipse_existence_blue":
+    case "stubby_hammerers":
+    case "exude_confidence_red":
       return true;
-    case "ELE044":
-    case "ELE045":
-    case "ELE046":
+    case "blizzard_bolt_red":
+    case "blizzard_bolt_yellow":
+    case "blizzard_bolt_blue":
       return true;
-    case "ELE047":
-    case "ELE048":
-    case "ELE049":
+    case "buzz_bolt_red":
+    case "buzz_bolt_yellow":
+    case "buzz_bolt_blue":
       return true;
-    case "ELE050":
-    case "ELE051":
-    case "ELE052":
+    case "chilling_icevein_red":
+    case "chilling_icevein_yellow":
+    case "chilling_icevein_blue":
       return true;
-    case "ELE059":
-    case "ELE060":
-    case "ELE061":
+    case "frazzle_red":
+    case "frazzle_yellow":
+    case "frazzle_blue":
       return true;
-    case "ELE066-HIT":
-    case "ELE067":
-    case "ELE068":
-    case "ELE069":
-    case "ELE091-BUFF":
-    case "ELE091-GA":
+    case "force_of_nature_blue-HIT":
+    case "explosive_growth_red":
+    case "explosive_growth_yellow":
+    case "explosive_growth_blue":
+    case "fulminate_yellow-BUFF":
+    case "fulminate_yellow-GA":
       return true;
-    case "ELE092-DOM":
-    case "ELE092-BUFF":
-    case "ELE143":
-    case "ELE151-HIT":
-    case "ELE152-HIT":
-    case "ELE153-HIT":
+    case "flashfreeze_red-DOM":
+    case "flashfreeze_red-BUFF":
+    case "amulet_of_earth_blue":
+    case "ice_quake_red-HIT":
+    case "ice_quake_yellow-HIT":
+    case "ice_quake_blue-HIT":
       return true;
-    case "ELE173":
-    case "ELE198":
-    case "ELE199":
-    case "ELE200":
-    case "ELE203":
+    case "shock_charmers":
+    case "electrify_red":
+    case "electrify_yellow":
+    case "electrify_blue":
+    case "rampart_of_the_rams_head":
       return true;
-    case "EVR001":
-    case "EVR019":
-    case "EVR066-1":
-    case "EVR067-1":
-    case "EVR068-1":
-    case "EVR090":
+    case "skull_crushers":
+    case "valda_brightaxe":
+    case "outland_skirmish_red-1":
+    case "outland_skirmish_yellow-1":
+    case "outland_skirmish_blue-1":
+    case "rain_razors_yellow":
       return true;
-    case "EVR160":
-    case "EVR164":
-    case "EVR165":
-    case "EVR166":
-    case "EVR170-1":
-    case "EVR171-1":
-    case "EVR172-1":
-    case "EVR186":
+    case "this_rounds_on_me_blue":
+    case "high_striker_red":
+    case "high_striker_yellow":
+    case "high_striker_blue":
+    case "smashing_good_time_red-1":
+    case "smashing_good_time_yellow-1":
+    case "smashing_good_time_blue-1":
+    case "potion_of_ironhide_blue":
       return true;
-    case "DVR008-1":
+    case "glistening_steelblade_yellow-1":
       return true;
-    case "UPR036":
-    case "UPR037":
-    case "UPR038":
-    case "UPR047":
-    case "UPR049":
+    case "skittering_sands_red":
+    case "skittering_sands_yellow":
+    case "skittering_sands_blue":
+    case "heat_wave":
+    case "spreading_flames_red":
       return true;
-    case "DYN009":
-    case "DYN049":
-    case "DYN085":
-    case "DYN086":
-    case "DYN087":
-    case "DYN089-UNDER":
-    case "DYN154":
+    case "berserk_yellow":
+    case "roar_of_the_tiger_yellow":
+    case "visit_the_imperial_forge_red":
+    case "visit_the_imperial_forge_yellow":
+    case "visit_the_imperial_forge_blue":
+    case "galvanic_bender-UNDER":
+    case "immobilizing_shot_red":
       return true;
-    case "OUT052":
-    case "OUT140":
-    case "OUT141":
-    case "OUT144":
-    case "OUT188_1":
+    case "head_leads_the_tail_red":
+    case "mask_of_shifting_perspectives":
+    case "blade_cuff":
+    case "knives_out_blue":
+    case "premeditate_red_1":
       return true;
-    case "DTD011":
+    case "figment_of_triumph_yellow":
       return true;
-    case "DTD051":
+    case "beckoning_light_red":
       return true;//Beckoning Light
-    case "DTD052":
+    case "spirit_of_war_red":
       return true;//Spirit of War
-    case "DTD111":
+    case "blood_dripping_frenzy_blue":
       return true;
-    case "DTD198":
+    case "call_down_the_lightning_yellow":
       return true;//Call Down the Lightning
-    case "DTD208":
+    case "chorus_of_ironsong_yellow":
       return true;
-    case "DTD229-HIT":
+    case "hack_to_reality_yellow-HIT":
       return true;
-    case "DTD410":
+    case "metis_archangel_of_tenacity":
       return true;
-    case "DTD411":
+    case "victoria_archangel_of_triumph":
       return true;
-    case "EVO426":
+    case "evo_steel_soul_memory_blue_equip":
       return true;
     case $Card_LifeBanner:
       return true;
     case $Card_ResourceBanner:
       return true;
-    case "HVY052":
-    case "HVY090":
-    case "HVY091":
+    case "stonewall_impasse":
+    case "kassai_of_the_golden_sand":
+    case "kassai":
       return true;
-    case "HVY104":
+    case "commanding_performance_red":
       return true;
-    case "HVY136":
+    case "talk_a_big_game_blue":
       return true;
-    case "EVO146":
+    case "fabricate_red":
       return true;
-    case "HVY176":
+    case "double_down_red":
       return true;
-    case "HVY246":
+    case "coercive_tendency_blue":
       return true;
-    case "HVY247":
+    case "ancestral_harmony_blue":
       return true;
-    case "MST053":
+    case "sacred_art_jade_tiger_domain_blue":
       return true;
-    case "MST079-DEBUFF":
+    case "dense_blue_mist_blue-DEBUFF":
       return true;
-    case "MST079-HITPREVENTION":
+    case "dense_blue_mist_blue-HITPREVENTION":
       return true;
-    case "MST190":
+    case "stonewall_gauntlet":
       return true;
-    case "AAZ004":
+    case "target_totalizer":
       return true;
-    case "TER019":
+    case "thrive_yellow":
       return true;
-    case "ROS012":
-    case "ROS119":
+    case "burn_up__shock_red":
+    case "succumb_to_temptation_yellow":
       return true;
-    case "AJV006-E":
-    case "AJV006-I":
+    case "gauntlets_of_the_boreal_domain-E":
+    case "gauntlets_of_the_boreal_domain-I":
       return true;
-    case "HNT061":
-    case "HNT105":
-    case "HNT125":
-    case "HNT127":
-    case "HNT134-GOAGAIN":
-    case "HNT135-GOAGAIN":
-    case "HNT136-GOAGAIN":
-    case "HNT137-MARKEDBUFF":
-    case "HNT138-MARKEDBUFF":
-    case "HNT139-MARKEDBUFF":
-    case "HNT156":
-    case "HNT185":
-    case "HNT186":
-    case "HNT187":
-    case "HNT198-HIT":
-    case "HNT215":
-    case "HNT228":
-    case "HNT228-HIT":
-    case "HNT258-BUFF":
-    case "HNT258-DMG":
+    case "wrath_of_retribution_red":
+    case "fire_and_brimstone_red":
+    case "agility_stance_yellow":
+    case "power_stance_blue":
+    case "knife_through_butter_red-GOAGAIN":
+    case "knife_through_butter_yellow-GOAGAIN":
+    case "knife_through_butter_blue-GOAGAIN":
+    case "point_of_engagement_red-MARKEDBUFF":
+    case "point_of_engagement_yellow-MARKEDBUFF":
+    case "point_of_engagement_blue-MARKEDBUFF":
+    case "rake_over_the_coals_red":
+    case "poisoned_blade_red":
+    case "poisoned_blade_yellow":
+    case "poisoned_blade_blue":
+    case "savor_bloodshed_red-HIT":
+    case "quickdodge_flexors":
+    case "imperial_seal_of_command_red":
+    case "imperial_seal_of_command_red-HIT":
+    case "war_cry_of_bellona_yellow-BUFF":
+    case "war_cry_of_bellona_yellow-DMG":
       return true;
     //Roguelike
     case "ROGUE018":
@@ -2077,37 +2077,37 @@ function BeginEndPhaseEffects()
   for ($i = 0; $i < count($currentTurnEffects); $i += CurrentTurnEffectsPieces()) {
     $EffectContext = $currentTurnEffects[$i];
     switch ($currentTurnEffects[$i]) {
-      case "EVR106":
-        if (CountAura("ARC112", $mainPlayer) > 0) {
+      case "revel_in_runeblood_red":
+        if (CountAura("runechant", $mainPlayer) > 0) {
           WriteLog(CardLink($currentTurnEffects[$i], $currentTurnEffects[$i]) . " destroyed your Runechant tokens");
-          DestroyAllThisAura($currentTurnEffects[$i + 1], "ARC112");
+          DestroyAllThisAura($currentTurnEffects[$i + 1], "runechant");
         }
         break;
-      case "UPR183-1":
-        $attackCharIndex = FindCharacterIndex($mainPlayer, "UPR183");
-        $defendCharIndex = FindCharacterIndex($defPlayer, "UPR183");
+      case "helios_mitre-1":
+        $attackCharIndex = FindCharacterIndex($mainPlayer, "helios_mitre");
+        $defendCharIndex = FindCharacterIndex($defPlayer, "helios_mitre");
         if ($attackCharIndex > -1) {
           DestroyCharacter($mainPlayer, $attackCharIndex);
         } elseif ($defendCharIndex > -1) {
           DestroyCharacter($defPlayer, $defendCharIndex);
         }
-      case "UPR200":
-      case "UPR201":
-      case "UPR202":
+      case "strategic_planning_red":
+      case "strategic_planning_yellow":
+      case "strategic_planning_blue":
         Draw($currentTurnEffects[$i + 1], false);
         break;
-      case "AAZ005":
-        $attackCharIndex = FindCharacterIndex($mainPlayer, "AAZ005");
-        $defendCharIndex = FindCharacterIndex($defPlayer, "AAZ005");
+      case "hidden_agenda":
+        $attackCharIndex = FindCharacterIndex($mainPlayer, "hidden_agenda");
+        $defendCharIndex = FindCharacterIndex($defPlayer, "hidden_agenda");
         if ($attackCharIndex > -1) {
           DestroyCharacter($mainPlayer, $attackCharIndex);
         } elseif ($defendCharIndex > -1) {
           DestroyCharacter($defPlayer, $defendCharIndex);
         }
         break;
-      case "ROS027-1":
+      case "sanctuary_of_aria-1":
         $player = $currentTurnEffects[$i+1];
-        $sanctuaryIndex = GetItemIndex("ROS027", $player);
+        $sanctuaryIndex = GetItemIndex("sanctuary_of_aria", $player);
         DestroyItemForPlayer($player, $sanctuaryIndex, true);
         break;
       default:
@@ -2123,14 +2123,14 @@ function BeginEndPhaseEffectTriggers()
   if (!IsImmuneToBloodDebt($mainPlayer) && $numBloodDebt > 0) AddLayer("TRIGGER", $mainPlayer, "BLOODDEBT");
   for ($i = 0; $i < count($currentTurnEffects); $i += CurrentTurnEffectsPieces()) {
     switch ($currentTurnEffects[$i]) {
-      case "ELE215-1": 
-        AddLayer("TRIGGER", $defPlayer, "ELE215", $currentTurnEffects[$i + 1], "-", "-");
+      case "seek_and_destroy_red-1": 
+        AddLayer("TRIGGER", $defPlayer, "seek_and_destroy_red", $currentTurnEffects[$i + 1], "-", "-");
         break;
-      case "DYN153":
-        AddLayer("TRIGGER", $mainPlayer, "DYN153", $currentTurnEffects[$i + 1], "-", "-");
+      case "heat_seeker_red":
+        AddLayer("TRIGGER", $mainPlayer, "heat_seeker_red", $currentTurnEffects[$i + 1], "-", "-");
         break;
-      case "ROS247-1":
-        AddLayer("TRIGGER", $defPlayer, "ROS247", $currentTurnEffects[$i + 1], "-", "-");
+      case "plan_for_the_worst_blue-1":
+        AddLayer("TRIGGER", $defPlayer, "plan_for_the_worst_blue", $currentTurnEffects[$i + 1], "-", "-");
         break;
       default:
         break;
@@ -2145,9 +2145,9 @@ function ActivateAbilityEffects()
     $remove = false;
     if ($currentTurnEffects[$i + 1] == $currentPlayer) {
       switch ($currentTurnEffects[$i]) {
-        case "ELE004-HIT":
-          WriteLog(CardLink("ELE004", "ELE004") . " created a frostbite");
-          PlayAura("ELE111", $currentPlayer, effectController:$mainPlayer);
+        case "endless_winter_red-HIT":
+          WriteLog(CardLink("endless_winter_red", "endless_winter_red") . " created a frostbite");
+          PlayAura("frostbite", $currentPlayer, effectController:$mainPlayer);
           break;
         default:
           break;
@@ -2161,20 +2161,20 @@ function ActivateAbilityEffects()
 function CurrentEffectNameModifier($effectID, $effectParameter, $player)
 {
   $name = "";
-  if (SearchCurrentTurnEffects("OUT183", $player)) return $name;
+  if (SearchCurrentTurnEffects("amnesia_red", $player)) return $name;
   switch ($effectID) {
-    case "OUT049":
+    case "mask_of_many_faces":
       $name = $effectParameter;
       break;
-    case "OUT068":
-    case "OUT069":
-    case "OUT070":
+    case "be_like_water_red":
+    case "be_like_water_yellow":
+    case "be_like_water_blue":
       $name = $effectParameter;
       break;
-    case "DYN065":
+    case "crouching_tiger":
       $name = $effectParameter;
       break;
-    case "HNT249":
+    case "retrace_the_past_blue":
       $name = $effectParameter;
       break;
     default:
@@ -2191,13 +2191,13 @@ function EffectDefenderAttackModifiers($cardID)
     $remove = false;
     if ($currentTurnEffects[$i + 1] == $defPlayer && IsCombatEffectActive($currentTurnEffects[$i], $cardID)) {
       switch ($currentTurnEffects[$i]) {
-        case "MON008":
-        case "MON009":
-        case "MON010":
+        case "herald_of_triumph_red":
+        case "herald_of_triumph_yellow":
+        case "herald_of_triumph_blue":
           $mod -= 1;
           break;
-        case "DTD011":
-        case "DTD411":
+        case "figment_of_triumph_yellow":
+        case "victoria_archangel_of_triumph":
           $mod -= 1;
           break;
         default:
@@ -2226,13 +2226,13 @@ function EffectAttackRestricted($cardID, $type, $from, $revertNeeded = false, $i
       $effectArr = explode(",", $currentTurnEffects[$i]);
       $effectID = $effectArr[0];
       switch ($effectID) {
-        case "DTD203":
+        case "star_struck_yellow":
           if ($attackValue <= $effectArr[1] && ($type == "AA" || $resolvedAbilityType == "AA" || $abilityType == "AA") && ($hasNoAbilityTypes || $resolvedAbilityType == "AA")) {
-              $restrictedBy = "DTD203";
+              $restrictedBy = "star_struck_yellow";
           }
           break;
         case "WarmongersPeace":
-          if (($type == "AA" && !str_contains(GetAbilityTypes($cardID), "I") || (TypeContains($cardID, "W", $mainPlayer) && $resolvedAbilityType != "I"))) $restrictedBy = "DTD230";
+          if (($type == "AA" && !str_contains(GetAbilityTypes($cardID), "I") || (TypeContains($cardID, "W", $mainPlayer) && $resolvedAbilityType != "I"))) $restrictedBy = "warmongers_diplomacy_blue";
           break;
         default:
           break;
@@ -2255,8 +2255,8 @@ function EffectPlayCardConstantRestriction($cardID, $type, &$restriction, $phase
       $effectArr = explode(",", $currentTurnEffects[$i]);
       $effectID = $effectArr[0];
       switch ($effectID) {
-        case "OUT187":
-          if (in_array(GamestateSanitize(NameOverride($cardID, $currentPlayer)), $effectArr) && CardType($cardID) == "DR" && ($turn[0] == "A" || $turn[0] == "D" || $turn[0] == "INSTANT")) $restriction = "OUT187";
+        case "burdens_of_the_past_blue":
+          if (in_array(GamestateSanitize(NameOverride($cardID, $currentPlayer)), $effectArr) && CardType($cardID) == "DR" && ($turn[0] == "A" || $turn[0] == "D" || $turn[0] == "INSTANT")) $restriction = "burdens_of_the_past_blue";
           break;
         default:
           break;
@@ -2276,35 +2276,35 @@ function EffectPlayCardRestricted($cardID, $type, $from, $revertNeeded = false, 
       $effectArr = explode(",", $currentTurnEffects[$i]);
       $effectID = $effectArr[0];
       switch ($effectID) {
-        case "ARC162":
-          if (GamestateSanitize(NameOverride($cardID)) == $effectArr[1]) $restrictedBy = "ARC162";
+        case "chains_of_eminence_red":
+          if (GamestateSanitize(NameOverride($cardID)) == $effectArr[1]) $restrictedBy = "chains_of_eminence_red";
           break;
-        case "DTD226":
-          if ($from != "PLAY" && !IsStaticType(CardType($cardID)) && GamestateSanitize(CardName($cardID)) == $effectArr[1]) $restrictedBy = "DTD226";
+        case "censor_red":
+          if ($from != "PLAY" && !IsStaticType(CardType($cardID)) && GamestateSanitize(CardName($cardID)) == $effectArr[1]) $restrictedBy = "censor_red";
           break;
         case "WarmongersWar":
           // warmongers processing for meld cards handled in AddPrePitchDecisionQueue
-          if (DelimStringContains($type, "A") && !HasMeld($cardID) && CardType($cardID) != "W") $restrictedBy = "DTD230";
+          if (DelimStringContains($type, "A") && !HasMeld($cardID) && CardType($cardID) != "W") $restrictedBy = "warmongers_diplomacy_blue";
           break;
         case "WarmongersPeace":
           // !str_contains(GetAbilityTypes($cardID), "I") should allow discarding attack actions for instant abilities under peace
-          if (($type == "AA" && !str_contains(GetAbilityTypes($cardID), "I")) || (TypeContains($cardID, "W", $currentPlayer) && GetResolvedAbilityType($cardID) != "I")) $restrictedBy = "DTD230";
+          if (($type == "AA" && !str_contains(GetAbilityTypes($cardID), "I")) || (TypeContains($cardID, "W", $currentPlayer) && GetResolvedAbilityType($cardID) != "I")) $restrictedBy = "warmongers_diplomacy_blue";
           break;
-        case "HNT115":
-          if (IsWeapon($cardID, $from) && !WeaponWithNonAttack($cardID, $from)) $restrictedBy = "HNT115";
+        case "kabuto_of_imperial_authority":
+          if (IsWeapon($cardID, $from) && !WeaponWithNonAttack($cardID, $from)) $restrictedBy = "kabuto_of_imperial_authority";
           break;
-        case "HNT148":
-        case "HNT149":
+        case "coat_of_allegiance":
+        case "oath_of_loyalty_red":
           if (!$resolutionCheck) {
-            if (!SearchCurrentTurnEffects("HNT167", $currentPlayer) && !TalentContains($cardID, "DRACONIC") && $from != "PLAY" && $from != "EQUIP" && $from != "CHAR" && !str_contains(GetAbilityTypes($cardID), "I")) {
+            if (!SearchCurrentTurnEffects("fealty", $currentPlayer) && !TalentContains($cardID, "DRACONIC") && $from != "PLAY" && $from != "EQUIP" && $from != "CHAR" && !str_contains(GetAbilityTypes($cardID), "I")) {
               if (TypeContains($cardID, "AA")) {
                 // this case is needed because brand with cinderclaw isn't set to become active until after the attack is played
                 $restrict = true;
                 for ($j = 0; $j < count($currentTurnEffects); $j += CurrentTurnEffectPieces()) {
                   switch ($currentTurnEffects[$j]) {
-                    case "UPR060":
-                    case "UPR061":
-                    case "UPR062":
+                    case "brand_with_cinderclaw_red":
+                    case "brand_with_cinderclaw_yellow":
+                    case "brand_with_cinderclaw_blue":
                       $restrict = false;
                       break;
                     default:
@@ -2322,10 +2322,10 @@ function EffectPlayCardRestricted($cardID, $type, $from, $revertNeeded = false, 
       }
     }
   }
-  $foundNullTime = SearchItemForModalities(GamestateSanitize(NameOverride($cardID)), $otherPlayer, "HNT251") != -1;
-  $foundNullTime = $foundNullTime || SearchItemForModalities(GamestateSanitize(NameOverride($cardID)), $currentPlayer, "HNT251") != -1;
+  $foundNullTime = SearchItemForModalities(GamestateSanitize(NameOverride($cardID)), $otherPlayer, "null_time_zone_blue") != -1;
+  $foundNullTime = $foundNullTime || SearchItemForModalities(GamestateSanitize(NameOverride($cardID)), $currentPlayer, "null_time_zone_blue") != -1;
   if($foundNullTime && $from == "HAND"){
-    $restrictedBy = "HNT251";
+    $restrictedBy = "null_time_zone_blue";
     return true;
   }
   if ($revertNeeded && $restrictedBy != "") {
@@ -2352,7 +2352,7 @@ function EffectsAttackYouControlModifiers($cardID, $player)
   for ($i = 0; $i < count($currentTurnEffects); $i += CurrentTurnEffectPieces()) {
     if ($currentTurnEffects[$i + 1] == $player) {
       switch ($currentTurnEffects[$i]) {
-        case "ARC160-1":
+        case "art_of_war_yellow-1":
           if (CardType($cardID) == "AA") $attackModifier += 1;
         default:
           break;
@@ -2366,11 +2366,11 @@ function AdministrativeEffect($effectID)
 {
   $cardID = substr($effectID, 0, 6);
   switch ($cardID) {
-    case "ELE111":
-    case "OUT093":
-    case "EVO013":
-    case "ROS246":
-    case "HNT244":
+    case "frostbite":
+    case "barbed_castaway":
+    case "adaptive_plating":
+    case "adaptive_dissolver":
+    case "marked":
       return true;
     default:
       return false;

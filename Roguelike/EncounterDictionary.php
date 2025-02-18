@@ -428,130 +428,130 @@ function EncounterImage()
     case 001: case 002: case 003: case 004: case 005: case 006:
       return "ROGUELORE001_cropped.png";
     case 007:
-      return "UPR221_cropped.png";
+      return "oasis_respite_red_cropped.png";
     case 8:
       $myDQ = &GetZone(1, "DecisionQueue");
       if($myDQ[0] == "SHOP"){
-        return "WTR151_cropped.png";
+        return "hope_merchants_hood_cropped.png";
       }
       else { //This should just be the beggar/remove section of the shop
-        return "CRU075_cropped.png";
+        return "zen_state_cropped.png";
       }
     case 9:
       return GetCrossroadsImage();
     case 10:
-      return "EVR191_cropped.png";
+      return "talisman_of_recompense_yellow_cropped.png";
 
     case 101:
-      return "MON286_cropped.png";
+      return "stony_woottonhog_blue_cropped.png";
     case 102:
-      return "ARC191_cropped.png";
+      return "ravenous_rabble_red_cropped.png";
     case 103:
-      return "WTR178_cropped.png";
+      return "barraging_brawnhide_blue_cropped.png";
     case 104:
-      return "ELE197_cropped.png";
+      return "shock_striker_blue_cropped.png";
     case 105:
-      return "ELE117_cropped.png";
+      return "channel_mount_heroic_red_cropped.png";
     case 106:
-      return "ARC072_cropped.png";
+      return "sic_em_shot_red_cropped.png";
     case 107:
-      return "ARC103_cropped.png";
+      return "spellblade_strike_red_cropped.png";
     case 108:
-      return "CRU046_cropped.png";
+      return "ira_crimson_haze_cropped.png";
     case 113:
-      return "WTR109_cropped.png";
+      return "surging_strike_blue_cropped.png";
     case 114:
-      return "DYN147_cropped.png";
+      return "slay_the_scholars_blue_cropped.png";
     case 115:
-      return "CRU057_cropped.png";
+      return "crane_dance_red_cropped.png";
     case 117:
-      return "EVR038_cropped.png";
+      return "break_tide_yellow_cropped.png";
     case 118:
-      return "ELE082_cropped.png";
+      return "stir_the_wildwood_red_cropped.png";
     case 119:
-      return "CRU055_cropped.png";
+      return "flood_of_force_yellow_cropped.png";
     case 120:
-      return "CRU110_cropped.png";
+      return "combustible_courier_yellow_cropped.png";
     case 121:
-      return "MON226_cropped.png";
+      return "smash_with_big_tree_red_cropped.png";
     case 122:
-      return "MON203_cropped.png";
+      return "ghostly_visit_red_cropped.png";
     case 123:
-      return "CRU029_cropped.png";
+      return "towering_titan_red_cropped.png";
     case 124:
-      return "DYN159_cropped.png";
+      return "blessing_of_focus_red_cropped.png";
     case 125:
-      return "RVD025_cropped.png";
+      return "clearing_bellow_blue_cropped.png";
     case 126:
-      return "CRU188_cropped.png";
+      return "cash_in_yellow_cropped.png";
     case 127:
-      return "OUT210_cropped.png";
+      return "freewheeling_renegades_red_cropped.png";
     case 128:
-      return "DYN230_cropped.png";
+      return "water_glow_lanterns_red_cropped.png";
     case 129:
-      return "DYN071_cropped.png";
+      return "cleave_red_cropped.png";
     case 130:
-      return "CRU192_cropped.png";
+      return "brutal_assault_red_cropped.png";
     case 131:
-      return "UPR009_cropped.png";
+      return "invoke_azvolai_red_cropped.png";
 
     case 201:
-      return "WTR194_cropped.png";
+      return "scour_the_battlescape_red_cropped.png";
     case 202:
-      return "UPR199_cropped.png";
+      return "sift_blue_cropped.png";
     case 203:
-      return "ELE112_cropped.png";
+      return "pulse_of_volthaven_red_cropped.png";
     case 204:
-      return "WTR046_cropped.png";
+      return "forged_for_war_yellow_cropped.png";
     case 205:
-      return "MON081_cropped.png";
+      return "seek_enlightenment_red_cropped.png";
     case 206:
-      return "CRU188_cropped.png";
+      return "cash_in_yellow_cropped.png";
     case 208:
-      return "UPR212_cropped.png";
+      return "trade_in_red_cropped.png";
     case 210:
-      return "DYN165_cropped.png";
+      return "long_shot_red_cropped.png";
     case 211:
-      return "DYN085_cropped.png";
+      return "visit_the_imperial_forge_red_cropped.png";
     case 212:
-      return "MON290_cropped.png";
+      return "yinti_yanti_red_cropped.png";
     case 213:
-      return "UPR183_cropped.png";
+      return "helios_mitre_cropped.png";
     case 214:
-      return "EVR050_cropped.png";
+      return "wax_on_red_cropped.png";
     case 215:
-      return "DVR009_cropped.png";
+      return "en_garde_red_cropped.png";
     case 216:
-      return "CRU097_cropped.png";
+      return "shiyana_diamond_gemini_cropped.png";
     case 217: case 218: case 219: case 220: case 221: case 222:
-      return "DYN094_cropped.png";
+      return "powder_keg_blue_cropped.png";
     case 223: case 224: case 225: case 226: case 227: case 228:
-      return "DYN242_cropped.png";
+      return "imperial_warhorn_red_cropped.png";
     case 229:
-      return "CRU179_cropped.png";
+      return "gamblers_gloves_cropped.png";
     case 230:
-      return "WTR151_cropped.png";
+      return "hope_merchants_hood_cropped.png";
     case 231:
-      return "ELE227_cropped.png";
+      return "sigil_of_suffering_red_cropped.png";
     case 232:
-      return "UPR187_cropped.png";
+      return "erase_face_red_cropped.png";
     case 233:
-      return "ARC141_cropped.png";
+      return "scalding_rain_red_cropped.png";
     case 234:
-      return "MON123_cropped.png";
+      return "deep_rooted_evil_yellow_cropped.png";
     case 235:
-      return "CRU151_cropped.png";
+      return "meat_and_greet_red_cropped.png";
     case 236:
-      return "WTR173_cropped.png";
+      return "sigil_of_solace_red_cropped.png";
     case 237:
-      return "UPR176_cropped.png";
+      return "read_the_ripples_red_cropped.png";
     case 238:
-      return "UPR176_cropped.png";
+      return "read_the_ripples_red_cropped.png";
 
     case 500:
-      return "RVD025_cropped.png";
+      return "clearing_bellow_blue_cropped.png";
 
-    default: return "CRU054_cropped.png";
+    default: return "find_center_blue_cropped.png";
   }
 }
 

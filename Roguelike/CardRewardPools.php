@@ -37,465 +37,465 @@ function GetPoolLogicEquipment($tag1, $hero, $tags){
 //Called at DecisionQueue.php at Backgrounds event
 function GiveUniversalEquipment(){
   $character = &GetZone(1, "Character");
-  array_push($character, "WTR156");
+  array_push($character, "ironrot_plate");
 }
 
 //Input a list of parameters
 function GetPoolClass($arrayParameters){
 
   $CardRewardPool = array(
-    array("WTR043", "Class", "Majestic", "Anothos", "TitanFist", "Sledge"),
-    array("WTR044", "Class", "Majestic", "Anothos", "TitanFist", "Sledge"),
-    array("WTR045", "Class", "Rare", "Anothos", "TitanFist", "Sledge"),
-    array("WTR046", "Class", "Rare", "Anothos", "TitanFist", "Sledge"),
-    array("WTR047", "Class", "Rare", "Anothos", "TitanFist", "Sledge"),
-    array("WTR048", "Class", "Rare", "Anothos", "TitanFist", "Sledge"), //Disable
-    array("WTR049", "Class", "Rare", "Anothos", "TitanFist", "Sledge"),
-    array("WTR050", "Class", "Rare", "Anothos", "TitanFist", "Sledge"),
-    array("WTR051", "Class", "Rare", "Anothos", "TitanFist", "Sledge"), //Staunch Response
-    array("WTR052", "Class", "Rare", "Anothos", "TitanFist", "Sledge"),
-    array("WTR053", "Class", "Rare", "Anothos", "TitanFist", "Sledge"),
-    array("WTR054", "Class", "Rare", "Anothos", "TitanFist", "Sledge"), //Blessing of Deliverance
-    array("WTR055", "Class", "Rare", "Anothos", "TitanFist", "Sledge"),
-    array("WTR056", "Class", "Rare", "Anothos", "TitanFist", "Sledge"),
-    array("WTR057", "Class", "Common", "Anothos", "TitanFist", "Sledge"), //Buckling Blow
-    array("WTR058", "Class", "Common", "Anothos", "TitanFist", "Sledge"),
-    array("WTR059", "Class", "Common", "Anothos", "TitanFist", "Sledge"),
-    array("WTR060", "Class", "Common", "Anothos", "TitanFist", "Sledge"), //Cartilage Crush
-    array("WTR061", "Class", "Common", "Anothos", "TitanFist", "Sledge"),
-    array("WTR062", "Class", "Common", "Anothos", "TitanFist", "Sledge"),
-    array("WTR063", "Class", "Common", "Anothos", "TitanFist", "Sledge"), //Crush Confidence
-    array("WTR062", "Class", "Common", "Anothos", "TitanFist", "Sledge"),
-    array("WTR065", "Class", "Common", "Anothos", "TitanFist", "Sledge"),
-    array("WTR066", "Class", "Common", "Anothos", "TitanFist", "Sledge"), //Debilitate
-    array("WTR067", "Class", "Common", "Anothos", "TitanFist", "Sledge"),
-    array("WTR068", "Class", "Common", "Anothos", "TitanFist", "Sledge"),
-    array("WTR069", "Class", "Common", "Anothos", "TitanFist", "Sledge"), //Emerging Power
-    array("WTR070", "Class", "Common", "Anothos", "TitanFist", "Sledge"),
-    array("WTR071", "Class", "Common", "Anothos", "TitanFist", "Sledge"),
-    array("WTR072", "Class", "Common", "Anothos", "TitanFist", "Sledge"), //Stonewall Confidence
-    array("WTR073", "Class", "Common", "Anothos", "TitanFist", "Sledge"),
-    array("WTR074", "Class", "Common", "Anothos", "TitanFist", "Sledge"),
+    array("crippling_crush_red", "Class", "Majestic", "Anothos", "TitanFist", "Sledge"),
+    array("spinal_crush_red", "Class", "Majestic", "Anothos", "TitanFist", "Sledge"),
+    array("cranial_crush_blue", "Class", "Rare", "Anothos", "TitanFist", "Sledge"),
+    array("forged_for_war_yellow", "Class", "Rare", "Anothos", "TitanFist", "Sledge"),
+    array("show_time_blue", "Class", "Rare", "Anothos", "TitanFist", "Sledge"),
+    array("disable_red", "Class", "Rare", "Anothos", "TitanFist", "Sledge"), //Disable
+    array("disable_yellow", "Class", "Rare", "Anothos", "TitanFist", "Sledge"),
+    array("disable_blue", "Class", "Rare", "Anothos", "TitanFist", "Sledge"),
+    array("staunch_response_red", "Class", "Rare", "Anothos", "TitanFist", "Sledge"), //Staunch Response
+    array("staunch_response_yellow", "Class", "Rare", "Anothos", "TitanFist", "Sledge"),
+    array("staunch_response_blue", "Class", "Rare", "Anothos", "TitanFist", "Sledge"),
+    array("blessing_of_deliverance_red", "Class", "Rare", "Anothos", "TitanFist", "Sledge"), //Blessing of Deliverance
+    array("blessing_of_deliverance_yellow", "Class", "Rare", "Anothos", "TitanFist", "Sledge"),
+    array("blessing_of_deliverance_blue", "Class", "Rare", "Anothos", "TitanFist", "Sledge"),
+    array("buckling_blow_red", "Class", "Common", "Anothos", "TitanFist", "Sledge"), //Buckling Blow
+    array("buckling_blow_yellow", "Class", "Common", "Anothos", "TitanFist", "Sledge"),
+    array("buckling_blow_blue", "Class", "Common", "Anothos", "TitanFist", "Sledge"),
+    array("cartilage_crush_red", "Class", "Common", "Anothos", "TitanFist", "Sledge"), //Cartilage Crush
+    array("cartilage_crush_yellow", "Class", "Common", "Anothos", "TitanFist", "Sledge"),
+    array("cartilage_crush_blue", "Class", "Common", "Anothos", "TitanFist", "Sledge"),
+    array("crush_confidence_red", "Class", "Common", "Anothos", "TitanFist", "Sledge"), //Crush Confidence
+    array("cartilage_crush_blue", "Class", "Common", "Anothos", "TitanFist", "Sledge"),
+    array("crush_confidence_blue", "Class", "Common", "Anothos", "TitanFist", "Sledge"),
+    array("debilitate_red", "Class", "Common", "Anothos", "TitanFist", "Sledge"), //Debilitate
+    array("debilitate_yellow", "Class", "Common", "Anothos", "TitanFist", "Sledge"),
+    array("debilitate_blue", "Class", "Common", "Anothos", "TitanFist", "Sledge"),
+    array("emerging_power_red", "Class", "Common", "Anothos", "TitanFist", "Sledge"), //Emerging Power
+    array("emerging_power_yellow", "Class", "Common", "Anothos", "TitanFist", "Sledge"),
+    array("emerging_power_blue", "Class", "Common", "Anothos", "TitanFist", "Sledge"),
+    array("stonewall_confidence_red", "Class", "Common", "Anothos", "TitanFist", "Sledge"), //Stonewall Confidence
+    array("stonewall_confidence_yellow", "Class", "Common", "Anothos", "TitanFist", "Sledge"),
+    array("stonewall_confidence_blue", "Class", "Common", "Anothos", "TitanFist", "Sledge"),
 
-    array("WTR082", "Class", "Majestic", "Emberblade", "Kodachi", "Edge"), //Ancestral Empowerment
-    array("WTR098", "Class", "Common", "Emberblade", "Kodachi", "Edge"), //Head Jab
-    array("WTR099", "Class", "Common", "Emberblade", "Kodachi", "Edge"),
-    array("WTR100", "Class", "Common", "Emberblade", "Kodachi", "Edge"),
-    array("WTR101", "Class", "Common", "Emberblade", "Kodachi", "Edge"), //Leg Tap
-    array("WTR102", "Class", "Common", "Emberblade", "Kodachi", "Edge"),
-    array("WTR103", "Class", "Common", "Emberblade", "Kodachi", "Edge"),
-    array("WTR107", "Class", "Common", "Emberblade", "Kodachi", "Edge"), //Surging Strike
-    array("WTR108", "Class", "Common", "Emberblade", "Kodachi", "Edge"),
-    array("WTR109", "Class", "Common", "Emberblade", "Kodachi", "Edge"),
+    array("ancestral_empowerment_red", "Class", "Majestic", "Emberblade", "Kodachi", "Edge"), //Ancestral Empowerment
+    array("head_jab_red", "Class", "Common", "Emberblade", "Kodachi", "Edge"), //Head Jab
+    array("head_jab_yellow", "Class", "Common", "Emberblade", "Kodachi", "Edge"),
+    array("head_jab_blue", "Class", "Common", "Emberblade", "Kodachi", "Edge"),
+    array("leg_tap_red", "Class", "Common", "Emberblade", "Kodachi", "Edge"), //Leg Tap
+    array("leg_tap_yellow", "Class", "Common", "Emberblade", "Kodachi", "Edge"),
+    array("leg_tap_blue", "Class", "Common", "Emberblade", "Kodachi", "Edge"),
+    array("surging_strike_red", "Class", "Common", "Emberblade", "Kodachi", "Edge"), //Surging Strike
+    array("surging_strike_yellow", "Class", "Common", "Emberblade", "Kodachi", "Edge"),
+    array("surging_strike_blue", "Class", "Common", "Emberblade", "Kodachi", "Edge"),
 
-    array("WTR118", "Class", "Majestic", "Saber", "Dawnblade", "Hatchet", "Battleaxe", "AllWeps"),
-    array("WTR119", "Class", "Majestic", "Saber", "Dawnblade", "Hatchet", "Battleaxe", "AllWeps"),
-    array("WTR120", "Class", "Majestic", "Saber", "Dawnblade", "Hatchet", "Battleaxe", "AllWeps"), //120-122 are Supers. I'm putting them in the majestic queue
-    array("WTR121", "Class", "Majestic", "Saber", "Dawnblade", "Hatchet", "Battleaxe", "AllWeps"),
-    array("WTR122", "Class", "Majestic", "Saber", "Dawnblade", "Hatchet", "Battleaxe", "AllWeps"),
-    array("WTR123", "Class", "Rare", "Saber", "Dawnblade", "Hatchet", "Battleaxe", "AllWeps"), //Overpower
-    array("WTR124", "Class", "Rare", "Saber", "Dawnblade", "Hatchet", "Battleaxe", "AllWeps"),
-    array("WTR125", "Class", "Rare", "Saber", "Dawnblade", "Hatchet", "Battleaxe", "AllWeps"),
-    array("WTR126", "Class", "Rare", "Saber", "Dawnblade", "Hatchet", "Battleaxe", "AllWeps"), //Steelblade Shunt
-    array("WTR127", "Class", "Rare", "Saber", "Dawnblade", "Hatchet", "Battleaxe", "AllWeps"),
-    array("WTR128", "Class", "Rare", "Saber", "Dawnblade", "Hatchet", "Battleaxe", "AllWeps"),
-    array("WTR129", "Class", "Rare", "Saber", "Dawnblade", "Hatchet", "Battleaxe", "AllWeps"), //Warrior's Valor
-    array("WTR130", "Class", "Rare", "Saber", "Dawnblade", "Hatchet", "Battleaxe", "AllWeps"),
-    array("WTR131", "Class", "Rare", "Saber", "Dawnblade", "Hatchet", "Battleaxe", "AllWeps"),
-    array("WTR132", "Class", "Common", "Saber", "Dawnblade", "Hatchet", "Battleaxe", "AllWeps"), //Ironsong Response
-    array("WTR133", "Class", "Common", "Saber", "Dawnblade", "Hatchet", "Battleaxe", "AllWeps"),
-    array("WTR134", "Class", "Common", "Saber", "Dawnblade", "Hatchet", "Battleaxe", "AllWeps"),
-    array("WTR135", "Class", "Common", "Saber", "Dawnblade", "Hatchet", "Battleaxe", "AllWeps"), //Biting Blade
-    array("WTR136", "Class", "Common", "Saber", "Dawnblade", "Hatchet", "Battleaxe", "AllWeps"),
-    array("WTR137", "Class", "Common", "Saber", "Dawnblade", "Hatchet", "Battleaxe", "AllWeps"),
-    array("WTR138", "Class", "Common", "Saber", "Dawnblade", "Hatchet", "Battleaxe", "AllWeps"), //Stroke of Foresight
-    array("WTR139", "Class", "Common", "Saber", "Dawnblade", "Hatchet", "Battleaxe", "AllWeps"),
-    array("WTR140", "Class", "Common", "Saber", "Dawnblade", "Hatchet", "Battleaxe", "AllWeps"),
-    array("WTR141", "Class", "Common", "Saber", "Dawnblade", "Hatchet", "Battleaxe", "AllWeps"), //Sharpern Steel
-    array("WTR142", "Class", "Common", "Saber", "Dawnblade", "Hatchet", "Battleaxe", "AllWeps"),
-    array("WTR143", "Class", "Common", "Saber", "Dawnblade", "Hatchet", "Battleaxe", "AllWeps"),
-    array("WTR144", "Class", "Common", "Saber", "Dawnblade", "Hatchet", "Battleaxe", "AllWeps"), //Driving Blade
-    array("WTR145", "Class", "Common", "Saber", "Dawnblade", "Hatchet", "Battleaxe", "AllWeps"),
-    array("WTR146", "Class", "Common", "Saber", "Dawnblade", "Hatchet", "Battleaxe", "AllWeps"),
-    array("WTR147", "Class", "Common", "Saber", "Dawnblade", "Hatchet", "Battleaxe", "AllWeps"), //Nature's Path Pilgrimage
-    array("WTR148", "Class", "Common", "Saber", "Dawnblade", "Hatchet", "Battleaxe", "AllWeps"),
-    array("WTR149", "Class", "Common", "Saber", "Dawnblade", "Hatchet", "Battleaxe", "AllWeps"),
+    array("glint_the_quicksilver_blue", "Class", "Majestic", "Saber", "Dawnblade", "Hatchet", "Battleaxe", "AllWeps"),
+    array("steelblade_supremacy_red", "Class", "Majestic", "Saber", "Dawnblade", "Hatchet", "Battleaxe", "AllWeps"),
+    array("rout_red", "Class", "Majestic", "Saber", "Dawnblade", "Hatchet", "Battleaxe", "AllWeps"), //120-122 are Supers. I'm putting them in the majestic queue
+    array("singing_steelblade_yellow", "Class", "Majestic", "Saber", "Dawnblade", "Hatchet", "Battleaxe", "AllWeps"),
+    array("ironsong_determination_yellow", "Class", "Majestic", "Saber", "Dawnblade", "Hatchet", "Battleaxe", "AllWeps"),
+    array("overpower_red", "Class", "Rare", "Saber", "Dawnblade", "Hatchet", "Battleaxe", "AllWeps"), //Overpower
+    array("overpower_yellow", "Class", "Rare", "Saber", "Dawnblade", "Hatchet", "Battleaxe", "AllWeps"),
+    array("overpower_blue", "Class", "Rare", "Saber", "Dawnblade", "Hatchet", "Battleaxe", "AllWeps"),
+    array("steelblade_shunt_red", "Class", "Rare", "Saber", "Dawnblade", "Hatchet", "Battleaxe", "AllWeps"), //Steelblade Shunt
+    array("steelblade_shunt_yellow", "Class", "Rare", "Saber", "Dawnblade", "Hatchet", "Battleaxe", "AllWeps"),
+    array("steelblade_shunt_blue", "Class", "Rare", "Saber", "Dawnblade", "Hatchet", "Battleaxe", "AllWeps"),
+    array("warriors_valor_red", "Class", "Rare", "Saber", "Dawnblade", "Hatchet", "Battleaxe", "AllWeps"), //Warrior's Valor
+    array("warriors_valor_yellow", "Class", "Rare", "Saber", "Dawnblade", "Hatchet", "Battleaxe", "AllWeps"),
+    array("warriors_valor_blue", "Class", "Rare", "Saber", "Dawnblade", "Hatchet", "Battleaxe", "AllWeps"),
+    array("ironsong_response_red", "Class", "Common", "Saber", "Dawnblade", "Hatchet", "Battleaxe", "AllWeps"), //Ironsong Response
+    array("ironsong_response_yellow", "Class", "Common", "Saber", "Dawnblade", "Hatchet", "Battleaxe", "AllWeps"),
+    array("ironsong_response_blue", "Class", "Common", "Saber", "Dawnblade", "Hatchet", "Battleaxe", "AllWeps"),
+    array("biting_blade_red", "Class", "Common", "Saber", "Dawnblade", "Hatchet", "Battleaxe", "AllWeps"), //Biting Blade
+    array("biting_blade_yellow", "Class", "Common", "Saber", "Dawnblade", "Hatchet", "Battleaxe", "AllWeps"),
+    array("biting_blade_blue", "Class", "Common", "Saber", "Dawnblade", "Hatchet", "Battleaxe", "AllWeps"),
+    array("stroke_of_foresight_red", "Class", "Common", "Saber", "Dawnblade", "Hatchet", "Battleaxe", "AllWeps"), //Stroke of Foresight
+    array("stroke_of_foresight_yellow", "Class", "Common", "Saber", "Dawnblade", "Hatchet", "Battleaxe", "AllWeps"),
+    array("stroke_of_foresight_blue", "Class", "Common", "Saber", "Dawnblade", "Hatchet", "Battleaxe", "AllWeps"),
+    array("sharpen_steel_red", "Class", "Common", "Saber", "Dawnblade", "Hatchet", "Battleaxe", "AllWeps"), //Sharpern Steel
+    array("sharpen_steel_yellow", "Class", "Common", "Saber", "Dawnblade", "Hatchet", "Battleaxe", "AllWeps"),
+    array("sharpen_steel_blue", "Class", "Common", "Saber", "Dawnblade", "Hatchet", "Battleaxe", "AllWeps"),
+    array("driving_blade_red", "Class", "Common", "Saber", "Dawnblade", "Hatchet", "Battleaxe", "AllWeps"), //Driving Blade
+    array("driving_blade_yellow", "Class", "Common", "Saber", "Dawnblade", "Hatchet", "Battleaxe", "AllWeps"),
+    array("driving_blade_blue", "Class", "Common", "Saber", "Dawnblade", "Hatchet", "Battleaxe", "AllWeps"),
+    array("natures_path_pilgrimage_red", "Class", "Common", "Saber", "Dawnblade", "Hatchet", "Battleaxe", "AllWeps"), //Nature's Path Pilgrimage
+    array("natures_path_pilgrimage_yellow", "Class", "Common", "Saber", "Dawnblade", "Hatchet", "Battleaxe", "AllWeps"),
+    array("natures_path_pilgrimage_blue", "Class", "Common", "Saber", "Dawnblade", "Hatchet", "Battleaxe", "AllWeps"),
 
-    array("ARC044", "Class", "Majestic", "Shiver", "Voltaire", "DeathDealer", "RedLiner"), //Three of a Kind
-    array("ARC045", "Class", "Majestic", "Shiver", "Voltaire", "DeathDealer", "RedLiner"), //Endless Arrow
-    array("ARC048", "Class", "Rare", "Shiver", "Voltaire", "DeathDealer", "RedLiner"), //Take Cover
-    array("ARC049", "Class", "Rare", "Shiver", "Voltaire", "DeathDealer", "RedLiner"),
-    array("ARC050", "Class", "Rare", "Shiver", "Voltaire", "DeathDealer", "RedLiner"),
-    array("ARC054", "Class", "Rare", "Shiver", "Voltaire", "DeathDealer", "RedLiner"), //Take Aim
-    array("ARC055", "Class", "Rare", "Shiver", "Voltaire", "DeathDealer", "RedLiner"),
-    array("ARC056", "Class", "Rare", "Shiver", "Voltaire", "DeathDealer", "RedLiner"),
-    array("ARC060", "Class", "Common", "Shiver", "Voltaire", "RedLiner"), //Hamstring Shot
-    array("ARC061", "Class", "Common", "Shiver", "Voltaire", "RedLiner"),
-    array("ARC062", "Class", "Common", "Shiver", "Voltaire", "RedLiner"),
-    array("ARC069", "Class", "Common", "Shiver", "Voltaire", "RedLiner"), //Searing Shot
-    array("ARC070", "Class", "Common", "Shiver", "Voltaire", "RedLiner"),
-    array("ARC071", "Class", "Common", "Shiver", "Voltaire", "RedLiner"),
+    array("three_of_a_kind_red", "Class", "Majestic", "Shiver", "Voltaire", "DeathDealer", "RedLiner"), //Three of a Kind
+    array("endless_arrow_red", "Class", "Majestic", "Shiver", "Voltaire", "DeathDealer", "RedLiner"), //Endless Arrow
+    array("take_cover_red", "Class", "Rare", "Shiver", "Voltaire", "DeathDealer", "RedLiner"), //Take Cover
+    array("take_cover_yellow", "Class", "Rare", "Shiver", "Voltaire", "DeathDealer", "RedLiner"),
+    array("take_cover_blue", "Class", "Rare", "Shiver", "Voltaire", "DeathDealer", "RedLiner"),
+    array("take_aim_red", "Class", "Rare", "Shiver", "Voltaire", "DeathDealer", "RedLiner"), //Take Aim
+    array("take_aim_yellow", "Class", "Rare", "Shiver", "Voltaire", "DeathDealer", "RedLiner"),
+    array("take_aim_blue", "Class", "Rare", "Shiver", "Voltaire", "DeathDealer", "RedLiner"),
+    array("hamstring_shot_red", "Class", "Common", "Shiver", "Voltaire", "RedLiner"), //Hamstring Shot
+    array("hamstring_shot_yellow", "Class", "Common", "Shiver", "Voltaire", "RedLiner"),
+    array("hamstring_shot_blue", "Class", "Common", "Shiver", "Voltaire", "RedLiner"),
+    array("searing_shot_red", "Class", "Common", "Shiver", "Voltaire", "RedLiner"), //Searing Shot
+    array("searing_shot_yellow", "Class", "Common", "Shiver", "Voltaire", "RedLiner"),
+    array("searing_shot_blue", "Class", "Common", "Shiver", "Voltaire", "RedLiner"),
 
-    array("CRU026", "Class", "Majestic", "Anothos", "TitanFist", "Sledge"), //Mangle
-    array("CRU027", "Class", "Majestic", "Anothos", "TitanFist", "Sledge"), //Righteous Cleansing
-    array("CRU028", "Class", "Majestic", "Anothos", "TitanFist", "Sledge"), //Stamp Authority
-    array("CRU029", "Class", "Rare", "Anothos", "TitanFist", "Sledge"), //Towering Titan
-    array("CRU030", "Class", "Rare", "Anothos", "TitanFist", "Sledge"),
-    array("CRU031", "Class", "Rare", "Anothos", "TitanFist", "Sledge"),
-    array("CRU032", "Class", "Common", "Anothos", "TitanFist", "Sledge"), //Crush the Weak
-    array("CRU033", "Class", "Common", "Anothos", "TitanFist", "Sledge"),
-    array("CRU034", "Class", "Common", "Anothos", "TitanFist", "Sledge"),
-    array("CRU035", "Class", "Common", "Anothos", "TitanFist", "Sledge"), //Chokeslam
-    array("CRU036", "Class", "Common", "Anothos", "TitanFist", "Sledge"),
-    array("CRU037", "Class", "Common", "Anothos", "TitanFist", "Sledge"),
-    array("CRU038", "Class", "Common", "Anothos", "TitanFist", "Sledge"), //Emerging Dominance
-    array("CRU039", "Class", "Common", "Anothos", "TitanFist", "Sledge"),
-    array("CRU040", "Class", "Common", "Anothos", "TitanFist", "Sledge"),
-    array("CRU041", "Class", "Common", "Anothos", "TitanFist", "Sledge"), //Blessing of Serenity
-    array("CRU042", "Class", "Common", "Anothos", "TitanFist", "Sledge"),
-    array("CRU043", "Class", "Common", "Anothos", "TitanFist", "Sledge"),
+    array("mangle_red", "Class", "Majestic", "Anothos", "TitanFist", "Sledge"), //Mangle
+    array("righteous_cleansing_yellow", "Class", "Majestic", "Anothos", "TitanFist", "Sledge"), //Righteous Cleansing
+    array("stamp_authority_blue", "Class", "Majestic", "Anothos", "TitanFist", "Sledge"), //Stamp Authority
+    array("towering_titan_red", "Class", "Rare", "Anothos", "TitanFist", "Sledge"), //Towering Titan
+    array("towering_titan_yellow", "Class", "Rare", "Anothos", "TitanFist", "Sledge"),
+    array("towering_titan_blue", "Class", "Rare", "Anothos", "TitanFist", "Sledge"),
+    array("crush_the_weak_red", "Class", "Common", "Anothos", "TitanFist", "Sledge"), //Crush the Weak
+    array("crush_the_weak_yellow", "Class", "Common", "Anothos", "TitanFist", "Sledge"),
+    array("crush_the_weak_blue", "Class", "Common", "Anothos", "TitanFist", "Sledge"),
+    array("chokeslam_red", "Class", "Common", "Anothos", "TitanFist", "Sledge"), //Chokeslam
+    array("chokeslam_yellow", "Class", "Common", "Anothos", "TitanFist", "Sledge"),
+    array("chokeslam_blue", "Class", "Common", "Anothos", "TitanFist", "Sledge"),
+    array("emerging_dominance_red", "Class", "Common", "Anothos", "TitanFist", "Sledge"), //Emerging Dominance
+    array("emerging_dominance_yellow", "Class", "Common", "Anothos", "TitanFist", "Sledge"),
+    array("emerging_dominance_blue", "Class", "Common", "Anothos", "TitanFist", "Sledge"),
+    array("blessing_of_serenity_red", "Class", "Common", "Anothos", "TitanFist", "Sledge"), //Blessing of Serenity
+    array("blessing_of_serenity_yellow", "Class", "Common", "Anothos", "TitanFist", "Sledge"),
+    array("blessing_of_serenity_blue", "Class", "Common", "Anothos", "TitanFist", "Sledge"),
 
-    array("CRU063", "Class", "Common", "Emberblade", "Kodachi", "Edge"), //Flying Kick
-    array("CRU064", "Class", "Common", "Emberblade", "Kodachi", "Edge"),
-    array("CRU065", "Class", "Common", "Emberblade", "Kodachi", "Edge"),
-    array("CRU066", "Class", "Common", "Emberblade", "Kodachi", "Edge"), //Soulbead Strike
-    array("CRU067", "Class", "Common", "Emberblade", "Kodachi", "Edge"),
-    array("CRU068", "Class", "Common", "Emberblade", "Kodachi", "Edge"),
-    array("CRU069", "Class", "Common", "Emberblade", "Kodachi", "Edge"), //Torrent of Tempo
-    array("CRU070", "Class", "Common", "Emberblade", "Kodachi", "Edge"),
-    array("CRU071", "Class", "Common", "Emberblade", "Kodachi", "Edge"),
-    array("CRU072", "Class", "Common", "Emberblade", "Kodachi", "Edge"), //Bittering Thorns
-    array("CRU073", "Class", "Common", "Emberblade", "Kodachi", "Edge"), //Salt the Wound
+    array("flying_kick_red", "Class", "Common", "Emberblade", "Kodachi", "Edge"), //Flying Kick
+    array("flying_kick_yellow", "Class", "Common", "Emberblade", "Kodachi", "Edge"),
+    array("flying_kick_blue", "Class", "Common", "Emberblade", "Kodachi", "Edge"),
+    array("soulbead_strike_red", "Class", "Common", "Emberblade", "Kodachi", "Edge"), //Soulbead Strike
+    array("soulbead_strike_yellow", "Class", "Common", "Emberblade", "Kodachi", "Edge"),
+    array("soulbead_strike_blue", "Class", "Common", "Emberblade", "Kodachi", "Edge"),
+    array("torrent_of_tempo_red", "Class", "Common", "Emberblade", "Kodachi", "Edge"), //Torrent of Tempo
+    array("torrent_of_tempo_yellow", "Class", "Common", "Emberblade", "Kodachi", "Edge"),
+    array("torrent_of_tempo_blue", "Class", "Common", "Emberblade", "Kodachi", "Edge"),
+    array("bittering_thorns_yellow", "Class", "Common", "Emberblade", "Kodachi", "Edge"), //Bittering Thorns
+    array("salt_the_wound_yellow", "Class", "Common", "Emberblade", "Kodachi", "Edge"), //Salt the Wound
 
-    array("CRU082", "Class", "Majestic", "Saber", "Dawnblade", "AllWeps"), //Twinning Blade - Only Swords
-    array("CRU083", "Class", "Majestic", "Saber", "Dawnblade", "Hatchet", "Battleaxe", "AllWeps"), //Unified Decree
-    array("CRU084", "Class", "Majestic", "Saber", "Dawnblade", "Hatchet", "Battleaxe", "AllWeps"), //Spoils of War
+    array("twinning_blade_yellow", "Class", "Majestic", "Saber", "Dawnblade", "AllWeps"), //Twinning Blade - Only Swords
+    array("unified_decree_yellow", "Class", "Majestic", "Saber", "Dawnblade", "Hatchet", "Battleaxe", "AllWeps"), //Unified Decree
+    array("spoils_of_war_red", "Class", "Majestic", "Saber", "Dawnblade", "Hatchet", "Battleaxe", "AllWeps"), //Spoils of War
     //Dauntless - Can be added when the AI can handle taxes
-    array("CRU088", "Class", "Common", "Saber", "Dawnblade", "Hatchet", "Battleaxe", "AllWeps"), //Out for Blood
-    array("CRU089", "Class", "Common", "Saber", "Dawnblade", "Hatchet", "Battleaxe", "AllWeps"),
-    array("CRU090", "Class", "Common", "Saber", "Dawnblade", "Hatchet", "Battleaxe", "AllWeps"),
-    array("CRU091", "Class", "Common", "Saber", "Dawnblade", "Hatchet", "Battleaxe", "AllWeps"), //Hit and Run
-    array("CRU092", "Class", "Common", "Saber", "Dawnblade", "Hatchet", "Battleaxe", "AllWeps"),
-    array("CRU093", "Class", "Common", "Saber", "Dawnblade", "Hatchet", "Battleaxe", "AllWeps"),
-    array("CRU094", "Class", "Common", "Saber", "Dawnblade", "Hatchet", "Battleaxe", "AllWeps"), //Push Forward
-    array("CRU095", "Class", "Common", "Saber", "Dawnblade", "Hatchet", "Battleaxe", "AllWeps"),
-    array("CRU096", "Class", "Common", "Saber", "Dawnblade", "Hatchet", "Battleaxe", "AllWeps"),
+    array("out_for_blood_red", "Class", "Common", "Saber", "Dawnblade", "Hatchet", "Battleaxe", "AllWeps"), //Out for Blood
+    array("out_for_blood_yellow", "Class", "Common", "Saber", "Dawnblade", "Hatchet", "Battleaxe", "AllWeps"),
+    array("out_for_blood_blue", "Class", "Common", "Saber", "Dawnblade", "Hatchet", "Battleaxe", "AllWeps"),
+    array("hit_and_run_red", "Class", "Common", "Saber", "Dawnblade", "Hatchet", "Battleaxe", "AllWeps"), //Hit and Run
+    array("hit_and_run_yellow", "Class", "Common", "Saber", "Dawnblade", "Hatchet", "Battleaxe", "AllWeps"),
+    array("hit_and_run_blue", "Class", "Common", "Saber", "Dawnblade", "Hatchet", "Battleaxe", "AllWeps"),
+    array("push_forward_red", "Class", "Common", "Saber", "Dawnblade", "Hatchet", "Battleaxe", "AllWeps"), //Push Forward
+    array("push_forward_yellow", "Class", "Common", "Saber", "Dawnblade", "Hatchet", "Battleaxe", "AllWeps"),
+    array("push_forward_blue", "Class", "Common", "Saber", "Dawnblade", "Hatchet", "Battleaxe", "AllWeps"),
 
-    array("CRU123", "Class", "Majestic", "Shiver", "Voltaire", "DeathDealer", "RedLiner"), //Remorseless
-    array("CRU124", "Class", "Majestic", "Shiver", "Voltaire", "DeathDealer", "RedLiner"), //Poison the Tips
-    array("CRU132", "Class", "Common", "Shiver", "Voltaire", "RedLiner"), //Sleep Dart
-    array("CRU133", "Class", "Common", "Shiver", "Voltaire", "RedLiner"),
-    array("CRU134", "Class", "Common", "Shiver", "Voltaire", "RedLiner"),
+    array("remorseless_red", "Class", "Majestic", "Shiver", "Voltaire", "DeathDealer", "RedLiner"), //Remorseless
+    array("poison_the_tips_yellow", "Class", "Majestic", "Shiver", "Voltaire", "DeathDealer", "RedLiner"), //Poison the Tips
+    array("sleep_dart_red", "Class", "Common", "Shiver", "Voltaire", "RedLiner"), //Sleep Dart
+    array("sleep_dart_yellow", "Class", "Common", "Shiver", "Voltaire", "RedLiner"),
+    array("sleep_dart_blue", "Class", "Common", "Shiver", "Voltaire", "RedLiner"),
 
-    array("MON109", "Class", "Majestic", "Hatchet", "Battleaxe"), //Spill Blood - Only Axes
-    array("MON110", "Class", "Rare", "Saber", "Dawnblade", "Hatchet", "Battleaxe", "AllWeps"), //Dusk Path Pilgrimage
-    array("MON111", "Class", "Rare", "Saber", "Dawnblade", "Hatchet", "Battleaxe", "AllWeps"),
-    array("MON112", "Class", "Rare", "Saber", "Dawnblade", "Hatchet", "Battleaxe", "AllWeps"),
-    array("MON113", "Class", "Rare", "Saber", "Dawnblade", "Hatchet", "Battleaxe", "AllWeps"), //Plow Through
-    array("MON114", "Class", "Rare", "Saber", "Dawnblade", "Hatchet", "Battleaxe", "AllWeps"),
-    array("MON115", "Class", "Rare", "Saber", "Dawnblade", "Hatchet", "Battleaxe", "AllWeps"),
-    array("MON116", "Class", "Rare", "Saber", "Dawnblade", "Hatchet", "Battleaxe", "AllWeps"), //Second Swing
-    array("MON117", "Class", "Rare", "Saber", "Dawnblade", "Hatchet", "Battleaxe", "AllWeps"),
-    array("MON118", "Class", "Rare", "Saber", "Dawnblade", "Hatchet", "Battleaxe", "AllWeps"),
+    array("spill_blood_red", "Class", "Majestic", "Hatchet", "Battleaxe"), //Spill Blood - Only Axes
+    array("dusk_path_pilgrimage_red", "Class", "Rare", "Saber", "Dawnblade", "Hatchet", "Battleaxe", "AllWeps"), //Dusk Path Pilgrimage
+    array("dusk_path_pilgrimage_yellow", "Class", "Rare", "Saber", "Dawnblade", "Hatchet", "Battleaxe", "AllWeps"),
+    array("dusk_path_pilgrimage_blue", "Class", "Rare", "Saber", "Dawnblade", "Hatchet", "Battleaxe", "AllWeps"),
+    array("plow_through_red", "Class", "Rare", "Saber", "Dawnblade", "Hatchet", "Battleaxe", "AllWeps"), //Plow Through
+    array("plow_through_yellow", "Class", "Rare", "Saber", "Dawnblade", "Hatchet", "Battleaxe", "AllWeps"),
+    array("plow_through_blue", "Class", "Rare", "Saber", "Dawnblade", "Hatchet", "Battleaxe", "AllWeps"),
+    array("second_swing_red", "Class", "Rare", "Saber", "Dawnblade", "Hatchet", "Battleaxe", "AllWeps"), //Second Swing
+    array("second_swing_yellow", "Class", "Rare", "Saber", "Dawnblade", "Hatchet", "Battleaxe", "AllWeps"),
+    array("second_swing_blue", "Class", "Rare", "Saber", "Dawnblade", "Hatchet", "Battleaxe", "AllWeps"),
 
-    array("ELE035", "Class", "Majestic", "Shiver", "Voltaire", "DeathDealer", "RedLiner"), //Frost Lock
-    array("ELE036", "Class", "Majestic", "Shiver", "Voltaire", "DeathDealer", "RedLiner"), //Light it Up
-    array("ELE037", "Class", "Majestic", "Shiver", "Voltaire", "DeathDealer", "RedLiner"), //Ice Storm
-    array("ELE038", "Class", "Rare", "Shiver", "Voltaire", "DeathDealer"), //Cold Wave - Could be worth ommiting due to the AI never playing DRs, but it still gets the "If this is fused" and "if you've fused this turn" type of things. Also, the player doesn't know that
-    array("ELE039", "Class", "Rare", "Shiver", "Voltaire", "DeathDealer"),
-    array("ELE040", "Class", "Rare", "Shiver", "Voltaire", "DeathDealer"),
-    array("ELE041", "Class", "Rare", "Shiver", "Voltaire", "DeathDealer"), //Snap Shot
-    array("ELE042", "Class", "Rare", "Shiver", "Voltaire", "DeathDealer"),
-    array("ELE043", "Class", "Rare", "Shiver", "Voltaire", "DeathDealer"),
-    array("ELE044", "Class", "Common", "Shiver", "Voltaire", "DeathDealer"), //Blizzard Bolt
-    array("ELE045", "Class", "Common", "Shiver", "Voltaire", "DeathDealer"),
-    array("ELE046", "Class", "Common", "Shiver", "Voltaire", "DeathDealer"),
-    array("ELE047", "Class", "Common", "Shiver", "Voltaire", "DeathDealer"), //Buzz Bolt
-    array("ELE048", "Class", "Common", "Shiver", "Voltaire", "DeathDealer"),
-    array("ELE049", "Class", "Common", "Shiver", "Voltaire", "DeathDealer"),
-    array("ELE050", "Class", "Common", "Shiver", "Voltaire", "DeathDealer"), //Chilling Icevein
-    array("ELE051", "Class", "Common", "Shiver", "Voltaire", "DeathDealer"),
-    array("ELE052", "Class", "Common", "Shiver", "Voltaire", "DeathDealer"),
-    array("ELE053", "Class", "Common", "Voltaire", "DeathDealer"), //Dazzling Crescendo
-    array("ELE054", "Class", "Common", "Voltaire", "DeathDealer"),
-    array("ELE055", "Class", "Common", "Voltaire", "DeathDealer"),
-    array("ELE056", "Class", "Common", "Shiver", "DeathDealer"), //Flake Out
-    array("ELE057", "Class", "Common", "Shiver", "DeathDealer"),
-    array("ELE058", "Class", "Common", "Shiver", "DeathDealer"),
-    array("ELE059", "Class", "Common", "Shiver", "Voltaire", "DeathDealer"), //Frazzle
-    array("ELE060", "Class", "Common", "Shiver", "Voltaire", "DeathDealer"),
-    array("ELE061", "Class", "Common", "Shiver", "Voltaire", "DeathDealer"),
+    array("frost_lock_blue", "Class", "Majestic", "Shiver", "Voltaire", "DeathDealer", "RedLiner"), //Frost Lock
+    array("light_it_up_yellow", "Class", "Majestic", "Shiver", "Voltaire", "DeathDealer", "RedLiner"), //Light it Up
+    array("ice_storm_red", "Class", "Majestic", "Shiver", "Voltaire", "DeathDealer", "RedLiner"), //Ice Storm
+    array("cold_wave_red", "Class", "Rare", "Shiver", "Voltaire", "DeathDealer"), //Cold Wave - Could be worth ommiting due to the AI never playing DRs, but it still gets the "If this is fused" and "if you've fused this turn" type of things. Also, the player doesn't know that
+    array("cold_wave_yellow", "Class", "Rare", "Shiver", "Voltaire", "DeathDealer"),
+    array("cold_wave_blue", "Class", "Rare", "Shiver", "Voltaire", "DeathDealer"),
+    array("snap_shot_red", "Class", "Rare", "Shiver", "Voltaire", "DeathDealer"), //Snap Shot
+    array("snap_shot_yellow", "Class", "Rare", "Shiver", "Voltaire", "DeathDealer"),
+    array("snap_shot_blue", "Class", "Rare", "Shiver", "Voltaire", "DeathDealer"),
+    array("blizzard_bolt_red", "Class", "Common", "Shiver", "Voltaire", "DeathDealer"), //Blizzard Bolt
+    array("blizzard_bolt_yellow", "Class", "Common", "Shiver", "Voltaire", "DeathDealer"),
+    array("blizzard_bolt_blue", "Class", "Common", "Shiver", "Voltaire", "DeathDealer"),
+    array("buzz_bolt_red", "Class", "Common", "Shiver", "Voltaire", "DeathDealer"), //Buzz Bolt
+    array("buzz_bolt_yellow", "Class", "Common", "Shiver", "Voltaire", "DeathDealer"),
+    array("buzz_bolt_blue", "Class", "Common", "Shiver", "Voltaire", "DeathDealer"),
+    array("chilling_icevein_red", "Class", "Common", "Shiver", "Voltaire", "DeathDealer"), //Chilling Icevein
+    array("chilling_icevein_yellow", "Class", "Common", "Shiver", "Voltaire", "DeathDealer"),
+    array("chilling_icevein_blue", "Class", "Common", "Shiver", "Voltaire", "DeathDealer"),
+    array("dazzling_crescendo_red", "Class", "Common", "Voltaire", "DeathDealer"), //Dazzling Crescendo
+    array("dazzling_crescendo_yellow", "Class", "Common", "Voltaire", "DeathDealer"),
+    array("dazzling_crescendo_blue", "Class", "Common", "Voltaire", "DeathDealer"),
+    array("flake_out_red", "Class", "Common", "Shiver", "DeathDealer"), //Flake Out
+    array("flake_out_yellow", "Class", "Common", "Shiver", "DeathDealer"),
+    array("flake_out_blue", "Class", "Common", "Shiver", "DeathDealer"),
+    array("frazzle_red", "Class", "Common", "Shiver", "Voltaire", "DeathDealer"), //Frazzle
+    array("frazzle_yellow", "Class", "Common", "Shiver", "Voltaire", "DeathDealer"),
+    array("frazzle_blue", "Class", "Common", "Shiver", "Voltaire", "DeathDealer"),
 
-    array("ELE205", "Class", "Majestic", "Anothos", "TitanFist", "Sledge"), //Tear Asunder
-    array("ELE206", "Class", "Rare", "Anothos", "TitanFist", "Sledge"), //Embolden
-    array("ELE207", "Class", "Rare", "Anothos", "TitanFist", "Sledge"),
-    array("ELE208", "Class", "Rare", "Anothos", "TitanFist", "Sledge"),
-    //ELE209 - Thump - Can the AI handle this? I haven't tested it yet. TODO Test it
+    array("tear_asunder_blue", "Class", "Majestic", "Anothos", "TitanFist", "Sledge"), //Tear Asunder
+    array("embolden_red", "Class", "Rare", "Anothos", "TitanFist", "Sledge"), //Embolden
+    array("embolden_yellow", "Class", "Rare", "Anothos", "TitanFist", "Sledge"),
+    array("embolden_blue", "Class", "Rare", "Anothos", "TitanFist", "Sledge"),
+    //thump_red - Thump - Can the AI handle this? I haven't tested it yet. TODO Test it
 
-    array("ELE215", "Class", "Common", "Shiver", "Voltaire", "DeathDealer", "RedLiner"), //Seek and Destroy
-    array("ELE216", "Class", "Common", "Shiver", "Voltaire", "RedLiner"), //Bolt'n' Shot
-    array("ELE217", "Class", "Common", "Shiver", "Voltaire", "RedLiner"),
-    array("ELE218", "Class", "Common", "Shiver", "Voltaire", "RedLiner"),
-    array("ELE219", "Class", "Common", "Shiver", "Voltaire", "DeathDealer", "RedLiner"), //Over Flex
-    array("ELE220", "Class", "Common", "Shiver", "Voltaire", "DeathDealer", "RedLiner"),
-    array("ELE221", "Class", "Common", "Shiver", "Voltaire", "DeathDealer", "RedLiner"),
+    array("seek_and_destroy_red", "Class", "Common", "Shiver", "Voltaire", "DeathDealer", "RedLiner"), //Seek and Destroy
+    array("boltn_shot_red", "Class", "Common", "Shiver", "Voltaire", "RedLiner"), //Bolt'n' Shot
+    array("boltn_shot_yellow", "Class", "Common", "Shiver", "Voltaire", "RedLiner"),
+    array("boltn_shot_blue", "Class", "Common", "Shiver", "Voltaire", "RedLiner"),
+    array("over_flex_red", "Class", "Common", "Shiver", "Voltaire", "DeathDealer", "RedLiner"), //Over Flex
+    array("over_flex_yellow", "Class", "Common", "Shiver", "Voltaire", "DeathDealer", "RedLiner"),
+    array("over_flex_blue", "Class", "Common", "Shiver", "Voltaire", "DeathDealer", "RedLiner"),
 
 
-    array("EVR021", "Class", "Majestic", "Anothos", "TitanFist", "Sledge"),
-    array("EVR022", "Class", "Majestic", "Anothos", "TitanFist", "Sledge"),
-    //EVR023 Nerves of Steel - I think this one is situational enough that we can omit it for now
-    array("EVR024", "Class", "Rare", "Anothos", "TitanFist", "Sledge"), //Thunder Quake
-    array("EVR025", "Class", "Rare", "Anothos", "TitanFist", "Sledge"),
-    array("EVR026", "Class", "Rare", "Anothos", "TitanFist", "Sledge"),
-    array("EVR027", "Class", "Common", "Anothos", "TitanFist", "Sledge"), //Macho Grande
-    array("EVR028", "Class", "Common", "Anothos", "TitanFist", "Sledge"),
-    array("EVR029", "Class", "Common", "Anothos", "TitanFist", "Sledge"),
-    array("EVR030", "Class", "Common", "Anothos", "TitanFist", "Sledge"), //Seismic Stir
-    array("EVR031", "Class", "Common", "Anothos", "TitanFist", "Sledge"),
-    array("EVR032", "Class", "Common", "Anothos", "TitanFist", "Sledge"),
-    array("EVR033", "Class", "Common", "Anothos", "TitanFist", "Sledge"), //Steadfast
-    array("EVR034", "Class", "Common", "Anothos", "TitanFist", "Sledge"),
-    array("EVR035", "Class", "Common", "Anothos", "TitanFist", "Sledge"),
+    array("pulverize_red", "Class", "Majestic", "Anothos", "TitanFist", "Sledge"),
+    array("imposing_visage_blue", "Class", "Majestic", "Anothos", "TitanFist", "Sledge"),
+    //nerves_of_steel_blue Nerves of Steel - I think this one is situational enough that we can omit it for now
+    array("thunder_quake_red", "Class", "Rare", "Anothos", "TitanFist", "Sledge"), //Thunder Quake
+    array("thunder_quake_yellow", "Class", "Rare", "Anothos", "TitanFist", "Sledge"),
+    array("thunder_quake_blue", "Class", "Rare", "Anothos", "TitanFist", "Sledge"),
+    array("macho_grande_red", "Class", "Common", "Anothos", "TitanFist", "Sledge"), //Macho Grande
+    array("macho_grande_yellow", "Class", "Common", "Anothos", "TitanFist", "Sledge"),
+    array("macho_grande_blue", "Class", "Common", "Anothos", "TitanFist", "Sledge"),
+    array("seismic_stir_red", "Class", "Common", "Anothos", "TitanFist", "Sledge"), //Seismic Stir
+    array("seismic_stir_yellow", "Class", "Common", "Anothos", "TitanFist", "Sledge"),
+    array("seismic_stir_blue", "Class", "Common", "Anothos", "TitanFist", "Sledge"),
+    array("steadfast_red", "Class", "Common", "Anothos", "TitanFist", "Sledge"), //Steadfast
+    array("steadfast_yellow", "Class", "Common", "Anothos", "TitanFist", "Sledge"),
+    array("steadfast_blue", "Class", "Common", "Anothos", "TitanFist", "Sledge"),
 
-    array("EVR041", "Class", "Rare", "Emberblade", "Kodachi", "Edge"), //Hundred Winds
-    array("EVR042", "Class", "Rare", "Emberblade", "Kodachi", "Edge"),
-    array("EVR043", "Class", "Rare", "Emberblade", "Kodachi", "Edge"),
-    array("EVR044", "Class", "Common", "Emberblade", "Kodachi", "Edge"), //Ride the Tailwind
-    array("EVR045", "Class", "Common", "Emberblade", "Kodachi", "Edge"),
-    array("EVR046", "Class", "Common", "Emberblade", "Kodachi", "Edge"),
-    array("EVR047", "Class", "Common", "Emberblade", "Kodachi", "Edge"), //Twin Twisters
-    array("EVR048", "Class", "Common", "Emberblade", "Kodachi", "Edge"),
-    array("EVR049", "Class", "Common", "Emberblade", "Kodachi", "Edge"),
+    array("hundred_winds_red", "Class", "Rare", "Emberblade", "Kodachi", "Edge"), //Hundred Winds
+    array("hundred_winds_yellow", "Class", "Rare", "Emberblade", "Kodachi", "Edge"),
+    array("hundred_winds_blue", "Class", "Rare", "Emberblade", "Kodachi", "Edge"),
+    array("ride_the_tailwind_red", "Class", "Common", "Emberblade", "Kodachi", "Edge"), //Ride the Tailwind
+    array("ride_the_tailwind_yellow", "Class", "Common", "Emberblade", "Kodachi", "Edge"),
+    array("ride_the_tailwind_blue", "Class", "Common", "Emberblade", "Kodachi", "Edge"),
+    array("twin_twisters_red", "Class", "Common", "Emberblade", "Kodachi", "Edge"), //Twin Twisters
+    array("twin_twisters_yellow", "Class", "Common", "Emberblade", "Kodachi", "Edge"),
+    array("twin_twisters_blue", "Class", "Common", "Emberblade", "Kodachi", "Edge"),
 
-    array("EVR054", "Class", "Majestic", "Dawnblade", "Battleaxe"), //Shatter
-    //EVR055 Blood on Her Hands - Not playable in any of our heroes
-    array("EVR056", "Class", "Rare", "Saber", "Dawnblade", "Hatchet", "Battleaxe", "AllWeps"), //Oath of Steel
-    array("EVR057", "Class", "Rare", "Saber", "Dawnblade", "AllWeps"), //Slice and Dice - Sword / Dagger only
-    array("EVR058", "Class", "Rare", "Saber", "Dawnblade", "AllWeps"),
-    array("EVR059", "Class", "Rare", "Saber", "Dawnblade", "AllWeps"),
-    array("EVR060", "Class", "Common", "Saber", "Hatchet", "AllWeps"), //Blade Runner - 1H weapon
-    array("EVR061", "Class", "Common", "Saber", "Hatchet", "AllWeps"),
-    array("EVR062", "Class", "Common", "Saber", "Hatchet", "AllWeps"),
-    array("EVR063", "Class", "Common", "Saber", "Dawnblade", "Hatchet", "Battleaxe", "AllWeps"), //In the Swing
-    array("EVR064", "Class", "Common", "Saber", "Dawnblade", "Hatchet", "Battleaxe", "AllWeps"),
-    array("EVR065", "Class", "Common", "Saber", "Dawnblade", "Hatchet", "Battleaxe", "AllWeps"),
-    array("EVR066", "Class", "Common", "Saber", "Hatchet", "AllWeps"), //Outland Skirmish - 1H weapon
-    array("EVR067", "Class", "Common", "Saber", "Hatchet", "AllWeps"),
-    array("EVR068", "Class", "Common", "Saber", "Hatchet", "AllWeps"),
+    array("shatter_yellow", "Class", "Majestic", "Dawnblade", "Battleaxe"), //Shatter
+    //blood_on_her_hands_yellow Blood on Her Hands - Not playable in any of our heroes
+    array("oath_of_steel_red", "Class", "Rare", "Saber", "Dawnblade", "Hatchet", "Battleaxe", "AllWeps"), //Oath of Steel
+    array("slice_and_dice_red", "Class", "Rare", "Saber", "Dawnblade", "AllWeps"), //Slice and Dice - Sword / Dagger only
+    array("slice_and_dice_yellow", "Class", "Rare", "Saber", "Dawnblade", "AllWeps"),
+    array("slice_and_dice_blue", "Class", "Rare", "Saber", "Dawnblade", "AllWeps"),
+    array("blade_runner_red", "Class", "Common", "Saber", "Hatchet", "AllWeps"), //Blade Runner - 1H weapon
+    array("blade_runner_yellow", "Class", "Common", "Saber", "Hatchet", "AllWeps"),
+    array("blade_runner_blue", "Class", "Common", "Saber", "Hatchet", "AllWeps"),
+    array("in_the_swing_red", "Class", "Common", "Saber", "Dawnblade", "Hatchet", "Battleaxe", "AllWeps"), //In the Swing
+    array("in_the_swing_yellow", "Class", "Common", "Saber", "Dawnblade", "Hatchet", "Battleaxe", "AllWeps"),
+    array("in_the_swing_blue", "Class", "Common", "Saber", "Dawnblade", "Hatchet", "Battleaxe", "AllWeps"),
+    array("outland_skirmish_red", "Class", "Common", "Saber", "Hatchet", "AllWeps"), //Outland Skirmish - 1H weapon
+    array("outland_skirmish_yellow", "Class", "Common", "Saber", "Hatchet", "AllWeps"),
+    array("outland_skirmish_blue", "Class", "Common", "Saber", "Hatchet", "AllWeps"),
 
-    array("EVR090", "Class", "Majestic", "Shiver", "Voltaire", "DeathDealer", "RedLiner"), //Rain Razors
-    array("EVR091", "Class", "Rare", "Shiver", "Voltaire", "DeathDealer", "RedLiner"), //Release the Tension - might be worth ommiting due to the AI not being able to play DRs, but it's still a buff, so it stays for now
-    array("EVR092", "Class", "Rare", "Shiver", "Voltaire", "DeathDealer", "RedLiner"),
-    array("EVR093", "Class", "Rare", "Shiver", "Voltaire", "DeathDealer", "RedLiner"),
-    array("EVR094", "Class", "Common", "Shiver", "Voltaire", "RedLiner"), //Fatigue Shot
-    array("EVR095", "Class", "Common", "Shiver", "Voltaire", "RedLiner"),
-    array("EVR096", "Class", "Common", "Shiver", "Voltaire", "RedLiner"),
-    array("EVR100", "Class", "Common", "Shiver", "Voltaire", "DeathDealer", "RedLiner"), //Read the Glide Path
-    array("EVR101", "Class", "Common", "Shiver", "Voltaire", "DeathDealer", "RedLiner"),
-    array("EVR102", "Class", "Common", "Shiver", "Voltaire", "DeathDealer", "RedLiner"),
+    array("rain_razors_yellow", "Class", "Majestic", "Shiver", "Voltaire", "DeathDealer", "RedLiner"), //Rain Razors
+    array("release_the_tension_red", "Class", "Rare", "Shiver", "Voltaire", "DeathDealer", "RedLiner"), //Release the Tension - might be worth ommiting due to the AI not being able to play DRs, but it's still a buff, so it stays for now
+    array("release_the_tension_yellow", "Class", "Rare", "Shiver", "Voltaire", "DeathDealer", "RedLiner"),
+    array("release_the_tension_blue", "Class", "Rare", "Shiver", "Voltaire", "DeathDealer", "RedLiner"),
+    array("fatigue_shot_red", "Class", "Common", "Shiver", "Voltaire", "RedLiner"), //Fatigue Shot
+    array("fatigue_shot_yellow", "Class", "Common", "Shiver", "Voltaire", "RedLiner"),
+    array("fatigue_shot_blue", "Class", "Common", "Shiver", "Voltaire", "RedLiner"),
+    array("read_the_glide_path_red", "Class", "Common", "Shiver", "Voltaire", "DeathDealer", "RedLiner"), //Read the Glide Path
+    array("read_the_glide_path_yellow", "Class", "Common", "Shiver", "Voltaire", "DeathDealer", "RedLiner"),
+    array("read_the_glide_path_blue", "Class", "Common", "Shiver", "Voltaire", "DeathDealer", "RedLiner"),
 
-    array("UPR048", "Class", "Majestic", "Emberblade", "Kodachi", "Edge"), //Phoenix Form
-    array("UPR049", "Class", "Majestic", "Emberblade", "Kodachi", "Edge"), //Searing Emberblade
-    array("UPR050", "Class", "Majestic", "Emberblade", "Kodachi", "Edge"), //Combustion Point
-    array("UPR051", "Class", "Rare", "Emberblade", "Kodachi", "Edge"), //Engulfing Flamewave
-    array("UPR052", "Class", "Rare", "Emberblade", "Kodachi", "Edge"),
-    array("UPR053", "Class", "Rare", "Emberblade", "Kodachi", "Edge"),
-    array("UPR054", "Class", "Rare", "Emberblade", "Kodachi", "Edge"), //Mounting Anger
-    array("UPR055", "Class", "Rare", "Emberblade", "Kodachi", "Edge"),
-    array("UPR056", "Class", "Rare", "Emberblade", "Kodachi", "Edge"),
-    array("UPR057", "Class", "Rare", "Emberblade", "Kodachi", "Edge"), //Rise from the Ashes
-    array("UPR058", "Class", "Rare", "Emberblade", "Kodachi", "Edge"),
-    array("UPR059", "Class", "Rare", "Emberblade", "Kodachi", "Edge"),
-    array("UPR060", "Class", "Common", "Emberblade", "Kodachi", "Edge"), //Brand with Cinderclaw
-    array("UPR061", "Class", "Common", "Emberblade", "Kodachi", "Edge"),
-    array("UPR062", "Class", "Common", "Emberblade", "Kodachi", "Edge"),
-    array("UPR063", "Class", "Common", "Emberblade", "Kodachi", "Edge"), //Cinderskin Devotion
-    array("UPR064", "Class", "Common", "Emberblade", "Kodachi", "Edge"),
-    array("UPR065", "Class", "Common", "Emberblade", "Kodachi", "Edge"),
-    array("UPR066", "Class", "Common", "Emberblade", "Kodachi", "Edge"), //Dust Runner Outlaw
-    array("UPR067", "Class", "Common", "Emberblade", "Kodachi", "Edge"),
-    array("UPR068", "Class", "Common", "Emberblade", "Kodachi", "Edge"),
-    array("UPR069", "Class", "Common", "Emberblade", "Kodachi", "Edge"), //Lava Vein Loyalty
-    array("UPR070", "Class", "Common", "Emberblade", "Kodachi", "Edge"),
-    array("UPR071", "Class", "Common", "Emberblade", "Kodachi", "Edge"),
-    array("UPR072", "Class", "Common", "Emberblade", "Kodachi", "Edge"), //Rebellious Rush
-    array("UPR073", "Class", "Common", "Emberblade", "Kodachi", "Edge"),
-    array("UPR074", "Class", "Common", "Emberblade", "Kodachi", "Edge"),
-    array("UPR075", "Class", "Common", "Emberblade", "Kodachi", "Edge"), //Rising Resentment
-    array("UPR076", "Class", "Common", "Emberblade", "Kodachi", "Edge"),
-    array("UPR077", "Class", "Common", "Emberblade", "Kodachi", "Edge"),
-    array("UPR078", "Class", "Common", "Emberblade", "Kodachi", "Edge"), //Ronin Renegade
-    array("UPR079", "Class", "Common", "Emberblade", "Kodachi", "Edge"),
-    array("UPR080", "Class", "Common", "Emberblade", "Kodachi", "Edge"),
-    array("UPR081", "Class", "Common", "Emberblade", "Kodachi", "Edge"), //Soaring Strike
-    array("UPR082", "Class", "Common", "Emberblade", "Kodachi", "Edge"),
-    array("UPR083", "Class", "Common", "Emberblade", "Kodachi", "Edge"),
+    array("phoenix_form_red", "Class", "Majestic", "Emberblade", "Kodachi", "Edge"), //Phoenix Form
+    array("spreading_flames_red", "Class", "Majestic", "Emberblade", "Kodachi", "Edge"), //Searing Emberblade
+    array("combustion_point_red", "Class", "Majestic", "Emberblade", "Kodachi", "Edge"), //Combustion Point
+    array("engulfing_flamewave_red", "Class", "Rare", "Emberblade", "Kodachi", "Edge"), //Engulfing Flamewave
+    array("engulfing_flamewave_yellow", "Class", "Rare", "Emberblade", "Kodachi", "Edge"),
+    array("engulfing_flamewave_blue", "Class", "Rare", "Emberblade", "Kodachi", "Edge"),
+    array("mounting_anger_red", "Class", "Rare", "Emberblade", "Kodachi", "Edge"), //Mounting Anger
+    array("mounting_anger_yellow", "Class", "Rare", "Emberblade", "Kodachi", "Edge"),
+    array("mounting_anger_blue", "Class", "Rare", "Emberblade", "Kodachi", "Edge"),
+    array("rise_from_the_ashes_red", "Class", "Rare", "Emberblade", "Kodachi", "Edge"), //Rise from the Ashes
+    array("rise_from_the_ashes_yellow", "Class", "Rare", "Emberblade", "Kodachi", "Edge"),
+    array("rise_from_the_ashes_blue", "Class", "Rare", "Emberblade", "Kodachi", "Edge"),
+    array("brand_with_cinderclaw_red", "Class", "Common", "Emberblade", "Kodachi", "Edge"), //Brand with Cinderclaw
+    array("brand_with_cinderclaw_yellow", "Class", "Common", "Emberblade", "Kodachi", "Edge"),
+    array("brand_with_cinderclaw_blue", "Class", "Common", "Emberblade", "Kodachi", "Edge"),
+    array("cinderskin_devotion_red", "Class", "Common", "Emberblade", "Kodachi", "Edge"), //Cinderskin Devotion
+    array("cinderskin_devotion_yellow", "Class", "Common", "Emberblade", "Kodachi", "Edge"),
+    array("cinderskin_devotion_blue", "Class", "Common", "Emberblade", "Kodachi", "Edge"),
+    array("dust_runner_outlaw_red", "Class", "Common", "Emberblade", "Kodachi", "Edge"), //Dust Runner Outlaw
+    array("dust_runner_outlaw_yellow", "Class", "Common", "Emberblade", "Kodachi", "Edge"),
+    array("dust_runner_outlaw_blue", "Class", "Common", "Emberblade", "Kodachi", "Edge"),
+    array("lava_vein_loyalty_red", "Class", "Common", "Emberblade", "Kodachi", "Edge"), //Lava Vein Loyalty
+    array("lava_vein_loyalty_yellow", "Class", "Common", "Emberblade", "Kodachi", "Edge"),
+    array("lava_vein_loyalty_blue", "Class", "Common", "Emberblade", "Kodachi", "Edge"),
+    array("rebellious_rush_red", "Class", "Common", "Emberblade", "Kodachi", "Edge"), //Rebellious Rush
+    array("rebellious_rush_yellow", "Class", "Common", "Emberblade", "Kodachi", "Edge"),
+    array("rebellious_rush_blue", "Class", "Common", "Emberblade", "Kodachi", "Edge"),
+    array("rising_resentment_red", "Class", "Common", "Emberblade", "Kodachi", "Edge"), //Rising Resentment
+    array("rising_resentment_yellow", "Class", "Common", "Emberblade", "Kodachi", "Edge"),
+    array("rising_resentment_blue", "Class", "Common", "Emberblade", "Kodachi", "Edge"),
+    array("ronin_renegade_red", "Class", "Common", "Emberblade", "Kodachi", "Edge"), //Ronin Renegade
+    array("ronin_renegade_yellow", "Class", "Common", "Emberblade", "Kodachi", "Edge"),
+    array("ronin_renegade_blue", "Class", "Common", "Emberblade", "Kodachi", "Edge"),
+    array("soaring_strike_red", "Class", "Common", "Emberblade", "Kodachi", "Edge"), //Soaring Strike
+    array("soaring_strike_yellow", "Class", "Common", "Emberblade", "Kodachi", "Edge"),
+    array("soaring_strike_blue", "Class", "Common", "Emberblade", "Kodachi", "Edge"),
 
-    array("UPR160", "Class", "Majestic", "Emberblade", "Kodachi", "Edge"), //Double Strike
-    array("UPR161", "Class", "Majestic", "Emberblade", "Kodachi", "Edge"), //Take the Tempo
-    array("UPR162", "Class", "Rare", "Emberblade", "Kodachi", "Edge"), //Rapid Reflex
-    array("UPR163", "Class", "Rare", "Emberblade", "Kodachi", "Edge"),
-    array("UPR164", "Class", "Rare", "Emberblade", "Kodachi", "Edge"),
+    array("double_strike_red", "Class", "Majestic", "Emberblade", "Kodachi", "Edge"), //Double Strike
+    array("take_the_tempo_red", "Class", "Majestic", "Emberblade", "Kodachi", "Edge"), //Take the Tempo
+    array("rapid_reflex_red", "Class", "Rare", "Emberblade", "Kodachi", "Edge"), //Rapid Reflex
+    array("rapid_reflex_yellow", "Class", "Rare", "Emberblade", "Kodachi", "Edge"),
+    array("rapid_reflex_blue", "Class", "Rare", "Emberblade", "Kodachi", "Edge"),
 
-    array("DYN028", "Class", "Majestic", "Anothos", "TitanFist", "Sledge"), //Buckle
-    array("DYN029", "Class", "Majestic", "Anothos", "TitanFist", "Sledge"), //Never Yield
-    array("DYN030", "Class", "Rare", "TitanFist"), //Shield Bash - Limited to Titanfist for off-hand synergy
-    array("DYN031", "Class", "Rare", "TitanFist"),
-    array("DYN032", "Class", "Rare", "TitanFist"),
-    array("DYN033", "Class", "Rare", "Anothos", "TitanFist", "Sledge"), //Blessing of Patience
-    array("DYN034", "Class", "Rare", "Anothos", "TitanFist", "Sledge"),
-    array("DYN035", "Class", "Rare", "Anothos", "TitanFist", "Sledge"),
-    array("DYN036", "Class", "Rare", "TitanFist"), //Shield Wall - Limited to Titanfist for off-hand synergy, this one honestly could be in all pools but I chose to limit for now
-    array("DYN037", "Class", "Rare", "TitanFist"),
-    array("DYN038", "Class", "Rare", "TitanFist"),
-    array("DYN039", "Class", "Rare", "TitanFist"), //Reinforce Steel - Limited to Titanfist for off-hand synergy
-    array("DYN040", "Class", "Rare", "TitanFist"),
-    array("DYN041", "Class", "Rare", "TitanFist"),
-    array("DYN042", "Class", "Rare", "TitanFist"), //Withstand - Limited to Titanfist for off-hand synergy
-    array("DYN043", "Class", "Rare", "TitanFist"),
-    array("DYN044", "Class", "Rare", "TitanFist"),
+    array("buckle_blue", "Class", "Majestic", "Anothos", "TitanFist", "Sledge"), //Buckle
+    array("never_yield_blue", "Class", "Majestic", "Anothos", "TitanFist", "Sledge"), //Never Yield
+    array("shield_bash_red", "Class", "Rare", "TitanFist"), //Shield Bash - Limited to Titanfist for off-hand synergy
+    array("shield_bash_yellow", "Class", "Rare", "TitanFist"),
+    array("shield_bash_blue", "Class", "Rare", "TitanFist"),
+    array("blessing_of_patience_red", "Class", "Rare", "Anothos", "TitanFist", "Sledge"), //Blessing of Patience
+    array("blessing_of_patience_yellow", "Class", "Rare", "Anothos", "TitanFist", "Sledge"),
+    array("blessing_of_patience_blue", "Class", "Rare", "Anothos", "TitanFist", "Sledge"),
+    array("shield_wall_red", "Class", "Rare", "TitanFist"), //Shield Wall - Limited to Titanfist for off-hand synergy, this one honestly could be in all pools but I chose to limit for now
+    array("shield_wall_yellow", "Class", "Rare", "TitanFist"),
+    array("shield_wall_blue", "Class", "Rare", "TitanFist"),
+    array("reinforce_steel_red", "Class", "Rare", "TitanFist"), //Reinforce Steel - Limited to Titanfist for off-hand synergy
+    array("reinforce_steel_yellow", "Class", "Rare", "TitanFist"),
+    array("reinforce_steel_blue", "Class", "Rare", "TitanFist"),
+    array("withstand_red", "Class", "Rare", "TitanFist"), //Withstand - Limited to Titanfist for off-hand synergy
+    array("withstand_yellow", "Class", "Rare", "TitanFist"),
+    array("withstand_blue", "Class", "Rare", "TitanFist"),
 
-    array("DYN047", "Class", "Majestic", "Emberblade", "Kodachi", "Edge"), //Tiger Swipe
-    array("DYN048", "Class", "Majestic", "Emberblade", "Kodachi", "Edge"), //Mindstate of the Tiger
-    array("DYN049", "Class", "Majestic", "Emberblade", "Kodachi", "Edge"), //Roar of the Tiger
-    array("DYN050", "Class", "Rare", "Emberblade", "Kodachi", "Edge"), //Flex Claws - Decide whether or not this is included in the pool
-    array("DYN051", "Class", "Rare", "Emberblade", "Kodachi", "Edge"),
-    array("DYN052", "Class", "Rare", "Emberblade", "Kodachi", "Edge"),
-    array("DYN056", "Class", "Common", "Emberblade", "Kodachi", "Edge"), //Pouncing Qi - Decide whether or not this is included in the pool
-    array("DYN057", "Class", "Common", "Emberblade", "Kodachi", "Edge"),
-    array("DYN058", "Class", "Common", "Emberblade", "Kodachi", "Edge"),
-    array("DYN062", "Class", "Common", "Emberblade", "Kodachi", "Edge"), //Predatory Streak
-    array("DYN063", "Class", "Common", "Emberblade", "Kodachi", "Edge"),
-    array("DYN064", "Class", "Common", "Emberblade", "Kodachi", "Edge"),
+    array("tiger_swipe_red", "Class", "Majestic", "Emberblade", "Kodachi", "Edge"), //Tiger Swipe
+    array("mindstate_of_tiger_blue", "Class", "Majestic", "Emberblade", "Kodachi", "Edge"), //Mindstate of the Tiger
+    array("roar_of_the_tiger_yellow", "Class", "Majestic", "Emberblade", "Kodachi", "Edge"), //Roar of the Tiger
+    array("flex_claws_red", "Class", "Rare", "Emberblade", "Kodachi", "Edge"), //Flex Claws - Decide whether or not this is included in the pool
+    array("flex_claws_yellow", "Class", "Rare", "Emberblade", "Kodachi", "Edge"),
+    array("flex_claws_blue", "Class", "Rare", "Emberblade", "Kodachi", "Edge"),
+    array("pouncing_qi_red", "Class", "Common", "Emberblade", "Kodachi", "Edge"), //Pouncing Qi - Decide whether or not this is included in the pool
+    array("pouncing_qi_yellow", "Class", "Common", "Emberblade", "Kodachi", "Edge"),
+    array("pouncing_qi_blue", "Class", "Common", "Emberblade", "Kodachi", "Edge"),
+    array("predatory_streak_red", "Class", "Common", "Emberblade", "Kodachi", "Edge"), //Predatory Streak
+    array("predatory_streak_yellow", "Class", "Common", "Emberblade", "Kodachi", "Edge"),
+    array("predatory_streak_blue", "Class", "Common", "Emberblade", "Kodachi", "Edge"),
 
-    array("DYN071", "Class", "Majestic", "Hatchet", "Battleaxe", "AllWeps"), //Cleave - Since there aren't any Ally cards yet, I could see omitting this, but the buff is still playable so I'm keeping it
-    array("DYN072", "Class", "Majestic"), //Ironsong Ride - Limited to sword backgrounds
-    array("DYN073", "Class", "Rare", "Hatchet", "Battleaxe", "AllWeps"), //Blessing of Steel
-    array("DYN074", "Class", "Rare", "Hatchet", "Battleaxe", "AllWeps"),
-    array("DYN075", "Class", "Rare", "Hatchet", "Battleaxe", "AllWeps"),
-    array("DYN076", "Class", "Rare", "Hatchet", "Battleaxe", "AllWeps"), //Precision Press
-    array("DYN077", "Class", "Rare", "Hatchet", "Battleaxe", "AllWeps"),
-    array("DYN078", "Class", "Rare", "Hatchet", "Battleaxe", "AllWeps"),
-    array("DYN079", "Class", "Common", "Saber", "Dawnblade", "AllWeps"), //Puncture - Swords/Dagger only
-    array("DYN080", "Class", "Common", "Saber", "Dawnblade", "AllWeps"),
-    array("DYN081", "Class", "Common", "Saber", "Dawnblade", "AllWeps"),
-    array("DYN082", "Class", "Common", "Hatchet", "Battleaxe", "AllWeps"), //Felling Swing
-    array("DYN083", "Class", "Common", "Hatchet", "Battleaxe", "AllWeps"),
-    array("DYN084", "Class", "Common", "Hatchet", "Battleaxe", "AllWeps"),
-    //DYN085-087 Visit the Imperial Forge - I've decided to omit these, since armor isn't hugely relevant right now and I don't know how the AI can handle piercing. It feels like this card would only be good in an exploitative manner
+    array("cleave_red", "Class", "Majestic", "Hatchet", "Battleaxe", "AllWeps"), //Cleave - Since there aren't any Ally cards yet, I could see omitting this, but the buff is still playable so I'm keeping it
+    array("ironsong_pride_red", "Class", "Majestic"), //Ironsong Ride - Limited to sword backgrounds
+    array("blessing_of_steel_red", "Class", "Rare", "Hatchet", "Battleaxe", "AllWeps"), //Blessing of Steel
+    array("blessing_of_steel_yellow", "Class", "Rare", "Hatchet", "Battleaxe", "AllWeps"),
+    array("blessing_of_steel_blue", "Class", "Rare", "Hatchet", "Battleaxe", "AllWeps"),
+    array("precision_press_red", "Class", "Rare", "Hatchet", "Battleaxe", "AllWeps"), //Precision Press
+    array("precision_press_yellow", "Class", "Rare", "Hatchet", "Battleaxe", "AllWeps"),
+    array("precision_press_blue", "Class", "Rare", "Hatchet", "Battleaxe", "AllWeps"),
+    array("puncture_red", "Class", "Common", "Saber", "Dawnblade", "AllWeps"), //Puncture - Swords/Dagger only
+    array("puncture_yellow", "Class", "Common", "Saber", "Dawnblade", "AllWeps"),
+    array("puncture_blue", "Class", "Common", "Saber", "Dawnblade", "AllWeps"),
+    array("felling_swing_red", "Class", "Common", "Hatchet", "Battleaxe", "AllWeps"), //Felling Swing
+    array("felling_swing_yellow", "Class", "Common", "Hatchet", "Battleaxe", "AllWeps"),
+    array("felling_swing_blue", "Class", "Common", "Hatchet", "Battleaxe", "AllWeps"),
+    //visit_the_imperial_forge_red-087 Visit the Imperial Forge - I've decided to omit these, since armor isn't hugely relevant right now and I don't know how the AI can handle piercing. It feels like this card would only be good in an exploitative manner
 
-    array("DYN153", "Class", "Majestic", "Shiver", "Voltaire", "DeathDealer", "RedLiner"), //only Heat Seeker. No way to gain aim counters yet. Might reevaluate if we make an aim centric power.
+    array("heat_seeker_red", "Class", "Majestic", "Shiver", "Voltaire", "DeathDealer", "RedLiner"), //only Heat Seeker. No way to gain aim counters yet. Might reevaluate if we make an aim centric power.
 
-    array("DYN119", "Class", "Majestic", "Contract", "Stealth", "Reaction"), //Eradicate
-    array("DYN120", "Class", "Majestic", "Contract", "Stealth", "Reaction"), //Leave No Witnesses
-    array("DYN121", "Class", "Majestic", "Contract", "Stealth", "Reaction"), //Regicide
-    array("DYN122", "Class", "Majestic", "Contract", "Stealth", "Reaction"), //Surgical Extraction
-    array("DYN123", "Class", "Majestic", "Contract"), //Pay Day
-    array("DYN124", "Class", "Rare", "Contract", "Stealth", "Reaction"), //Plunder the Poor
-    array("DYN125", "Class", "Rare", "Contract", "Stealth", "Reaction"),
-    array("DYN126", "Class", "Rare", "Contract", "Stealth", "Reaction"),
-    array("DYN127", "Class", "Rare", "Contract", "Stealth", "Reaction"), //Rob the Rich
-    array("DYN128", "Class", "Rare", "Contract", "Stealth", "Reaction"),
-    array("DYN129", "Class", "Rare", "Contract", "Stealth", "Reaction"),
-    array("DYN130", "Class", "Rare", "Contract", "Stealth", "Reaction"), //Shred
-    array("DYN131", "Class", "Rare", "Contract", "Stealth", "Reaction"),
-    array("DYN132", "Class", "Rare", "Contract", "Stealth", "Reaction"),
-    array("DYN133", "Class", "Common", "Contract", "Stealth", "Reaction"), //Annihilate the Armed
-    array("DYN134", "Class", "Common", "Contract", "Stealth", "Reaction"),
-    array("DYN135", "Class", "Common", "Contract", "Stealth", "Reaction"),
-    array("DYN136", "Class", "Common", "Contract", "Stealth", "Reaction"), //Fleece the Frail
-    array("DYN137", "Class", "Common", "Contract", "Stealth", "Reaction"),
-    array("DYN138", "Class", "Common", "Contract", "Stealth", "Reaction"),
-    array("DYN139", "Class", "Common", "Contract", "Stealth", "Reaction"), //Nix the Nimble
-    array("DYN140", "Class", "Common", "Contract", "Stealth", "Reaction"),
-    array("DYN141", "Class", "Common", "Contract", "Stealth", "Reaction"),
-    array("DYN142", "Class", "Common", "Contract", "Stealth", "Reaction"), //Sack the Shifty
-    array("DYN143", "Class", "Common", "Contract", "Stealth", "Reaction"),
-    array("DYN144", "Class", "Common", "Contract", "Stealth", "Reaction"),
-    array("DYN145", "Class", "Common", "Contract", "Stealth", "Reaction"), //Slay the Scholars
-    array("DYN146", "Class", "Common", "Contract", "Stealth", "Reaction"),
-    array("DYN147", "Class", "Common", "Contract", "Stealth", "Reaction"),
-    array("DYN148", "Class", "Common", "Contract"), //Cut to the Chase
-    array("DYN149", "Class", "Common", "Contract"),
-    array("DYN150", "Class", "Common", "Contract"),
+    array("eradicate_yellow", "Class", "Majestic", "Contract", "Stealth", "Reaction"), //Eradicate
+    array("leave_no_witnesses_red", "Class", "Majestic", "Contract", "Stealth", "Reaction"), //Leave No Witnesses
+    array("regicide_blue", "Class", "Majestic", "Contract", "Stealth", "Reaction"), //Regicide
+    array("surgical_extraction_blue", "Class", "Majestic", "Contract", "Stealth", "Reaction"), //Surgical Extraction
+    array("pay_day_blue", "Class", "Majestic", "Contract"), //Pay Day
+    array("plunder_the_poor_red", "Class", "Rare", "Contract", "Stealth", "Reaction"), //Plunder the Poor
+    array("plunder_the_poor_yellow", "Class", "Rare", "Contract", "Stealth", "Reaction"),
+    array("plunder_the_poor_blue", "Class", "Rare", "Contract", "Stealth", "Reaction"),
+    array("rob_the_rich_red", "Class", "Rare", "Contract", "Stealth", "Reaction"), //Rob the Rich
+    array("rob_the_rich_yellow", "Class", "Rare", "Contract", "Stealth", "Reaction"),
+    array("rob_the_rich_blue", "Class", "Rare", "Contract", "Stealth", "Reaction"),
+    array("shred_red", "Class", "Rare", "Contract", "Stealth", "Reaction"), //Shred
+    array("shred_yellow", "Class", "Rare", "Contract", "Stealth", "Reaction"),
+    array("shred_blue", "Class", "Rare", "Contract", "Stealth", "Reaction"),
+    array("annihilate_the_armed_red", "Class", "Common", "Contract", "Stealth", "Reaction"), //Annihilate the Armed
+    array("annihilate_the_armed_yellow", "Class", "Common", "Contract", "Stealth", "Reaction"),
+    array("annihilate_the_armed_blue", "Class", "Common", "Contract", "Stealth", "Reaction"),
+    array("fleece_the_frail_red", "Class", "Common", "Contract", "Stealth", "Reaction"), //Fleece the Frail
+    array("fleece_the_frail_yellow", "Class", "Common", "Contract", "Stealth", "Reaction"),
+    array("fleece_the_frail_blue", "Class", "Common", "Contract", "Stealth", "Reaction"),
+    array("nix_the_nimble_red", "Class", "Common", "Contract", "Stealth", "Reaction"), //Nix the Nimble
+    array("nix_the_nimble_yellow", "Class", "Common", "Contract", "Stealth", "Reaction"),
+    array("nix_the_nimble_blue", "Class", "Common", "Contract", "Stealth", "Reaction"),
+    array("sack_the_shifty_red", "Class", "Common", "Contract", "Stealth", "Reaction"), //Sack the Shifty
+    array("sack_the_shifty_yellow", "Class", "Common", "Contract", "Stealth", "Reaction"),
+    array("sack_the_shifty_blue", "Class", "Common", "Contract", "Stealth", "Reaction"),
+    array("slay_the_scholars_red", "Class", "Common", "Contract", "Stealth", "Reaction"), //Slay the Scholars
+    array("slay_the_scholars_yellow", "Class", "Common", "Contract", "Stealth", "Reaction"),
+    array("slay_the_scholars_blue", "Class", "Common", "Contract", "Stealth", "Reaction"),
+    array("cut_to_the_chase_red", "Class", "Common", "Contract"), //Cut to the Chase
+    array("cut_to_the_chase_yellow", "Class", "Common", "Contract"),
+    array("cut_to_the_chase_blue", "Class", "Common", "Contract"),
 
-    array("OUT100", "Class", "Majestic", "Shiver", "Voltaire", "DeathDealer", "RedLiner"), //Amplifying Arrow
-    array("OUT105", "Class", "Majestic", "Shiver", "Voltaire", "DeathDealer", "RedLiner"), //Melting Point
-    array("OUT109", "Class", "Rare", "Shiver", "Voltaire", "DeathDealer", "RedLiner"), //Fletch a [color] tail
-    array("OUT110", "Class", "Rare", "Shiver", "Voltaire", "DeathDealer", "RedLiner"),
-    array("OUT111", "Class", "Rare", "Shiver", "Voltaire", "DeathDealer", "RedLiner"),
-    array("OUT112", "Class", "Rare", "Shiver", "Voltaire", "DeathDealer", "RedLiner"), //Lace with [infection]
-    array("OUT113", "Class", "Rare", "Shiver", "Voltaire", "DeathDealer", "RedLiner"),
-    array("OUT114", "Class", "Rare", "Shiver", "Voltaire", "DeathDealer", "RedLiner"),
-    array("OUT118", "Class", "Rare", "Shiver", "Voltaire", "RedLiner"), //Infecting Shot
-    array("OUT119", "Class", "Rare", "Shiver", "Voltaire", "RedLiner"),
-    array("OUT120", "Class", "Rare", "Shiver", "Voltaire", "RedLiner"),
-    array("OUT124", "Class", "Rare", "Shiver", "Voltaire", "RedLiner"), //Sedation Shot
-    array("OUT125", "Class", "Rare", "Shiver", "Voltaire", "RedLiner"),
-    array("OUT126", "Class", "Rare", "Shiver", "Voltaire", "RedLiner"),
-    array("OUT136", "Class", "Rare", "Shiver", "Voltaire", "RedLiner"), //Withering Shot
-    array("OUT136", "Class", "Rare", "Shiver", "Voltaire", "RedLiner"),
-    array("OUT136", "Class", "Rare", "Shiver", "Voltaire", "RedLiner"),
+    array("amplifying_arrow_yellow", "Class", "Majestic", "Shiver", "Voltaire", "DeathDealer", "RedLiner"), //Amplifying Arrow
+    array("melting_point_red", "Class", "Majestic", "Shiver", "Voltaire", "DeathDealer", "RedLiner"), //Melting Point
+    array("fletch_a_red_tail_red", "Class", "Rare", "Shiver", "Voltaire", "DeathDealer", "RedLiner"), //Fletch a [color] tail
+    array("fletch_a_yellow_tail_yellow", "Class", "Rare", "Shiver", "Voltaire", "DeathDealer", "RedLiner"),
+    array("fletch_a_blue_tail_blue", "Class", "Rare", "Shiver", "Voltaire", "DeathDealer", "RedLiner"),
+    array("lace_with_bloodrot_red", "Class", "Rare", "Shiver", "Voltaire", "DeathDealer", "RedLiner"), //Lace with [infection]
+    array("lace_with_frailty_red", "Class", "Rare", "Shiver", "Voltaire", "DeathDealer", "RedLiner"),
+    array("lace_with_inertia_red", "Class", "Rare", "Shiver", "Voltaire", "DeathDealer", "RedLiner"),
+    array("infecting_shot_red", "Class", "Rare", "Shiver", "Voltaire", "RedLiner"), //Infecting Shot
+    array("infecting_shot_yellow", "Class", "Rare", "Shiver", "Voltaire", "RedLiner"),
+    array("infecting_shot_blue", "Class", "Rare", "Shiver", "Voltaire", "RedLiner"),
+    array("sedation_shot_red", "Class", "Rare", "Shiver", "Voltaire", "RedLiner"), //Sedation Shot
+    array("sedation_shot_yellow", "Class", "Rare", "Shiver", "Voltaire", "RedLiner"),
+    array("sedation_shot_blue", "Class", "Rare", "Shiver", "Voltaire", "RedLiner"),
+    array("withering_shot_red", "Class", "Rare", "Shiver", "Voltaire", "RedLiner"), //Withering Shot
+    array("withering_shot_red", "Class", "Rare", "Shiver", "Voltaire", "RedLiner"),
+    array("withering_shot_red", "Class", "Rare", "Shiver", "Voltaire", "RedLiner"),
 
-    array("OUT052", "Class", "Majestic", "Emberblade", "Kodachi", "Edge"), //Head Leads the Tail
+    array("head_leads_the_tail_red", "Class", "Majestic", "Emberblade", "Kodachi", "Edge"), //Head Leads the Tail
 
-    array("OUT012", "Class", "Majestic", "Contract", "Stealth", "Reaction"), //Infiltrate
-    array("OUT014", "Class", "Majestic", "Contract", "Stealth", "Reaction"), //Spreading Plague
-    array("OUT015", "Class", "Rare", "Contract", "Stealth", "Reaction"), //Back Stab
-    array("OUT016", "Class", "Rare", "Contract", "Stealth", "Reaction"),
-    array("OUT017", "Class", "Rare", "Contract", "Stealth", "Reaction"),
+    array("infiltrate_red", "Class", "Majestic", "Contract", "Stealth", "Reaction"), //Infiltrate
+    array("spreading_plague_yellow", "Class", "Majestic", "Contract", "Stealth", "Reaction"), //Spreading Plague
+    array("back_stab_red", "Class", "Rare", "Contract", "Stealth", "Reaction"), //Back Stab
+    array("back_stab_yellow", "Class", "Rare", "Contract", "Stealth", "Reaction"),
+    array("back_stab_blue", "Class", "Rare", "Contract", "Stealth", "Reaction"),
     //Sneak Attack is not presently playable by Arakni. Only gains the effects on Uzuri
-    array("OUT021", "Class", "Rare", "Stealth", "Reaction"), //Spikes
-    array("OUT022", "Class", "Rare", "Stealth", "Reaction"),
-    array("OUT023", "Class", "Rare", "Stealth", "Reaction"),
-    array("OUT024", "Class", "Common", "Contract", "Stealth", "Reaction"), //Infect
-    array("OUT025", "Class", "Common", "Contract", "Stealth", "Reaction"),
-    array("OUT026", "Class", "Common", "Contract", "Stealth", "Reaction"),
-    array("OUT027", "Class", "Common", "Contract", "Stealth", "Reaction"), //Isolate
-    array("OUT028", "Class", "Common", "Contract", "Stealth", "Reaction"),
-    array("OUT029", "Class", "Common", "Contract", "Stealth", "Reaction"),
-    array("OUT030", "Class", "Common", "Contract", "Stealth", "Reaction"), //Malign
-    array("OUT031", "Class", "Common", "Contract", "Stealth", "Reaction"),
-    array("OUT032", "Class", "Common", "Contract", "Stealth", "Reaction"),
-    array("OUT033", "Class", "Common", "Contract", "Stealth", "Reaction"), //Prowl
-    array("OUT034", "Class", "Common", "Contract", "Stealth", "Reaction"),
-    array("OUT035", "Class", "Common", "Contract", "Stealth", "Reaction"),
-    array("OUT036", "Class", "Common", "Contract", "Stealth", "Reaction"), //Sedate
-    array("OUT037", "Class", "Common", "Contract", "Stealth", "Reaction"),
-    array("OUT038", "Class", "Common", "Contract", "Stealth", "Reaction"),
-    array("OUT039", "Class", "Common", "Contract", "Stealth", "Reaction"), //Wither
-    array("OUT040", "Class", "Common", "Contract", "Stealth", "Reaction"),
-    array("OUT041", "Class", "Common", "Contract", "Stealth", "Reaction"),
-    array("OUT042", "Class", "Common", "Stealth", "Reaction"), //Razor's Edge
-    array("OUT043", "Class", "Common", "Stealth", "Reaction"),
-    array("OUT044", "Class", "Common", "Stealth", "Reaction"),
-    array("OUT142", "Class", "Majestic", "Kodachi", "Contract", "Stealth", "Reaction"), //Stab Wound
-    array("OUT143", "Class", "Majestic", "Kodachi", "Contract", "Stealth", "Reaction"), //Concealed Blade
-    array("OUT144", "Class", "Majestic", "Kodachi", "Contract", "Stealth", "Reaction"), //Knives Out
-    array("OUT145", "Class", "Rare", "Kodachi", "Contract", "Stealth", "Reaction"), //Bleed Out
-    array("OUT146", "Class", "Rare", "Kodachi", "Contract", "Stealth", "Reaction"),
-    array("OUT147", "Class", "Rare", "Kodachi", "Contract", "Stealth", "Reaction"),
-    array("OUT148", "Class", "Rare", "Kodachi", "Contract", "Stealth", "Reaction"), //Hurl
-    array("OUT149", "Class", "Rare", "Kodachi", "Contract", "Stealth", "Reaction"),
-    array("OUT150", "Class", "Rare", "Kodachi", "Contract", "Stealth", "Reaction"),
-    array("OUT151", "Class", "Common", "Kodachi", "Contract", "Stealth", "Reaction"), //Plunge
-    array("OUT152", "Class", "Common", "Kodachi", "Contract", "Stealth", "Reaction"),
-    array("OUT153", "Class", "Common", "Kodachi", "Contract", "Stealth", "Reaction"),
-    array("OUT154", "Class", "Common", "Kodachi", "Contract", "Stealth", "Reaction"), //Short and Sharp
-    array("OUT155", "Class", "Common", "Kodachi", "Contract", "Stealth", "Reaction"),
-    array("OUT156", "Class", "Common", "Kodachi", "Contract", "Stealth", "Reaction"),
-    array("OUT159", "Class", "Majestic", "Shiver", "Voltaire", "DeathDealer", "RedLiner", "Contract", "Stealth", "Reaction"), //Codexes
-    array("OUT160", "Class", "Majestic", "Shiver", "Voltaire", "DeathDealer", "RedLiner", "Contract", "Stealth", "Reaction"),
-    array("OUT161", "Class", "Majestic", "Shiver", "Voltaire", "DeathDealer", "RedLiner", "Contract", "Stealth", "Reaction"),
-    array("OUT162", "Class", "Rare", "Contract", "Stealth", "Reaction"), //Death Touch
-    array("OUT163", "Class", "Rare", "Contract", "Stealth", "Reaction"),
-    array("OUT164", "Class", "Rare", "Contract", "Stealth", "Reaction"),
-    array("OUT165", "Class", "Rare", "Contract", "Stealth", "Reaction"), //Toxicity
-    array("OUT166", "Class", "Rare", "Contract", "Stealth", "Reaction"),
-    array("OUT167", "Class", "Rare", "Contract", "Stealth", "Reaction"),
-    array("OUT168", "Class", "Common", "Contract", "Stealth", "Reaction"), //Virulent Touch
-    array("OUT169", "Class", "Common", "Contract", "Stealth", "Reaction"),
-    array("OUT170", "Class", "Common", "Contract", "Stealth", "Reaction"),
+    array("spike_with_bloodrot_red", "Class", "Rare", "Stealth", "Reaction"), //Spikes
+    array("spike_with_frailty_red", "Class", "Rare", "Stealth", "Reaction"),
+    array("spike_with_inertia_red", "Class", "Rare", "Stealth", "Reaction"),
+    array("infect_red", "Class", "Common", "Contract", "Stealth", "Reaction"), //Infect
+    array("infect_yellow", "Class", "Common", "Contract", "Stealth", "Reaction"),
+    array("infect_blue", "Class", "Common", "Contract", "Stealth", "Reaction"),
+    array("isolate_red", "Class", "Common", "Contract", "Stealth", "Reaction"), //Isolate
+    array("isolate_yellow", "Class", "Common", "Contract", "Stealth", "Reaction"),
+    array("isolate_blue", "Class", "Common", "Contract", "Stealth", "Reaction"),
+    array("malign_red", "Class", "Common", "Contract", "Stealth", "Reaction"), //Malign
+    array("malign_yellow", "Class", "Common", "Contract", "Stealth", "Reaction"),
+    array("malign_blue", "Class", "Common", "Contract", "Stealth", "Reaction"),
+    array("prowl_red", "Class", "Common", "Contract", "Stealth", "Reaction"), //Prowl
+    array("prowl_yellow", "Class", "Common", "Contract", "Stealth", "Reaction"),
+    array("prowl_blue", "Class", "Common", "Contract", "Stealth", "Reaction"),
+    array("sedate_red", "Class", "Common", "Contract", "Stealth", "Reaction"), //Sedate
+    array("sedate_yellow", "Class", "Common", "Contract", "Stealth", "Reaction"),
+    array("sedate_blue", "Class", "Common", "Contract", "Stealth", "Reaction"),
+    array("wither_red", "Class", "Common", "Contract", "Stealth", "Reaction"), //Wither
+    array("wither_yellow", "Class", "Common", "Contract", "Stealth", "Reaction"),
+    array("wither_blue", "Class", "Common", "Contract", "Stealth", "Reaction"),
+    array("razors_edge_red", "Class", "Common", "Stealth", "Reaction"), //Razor's Edge
+    array("razors_edge_yellow", "Class", "Common", "Stealth", "Reaction"),
+    array("razors_edge_blue", "Class", "Common", "Stealth", "Reaction"),
+    array("stab_wound_blue", "Class", "Majestic", "Kodachi", "Contract", "Stealth", "Reaction"), //Stab Wound
+    array("concealed_blade_blue", "Class", "Majestic", "Kodachi", "Contract", "Stealth", "Reaction"), //Concealed Blade
+    array("knives_out_blue", "Class", "Majestic", "Kodachi", "Contract", "Stealth", "Reaction"), //Knives Out
+    array("bleed_out_red", "Class", "Rare", "Kodachi", "Contract", "Stealth", "Reaction"), //Bleed Out
+    array("bleed_out_yellow", "Class", "Rare", "Kodachi", "Contract", "Stealth", "Reaction"),
+    array("bleed_out_blue", "Class", "Rare", "Kodachi", "Contract", "Stealth", "Reaction"),
+    array("hurl_red", "Class", "Rare", "Kodachi", "Contract", "Stealth", "Reaction"), //Hurl
+    array("hurl_yellow", "Class", "Rare", "Kodachi", "Contract", "Stealth", "Reaction"),
+    array("hurl_blue", "Class", "Rare", "Kodachi", "Contract", "Stealth", "Reaction"),
+    array("plunge_red", "Class", "Common", "Kodachi", "Contract", "Stealth", "Reaction"), //Plunge
+    array("plunge_yellow", "Class", "Common", "Kodachi", "Contract", "Stealth", "Reaction"),
+    array("plunge_blue", "Class", "Common", "Kodachi", "Contract", "Stealth", "Reaction"),
+    array("short_and_sharp_red", "Class", "Common", "Kodachi", "Contract", "Stealth", "Reaction"), //Short and Sharp
+    array("short_and_sharp_yellow", "Class", "Common", "Kodachi", "Contract", "Stealth", "Reaction"),
+    array("short_and_sharp_blue", "Class", "Common", "Kodachi", "Contract", "Stealth", "Reaction"),
+    array("codex_of_bloodrot_yellow", "Class", "Majestic", "Shiver", "Voltaire", "DeathDealer", "RedLiner", "Contract", "Stealth", "Reaction"), //Codexes
+    array("codex_of_frailty_yellow", "Class", "Majestic", "Shiver", "Voltaire", "DeathDealer", "RedLiner", "Contract", "Stealth", "Reaction"),
+    array("codex_of_inertia_yellow", "Class", "Majestic", "Shiver", "Voltaire", "DeathDealer", "RedLiner", "Contract", "Stealth", "Reaction"),
+    array("death_touch_red", "Class", "Rare", "Contract", "Stealth", "Reaction"), //Death Touch
+    array("death_touch_yellow", "Class", "Rare", "Contract", "Stealth", "Reaction"),
+    array("death_touch_blue", "Class", "Rare", "Contract", "Stealth", "Reaction"),
+    array("toxicity_red", "Class", "Rare", "Contract", "Stealth", "Reaction"), //Toxicity
+    array("toxicity_yellow", "Class", "Rare", "Contract", "Stealth", "Reaction"),
+    array("toxicity_blue", "Class", "Rare", "Contract", "Stealth", "Reaction"),
+    array("virulent_touch_red", "Class", "Common", "Contract", "Stealth", "Reaction"), //Virulent Touch
+    array("virulent_touch_yellow", "Class", "Common", "Contract", "Stealth", "Reaction"),
+    array("virulent_touch_blue", "Class", "Common", "Contract", "Stealth", "Reaction"),
   );
 
   return ProcessPool($CardRewardPool, $arrayParameters);
@@ -505,268 +505,268 @@ function GetPoolGeneric($arrayParameters){
   //Currently, Generics are available to all heroes equally.
   //In the future, if we want to have certain generics available to certain heroes, we can go back and tag most cards with "All", and specific ones with the name of that hero
   $CardRewardPool = array(
-    array("WTR159", "Majestic"), //Enlightened Strike
-    array("WTR160", "Majestic"), // Tome of Fyendal
-    array("WTR161", "Majestic"), // Last Ditch Effort
-    array("WTR162", "Majestic"), // Crazy Brew - Super, but tagged as Majestic
-    array("WTR163", "Majestic"), // Remembrance - Super, but tagged as Majestic
-    array("WTR164", "Rare"), //Drone of Brutality
-    array("WTR165", "Rare"),
-    array("WTR166", "Rare"),
-    array("WTR167", "Rare"), //Snatch
-    array("WTR168", "Rare"),
-    array("WTR169", "Rare"),
-    array("WTR170", "Rare"), //Energy potion
-    array("WTR171", "Rare"), //Potion of Strength
-    array("WTR172", "Rare"), //Timesnap Potion
-    //array("WTR173", "Rare"), //Sigil of Solace - Nate thinks that these shouldn't be in the pool because they're too strong.
-    //array("WTR174", "Rare"), // Nate, if you're reading this, feel free to remove these from the pool!
-    array("WTR175", "Rare"), // Sigil of Solace (Blue)
-    array("WTR176", "Common"), //Barraging Brawnhide
-    array("WTR177", "Common"),
-    array("WTR178", "Common"),
-    array("WTR179", "Common"), //Demolition Crew
-    array("WTR180", "Common"),
-    array("WTR181", "Common"),
-    array("WTR182", "Common"), //Flock of the Feather Walkers
-    array("WTR183", "Common"),
-    array("WTR184", "Common"),
-    array("WTR185", "Common"), //Nimble Strike
-    array("WTR186", "Common"),
-    array("WTR187", "Common"),
-    array("WTR188", "Common"), //Raging Onslaught
-    array("WTR189", "Common"),
-    array("WTR190", "Common"),
-    array("WTR191", "Common"), //Scar for a Scar - Notably reprinted in UPR, and omitted there
-    array("WTR192", "Common"),
-    array("WTR193", "Common"),
-    array("WTR194", "Common"), //Scour the Battlescape
-    array("WTR195", "Common"),
-    array("WTR196", "Common"),
-    array("WTR197", "Common"), //Regurgitating Slog
-    array("WTR198", "Common"),
-    array("WTR199", "Common"),
-    array("WTR200", "Common"), //Wounded Bull
-    array("WTR201", "Common"),
-    array("WTR202", "Common"),
-    array("WTR203", "Common"), //Wounding Blow
-    array("WTR204", "Common"),
-    array("WTR205", "Common"),
-    array("WTR206", "Common"), //Pummel
-    array("WTR207", "Common"),
-    array("WTR208", "Common"),
-    array("WTR209", "Common"), //Razor Reflex
-    array("WTR210", "Common"),
-    array("WTR211", "Common"),
-    array("WTR212", "Common"), //Unmovable
-    array("WTR213", "Common"),
-    array("WTR214", "Common"),
-    array("WTR215", "Common"), //Sink Below
-    array("WTR216", "Common"),
-    array("WTR217", "Common"),
-    array("WTR218", "Common"), //Nimblism
-    array("WTR219", "Common"),
-    array("WTR220", "Common"),
-    array("WTR221", "Common"), //Sloggism
-    array("WTR222", "Common"),
-    array("WTR223", "Common"),
+    array("enlightened_strike_red", "Majestic"), //Enlightened Strike
+    array("tome_of_fyendal_yellow", "Majestic"), // Tome of Fyendal
+    array("last_ditch_effort_blue", "Majestic"), // Last Ditch Effort
+    array("crazy_brew_blue", "Majestic"), // Crazy Brew - Super, but tagged as Majestic
+    array("remembrance_yellow", "Majestic"), // Remembrance - Super, but tagged as Majestic
+    array("drone_of_brutality_red", "Rare"), //Drone of Brutality
+    array("drone_of_brutality_yellow", "Rare"),
+    array("drone_of_brutality_blue", "Rare"),
+    array("snatch_red", "Rare"), //Snatch
+    array("snatch_yellow", "Rare"),
+    array("snatch_blue", "Rare"),
+    array("energy_potion_blue", "Rare"), //Energy potion
+    array("potion_of_strength_blue", "Rare"), //Potion of Strength
+    array("timesnap_potion_blue", "Rare"), //Timesnap Potion
+    //array("sigil_of_solace_red", "Rare"), //Sigil of Solace - Nate thinks that these shouldn't be in the pool because they're too strong.
+    //array("sigil_of_solace_yellow", "Rare"), // Nate, if you're reading this, feel free to remove these from the pool!
+    array("sigil_of_solace_blue", "Rare"), // Sigil of Solace (Blue)
+    array("barraging_brawnhide_red", "Common"), //Barraging Brawnhide
+    array("barraging_brawnhide_yellow", "Common"),
+    array("barraging_brawnhide_blue", "Common"),
+    array("demolition_crew_red", "Common"), //Demolition Crew
+    array("demolition_crew_yellow", "Common"),
+    array("demolition_crew_blue", "Common"),
+    array("flock_of_the_feather_walkers_red", "Common"), //Flock of the Feather Walkers
+    array("flock_of_the_feather_walkers_yellow", "Common"),
+    array("flock_of_the_feather_walkers_blue", "Common"),
+    array("nimble_strike_red", "Common"), //Nimble Strike
+    array("nimble_strike_yellow", "Common"),
+    array("nimble_strike_blue", "Common"),
+    array("raging_onslaught_red", "Common"), //Raging Onslaught
+    array("raging_onslaught_yellow", "Common"),
+    array("raging_onslaught_blue", "Common"),
+    array("scar_for_a_scar_red", "Common"), //Scar for a Scar - Notably reprinted in UPR, and omitted there
+    array("scar_for_a_scar_yellow", "Common"),
+    array("scar_for_a_scar_blue", "Common"),
+    array("scour_the_battlescape_red", "Common"), //Scour the Battlescape
+    array("scour_the_battlescape_yellow", "Common"),
+    array("scour_the_battlescape_blue", "Common"),
+    array("regurgitating_slog_red", "Common"), //Regurgitating Slog
+    array("regurgitating_slog_yellow", "Common"),
+    array("regurgitating_slog_blue", "Common"),
+    array("wounded_bull_red", "Common"), //Wounded Bull
+    array("wounded_bull_yellow", "Common"),
+    array("wounded_bull_blue", "Common"),
+    array("wounding_blow_red", "Common"), //Wounding Blow
+    array("wounding_blow_yellow", "Common"),
+    array("wounding_blow_blue", "Common"),
+    array("pummel_red", "Common"), //Pummel
+    array("pummel_yellow", "Common"),
+    array("pummel_blue", "Common"),
+    array("razor_reflex_red", "Common"), //Razor Reflex
+    array("razor_reflex_yellow", "Common"),
+    array("razor_reflex_blue", "Common"),
+    array("unmovable_red", "Common"), //Unmovable
+    array("unmovable_yellow", "Common"),
+    array("unmovable_blue", "Common"),
+    array("sink_below_red", "Common"), //Sink Below
+    array("sink_below_yellow", "Common"),
+    array("sink_below_blue", "Common"),
+    array("nimblism_red", "Common"), //Nimblism
+    array("nimblism_yellow", "Common"),
+    array("nimblism_blue", "Common"),
+    array("sloggism_red", "Common"), //Sloggism
+    array("sloggism_yellow", "Common"),
+    array("sloggism_blue", "Common"),
 
-    array("ARC159", "Majestic"), //Command and motherflippin' Conquer
-    array("ARC160", "Majestic"), //Art of War
-    array("ARC161", "Majestic"), //Pursuit of Knowledge
-    array("ARC162", "Majestic"), //Chains of Eminence - Super, but tagged with Majestics
-    //ARC163 - Rusted Relic - No interaction with arcane dmg
-    array("ARC164", "Rare"), //Life for a life
-    array("ARC165", "Rare"),
-    array("ARC166", "Rare"),
-    array("ARC167", "Rare"), //Enchanting Melody
-    array("ARC168", "Rare"),
-    array("ARC169", "Rare"),
-    array("ARC170", "Rare"), //Plunder Run
-    array("ARC171", "Rare"),
-    array("ARC172", "Rare"),
-    //ARC173-175 - Eirina's Prayer - No interaction with arcane dmg
-    array("ARC176", "Common"), //Back Alley Breakline
-    array("ARC177", "Common"),
-    array("ARC178", "Common"),
-    array("ARC179", "Common"), //Cadaverous Contraband
-    array("ARC180", "Common"),
-    array("ARC181", "Common"),
-    array("ARC182", "Common"), //Fervent Forerunner
-    array("ARC183", "Common"),
-    array("ARC184", "Common"),
-    array("ARC185", "Common"), //Moon Wish
-    array("ARC186", "Common"),
-    array("ARC187", "Common"),
-    array("ARC188", "Common"), //Push the Point
-    array("ARC189", "Common"),
-    array("ARC190", "Common"),
-    array("ARC191", "Common"), //Ravenous Rabble
-    array("ARC192", "Common"),
-    array("ARC193", "Common"),
-    array("ARC194", "Common"), //Rifting
-    array("ARC195", "Common"),
-    array("ARC196", "Common"),
-    array("ARC197", "Common"), //Vigor Rush
-    array("ARC198", "Common"),
-    array("ARC199", "Common"),
-    array("ARC200", "Common"), //Fate Foreseen
-    array("ARC201", "Common"),
-    array("ARC202", "Common"),
-    array("ARC203", "Common"), //Come to Fight
-    array("ARC204", "Common"),
-    array("ARC205", "Common"),
-    array("ARC206", "Common"), //Force Sight
-    array("ARC207", "Common"),
-    array("ARC208", "Common"),
-    array("ARC209", "Common"), //Lead the Charge
-    array("ARC210", "Common"),
-    array("ARC211", "Common"),
-    array("ARC212", "Common"), //Sun Kiss
-    array("ARC213", "Common"),
-    array("ARC214", "Common"),
-    array("ARC215", "Common"), //Whisper of the Oracle
-    array("ARC216", "Common"),
-    array("ARC217", "Common"),
+    array("command_and_conquer_red", "Majestic"), //Command and motherflippin' Conquer
+    array("art_of_war_yellow", "Majestic"), //Art of War
+    array("pursuit_of_knowledge_blue", "Majestic"), //Pursuit of Knowledge
+    array("chains_of_eminence_red", "Majestic"), //Chains of Eminence - Super, but tagged with Majestics
+    //rusted_relic_blue - Rusted Relic - No interaction with arcane dmg
+    array("life_for_a_life_red", "Rare"), //Life for a life
+    array("life_for_a_life_yellow", "Rare"),
+    array("life_for_a_life_blue", "Rare"),
+    array("enchanting_melody_red", "Rare"), //Enchanting Melody
+    array("enchanting_melody_yellow", "Rare"),
+    array("enchanting_melody_blue", "Rare"),
+    array("plunder_run_red", "Rare"), //Plunder Run
+    array("plunder_run_yellow", "Rare"),
+    array("plunder_run_blue", "Rare"),
+    //eirinas_prayer_red-175 - Eirina's Prayer - No interaction with arcane dmg
+    array("back_alley_breakline_red", "Common"), //Back Alley Breakline
+    array("back_alley_breakline_yellow", "Common"),
+    array("back_alley_breakline_blue", "Common"),
+    array("cadaverous_contraband_red", "Common"), //Cadaverous Contraband
+    array("cadaverous_contraband_yellow", "Common"),
+    array("cadaverous_contraband_blue", "Common"),
+    array("fervent_forerunner_red", "Common"), //Fervent Forerunner
+    array("fervent_forerunner_yellow", "Common"),
+    array("fervent_forerunner_blue", "Common"),
+    array("moon_wish_red", "Common"), //Moon Wish
+    array("moon_wish_yellow", "Common"),
+    array("moon_wish_blue", "Common"),
+    array("push_the_point_red", "Common"), //Push the Point
+    array("push_the_point_yellow", "Common"),
+    array("push_the_point_blue", "Common"),
+    array("ravenous_rabble_red", "Common"), //Ravenous Rabble
+    array("ravenous_rabble_yellow", "Common"),
+    array("ravenous_rabble_blue", "Common"),
+    array("rifting_red", "Common"), //Rifting
+    array("rifting_yellow", "Common"),
+    array("rifting_blue", "Common"),
+    array("vigor_rush_red", "Common"), //Vigor Rush
+    array("vigor_rush_yellow", "Common"),
+    array("vigor_rush_blue", "Common"),
+    array("fate_foreseen_red", "Common"), //Fate Foreseen
+    array("fate_foreseen_yellow", "Common"),
+    array("fate_foreseen_blue", "Common"),
+    array("come_to_fight_red", "Common"), //Come to Fight
+    array("come_to_fight_yellow", "Common"),
+    array("come_to_fight_blue", "Common"),
+    array("force_sight_red", "Common"), //Force Sight
+    array("force_sight_yellow", "Common"),
+    array("force_sight_blue", "Common"),
+    array("lead_the_charge_red", "Common"), //Lead the Charge
+    array("lead_the_charge_yellow", "Common"),
+    array("lead_the_charge_blue", "Common"),
+    array("sun_kiss_red", "Common"), //Sun Kiss
+    array("sun_kiss_yellow", "Common"),
+    array("sun_kiss_blue", "Common"),
+    array("whisper_of_the_oracle_red", "Common"), //Whisper of the Oracle
+    array("whisper_of_the_oracle_yellow", "Common"),
+    array("whisper_of_the_oracle_blue", "Common"),
 
-    array("CRU180", "Majestic"), //Coax a Commotion
-    array("CRU181", "Majestic"), //Gorganian Tome
-    array("CRU182", "Majestic"), //Snag
-    array("CRU183", "Rare"), //Promise of Plenty
-    array("CRU184", "Rare"),
-    array("CRU185", "Rare"),
-    array("CRU186", "Rare"), //Lunging Press
-    array("CRU187", "Rare"), //Springboard Assault
-    array("CRU188", "Rare"), //Cash In
-    array("CRU189", "Rare"), //Reinforce the Line
-    array("CRU190", "Rare"),
-    array("CRU191", "Rare"),
-    array("CRU192", "Common"), //Brutal Assault
-    array("CRU193", "Common"),
-    array("CRU194", "Common"),
+    array("coax_a_commotion_red", "Majestic"), //Coax a Commotion
+    array("gorganian_tome", "Majestic"), //Gorganian Tome
+    array("snag_blue", "Majestic"), //Snag
+    array("promise_of_plenty_red", "Rare"), //Promise of Plenty
+    array("promise_of_plenty_yellow", "Rare"),
+    array("promise_of_plenty_blue", "Rare"),
+    array("lunging_press_blue", "Rare"), //Lunging Press
+    array("springboard_somersault_yellow", "Rare"), //Springboard Assault
+    array("cash_in_yellow", "Rare"), //Cash In
+    array("reinforce_the_line_red", "Rare"), //Reinforce the Line
+    array("reinforce_the_line_yellow", "Rare"),
+    array("reinforce_the_line_blue", "Rare"),
+    array("brutal_assault_red", "Common"), //Brutal Assault
+    array("brutal_assault_yellow", "Common"),
+    array("brutal_assault_blue", "Common"),
 
-    array("MON245", "Majestic"), //Exude Confidence
-    array("MON246", "Majestic"), //Nourishing Emptiness
-    array("MON247", "Majestic"), //Rouse the Ancients
-    array("MON248", "Rare"), //Out Muscle
-    array("MON249", "Rare"),
-    array("MON250", "Rare"),
-    array("MON251", "Rare"), //Seek Horizon
-    array("MON252", "Rare"),
-    array("MON253", "Rare"),
-    array("MON254", "Rare"), //Tremor of iArathael - Honestly this one we might want to take out? I'm leaving it in for now
-    array("MON255", "Rare"),
-    array("MON256", "Rare"),
-    array("MON257", "Rare"), //Rise Above
-    array("MON258", "Rare"),
-    array("MON259", "Rare"),
-    array("MON260", "Rare"), //Captain's Call
-    array("MON261", "Rare"),
-    array("MON262", "Rare"),
-    array("MON263", "Common"), //Adrenaline Rush
-    array("MON264", "Common"),
-    array("MON265", "Common"),
-    array("MON266", "Common"), //Belittle
-    array("MON267", "Common"),
-    array("MON268", "Common"),
-    array("MON269", "Common"), //Brandish
-    array("MON270", "Common"),
-    array("MON271", "Common"),
-    array("MON272", "Common"), //Frontline Scout
-    array("MON273", "Common"),
-    array("MON274", "Common"),
-    array("MON275", "Common"), //Overload
-    array("MON276", "Common"),
-    array("MON277", "Common"),
-    array("MON278", "Common"), //Pound for Pound
-    array("MON279", "Common"),
-    array("MON280", "Common"),
-    array("MON281", "Common"), //Rally the Rearguard
-    array("MON282", "Common"),
-    array("MON283", "Common"),
-    array("MON284", "Common"), //Stony Woottonhog - The unofficial Roguelike Mascot
-    array("MON285", "Common"),
-    array("MON286", "Common"),
-    array("MON287", "Common"), //Surging Militia
-    array("MON288", "Common"),
-    array("MON289", "Common"),
-    array("MON290", "Common"), //Yinti Yanti
-    array("MON291", "Common"),
-    array("MON292", "Common"),
-    array("MON293", "Common"), //Zealous Belting
-    array("MON294", "Common"),
-    array("MON295", "Common"),
-    array("MON296", "Common"), //Minnowism
-    array("MON297", "Common"),
-    array("MON298", "Common"),
-    array("MON299", "Common"), //Warmonger's Recital
-    array("MON300", "Common"),
-    array("MON301", "Common"),
-    //MON302 - Talisman of Dousing - No need for spellvoid
-    array("MON303", "Common"), //Memorial Ground
-    array("MON304", "Common"),
-    array("MON305", "Common"),
+    array("exude_confidence_red", "Majestic"), //Exude Confidence
+    array("nourishing_emptiness_red", "Majestic"), //Nourishing Emptiness
+    array("rouse_the_ancients_blue", "Majestic"), //Rouse the Ancients
+    array("out_muscle_red", "Rare"), //Out Muscle
+    array("out_muscle_yellow", "Rare"),
+    array("out_muscle_blue", "Rare"),
+    array("seek_horizon_red", "Rare"), //Seek Horizon
+    array("seek_horizon_yellow", "Rare"),
+    array("seek_horizon_blue", "Rare"),
+    array("tremor_of_iarathael_red", "Rare"), //Tremor of iArathael - Honestly this one we might want to take out? I'm leaving it in for now
+    array("tremor_of_iarathael_yellow", "Rare"),
+    array("tremor_of_iarathael_blue", "Rare"),
+    array("rise_above_red", "Rare"), //Rise Above
+    array("rise_above_yellow", "Rare"),
+    array("rise_above_blue", "Rare"),
+    array("captains_call_red", "Rare"), //Captain's Call
+    array("captains_call_yellow", "Rare"),
+    array("captains_call_blue", "Rare"),
+    array("adrenaline_rush_red", "Common"), //Adrenaline Rush
+    array("adrenaline_rush_yellow", "Common"),
+    array("adrenaline_rush_blue", "Common"),
+    array("belittle_red", "Common"), //Belittle
+    array("belittle_yellow", "Common"),
+    array("belittle_blue", "Common"),
+    array("brandish_red", "Common"), //Brandish
+    array("brandish_yellow", "Common"),
+    array("brandish_blue", "Common"),
+    array("frontline_scout_red", "Common"), //Frontline Scout
+    array("frontline_scout_yellow", "Common"),
+    array("frontline_scout_blue", "Common"),
+    array("overload_red", "Common"), //Overload
+    array("overload_yellow", "Common"),
+    array("overload_blue", "Common"),
+    array("pound_for_pound_red", "Common"), //Pound for Pound
+    array("pound_for_pound_yellow", "Common"),
+    array("pound_for_pound_blue", "Common"),
+    array("rally_the_rearguard_red", "Common"), //Rally the Rearguard
+    array("rally_the_rearguard_yellow", "Common"),
+    array("rally_the_rearguard_blue", "Common"),
+    array("stony_woottonhog_red", "Common"), //Stony Woottonhog - The unofficial Roguelike Mascot
+    array("stony_woottonhog_yellow", "Common"),
+    array("stony_woottonhog_blue", "Common"),
+    array("surging_militia_red", "Common"), //Surging Militia
+    array("surging_militia_yellow", "Common"),
+    array("surging_militia_blue", "Common"),
+    array("yinti_yanti_red", "Common"), //Yinti Yanti
+    array("yinti_yanti_yellow", "Common"),
+    array("yinti_yanti_blue", "Common"),
+    array("zealous_belting_red", "Common"), //Zealous Belting
+    array("zealous_belting_yellow", "Common"),
+    array("zealous_belting_blue", "Common"),
+    array("minnowism_red", "Common"), //Minnowism
+    array("minnowism_yellow", "Common"),
+    array("minnowism_blue", "Common"),
+    array("warmongers_recital_red", "Common"), //Warmonger's Recital
+    array("warmongers_recital_yellow", "Common"),
+    array("warmongers_recital_blue", "Common"),
+    //talisman_of_dousing_yellow - Talisman of Dousing - No need for spellvoid
+    array("memorial_ground_red", "Common"), //Memorial Ground
+    array("memorial_ground_yellow", "Common"),
+    array("memorial_ground_blue", "Common"),
     //
-    array("EVR156", "Majestic"), //Bingo
-    array("EVR157", "Majestic"), //Firebreathing
-    array("EVR158", "Majestic"), //Cash Out
-    array("EVR159", "Majestic"), //Knick Knack Bric-a-brac
-    array("EVR160", "Majestic"), //This Round's on Me
-    array("EVR161", "Rare"), //Life of the Party
-    array("EVR162", "Rare"),
-    array("EVR163", "Rare"),
-    //EVR164-166 - High Striker - I've decided to omit this one, but if someone wants to add it in feel free
-    array("EVR167", "Rare"), //Pick a Card, Any Card
-    array("EVR168", "Rare"),
-    array("EVR169", "Rare"),
-    array("EVR156", "Rare"), //Smashing Good Time
-    array("EVR157", "Rare"),
-    array("EVR158", "Rare"),
-    array("EVR159", "Rare"), //Even Bigger Than That
-    array("EVR160", "Rare"),
-    array("EVR161", "Rare"),
+    array("bingo_red", "Majestic"), //Bingo
+    array("firebreathing_red", "Majestic"), //Firebreathing
+    array("cash_out_blue", "Majestic"), //Cash Out
+    array("knick_knack_bricabrac_red", "Majestic"), //Knick Knack Bric-a-brac
+    array("this_rounds_on_me_blue", "Majestic"), //This Round's on Me
+    array("life_of_the_party_red", "Rare"), //Life of the Party
+    array("life_of_the_party_yellow", "Rare"),
+    array("life_of_the_party_blue", "Rare"),
+    //high_striker_red-166 - High Striker - I've decided to omit this one, but if someone wants to add it in feel free
+    array("pick_a_card_any_card_red", "Rare"), //Pick a Card, Any Card
+    array("pick_a_card_any_card_yellow", "Rare"),
+    array("pick_a_card_any_card_blue", "Rare"),
+    array("bingo_red", "Rare"), //Smashing Good Time
+    array("firebreathing_red", "Rare"),
+    array("cash_out_blue", "Rare"),
+    array("knick_knack_bricabrac_red", "Rare"), //Even Bigger Than That
+    array("this_rounds_on_me_blue", "Rare"),
+    array("life_of_the_party_red", "Rare"),
     //EVER176 through EVER193 are all potions.
     //I decided to omit all the potions for now, but feel free to add some/all
 
-    array("UPR187", "Majestic"), //Erase Face
-    array("UPR188", "Majestic"), //Vipox
-    array("UPR189", "Majestic"), //That All You Got?
-    array("UPR190", "Majestic"), //Fog Down
-    array("UPR191", "Rare"), //Flex
-    array("UPR192", "Rare"),
-    array("UPR193", "Rare"),
-    array("UPR194", "Rare"), //Fyendal's Fighting Spirit
-    array("UPR195", "Rare"),
-    array("UPR196", "Rare"),
-    array("UPR197", "Rare"), //Sift
-    array("UPR198", "Rare"),
-    array("UPR199", "Rare"),
-    array("UPR200", "Rare"), //Strategic Planning
-    array("UPR201", "Rare"),
-    array("UPR202", "Rare"),
-    array("UPR203", "Common"), //Brothers in Arms
-    array("UPR204", "Common"),
-    array("UPR205", "Common"),
-    array("UPR206", "Common"), //Critical Strike
-    array("UPR207", "Common"),
-    array("UPR208", "Common"),
-    //UPR209-UPR211 Scar for a Scar - Reprinted from WTR
-    array("UPR212", "Common"), //Trade In
-    array("UPR213", "Common"),
-    array("UPR214", "Common"),
-    array("UPR215", "Common"), //Healing Balm
-    array("UPR216", "Common"),
-    array("UPR217", "Common"),
-    array("UPR218", "Common"), //Sigil of Protection
-    array("UPR219", "Common"),
-    array("UPR220", "Common"),
-    array("UPR221", "Common"), //Oasis Respite
-    array("UPR222", "Common"),
-    array("UPR223", "Common"),
+    array("erase_face_red", "Majestic"), //Erase Face
+    array("vipox_red", "Majestic"), //Vipox
+    array("that_all_you_got_yellow", "Majestic"), //That All You Got?
+    array("fog_down_yellow", "Majestic"), //Fog Down
+    array("flex_red", "Rare"), //Flex
+    array("flex_yellow", "Rare"),
+    array("flex_blue", "Rare"),
+    array("fyendals_fighting_spirit_red", "Rare"), //Fyendal's Fighting Spirit
+    array("fyendals_fighting_spirit_yellow", "Rare"),
+    array("fyendals_fighting_spirit_blue", "Rare"),
+    array("sift_red", "Rare"), //Sift
+    array("sift_yellow", "Rare"),
+    array("sift_blue", "Rare"),
+    array("strategic_planning_red", "Rare"), //Strategic Planning
+    array("strategic_planning_yellow", "Rare"),
+    array("strategic_planning_blue", "Rare"),
+    array("brothers_in_arms_red", "Common"), //Brothers in Arms
+    array("brothers_in_arms_yellow", "Common"),
+    array("brothers_in_arms_blue", "Common"),
+    array("critical_strike_red", "Common"), //Critical Strike
+    array("critical_strike_yellow", "Common"),
+    array("critical_strike_blue", "Common"),
+    //scar_for_a_scar_red-scar_for_a_scar_blue Scar for a Scar - Reprinted from WTR
+    array("trade_in_red", "Common"), //Trade In
+    array("trade_in_yellow", "Common"),
+    array("trade_in_blue", "Common"),
+    array("healing_balm_red", "Common"), //Healing Balm
+    array("healing_balm_yellow", "Common"),
+    array("healing_balm_blue", "Common"),
+    array("sigil_of_protection_red", "Common"), //Sigil of Protection
+    array("sigil_of_protection_yellow", "Common"),
+    array("sigil_of_protection_blue", "Common"),
+    array("oasis_respite_red", "Common"), //Oasis Respite
+    array("oasis_respite_yellow", "Common"),
+    array("oasis_respite_blue", "Common"),
 
-    array("DYN240", "Majestic"), //Imperial Edict
-    array("DYN241", "Majestic"), //Imperial Ledger
-    array("DYN242", "Majestic"), //Imperial Warhorn
+    array("imperial_edict_red", "Majestic"), //Imperial Edict
+    array("imperial_ledger_red", "Majestic"), //Imperial Ledger
+    array("imperial_warhorn_red", "Majestic"), //Imperial Warhorn
   );
 
   return ProcessPool($CardRewardPool, $arrayParameters);
@@ -774,105 +774,105 @@ function GetPoolGeneric($arrayParameters){
 function GetPoolTalent($arrayParameters){
 
   $CardRewardPool = array(
-    array("ELE092", "Talent", "Majestic", "Shiver", "Voltaire", "DeathDealer", "RedLiner"), //Flashfreeze
-    array("ELE097", "Talent", "Common", "Shiver", "Voltaire", "DeathDealer", "RedLiner"), //Entwine Ice
-    array("ELE098", "Talent", "Common", "Shiver", "Voltaire", "DeathDealer", "RedLiner"),
-    array("ELE099", "Talent", "Common", "Shiver", "Voltaire", "DeathDealer", "RedLiner"),
-    array("ELE100", "Talent", "Common", "Shiver", "Voltaire", "DeathDealer", "RedLiner"), //Entwine Lightning
-    array("ELE101", "Talent", "Common", "Shiver", "Voltaire", "DeathDealer", "RedLiner"),
-    array("ELE102", "Talent", "Common", "Shiver", "Voltaire", "DeathDealer", "RedLiner"),
-    array("ELE103", "Talent", "Common", "Shiver", "Voltaire", "DeathDealer", "RedLiner"), //Invigorate
-    array("ELE104", "Talent", "Common", "Shiver", "Voltaire", "DeathDealer", "RedLiner"),
-    array("ELE105", "Talent", "Common", "Shiver", "Voltaire", "DeathDealer", "RedLiner"),
-    array("ELE106", "Talent", "Common", "Shiver", "Voltaire", "DeathDealer", "RedLiner"), //Rejuvenate
-    array("ELE107", "Talent", "Common", "Shiver", "Voltaire", "DeathDealer", "RedLiner"),
-    array("ELE108", "Talent", "Common", "Shiver", "Voltaire", "DeathDealer", "RedLiner"),
-    array("ELE112", "Talent", "Majestic", "Shiver", "Voltaire", "DeathDealer", "RedLiner"), //Pulse of Volthaven
-    array("ELE146", "Talent", "Majestic", "Shiver", "Voltaire", "DeathDealer", "RedLiner"), //Channel Lake Frigid
-    array("ELE147", "Talent", "Majestic", "Shiver", "Voltaire", "DeathDealer", "RedLiner"), //Blizzard
-    array("ELE148", "Talent", "Rare", "Shiver", "Voltaire", "DeathDealer", "RedLiner"), //Frost Fang
-    array("ELE149", "Talent", "Rare", "Shiver", "Voltaire", "DeathDealer", "RedLiner"),
-    array("ELE150", "Talent", "Rare", "Shiver", "Voltaire", "DeathDealer", "RedLiner"),
-    array("ELE151", "Talent", "Rare", "Shiver", "Voltaire", "DeathDealer", "RedLiner"), //Ice Quake
-    array("ELE152", "Talent", "Rare", "Shiver", "Voltaire", "DeathDealer", "RedLiner"),
-    array("ELE153", "Talent", "Rare", "Shiver", "Voltaire", "DeathDealer", "RedLiner"),
-    array("ELE154", "Talent", "Rare", "Shiver", "Voltaire", "DeathDealer", "RedLiner"), //Weave Ice
-    array("ELE155", "Talent", "Rare", "Shiver", "Voltaire", "DeathDealer", "RedLiner"),
-    array("ELE156", "Talent", "Rare", "Shiver", "Voltaire", "DeathDealer", "RedLiner"),
-    array("ELE157", "Talent", "Common", "Shiver", "Voltaire", "DeathDealer", "RedLiner"), //Icy Encounter
-    array("ELE158", "Talent", "Common", "Shiver", "Voltaire", "DeathDealer", "RedLiner"),
-    array("ELE159", "Talent", "Common", "Shiver", "Voltaire", "DeathDealer", "RedLiner"),
-    array("ELE160", "Talent", "Common", "Shiver", "Voltaire", "DeathDealer", "RedLiner"), //Winter's Grasp
-    array("ELE161", "Talent", "Common", "Shiver", "Voltaire", "DeathDealer", "RedLiner"),
-    array("ELE162", "Talent", "Common", "Shiver", "Voltaire", "DeathDealer", "RedLiner"),
-    array("ELE163", "Talent", "Common", "Shiver", "Voltaire", "DeathDealer", "RedLiner"), //Chill to the Bone
-    array("ELE164", "Talent", "Common", "Shiver", "Voltaire", "DeathDealer", "RedLiner"),
-    array("ELE165", "Talent", "Common", "Shiver", "Voltaire", "DeathDealer", "RedLiner"),
-    array("ELE166", "Talent", "Common", "Shiver", "Voltaire", "DeathDealer", "RedLiner"), //Polar Blast
-    array("ELE167", "Talent", "Common", "Shiver", "Voltaire", "DeathDealer", "RedLiner"),
-    array("ELE168", "Talent", "Common", "Shiver", "Voltaire", "DeathDealer", "RedLiner"),
-    array("ELE169", "Talent", "Common", "Shiver", "Voltaire", "DeathDealer", "RedLiner"), //Winter's Bite
-    array("ELE170", "Talent", "Common", "Shiver", "Voltaire", "DeathDealer", "RedLiner"),
-    array("ELE171", "Talent", "Common", "Shiver", "Voltaire", "DeathDealer", "RedLiner"),
-    array("ELE172", "Talent", "Common", "Shiver", "Voltaire", "DeathDealer", "RedLiner"), //Amulet of Ice
-    array("ELE175", "Talent", "Majestic", "Shiver", "Voltaire", "DeathDealer", "RedLiner"), //Channel Thunder Steppe
-    array("ELE176", "Talent", "Majestic", "Shiver", "Voltaire", "DeathDealer", "RedLiner"), //Blink
-    array("ELE177", "Talent", "Rare", "Shiver", "Voltaire", "DeathDealer", "RedLiner"), //Flash
-    array("ELE178", "Talent", "Rare", "Shiver", "Voltaire", "DeathDealer", "RedLiner"),
-    array("ELE179", "Talent", "Rare", "Shiver", "Voltaire", "DeathDealer", "RedLiner"),
-    array("ELE180", "Talent", "Rare", "Shiver", "Voltaire", "DeathDealer", "RedLiner"), //Weave Lightning
-    array("ELE181", "Talent", "Rare", "Shiver", "Voltaire", "DeathDealer", "RedLiner"),
-    array("ELE182", "Talent", "Rare", "Shiver", "Voltaire", "DeathDealer", "RedLiner"),
-    array("ELE183", "Talent", "Rare", "Shiver", "Voltaire", "DeathDealer", "RedLiner"), //Lightning Press
-    array("ELE184", "Talent", "Rare", "Shiver", "Voltaire", "DeathDealer", "RedLiner"),
-    array("ELE185", "Talent", "Rare", "Shiver", "Voltaire", "DeathDealer", "RedLiner"),
-    array("ELE186", "Talent", "Common", "Shiver", "Voltaire", "DeathDealer", "RedLiner"), //Ball Lightning
-    array("ELE187", "Talent", "Common", "Shiver", "Voltaire", "DeathDealer", "RedLiner"),
-    array("ELE188", "Talent", "Common", "Shiver", "Voltaire", "DeathDealer", "RedLiner"),
-    array("ELE189", "Talent", "Common", "Shiver", "Voltaire", "DeathDealer", "RedLiner"), //Lightning Surge
-    array("ELE190", "Talent", "Common", "Shiver", "Voltaire", "DeathDealer", "RedLiner"),
-    array("ELE191", "Talent", "Common", "Shiver", "Voltaire", "DeathDealer", "RedLiner"),
-    array("ELE192", "Talent", "Common", "Shiver", "Voltaire", "DeathDealer", "RedLiner"), //Heaven's Claws
-    array("ELE193", "Talent", "Common", "Shiver", "Voltaire", "DeathDealer", "RedLiner"),
-    array("ELE194", "Talent", "Common", "Shiver", "Voltaire", "DeathDealer", "RedLiner"),
-    array("ELE195", "Talent", "Common", "Shiver", "Voltaire", "DeathDealer", "RedLiner"), //Shock Striker
-    array("ELE196", "Talent", "Common", "Shiver", "Voltaire", "DeathDealer", "RedLiner"),
-    array("ELE197", "Talent", "Common", "Shiver", "Voltaire", "DeathDealer", "RedLiner"),
-    array("ELE198", "Talent", "Common", "Shiver", "Voltaire", "DeathDealer", "RedLiner"), //Electrify
-    array("ELE199", "Talent", "Common", "Shiver", "Voltaire", "DeathDealer", "RedLiner"),
-    array("ELE200", "Talent", "Common", "Shiver", "Voltaire", "DeathDealer", "RedLiner"),
-    array("ELE201", "Talent", "Common", "Shiver", "Voltaire", "DeathDealer", "RedLiner"), //Amulet of Lightning
+    array("flashfreeze_red", "Talent", "Majestic", "Shiver", "Voltaire", "DeathDealer", "RedLiner"), //Flashfreeze
+    array("entwine_ice_red", "Talent", "Common", "Shiver", "Voltaire", "DeathDealer", "RedLiner"), //Entwine Ice
+    array("entwine_ice_yellow", "Talent", "Common", "Shiver", "Voltaire", "DeathDealer", "RedLiner"),
+    array("entwine_ice_blue", "Talent", "Common", "Shiver", "Voltaire", "DeathDealer", "RedLiner"),
+    array("entwine_lightning_red", "Talent", "Common", "Shiver", "Voltaire", "DeathDealer", "RedLiner"), //Entwine Lightning
+    array("entwine_lightning_yellow", "Talent", "Common", "Shiver", "Voltaire", "DeathDealer", "RedLiner"),
+    array("entwine_lightning_blue", "Talent", "Common", "Shiver", "Voltaire", "DeathDealer", "RedLiner"),
+    array("invigorate_red", "Talent", "Common", "Shiver", "Voltaire", "DeathDealer", "RedLiner"), //Invigorate
+    array("invigorate_yellow", "Talent", "Common", "Shiver", "Voltaire", "DeathDealer", "RedLiner"),
+    array("invigorate_blue", "Talent", "Common", "Shiver", "Voltaire", "DeathDealer", "RedLiner"),
+    array("rejuvenate_red", "Talent", "Common", "Shiver", "Voltaire", "DeathDealer", "RedLiner"), //Rejuvenate
+    array("rejuvenate_yellow", "Talent", "Common", "Shiver", "Voltaire", "DeathDealer", "RedLiner"),
+    array("rejuvenate_blue", "Talent", "Common", "Shiver", "Voltaire", "DeathDealer", "RedLiner"),
+    array("pulse_of_volthaven_red", "Talent", "Majestic", "Shiver", "Voltaire", "DeathDealer", "RedLiner"), //Pulse of Volthaven
+    array("channel_lake_frigid_blue", "Talent", "Majestic", "Shiver", "Voltaire", "DeathDealer", "RedLiner"), //Channel Lake Frigid
+    array("blizzard_blue", "Talent", "Majestic", "Shiver", "Voltaire", "DeathDealer", "RedLiner"), //Blizzard
+    array("frost_fang_red", "Talent", "Rare", "Shiver", "Voltaire", "DeathDealer", "RedLiner"), //Frost Fang
+    array("frost_fang_yellow", "Talent", "Rare", "Shiver", "Voltaire", "DeathDealer", "RedLiner"),
+    array("frost_fang_blue", "Talent", "Rare", "Shiver", "Voltaire", "DeathDealer", "RedLiner"),
+    array("ice_quake_red", "Talent", "Rare", "Shiver", "Voltaire", "DeathDealer", "RedLiner"), //Ice Quake
+    array("ice_quake_yellow", "Talent", "Rare", "Shiver", "Voltaire", "DeathDealer", "RedLiner"),
+    array("ice_quake_blue", "Talent", "Rare", "Shiver", "Voltaire", "DeathDealer", "RedLiner"),
+    array("weave_ice_red", "Talent", "Rare", "Shiver", "Voltaire", "DeathDealer", "RedLiner"), //Weave Ice
+    array("weave_ice_yellow", "Talent", "Rare", "Shiver", "Voltaire", "DeathDealer", "RedLiner"),
+    array("weave_ice_blue", "Talent", "Rare", "Shiver", "Voltaire", "DeathDealer", "RedLiner"),
+    array("icy_encounter_red", "Talent", "Common", "Shiver", "Voltaire", "DeathDealer", "RedLiner"), //Icy Encounter
+    array("icy_encounter_yellow", "Talent", "Common", "Shiver", "Voltaire", "DeathDealer", "RedLiner"),
+    array("icy_encounter_blue", "Talent", "Common", "Shiver", "Voltaire", "DeathDealer", "RedLiner"),
+    array("winters_grasp_red", "Talent", "Common", "Shiver", "Voltaire", "DeathDealer", "RedLiner"), //Winter's Grasp
+    array("winters_grasp_yellow", "Talent", "Common", "Shiver", "Voltaire", "DeathDealer", "RedLiner"),
+    array("winters_grasp_blue", "Talent", "Common", "Shiver", "Voltaire", "DeathDealer", "RedLiner"),
+    array("chill_to_the_bone_red", "Talent", "Common", "Shiver", "Voltaire", "DeathDealer", "RedLiner"), //Chill to the Bone
+    array("chill_to_the_bone_yellow", "Talent", "Common", "Shiver", "Voltaire", "DeathDealer", "RedLiner"),
+    array("chill_to_the_bone_blue", "Talent", "Common", "Shiver", "Voltaire", "DeathDealer", "RedLiner"),
+    array("polar_blast_red", "Talent", "Common", "Shiver", "Voltaire", "DeathDealer", "RedLiner"), //Polar Blast
+    array("polar_blast_yellow", "Talent", "Common", "Shiver", "Voltaire", "DeathDealer", "RedLiner"),
+    array("polar_blast_blue", "Talent", "Common", "Shiver", "Voltaire", "DeathDealer", "RedLiner"),
+    array("winters_bite_red", "Talent", "Common", "Shiver", "Voltaire", "DeathDealer", "RedLiner"), //Winter's Bite
+    array("winters_bite_yellow", "Talent", "Common", "Shiver", "Voltaire", "DeathDealer", "RedLiner"),
+    array("winters_bite_blue", "Talent", "Common", "Shiver", "Voltaire", "DeathDealer", "RedLiner"),
+    array("amulet_of_ice_blue", "Talent", "Common", "Shiver", "Voltaire", "DeathDealer", "RedLiner"), //Amulet of Ice
+    array("channel_thunder_steppe_yellow", "Talent", "Majestic", "Shiver", "Voltaire", "DeathDealer", "RedLiner"), //Channel Thunder Steppe
+    array("blink_blue", "Talent", "Majestic", "Shiver", "Voltaire", "DeathDealer", "RedLiner"), //Blink
+    array("flash_red", "Talent", "Rare", "Shiver", "Voltaire", "DeathDealer", "RedLiner"), //Flash
+    array("flash_yellow", "Talent", "Rare", "Shiver", "Voltaire", "DeathDealer", "RedLiner"),
+    array("flash_blue", "Talent", "Rare", "Shiver", "Voltaire", "DeathDealer", "RedLiner"),
+    array("weave_lightning_red", "Talent", "Rare", "Shiver", "Voltaire", "DeathDealer", "RedLiner"), //Weave Lightning
+    array("weave_lightning_yellow", "Talent", "Rare", "Shiver", "Voltaire", "DeathDealer", "RedLiner"),
+    array("weave_lightning_blue", "Talent", "Rare", "Shiver", "Voltaire", "DeathDealer", "RedLiner"),
+    array("lightning_press_red", "Talent", "Rare", "Shiver", "Voltaire", "DeathDealer", "RedLiner"), //Lightning Press
+    array("lightning_press_yellow", "Talent", "Rare", "Shiver", "Voltaire", "DeathDealer", "RedLiner"),
+    array("lightning_press_blue", "Talent", "Rare", "Shiver", "Voltaire", "DeathDealer", "RedLiner"),
+    array("ball_lightning_red", "Talent", "Common", "Shiver", "Voltaire", "DeathDealer", "RedLiner"), //Ball Lightning
+    array("ball_lightning_yellow", "Talent", "Common", "Shiver", "Voltaire", "DeathDealer", "RedLiner"),
+    array("ball_lightning_blue", "Talent", "Common", "Shiver", "Voltaire", "DeathDealer", "RedLiner"),
+    array("lightning_surge_red", "Talent", "Common", "Shiver", "Voltaire", "DeathDealer", "RedLiner"), //Lightning Surge
+    array("lightning_surge_yellow", "Talent", "Common", "Shiver", "Voltaire", "DeathDealer", "RedLiner"),
+    array("lightning_surge_blue", "Talent", "Common", "Shiver", "Voltaire", "DeathDealer", "RedLiner"),
+    array("heavens_claws_red", "Talent", "Common", "Shiver", "Voltaire", "DeathDealer", "RedLiner"), //Heaven's Claws
+    array("heavens_claws_yellow", "Talent", "Common", "Shiver", "Voltaire", "DeathDealer", "RedLiner"),
+    array("heavens_claws_blue", "Talent", "Common", "Shiver", "Voltaire", "DeathDealer", "RedLiner"),
+    array("shock_striker_red", "Talent", "Common", "Shiver", "Voltaire", "DeathDealer", "RedLiner"), //Shock Striker
+    array("shock_striker_yellow", "Talent", "Common", "Shiver", "Voltaire", "DeathDealer", "RedLiner"),
+    array("shock_striker_blue", "Talent", "Common", "Shiver", "Voltaire", "DeathDealer", "RedLiner"),
+    array("electrify_red", "Talent", "Common", "Shiver", "Voltaire", "DeathDealer", "RedLiner"), //Electrify
+    array("electrify_yellow", "Talent", "Common", "Shiver", "Voltaire", "DeathDealer", "RedLiner"),
+    array("electrify_blue", "Talent", "Common", "Shiver", "Voltaire", "DeathDealer", "RedLiner"),
+    array("amulet_of_lightning_blue", "Talent", "Common", "Shiver", "Voltaire", "DeathDealer", "RedLiner"), //Amulet of Lightning
 
-    array("UPR138", "Talent", "Majestic", "Shiver", "Voltaire", "DeathDealer", "RedLiner"), //Channel the Bleak Expanse
-    array("UPR139", "Talent", "Majestic", "Shiver", "Voltaire", "DeathDealer", "RedLiner"), //Hypothermia
-    array("UPR140", "Talent", "Majestic", "Shiver", "Voltaire", "DeathDealer", "RedLiner"), //Insidious Chill
-    array("UPR141", "Talent", "Rare", "Shiver", "Voltaire", "DeathDealer", "RedLiner"), //Isenhowl Weathervane
-    array("UPR142", "Talent", "Rare", "Shiver", "Voltaire", "DeathDealer", "RedLiner"),
-    array("UPR143", "Talent", "Rare", "Shiver", "Voltaire", "DeathDealer", "RedLiner"),
-    array("UPR144", "Talent", "Common", "Shiver", "Voltaire", "DeathDealer", "RedLiner"), //Arctic Incarceration
-    array("UPR145", "Talent", "Common", "Shiver", "Voltaire", "DeathDealer", "RedLiner"),
-    array("UPR146", "Talent", "Common", "Shiver", "Voltaire", "DeathDealer", "RedLiner"),
-    array("UPR147", "Talent", "Common", "Shiver", "Voltaire", "DeathDealer", "RedLiner"), //Cold Snap
-    array("UPR148", "Talent", "Common", "Shiver", "Voltaire", "DeathDealer", "RedLiner"),
-    array("UPR149", "Talent", "Common", "Shiver", "Voltaire", "DeathDealer", "RedLiner"),
+    array("channel_the_bleak_expanse_blue", "Talent", "Majestic", "Shiver", "Voltaire", "DeathDealer", "RedLiner"), //Channel the Bleak Expanse
+    array("hypothermia_blue", "Talent", "Majestic", "Shiver", "Voltaire", "DeathDealer", "RedLiner"), //Hypothermia
+    array("insidious_chill_blue", "Talent", "Majestic", "Shiver", "Voltaire", "DeathDealer", "RedLiner"), //Insidious Chill
+    array("isenhowl_weathervane_red", "Talent", "Rare", "Shiver", "Voltaire", "DeathDealer", "RedLiner"), //Isenhowl Weathervane
+    array("isenhowl_weathervane_yellow", "Talent", "Rare", "Shiver", "Voltaire", "DeathDealer", "RedLiner"),
+    array("isenhowl_weathervane_blue", "Talent", "Rare", "Shiver", "Voltaire", "DeathDealer", "RedLiner"),
+    array("arctic_incarceration_red", "Talent", "Common", "Shiver", "Voltaire", "DeathDealer", "RedLiner"), //Arctic Incarceration
+    array("arctic_incarceration_yellow", "Talent", "Common", "Shiver", "Voltaire", "DeathDealer", "RedLiner"),
+    array("arctic_incarceration_blue", "Talent", "Common", "Shiver", "Voltaire", "DeathDealer", "RedLiner"),
+    array("cold_snap_red", "Talent", "Common", "Shiver", "Voltaire", "DeathDealer", "RedLiner"), //Cold Snap
+    array("cold_snap_yellow", "Talent", "Common", "Shiver", "Voltaire", "DeathDealer", "RedLiner"),
+    array("cold_snap_blue", "Talent", "Common", "Shiver", "Voltaire", "DeathDealer", "RedLiner"),
 
-    array("UPR086", "Talent", "Majestic", "Emberblade", "Kodachi", "Edge"), //Thaw
-    array("UPR087", "Talent", "Majestic", "Emberblade", "Kodachi", "Edge"), //Liquify
-    array("UPR088", "Talent", "Majestic", "Emberblade", "Kodachi", "Edge"), //Uprising
-    array("UPR089", "Talent", "Majestic", "Emberblade", "Kodachi", "Edge"), //Tome of Firebrand
-    array("UPR090", "Talent", "Rare", "Emberblade", "Kodachi", "Edge"), //Red Hot
-    array("UPR091", "Talent", "Rare", "Emberblade", "Kodachi", "Edge"), //Rise Up
-    array("UPR092", "Talent", "Common", "Emberblade", "Kodachi", "Edge"), //Blaze Headlong
-    array("UPR093", "Talent", "Common", "Emberblade", "Kodachi", "Edge"), //Breaking Point
-    array("UPR094", "Talent", "Common", "Emberblade", "Kodachi", "Edge"), //Burn Away
-    array("UPR095", "Talent", "Common", "Emberblade", "Kodachi", "Edge"), //Flameborn Retribution
-    array("UPR096", "Talent", "Common", "Emberblade", "Kodachi", "Edge"), //Flamecall Awakening
-    array("UPR097", "Talent", "Common", "Emberblade", "Kodachi", "Edge"), //Inflame
-    array("UPR098", "Talent", "Common", "Emberblade", "Kodachi", "Edge"), //Lava Burst
-    array("UPR099", "Talent", "Common", "Emberblade", "Kodachi", "Edge"), //Searing Touch
-    array("UPR100", "Talent", "Common", "Emberblade", "Kodachi", "Edge"), //Stoke the Flames
-    array("UPR101", "Talent", "Common", "Emberblade", "Kodachi", "Edge"), //Phoenix Flame
-    array("UPR101", "Talent", "Common", "Emberblade", "Kodachi", "Edge"), //Phoenix Flame - Putting it in twice so it has a higher rate to be pulled in card rewards
+    array("thaw_red", "Talent", "Majestic", "Emberblade", "Kodachi", "Edge"), //Thaw
+    array("liquefy_red", "Talent", "Majestic", "Emberblade", "Kodachi", "Edge"), //Liquify
+    array("uprising_red", "Talent", "Majestic", "Emberblade", "Kodachi", "Edge"), //Uprising
+    array("tome_of_firebrand_red", "Talent", "Majestic", "Emberblade", "Kodachi", "Edge"), //Tome of Firebrand
+    array("red_hot_red", "Talent", "Rare", "Emberblade", "Kodachi", "Edge"), //Red Hot
+    array("rise_up_red", "Talent", "Rare", "Emberblade", "Kodachi", "Edge"), //Rise Up
+    array("blaze_headlong_red", "Talent", "Common", "Emberblade", "Kodachi", "Edge"), //Blaze Headlong
+    array("breaking_point_red", "Talent", "Common", "Emberblade", "Kodachi", "Edge"), //Breaking Point
+    array("burn_away_red", "Talent", "Common", "Emberblade", "Kodachi", "Edge"), //Burn Away
+    array("flameborn_retribution_red", "Talent", "Common", "Emberblade", "Kodachi", "Edge"), //Flameborn Retribution
+    array("flamecall_awakening_red", "Talent", "Common", "Emberblade", "Kodachi", "Edge"), //Flamecall Awakening
+    array("inflame_red", "Talent", "Common", "Emberblade", "Kodachi", "Edge"), //Inflame
+    array("lava_burst_red", "Talent", "Common", "Emberblade", "Kodachi", "Edge"), //Lava Burst
+    array("searing_touch_red", "Talent", "Common", "Emberblade", "Kodachi", "Edge"), //Searing Touch
+    array("stoke_the_flames_red", "Talent", "Common", "Emberblade", "Kodachi", "Edge"), //Stoke the Flames
+    array("phoenix_flame_red", "Talent", "Common", "Emberblade", "Kodachi", "Edge"), //Phoenix Flame
+    array("phoenix_flame_red", "Talent", "Common", "Emberblade", "Kodachi", "Edge"), //Phoenix Flame - Putting it in twice so it has a higher rate to be pulled in card rewards
 
   );
 
@@ -882,107 +882,107 @@ function GetPoolTalent($arrayParameters){
 //TODO: Add slot (head, chest etc)
 function GetPoolEquipment($arrayParameters){
   $CardRewardPool = array(
-  array("WTR041", "Bravo", "Legendary", "Chest"), //Tectonic Plating
-  array("WTR042", "Bravo", "Legendary", "Head"), //Helm of Isen's Peak
-  array("WTR079", "Fai", "Legendary", "Head"), //Mask of Momentum
-  array("WTR080", "Fai", "Common", "Legs"), //Breaking Scales
-  array("WTR116", "Dorinthea", "Legendary", "Arms"), //Braveforge Bracers
-  array("WTR117", "Dorinthea", "Common", "Legs"), //Refraction Bolters
-  array("WTR150", "Generic", "Legendary", "Chest"), //Fyendal's Spring Tunic
-  array("WTR151", "Generic", "Common", "Head"), //Hope Merchant's Hood
-  array("WTR152", "Generic", "Common", "Chest"), //Heartened Cross Strap
-  array("WTR153", "Generic", "Common"), //Goliath Gauntlet
-  array("WTR154", "Generic", "Common", "Legs"), //Snapdragon Scalers
-  array("WTR155", "Generic", "Common", "Head"), //Ironrot Helm
-  //array("WTR156", "Generic", "Common", "Chest"), //Ironrot Chest - Omitted due to being included in universal equipment
-  array("WTR157", "Generic", "Common", "Arms"), //Ironrot Gauntlets
-  array("WTR158", "Generic", "Common", "Legs"), //Ironrot Boots
+  array("tectonic_plating", "Bravo", "Legendary", "Chest"), //Tectonic Plating
+  array("helm_of_isens_peak", "Bravo", "Legendary", "Head"), //Helm of Isen's Peak
+  array("mask_of_momentum", "Fai", "Legendary", "Head"), //Mask of Momentum
+  array("breaking_scales", "Fai", "Common", "Legs"), //Breaking Scales
+  array("braveforge_bracers", "Dorinthea", "Legendary", "Arms"), //Braveforge Bracers
+  array("refraction_bolters", "Dorinthea", "Common", "Legs"), //Refraction Bolters
+  array("fyendals_spring_tunic", "Generic", "Legendary", "Chest"), //Fyendal's Spring Tunic
+  array("hope_merchants_hood", "Generic", "Common", "Head"), //Hope Merchant's Hood
+  array("heartened_cross_strap", "Generic", "Common", "Chest"), //Heartened Cross Strap
+  array("goliath_gauntlet", "Generic", "Common"), //Goliath Gauntlet
+  array("snapdragon_scalers", "Generic", "Common", "Legs"), //Snapdragon Scalers
+  array("ironrot_helm", "Generic", "Common", "Head"), //Ironrot Helm
+  //array("ironrot_plate", "Generic", "Common", "Chest"), //Ironrot Chest - Omitted due to being included in universal equipment
+  array("ironrot_gauntlet", "Generic", "Common", "Arms"), //Ironrot Gauntlets
+  array("ironrot_legs", "Generic", "Common", "Legs"), //Ironrot Boots
 
-  array("ARC041", "Lexi", "Legendary", "Head"), //Skullbone Crosswrap
-  array("ARC042", "Lexi", "Common"), //Bull's Eye Bracers
-  array("ARC150", "Generic", "Legendary", "Head"), //Arcanite Skullcap
-  array("ARC151", "Generic", "Common", "Head"), //Talismanic Lens
-  array("ARC152", "Generic", "Common", "Chest"), //Vest of the First Fist
-  array("ARC153", "Generic", "Common", "Arms"), //Bracers of Belief
-  array("ARC154", "Generic", "Common", "Legs"), //Mage Master Boots
-  //ARC155 - 158 Nullrune Boots omitted due to being included in universal equipment
+  array("skullbone_crosswrap", "Lexi", "Legendary", "Head"), //Skullbone Crosswrap
+  array("bulls_eye_bracers", "Lexi", "Common"), //Bull's Eye Bracers
+  array("arcanite_skullcap", "Generic", "Legendary", "Head"), //Arcanite Skullcap
+  array("talismanic_lens", "Generic", "Common", "Head"), //Talismanic Lens
+  array("vest_of_the_first_fist", "Generic", "Common", "Chest"), //Vest of the First Fist
+  array("bracers_of_belief", "Generic", "Common", "Arms"), //Bracers of Belief
+  array("mage_master_boots", "Generic", "Common", "Legs"), //Mage Master Boots
+  //nullrune_hood - 158 Nullrune Boots omitted due to being included in universal equipment
 
-  array("CRU025", "Bravo", "Majestic", "Arms"), //Crater Fist
-  array("CRU053", "Fai", "Majestic", "Legs"), //Breeze Rider Boots
-  array("CRU081", "Dorinthea", "Majestic", "Chest"), //Courage of Bladehold
-  array("CRU122", "Lexi", "Majestic", "Legs"), //Perch Grapplers
-  //CRU179 - Omitted due to irrelevance... though there's definitely a world where this is relevant, though maybe not playable.
+  array("crater_fist", "Bravo", "Majestic", "Arms"), //Crater Fist
+  array("breeze_rider_boots", "Fai", "Majestic", "Legs"), //Breeze Rider Boots
+  array("courage_of_bladehold", "Dorinthea", "Majestic", "Chest"), //Courage of Bladehold
+  array("perch_grapplers", "Lexi", "Majestic", "Legs"), //Perch Grapplers
+  //gamblers_gloves - Omitted due to irrelevance... though there's definitely a world where this is relevant, though maybe not playable.
 
-  array("MON107", "Dorinthea", "Legendary", "Legs"), //Valiant Dynamo
-  array("MON108", "Dorinthea", "Common", "Arms"), //Gallantry Gold
-  array("MON238", "Generic", "Common", "Chest"), //Blood Drop Brocade
-  array("MON239", "Generic", "Common", "Arms"), //Stubby Hammerers
-  array("MON240", "Generic", "Common", "Legs"), //Time Skippers
-  array("MON241", "Generic", "Common", "Head"), //Ironhide Helm
-  array("MON242", "Generic", "Common", "Chest"),
-  array("MON243", "Generic", "Common", "Arms"),
-  array("MON244", "Generic", "Common", "Legs"), //Ironhide Boots
+  array("valiant_dynamo", "Dorinthea", "Legendary", "Legs"), //Valiant Dynamo
+  array("gallantry_gold", "Dorinthea", "Common", "Arms"), //Gallantry Gold
+  array("blood_drop_brocade", "Generic", "Common", "Chest"), //Blood Drop Brocade
+  array("stubby_hammerers", "Generic", "Common", "Arms"), //Stubby Hammerers
+  array("time_skippers", "Generic", "Common", "Legs"), //Time Skippers
+  array("ironhide_helm", "Generic", "Common", "Head"), //Ironhide Helm
+  array("ironhide_plate", "Generic", "Common", "Chest"),
+  array("ironhide_gauntlet", "Generic", "Common", "Arms"),
+  array("ironhide_legs", "Generic", "Common", "Legs"), //Ironhide Boots
 
-  array("ELE144", "Lexi", "Legendary", "Chest"), //Heart of Ice
-  array("ELE145", "Lexi", "Common", "Chest"), //Coat of Frost
-  array("ELE173", "Lexi", "Legendary", "Arms"), //Shock Charmers
-  array("ELE174", "Lexi", "Common", "Arms"), //Mark of Lightning
-  array("ELE203", "Bravo", "Legendary", "Offhand"), //Rampart of the Ram's Head
-  array("ELE204", "Bravo", "Common", "Offhand"), //Rotten Old Buckler
-  array("ELE213", "Lexi", "Legendary", "Head"), //New Horizon
-  array("ELE214", "Lexi", "Common", "Head"), //Honing Hood
-  array("ELE233", "Generic", "Common", "Head"), //Ragamuffin's Hat
-  array("ELE234", "Generic", "Common", "Chest"), //Deep Blue
-  array("ELE235", "Generic", "Common"), //Cracker Jax
-  array("ELE236", "Generic", "Common", "Legs"), //Runaways
+  array("heart_of_ice", "Lexi", "Legendary", "Chest"), //Heart of Ice
+  array("coat_of_frost", "Lexi", "Common", "Chest"), //Coat of Frost
+  array("shock_charmers", "Lexi", "Legendary", "Arms"), //Shock Charmers
+  array("mark_of_lightning", "Lexi", "Common", "Arms"), //Mark of Lightning
+  array("rampart_of_the_rams_head", "Bravo", "Legendary", "Offhand"), //Rampart of the Ram's Head
+  array("rotten_old_buckler", "Bravo", "Common", "Offhand"), //Rotten Old Buckler
+  array("new_horizon", "Lexi", "Legendary", "Head"), //New Horizon
+  array("honing_hood", "Lexi", "Common", "Head"), //Honing Hood
+  array("ragamuffins_hat", "Generic", "Common", "Head"), //Ragamuffin's Hat
+  array("deep_blue", "Generic", "Common", "Chest"), //Deep Blue
+  array("cracker_jax", "Generic", "Common"), //Cracker Jax
+  array("runaways", "Generic", "Common", "Legs"), //Runaways
 
-  array("EVR020", "Bravo", "Majestic", "Chest"), //Earthlore Bounty
-  array("EVR037", "Fai", "Majestic", "Head"), //Mask of the Pouncing Lynx
-  array("EVR053", "Dorinthea", "Majestic", "Head"), //Helm of Sharp Eye
-  //EVR155 - Arcane Lantern (RARE) - omitted for now. I want to be able to tag the diff between Equips that interact with Arcane and those that don't before I implement the arcane ones.
+  array("earthlore_bounty", "Bravo", "Majestic", "Chest"), //Earthlore Bounty
+  array("mask_of_the_pouncing_lynx", "Fai", "Majestic", "Head"), //Mask of the Pouncing Lynx
+  array("helm_of_sharp_eye", "Dorinthea", "Majestic", "Head"), //Helm of Sharp Eye
+  //arcane_lantern - Arcane Lantern (RARE) - omitted for now. I want to be able to tag the diff between Equips that interact with Arcane and those that don't before I implement the arcane ones.
 
-  array("UPR047", "Fai", "Common", "Arms"), //Heat Wave
-  array("UPR084", "Fai", "Legendary", "Chest"), //Flamescale Furnace
-  array("UPR085", "Fai", "Common", "Chest"), //Sash of Sandikai
-  array("UPR136", "Lexi", "Legendary", "Head"), //Coronet Peak
-  array("UPR137", "Lexi", "Common", "Head"), //Glacial Horns
-  array("UPR158", "Fai", "Legendary", "Arms"), //Tiger Stripe Shuko
-  array("UPR159", "Fai", "Common", "Legs"), //Tide Flippers
-  array("UPR182", "Generic", "Legendary", "Head"), //Crown of Providence
-  array("UPR183", "Generic", "Common", "Head"), //Heliod's Mitre - Okay, not technically a common, but I'm okay with it going in the common pool if you are *wink*
-  array("UPR184", "Generic", "Common", "Chest"), //Quelling Robe
-  array("UPR185", "Generic", "Common", "Arms"), //Quelling Sleeves
-  array("UPR186", "Generic", "Common", "Legs"), //Quelling Slippers
+  array("heat_wave", "Fai", "Common", "Arms"), //Heat Wave
+  array("flamescale_furnace", "Fai", "Legendary", "Chest"), //Flamescale Furnace
+  array("sash_of_sandikai", "Fai", "Common", "Chest"), //Sash of Sandikai
+  array("coronet_peak", "Lexi", "Legendary", "Head"), //Coronet Peak
+  array("glacial_horns", "Lexi", "Common", "Head"), //Glacial Horns
+  array("tiger_stripe_shuko", "Fai", "Legendary", "Arms"), //Tiger Stripe Shuko
+  array("tide_flippers", "Fai", "Common", "Legs"), //Tide Flippers
+  array("crown_of_providence", "Generic", "Legendary", "Head"), //Crown of Providence
+  array("helios_mitre", "Generic", "Common", "Head"), //Heliod's Mitre - Okay, not technically a common, but I'm okay with it going in the common pool if you are *wink*
+  array("quelling_robe", "Generic", "Common", "Chest"), //Quelling Robe
+  array("quelling_sleeves", "Generic", "Common", "Arms"), //Quelling Sleeves
+  array("quelling_slippers", "Generic", "Common", "Legs"), //Quelling Slippers
 
-  array("DYN026", "Bravo", "Majestic", "Offhand"), //Seasoned Saviour
-  array("DYN027", "Bravo", "Rare", "Offhand"), //Steelbraid Buckler
-  array("DYN045", "Fai", "Majestic", "Chest"), //Blazing Yoroi
-  array("DYN046", "Fai", "Rare", "Arms"), //Tearing Shuko
-  array("DYN117", "Arakni", "Legendary", "Legs"), //Blacktek Whisperers
-  array("DYN118", "Arakni", "Majestic", "Head"), //Mask of Perdition
-  array("DYN152", "Lexi", "Rare", "Arms"), //Hornet's Sting
-  //DYN236 thru 29 - Spellfray equipment. I do want to put these in the pool, but I'd like to tag them as arcane first and put them in my 2nd draft
-  array("DYN234", "Generic", "Legendary", "Head"), //Crown of Dominion
-  array("DYN235", "Generic", "Rare", "Offhand"), //Ornate Tessen
+  array("seasoned_saviour", "Bravo", "Majestic", "Offhand"), //Seasoned Saviour
+  array("steelbraid_buckler", "Bravo", "Rare", "Offhand"), //Steelbraid Buckler
+  array("blazen_yoroi", "Fai", "Majestic", "Chest"), //Blazing Yoroi
+  array("tearing_shuko", "Fai", "Rare", "Arms"), //Tearing Shuko
+  array("blacktek_whisperers", "Arakni", "Legendary", "Legs"), //Blacktek Whisperers
+  array("mask_of_perdition", "Arakni", "Majestic", "Head"), //Mask of Perdition
+  array("hornets_sting", "Lexi", "Rare", "Arms"), //Hornet's Sting
+  //spell_fray_tiara thru 29 - Spellfray equipment. I do want to put these in the pool, but I'd like to tag them as arcane first and put them in my 2nd draft
+  array("crown_of_dominion", "Generic", "Legendary", "Head"), //Crown of Dominion
+  array("ornate_tessen", "Generic", "Rare", "Offhand"), //Ornate Tessen
 
-  array("OUT011", "Arakni", "Legendary", "Chest"), //Redback Shroud
-  array("OUT049", "Fai", "Common", "Head"), //Mask of Many Faces
-  array("OUT094", "Lexi", "Legendary", "Chest"), //Trench of Sunken Treasure
-  array("OUT099", "Lexi", "Common", "Head"), //Wayfinder's Crest
-  array("OUT139", "Fai", "Arakni", "Legendary", "Arms"), //Flick Knives
-  array("OUT140", "Fai", "Arakni", "Common", "Head"), //Mask of Shifting Perspectives
-  array("OUT141", "Fai", "Arakni", "Common", "Arms"), //Blade Cuff
-  array("OUT157", "Arakni", "Lexi", "Common", "Head"), //Mask of Malicious Manifestations
-  array("OUT157", "Arakni", "Lexi", "Common", "Arms"), //Toxic Tips
-  array("OUT174", "Generic", "Legendary", "Arms"), //Vambrace of Determination
-  array("OUT175", "Generic", "Common", "Head"), //Seekers
-  array("OUT176", "Generic", "Common", "Chest"),
-  array("OUT177", "Generic", "Common", "Arms"),
-  array("OUT178", "Generic", "Common", "Legs"),
-  array("OUT179", "Generic", "Common", "Chest"), //Silken Gi
-  array("OUT180", "Generic", "Common", "Chest"), //Threadbare Tunic
-  array("OUT181", "Generic", "Common", "Arms"), //Fisticuffs
-  array("OUT182", "Generic", "Common", "Legs"), //Fleet Foot Sandals
+  array("redback_shroud", "Arakni", "Legendary", "Chest"), //Redback Shroud
+  array("mask_of_many_faces", "Fai", "Common", "Head"), //Mask of Many Faces
+  array("trench_of_sunken_treasure", "Lexi", "Legendary", "Chest"), //Trench of Sunken Treasure
+  array("wayfinders_crest", "Lexi", "Common", "Head"), //Wayfinder's Crest
+  array("flick_knives", "Fai", "Arakni", "Legendary", "Arms"), //Flick Knives
+  array("mask_of_shifting_perspectives", "Fai", "Arakni", "Common", "Head"), //Mask of Shifting Perspectives
+  array("blade_cuff", "Fai", "Arakni", "Common", "Arms"), //Blade Cuff
+  array("mask_of_malicious_manifestations", "Arakni", "Lexi", "Common", "Head"), //Mask of Malicious Manifestations
+  array("mask_of_malicious_manifestations", "Arakni", "Lexi", "Common", "Arms"), //Toxic Tips
+  array("vambrace_of_determination", "Generic", "Legendary", "Arms"), //Vambrace of Determination
+  array("seekers_hood", "Generic", "Common", "Head"), //Seekers
+  array("seekers_gilet", "Generic", "Common", "Chest"),
+  array("seekers_mitts", "Generic", "Common", "Arms"),
+  array("seekers_leggings", "Generic", "Common", "Legs"),
+  array("silken_gi", "Generic", "Common", "Chest"), //Silken Gi
+  array("threadbare_tunic", "Generic", "Common", "Chest"), //Threadbare Tunic
+  array("fisticuffs", "Generic", "Common", "Arms"), //Fisticuffs
+  array("fleet_foot_sandals", "Generic", "Common", "Legs"), //Fleet Foot Sandals
   );
 
   return ProcessPool($CardRewardPool, $arrayParameters);

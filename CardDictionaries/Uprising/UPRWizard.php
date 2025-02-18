@@ -6,30 +6,30 @@
     $rv = "";
     switch($cardID)
     {
-      case "UPR104":
+      case "encase_red":
         DealArcane(3, 2, "PLAYCARD", $cardID, false, $currentPlayer, false, false, !DelimStringContains($additionalCosts, "ICE"), resolvedTarget: $target);
         return "";
-      case "UPR105":
+      case "freezing_point_red":
         if(DelimStringContains($additionalCosts, "ICE")) {
           $otherPlayer = ($currentPlayer == 1 ? 2 : 1);
-          $damage = 5 + CountAura("ELE111", $otherPlayer) + SearchCount(SearchAura($otherPlayer, "", "Affliction", -1, -1, "", "ICE")) + FrozenCount($otherPlayer);
+          $damage = 5 + CountAura("frostbite", $otherPlayer) + SearchCount(SearchAura($otherPlayer, "", "Affliction", -1, -1, "", "ICE")) + FrozenCount($otherPlayer);
         }
         else $damage = 5;
         DealArcane($damage, 0, "PLAYCARD", $cardID, false, $currentPlayer, resolvedTarget: $target);
         return "";
-      case "UPR106": case "UPR107": case "UPR108":
+      case "sigil_of_permafrost_red": case "sigil_of_permafrost_yellow": case "sigil_of_permafrost_blue":
         if(DelimStringContains($additionalCosts, "ICE")) AddCurrentTurnEffect($cardID, $currentPlayer);
         return "";
-      case "UPR109":
+      case "ice_eternal_blue":
         $otherPlayer = ($currentPlayer == 1 ? 2 : 1);
         $numFrostBite = GetClassState($currentPlayer, $CS_LastDynCost)/2;
-        PlayAura("ELE111", $otherPlayer, $numFrostBite, effectController: $currentPlayer);
-        $amountArcane = SearchCount(SearchAurasForCard("ELE111", $otherPlayer));
+        PlayAura("frostbite", $otherPlayer, $numFrostBite, effectController: $currentPlayer);
+        $amountArcane = SearchCount(SearchAurasForCard("frostbite", $otherPlayer));
         if(DelimStringContains($additionalCosts, "ICE")) DealArcane($amountArcane, 0, "PLAYCARD", $cardID, false, $currentPlayer, resolvedTarget: $target);
         return "";
-      case "UPR110": case "UPR111": case "UPR112":
-        if($cardID == "UPR110") $damage = 5;
-        else if($cardID == "UPR111") $damage = 4;
+      case "succumb_to_winter_red": case "succumb_to_winter_yellow": case "succumb_to_winter_blue":
+        if($cardID == "succumb_to_winter_red") $damage = 5;
+        else if($cardID == "succumb_to_winter_yellow") $damage = 4;
         else $damage = 3;
         DealArcane($damage, 2, "PLAYCARD", $cardID, false, $currentPlayer, resolvedTarget: $target);
         if(DelimStringContains($additionalCosts, "ICE")) {
@@ -37,13 +37,13 @@
           AddDecisionQueue("SUCCUMBTOWINTER", $currentPlayer, "-", 1);
         }
         return "";
-      case "UPR113": case "UPR114": case "UPR115":
-        if($cardID == "UPR113") $damage = 5;
-        else if($cardID == "UPR114") $damage = 4;
+      case "aether_icevein_red": case "aether_icevein_yellow": case "aether_icevein_blue":
+        if($cardID == "aether_icevein_red") $damage = 5;
+        else if($cardID == "aether_icevein_yellow") $damage = 4;
         else $damage = 3;
         DealArcane($damage, 2, "PLAYCARD", $cardID, false, $currentPlayer, false, false, !DelimStringContains($additionalCosts, "ICE"), resolvedTarget: $target);
         return "";
-      case "UPR116": case "UPR117": case "UPR118":
+      case "brain_freeze_red": case "brain_freeze_yellow": case "brain_freeze_blue":
         $otherPlayer = ($currentPlayer == 1 ? 2 : 1);
         $hand = &GetHand($otherPlayer);
         $cards = "";
@@ -53,8 +53,8 @@
         }
         $cardsRevealed = RevealCards($cards);
         if($cardsRevealed && DelimStringContains($additionalCosts, "ICE")) {
-          if($cardID == "UPR116") $maxCost = 2;
-          else if($cardID == "UPR117") $maxCost = 1;
+          if($cardID == "brain_freeze_red") $maxCost = 2;
+          else if($cardID == "brain_freeze_yellow") $maxCost = 1;
           else $maxCost = 0;
           AddDecisionQueue("FINDINDICES", $otherPlayer, "HANDACTIONMAXCOST," . $maxCost);
           AddDecisionQueue("CHOOSETHEIRHAND", $currentPlayer, "<-", 1);
@@ -62,78 +62,78 @@
           AddDecisionQueue("MULTIADDTOPDECK", $otherPlayer, "-", 1);
         }
         return "";
-      case "UPR119": case "UPR120": case "UPR121":
-        if($cardID == "UPR119") $damage = 3;
-        else if($cardID == "UPR120") $damage = 2;
+      case "icebind_red": case "icebind_yellow": case "icebind_blue":
+        if($cardID == "icebind_red") $damage = 3;
+        else if($cardID == "icebind_yellow") $damage = 2;
         else $damage = 1;
         DealArcane($damage, 2, "PLAYCARD", $cardID, false, $currentPlayer, false, false, !DelimStringContains($additionalCosts, "ICE"), resolvedTarget: $target);
         return "";
-      case "UPR122": case "UPR123": case "UPR124":
-        if($cardID == "UPR122") $damage = 4;
-        else if($cardID == "UPR123") $damage = 3;
+      case "polar_cap_red": case "polar_cap_yellow": case "polar_cap_blue":
+        if($cardID == "polar_cap_red") $damage = 4;
+        else if($cardID == "polar_cap_yellow") $damage = 3;
         else $damage = 2;
         DealArcane($damage, 2, "PLAYCARD", $cardID, false, $currentPlayer, false, false, !DelimStringContains($additionalCosts, "ICE"), resolvedTarget: $target);
         return "";
-      case "UPR125":
+      case "conduit_of_frostburn":
         AddCurrentTurnEffect($cardID, $currentPlayer);
         return "";
-      case "UPR127": case "UPR128": case "UPR129":
-        if($cardID == "UPR127") $damage = 4;
-        else if($cardID == "UPR128") $damage = 3;
+      case "aether_hail_red": case "aether_hail_yellow": case "aether_hail_blue":
+        if($cardID == "aether_hail_red") $damage = 4;
+        else if($cardID == "aether_hail_yellow") $damage = 3;
         else $damage = 2;
         DealArcane($damage, 2, "PLAYCARD", $cardID, false, $currentPlayer, resolvedTarget: $target);
         return "";
-      case "UPR130": case "UPR131": case "UPR132":
-        if($cardID == "UPR130") $damage = 3;
-        else if($cardID == "UPR131") $damage = 2;
+      case "frosting_red": case "frosting_yellow": case "frosting_blue":
+        if($cardID == "frosting_red") $damage = 3;
+        else if($cardID == "frosting_yellow") $damage = 2;
         else $damage = 1;
         DealArcane($damage, 2, "PLAYCARD", $cardID, false, $currentPlayer, resolvedTarget: $target);
         return "";
-      case "UPR133": case "UPR134": case "UPR135":
-        if($cardID == "UPR133") $damage = 5;
-        else if($cardID == "UPR134") $damage = 4;
+      case "ice_bolt_red": case "ice_bolt_yellow": case "ice_bolt_blue":
+        if($cardID == "ice_bolt_red") $damage = 5;
+        else if($cardID == "ice_bolt_yellow") $damage = 4;
         else $damage = 3;
         DealArcane($damage, 2, "PLAYCARD", $cardID, false, $currentPlayer, resolvedTarget: $target);
         return "";
-      case "UPR165":
+      case "waning_moon":
         if($currentPlayer != $mainPlayer) $damage = 3;
         else $damage = 2;
         DealArcane($damage, 0, "ABILITY", $cardID, resolvedTarget: $target);
         return "";
-      case "UPR166":
+      case "alluvion_constellas":
         AddCurrentTurnEffect($cardID, $currentPlayer);
         return "";
-      case "UPR167":
+      case "spellfire_cloak":
         GainResources($currentPlayer, 1);
         return "Gain 1 resource.";
-      case "UPR168":
+      case "tome_of_duplicity_blue":
         AddDecisionQueue("FINDINDICES", $currentPlayer, "DECKTOPXINDICES,2");
         AddDecisionQueue("CHOOSEDECK", $currentPlayer, "<-", 1);
         AddDecisionQueue("SPECIFICCARD", $currentPlayer, "TOMEOFDUPLICITY", 1);
         return "";
-      case "UPR169":
+      case "rewind_blue":
         $index = intval(explode("-", $target)[1]);
         $targetPlayer = $layers[$index + 1];
         if(substr($from, 0, 5) != "THEIR") NegateLayer($target, "HAND");
         else NegateLayer($target, "THEIRHAND"); 
         if($targetPlayer == $mainPlayer) GainActionPoints(1, $mainPlayer);
         return "";
-      case "UPR170": case "UPR171": case "UPR172":
-        if($cardID == "UPR170") $damage = 4;
-        else if($cardID == "UPR171") $damage = 3;
+      case "dampen_red": case "dampen_yellow": case "dampen_blue":
+        if($cardID == "dampen_red") $damage = 4;
+        else if($cardID == "dampen_yellow") $damage = 3;
         else $damage = 2;
         DealArcane($damage, 2, "PLAYCARD", $cardID, false, $currentPlayer, resolvedTarget: $target);
         AddDecisionQueue("SETCLASSSTATE", $currentPlayer, $CS_ArcaneDamagePrevention, 1);
         return "";
-      case "UPR173": case "UPR174": case "UPR175":
-        if($cardID == "UPR173") $damage = 3;
-        else if($cardID == "UPR174") $damage = 2;
+      case "aether_dart_red": case "aether_dart_yellow": case "aether_dart_blue":
+        if($cardID == "aether_dart_red") $damage = 3;
+        else if($cardID == "aether_dart_yellow") $damage = 2;
         else $damage = 1;
         DealArcane($damage, 2, "PLAYCARD", $cardID, false, $currentPlayer, resolvedTarget: $target);
         return "";
-      case "UPR179": case "UPR180": case "UPR181":
-        if($cardID == "UPR179") $maxAllies = 3;
-        else if($cardID == "UPR180") $maxAllies = 2;
+      case "singe_red": case "singe_yellow": case "singe_blue":
+        if($cardID == "singe_red") $maxAllies = 3;
+        else if($cardID == "singe_yellow") $maxAllies = 2;
         else $maxAllies = 1;
         $otherPlayer = ($currentPlayer == 1 ? 2 : 1);
         $allies = &GetAllies($otherPlayer);
@@ -157,10 +157,10 @@
 
   function FrostHexEndTurnAbility($player)
   {
-    $numFrostHex = SearchCount(SearchAurasForCard("UPR126", $player));
+    $numFrostHex = SearchCount(SearchAurasForCard("frost_hex_blue", $player));
     for($i=0; $i<$numFrostHex; ++$i)
     {
-      DealArcane(1, 4, "TRIGGER", "ELE111", false, $player);
+      DealArcane(1, 4, "TRIGGER", "frostbite", false, $player);
     }
   }
 

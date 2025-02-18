@@ -53,7 +53,7 @@ if (CardSet($p2Char[0]) == "ROG") {
 
 //Dummy - Single Player
 if ($p2Char[0] == "DUMMY") {
-  $cards = ["CRU109", "ARC029", "ARC022", "EVR070", "ARC010", "ARC026"];
+  $cards = ["combustible_courier_red", "zipper_hit_red", "over_loop_blue", "microprocessor_blue", "induction_chamber_red", "zero_to_sixty_red"];
   AddGraveyard($cards[rand(0, 5)], 2, "DECK");
   AddGraveyard($cards[rand(0, 5)], 2, "DECK");
   AddGraveyard($cards[rand(0, 5)], 2, "DECK");
@@ -63,8 +63,8 @@ if ($p2Char[0] == "DUMMY") {
 
 //CR 2.0 4.1.5b Meta-static abilities affecting deck composition
 //Dash
-$p1IsDash = $p1Char[0] == "ARC001" || $p1Char[0] == "ARC002";
-$p2IsDash = $p2Char[0] == "ARC001" || $p2Char[0] == "ARC002";
+$p1IsDash = $p1Char[0] == "dash_inventor_extraordinaire" || $p1Char[0] == "dash";
+$p2IsDash = $p2Char[0] == "dash_inventor_extraordinaire" || $p2Char[0] == "dash";
 if ($p1IsDash) {
   $items = SearchDeck(1, "", "Item", 2, -1, "MECHANOLOGIST");//Player 1, max cost 2
   AddDecisionQueue("CHOOSEDECK", 1, $items);
@@ -86,15 +86,15 @@ if ($p2IsDash) {
 }
 
 //Fai
-if ($p1Char[0] == "UPR044" || $p1Char[0] == "UPR045") {
-  $cards = SearchDeckForCard(1, "UPR101");
+if ($p1Char[0] == "fai_rising_rebellion" || $p1Char[0] == "fai") {
+  $cards = SearchDeckForCard(1, "phoenix_flame_red");
   if ($cards != "") {
     AddDecisionQueue("MAYCHOOSEDECK", 1, $cards);
     AddDecisionQueue("ADDDISCARD", 1, "DECK", 1);
   }
 }
-if ($p2Char[0] == "UPR044" || $p2Char[0] == "UPR045") {
-  $cards = SearchDeckForCard(2, "UPR101");
+if ($p2Char[0] == "fai_rising_rebellion" || $p2Char[0] == "fai") {
+  $cards = SearchDeckForCard(2, "phoenix_flame_red");
   if ($cards != "") {
     AddDecisionQueue("MAYCHOOSEDECK", 2, $cards);
     AddDecisionQueue("ADDDISCARD", 2, "DECK", 1);
@@ -102,46 +102,46 @@ if ($p2Char[0] == "UPR044" || $p2Char[0] == "UPR045") {
 }
 
 //Crown of Dominion
-if (SearchCharacterForCard(1, "DYN234")) {
-  AddDecisionQueue("PASSPARAMETER", 1, "DYN243");
+if (SearchCharacterForCard(1, "crown_of_dominion")) {
+  AddDecisionQueue("PASSPARAMETER", 1, "gold");
   AddDecisionQueue("PUTPLAY", 1, "-");
 }
-if (SearchCharacterForCard(2, "DYN234")) {
-  AddDecisionQueue("PASSPARAMETER", 2, "DYN243");
+if (SearchCharacterForCard(2, "crown_of_dominion")) {
+  AddDecisionQueue("PASSPARAMETER", 2, "gold");
   AddDecisionQueue("PUTPLAY", 2, "-");
 }
 
 //Seasoned Saviour
-if (($index = FindCharacterIndex(1, "DYN026")) > 0) {
+if (($index = FindCharacterIndex(1, "seasoned_saviour")) > 0) {
   $p1Char[$index + 4] = -2;
 }
-if (($index = FindCharacterIndex(2, "DYN026")) > 0) {
+if (($index = FindCharacterIndex(2, "seasoned_saviour")) > 0) {
   $p2Char[$index + 4] = -2;
 }
 
 //Barbed Castaway
-if (($index = FindCharacterIndex(1, "OUT093")) > 0) {
-  AddCurrentTurnEffect("OUT093-Load", 1);
-  AddCurrentTurnEffect("OUT093-Aim", 1);
+if (($index = FindCharacterIndex(1, "barbed_castaway")) > 0) {
+  AddCurrentTurnEffect("barbed_castaway-Load", 1);
+  AddCurrentTurnEffect("barbed_castaway-Aim", 1);
 }
-if (($index = FindCharacterIndex(2, "OUT093")) > 0) {
-  AddCurrentTurnEffect("OUT093-Load", 2);
-  AddCurrentTurnEffect("OUT093-Aim", 2);
+if (($index = FindCharacterIndex(2, "barbed_castaway")) > 0) {
+  AddCurrentTurnEffect("barbed_castaway-Load", 2);
+  AddCurrentTurnEffect("barbed_castaway-Aim", 2);
 }
 
 //Victor
-if (SearchCharacterForCard(1, "HVY047") || SearchCharacterForCard(1, "HVY048")) {
+if (SearchCharacterForCard(1, "victor_goldmane_high_and_mighty") || SearchCharacterForCard(1, "victor_goldmane")) {
   AddDecisionQueue("ADDCURRENTEFFECT", 1, $p1Char[0] . "-1", 1);
 }
-if (SearchCharacterForCard(2, "HVY047") || SearchCharacterForCard(2, "HVY048")) {
+if (SearchCharacterForCard(2, "victor_goldmane_high_and_mighty") || SearchCharacterForCard(2, "victor_goldmane")) {
   AddDecisionQueue("ADDCURRENTEFFECT", 2, $p2Char[0] . "-1", 1);
 }
 
 //Aria Sanctuary for Rosseta Limited
 /* if($format == "draft"){
-  AddDecisionQueue("PASSPARAMETER", 1, "ROS027");
+  AddDecisionQueue("PASSPARAMETER", 1, "sanctuary_of_aria");
   AddDecisionQueue("PUTPLAY", 1, "-");
-  AddDecisionQueue("PASSPARAMETER", 2, "ROS027");
+  AddDecisionQueue("PASSPARAMETER", 2, "sanctuary_of_aria");
   AddDecisionQueue("PUTPLAY", 2, "-");
 } */
 
@@ -149,15 +149,15 @@ InventoryStartGameAbilities(1);
 InventoryStartGameAbilities(2);
 
 //Cogwerx equipments
-EquipWithSteamCounter("EVO014", $p1Char, $p2Char);
-EquipWithSteamCounter("EVO015", $p1Char, $p2Char);
-EquipWithSteamCounter("EVO016", $p1Char, $p2Char);
-EquipWithSteamCounter("EVO017", $p1Char, $p2Char);
+EquipWithSteamCounter("cogwerx_base_head", $p1Char, $p2Char);
+EquipWithSteamCounter("cogwerx_base_chest", $p1Char, $p2Char);
+EquipWithSteamCounter("cogwerx_base_arms", $p1Char, $p2Char);
+EquipWithSteamCounter("cogwerx_base_legs", $p1Char, $p2Char);
 
 //Quickshot Apprentice
 if ($p2Char[0] == "ROGUE016") {
   $p2Hand = &GetHand(2);
-  array_unshift($p2Hand, "ARC069");
+  array_unshift($p2Hand, "searing_shot_red");
 }
 if ($p2Char[0] == "ROGUE025") {
   $options = array("ROGUE801", "ROGUE803", "ROGUE805");
@@ -197,25 +197,25 @@ function InventoryStartGameAbilities($player)
   $inventory = $player == 1 ? $p1Inventory : $p2Inventory;
   for ($i = 0; $i < count($inventory); $i += InventoryPieces()) {
     switch ($inventory[$i]) {
-      case "DTD164":
-        PutPermanentIntoPlay($player, "DTD164");
-        array_push($inventory, "DTD564");
+      case "levia_redeemed":
+        PutPermanentIntoPlay($player, "levia_redeemed");
+        array_push($inventory, "blasmophet_levia_consumed");
         break;
-      case "EVO013":
+      case "adaptive_plating":
         AddDecisionQueue("LISTEMPTYEQUIPSLOTS", $player, "-");
         AddDecisionQueue("SETDQVAR", $player, "0", 1);
         AddDecisionQueue("SETDQCONTEXT", $player, "Choose where to equip your " . CardLink($inventory[$i], $inventory[$i]), 1);
         AddDecisionQueue("BUTTONINPUT", $player, "{0},None", 1);
         AddDecisionQueue("MODAL", $player, "ADAPTIVEPLATING", 1);
-        AddDecisionQueue("SHOWMODES", $player, "EVO013", 1);
+        AddDecisionQueue("SHOWMODES", $player, "adaptive_plating", 1);
         break;
-      case "ROS246":
+      case "adaptive_dissolver":
         AddDecisionQueue("LISTEMPTYEQUIPSLOTS", $player, "-");
         AddDecisionQueue("SETDQVAR", $player, "0", 1);
         AddDecisionQueue("SETDQCONTEXT", $player, "Choose where to equip your " . CardLink($inventory[$i], $inventory[$i]), 1);
         AddDecisionQueue("BUTTONINPUT", $player, "{0},None", 1);
         AddDecisionQueue("MODAL", $player, "ADAPTIVEDISSOLVER", 1);
-        AddDecisionQueue("SHOWMODES", $player, "ROS246", 1);
+        AddDecisionQueue("SHOWMODES", $player, "adaptive_dissolver", 1);
         break;
       default:
         break;

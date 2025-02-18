@@ -169,18 +169,18 @@ function ProcessInput($playerID, $mode, $buttonInput, $cardID, $chkCount, $chkIn
       $cardID = $banish[$index];
       if (!IsPlayable($cardID, $turn[0], "BANISH", $index)) break;
       if ($banish[$index + 1] == "INST") SetClassState($currentPlayer, $CS_NextNAAInstant, 1);
-      if ($banish[$index + 1] == "MON212" && TalentContains($theirChar[0], "LIGHT", $currentPlayer)) AddCurrentTurnEffect("MON212", $currentPlayer);
+      if ($banish[$index + 1] == "spew_shadow_red" && TalentContains($theirChar[0], "LIGHT", $currentPlayer)) AddCurrentTurnEffect("spew_shadow_red", $currentPlayer);
       SetClassState($currentPlayer, $CS_PlayIndex, $index);
       if (CanPlayAsInstant($cardID, $index, "BANISH")) SetClassState($currentPlayer, $CS_PlayedAsInstant, "1");
-      if (!PlayableFromBanish($cardID, $banish[$index + 1], true)) SearchCurrentTurnEffects("DTD564", $currentPlayer, true);
-      if ($banish[$index + 1] == "MST236") {
-        SearchCurrentTurnEffects("MST236-3", $currentPlayer, true);
+      if (!PlayableFromBanish($cardID, $banish[$index + 1], true)) SearchCurrentTurnEffects("levia_redeemed", $currentPlayer, true);
+      if ($banish[$index + 1] == "shadowrealm_horror_red") {
+        SearchCurrentTurnEffects("shadowrealm_horror_red-3", $currentPlayer, true);
         $currentPlayerBanish = new Banish($currentPlayer);
         $otherPlayerBanish = new Banish($otherPlayer);
-        $currentPlayerBanish->UnsetModifier("MST236");
-        $otherPlayerBanish->UnsetModifier("MST236");
+        $currentPlayerBanish->UnsetModifier("shadowrealm_horror_red");
+        $otherPlayerBanish->UnsetModifier("shadowrealm_horror_red");
       }
-      if($banish[$index + 1] == "ELE064") AddCurrentTurnEffect("ELE064", $currentPlayer, uniqueID:$cardID);
+      if($banish[$index + 1] == "blossoming_spellblade_red") AddCurrentTurnEffect("blossoming_spellblade_red", $currentPlayer, uniqueID:$cardID);
       PlayCard($cardID, "BANISH", -1, $index, $banish[$index + 2]);
       break;
     case 15: // Their Banish
@@ -250,7 +250,7 @@ function ProcessInput($playerID, $mode, $buttonInput, $cardID, $chkCount, $chkIn
         }
 
         $selectionCount = count($chkInput);
-        if ($maxSelect < $selectionCount) { // we won't revert the gamestate as may the opponent is requested to choose (EVO143)
+        if ($maxSelect < $selectionCount) { // we won't revert the gamestate as may the opponent is requested to choose (meganetic_lockwave_blue)
           WriteLog("Player " . $playerID . " selected " . $selectionCount . " items, but a maximum of " . $maxSelect . " is allowed.", highlight: true);
           $skipWriteGamestate = true;
           break;
@@ -421,7 +421,7 @@ function ProcessInput($playerID, $mode, $buttonInput, $cardID, $chkCount, $chkIn
     case 30: //String input
       $cardName = CardName(strtoupper($inputText));
       if ($cardName != "") $inputText = $cardName;
-      if ($turn[2] == "OUT052" && $inputText == "Head Leads the Tail") //Validate the name
+      if ($turn[2] == "head_leads_the_tail_red" && $inputText == "Head Leads the Tail") //Validate the name
       {
         WriteLog("Must name another card");
         break;
@@ -882,12 +882,12 @@ function PassInput($autopass = true)
 {
   global $turn, $currentPlayer, $mainPlayer;
   if ($turn[0] == "B") {
-    $uniqueID = SearchCurrentTurnEffects("EVO143", $mainPlayer, returnUniqueID: true);
+    $uniqueID = SearchCurrentTurnEffects("meganetic_lockwave_blue", $mainPlayer, returnUniqueID: true);
     if ($uniqueID != -1) {
       $playerChar = &GetPlayerCharacter($currentPlayer);
       $charID = FindCharacterIndex($currentPlayer, $uniqueID);
       if ($playerChar[$charID + 6] != 1 && BlockValue($playerChar[$charID]) >= 0) {
-        WriteLog("Player " . $currentPlayer . " must block with " . CardLink($uniqueID, $uniqueID) . " due to the effect of " . CardLink("EVO143", "EVO143") . ".");
+        WriteLog("Player " . $currentPlayer . " must block with " . CardLink($uniqueID, $uniqueID) . " due to the effect of " . CardLink("meganetic_lockwave_blue", "meganetic_lockwave_blue") . ".");
         return;
       }
     }
@@ -952,7 +952,7 @@ function NuuStaticAbility($banishedBy)
       if ($defPlayer == $prevLink[$i+1]) {
         $originalID = GetCardIDBeforeTransform($prevLink[$i]);
         $cardType = CardType($prevLink[$i]);
-        if ($cardType === "E" && CardType($originalID) === "A" && $prevLink[$i] !== "EVO410b" && $prevLink[$i] !== "DYN492b") {
+        if ($cardType === "E" && CardType($originalID) === "A" && $prevLink[$i] !== "teklovossen_the_mechropotentb" && $prevLink[$i] !== "nitro_mechanoidb") {
           WriteLog(CardLink($prevLink[$i], $prevLink[$i]) . " was banished.");
           BanishCardForPlayer($originalID, $defPlayer, "CC", "Source-" . $banishedBy, $mainPlayer);
           $index = FindCharacterIndex($defPlayer, $prevLink[$i]);
@@ -979,7 +979,7 @@ function ChainLinkBeginResolutionEffects()
         switch ($mainCharacterEffects[$i + 1]) {
           //CR 2.1 - 6.5.4. Standard-replacement: Third, each player applies any active standard-replacement effects they control
           //CR 2.1 - 6.5.5. Prevention: Fourth, each player applies any active prevention effects they control
-          case "EVR054":
+          case "shatter_yellow":
             $pendingDamage = CachedTotalAttack() - CachedTotalBlock();
             AddDecisionQueue("SETDQCONTEXT", $mainPlayer, "Currently $pendingDamage damage would be dealt. Do you want to destroy a defending equipment instead?");
             AddDecisionQueue("YESNO", $mainPlayer, "if_you_want_to_destroy_a_blocking_equipment_instead_of_dealing_damage");
@@ -990,7 +990,7 @@ function ChainLinkBeginResolutionEffects()
             AddDecisionQueue("CHOOSETHEIRCHARACTER", $mainPlayer, "<-", 1);
             AddDecisionQueue("DESTROYCHARACTER", $defPlayer, "-", 1);
             break;
-          case "HVY053":
+          case "gauntlets_of_iron_will":
             RemoveCurrentTurnEffect($i);
             break;
           default:
@@ -1056,13 +1056,13 @@ function ResolveCombatDamage($damageDone)
       ++$combatChainState[$CCS_HitsWithWeapon];
       IncrementClassState($mainPlayer, $CS_HitsWithWeapon);
       if (SubtypeContains($combatChain[0], "Sword", $mainPlayer)) IncrementClassState($mainPlayer, $CS_HitsWithSword);
-      if (SearchDynamicCurrentTurnEffectsIndex("HNT258-DMG", $defPlayer, lenght:10) != -1) {
-        $index = SearchDynamicCurrentTurnEffectsIndex("HNT258-DMG", $defPlayer, lenght:10);
+      if (SearchDynamicCurrentTurnEffectsIndex("war_cry_of_bellona_yellow-DMG", $defPlayer) != -1) {
+        $index = SearchDynamicCurrentTurnEffectsIndex("war_cry_of_bellona_yellow-DMG", $defPlayer);
         $params = explode(",", $currentTurnEffects[$index]);
         $amount = $params[1];
         $uniqueID = $params[2];
         if($damageDone <= $amount && $uniqueID == $combatChain[8]) {
-          DealDamageAsync($mainPlayer, $amount, "DAMAGE", "HNT258");
+          DealDamageAsync($mainPlayer, $amount, "DAMAGE", "war_cry_of_bellona_yellow");
           RemoveCurrentTurnEffect($index);
         }
       }
@@ -1096,7 +1096,7 @@ function ResolveCombatDamage($damageDone)
       AttackDamageAbilities(GetClassState($mainPlayer, $CS_DamageDealt));
     }
     for ($i = count($currentTurnEffects) - CurrentTurnEffectsPieces(); $i >= 0; $i -= CurrentTurnEffectsPieces()) {
-      if ($currentTurnEffects[$i] == "DYN213") AddLayer("TRIGGER", $currentTurnEffects[$i + 1], "DYN213");
+      if ($currentTurnEffects[$i] == "celestial_kimono") AddLayer("TRIGGER", $currentTurnEffects[$i + 1], "celestial_kimono");
       if (IsCombatEffectActive($currentTurnEffects[$i]) && $currentTurnEffects[$i + 1] == $mainPlayer && !$combatChainState[$CCS_ChainLinkHitEffectsPrevented]) {
         AddCardEffectHitTrigger($currentTurnEffects[$i]); // Effects that do not gives it's effect to the attack
       }
@@ -1125,14 +1125,14 @@ function FinalizeChainLink($chainClosed = false)
   global $CS_AnotherWeaponGainedGoAgain, $CCS_HitThisLink, $CS_ModalAbilityChoosen, $CS_NumSpectralShieldAttacks, $CombatChain;
   BuildMainPlayerGameState();
   if (DoesAttackHaveGoAgain() && !$chainClosed) {
-    if(SearchCurrentTurnEffects("ROS010", $currentPlayer)) {
-      $count = CountCurrentTurnEffects("ROS010", $currentPlayer);
+    if(SearchCurrentTurnEffects("arc_lightning_yellow", $currentPlayer)) {
+      $count = CountCurrentTurnEffects("arc_lightning_yellow", $currentPlayer);
       for ($i=0; $i < $count; $i++) { 
-        AddLayer("TRIGGER", $currentPlayer, "ROS010");
+        AddLayer("TRIGGER", $currentPlayer, "arc_lightning_yellow");
       }
     }
     GainActionPoints(1, $mainPlayer);
-    if ($combatChain[0] == "DVR002" && SearchCharacterActive($mainPlayer, "DVR001")) DoriQuicksilverProdigyEffect();
+    if ($combatChain[0] == "dawnblade_resplendent" && SearchCharacterActive($mainPlayer, "dorinthea_quicksilver_prodigy")) DoriQuicksilverProdigyEffect();
     if (TypeContains($combatChain[0], "W", $mainPlayer) && GetClassState($mainPlayer, $CS_AnotherWeaponGainedGoAgain) == "-") SetClassState($mainPlayer, $CS_AnotherWeaponGainedGoAgain, $combatChain[0]);
   }
   array_push($chainLinkSummary, $combatChainState[$CCS_DamageDealt]);
@@ -1214,17 +1214,17 @@ function CleanUpCombatEffects($weaponSwap = false, $isSpectraTarget = false)
         $addedOnHits .= $currentTurnEffects[$i] . ",";
       }
     }
-    if (substr($currentTurnEffects[$i], 0, 6) == "DYN065") array_push($effectsToRemove, $i);
+    if (ExtractCardID($currentTurnEffects[$i]) == "crouching_tiger") array_push($effectsToRemove, $i);
     switch ($currentTurnEffects[$i]) {
-      case "MON281":
-      case "MON282":
-      case "MON283":
-      case "DYN079":
-      case "DYN080":
-      case "DYN081":
+      case "rally_the_rearguard_red":
+      case "rally_the_rearguard_yellow":
+      case "rally_the_rearguard_blue":
+      case "puncture_red":
+      case "puncture_yellow":
+      case "puncture_blue":
         array_push($effectsToRemove, $i);
         break;
-      case "OUT108":
+      case "tarpit_trap_yellow":
         if ($combatChainState[$CCS_DamageDealt] > 0 && CardType($combatChain[0]) == "AA") array_push($effectsToRemove, $i);
         break;
       default:
@@ -1272,8 +1272,8 @@ function UndoShiyanaBaseLife() // Technically not a End Step Trigger but it's th
   global $mainPlayer, $defPlayer;
   $mainChar = GetPlayerCharacter($mainPlayer);
   $defChar = GetPlayerCharacter($defPlayer);
-  if ($defChar[0] == "CRU097" && SearchCurrentTurnEffects($mainChar[0] . "-SHIYANA", $defPlayer)) {
-    $lifeDifference = GeneratedCharacterHealth($mainChar[0]) - GeneratedCharacterHealth("CRU097");
+  if ($defChar[0] == "shiyana_diamond_gemini" && SearchCurrentTurnEffects($mainChar[0] . "-SHIYANA", $defPlayer)) {
+    $lifeDifference = GeneratedCharacterHealth($mainChar[0]) - GeneratedCharacterHealth("shiyana_diamond_gemini");
     if ($lifeDifference > 0) LoseHealth($lifeDifference, $defPlayer);
     elseif ($lifeDifference < 0) GainHealth(abs($lifeDifference), $defPlayer, true, false);
   }
@@ -1289,11 +1289,11 @@ function UndoIntimidate($player)
       RemoveBanish($player, $i);
       continue;
     }
-    if ($banish[$i + 1] == "NOFEAR" && SearchLayersForCardID("HVY016") == -1) {
-      AddLayer("TRIGGER", $player, "HVY016", "-");
+    if ($banish[$i + 1] == "NOFEAR" && SearchLayersForCardID("no_fear_red") == -1) {
+      AddLayer("TRIGGER", $player, "no_fear_red", "-");
     }
-    if ($banish[$i + 1] == "STONERAIN" && SearchLayersForCardID("AAZ016") == -1) {
-      AddLayer("TRIGGER", $player, "AAZ016", "-");
+    if ($banish[$i + 1] == "STONERAIN" && SearchLayersForCardID("stone_rain_red") == -1) {
+      AddLayer("TRIGGER", $player, "stone_rain_red", "-");
     }
   }
 }
@@ -1370,7 +1370,7 @@ function FinalizeTurn()
   //4.4.3c Each player puts all cards in their pitch zone (if any) on the bottom of their deck in any order.The order cards are put on the bottom of the deck this way is hidden information
   //Reset characters/equipment
   for ($i = 1; $i < count($mainCharacter); $i += CharacterPieces()) {
-    if ($mainCharacter[$i - 1] == "CRU177" && $mainCharacter[$i + 1] >= 3) $mainCharacter[$i] = 0; //Destroy Talishar if >= 3 rust counters
+    if ($mainCharacter[$i - 1] == "talishar_the_lost_prince" && $mainCharacter[$i + 1] >= 3) $mainCharacter[$i] = 0; //Destroy Talishar if >= 3 rust counters
     if ($mainCharacter[$i + 6] == 1) {
       DestroyCharacter($mainPlayer, $i-1); //Destroy if it was flagged for destruction
       $mainCharacter[$i + 6] = 0;
@@ -1471,7 +1471,7 @@ function PlayCard($cardID, $from, $dynCostResolved = -1, $index = -1, $uniqueID 
   $playingCard = $turn[0] != "P" && ($turn[0] != "B" || count($layers) > 0);  
   $mod = "";
   //manual tunic ticking
-  if ($playingCard && $cardID == "WTR150" && ManualTunicSetting($currentPlayer) && GetClassState($currentPlayer, $CS_TunicTicks) == 0) {
+  if ($playingCard && $cardID == "fyendals_spring_tunic" && ManualTunicSetting($currentPlayer) && GetClassState($currentPlayer, $CS_TunicTicks) == 0) {
     $character = &GetPlayerCharacter($currentPlayer);
     $cardIndex = FindCharacterIndex($currentPlayer, $cardID);
     if ($character[$cardIndex + 2] < 3) {
@@ -1510,8 +1510,8 @@ function PlayCard($cardID, $from, $dynCostResolved = -1, $index = -1, $uniqueID 
   }
   if ($turn[0] != "P") {
     if ($dynCostResolved >= 0) {
-      if ($playingCard && SearchCurrentTurnEffects("HNT167", $currentPlayer) && TypeContains($cardID, "AA") && !SearchCurrentTurnEffects("HNT167-ATTACK", $currentPlayer) && GetResolvedAbilityName($cardID, $from) != "Ability") {
-        AddCurrentTurnEffect("HNT167-ATTACK", $currentPlayer);
+      if ($playingCard && SearchCurrentTurnEffects("fealty", $currentPlayer) && TypeContains($cardID, "AA") && !SearchCurrentTurnEffects("fealty-ATTACK", $currentPlayer) && GetResolvedAbilityName($cardID, $from) != "Ability") {
+        AddCurrentTurnEffect("fealty-ATTACK", $currentPlayer);
       }
       SetClassState($currentPlayer, $CS_DynCostResolved, $dynCostResolved);
       $baseCost = ($from == "PLAY" || $from == "EQUIP" ? AbilityCost($cardID) : (CardCost($cardID, $from) + SelfCostModifier($cardID, $from)));
@@ -1534,8 +1534,8 @@ function PlayCard($cardID, $from, $dynCostResolved = -1, $index = -1, $uniqueID 
       //CR 5.1.3 Declare Costs Begin (CR 2.0)
       $resources[1] = 0;
       if ($playingCard && substr($from, 0, 5) == "THEIR") {
-        if ((SearchCurrentTurnEffects("MST001", $currentPlayer) || SearchCurrentTurnEffects("MST002", $currentPlayer)) && ColorContains($cardID, 3, $otherPlayer)) {
-          if($cardID == "WTR051" || $cardID == "WTR052" || $cardID == "WTR053") $dynCost = "0,4"; //It's cost when played by Nuu
+        if ((SearchCurrentTurnEffects("nuu_alluring_desire", $currentPlayer) || SearchCurrentTurnEffects("nuu", $currentPlayer)) && ColorContains($cardID, 3, $otherPlayer)) {
+          if($cardID == "staunch_response_red" || $cardID == "staunch_response_yellow" || $cardID == "staunch_response_blue") $dynCost = "0,4"; //It's cost when played by Nuu
           else $dynCost = 0; //If you are playing a card without paying its {r} cost, and part of that cost involves X, then you can only choose X=0.
           SetClassState($currentPlayer, $CS_LastDynCost, $dynCost);
         }
@@ -1605,16 +1605,16 @@ function PlayCard($cardID, $from, $dynCostResolved = -1, $index = -1, $uniqueID 
     $canPlayAsInstant = CanPlayAsInstant($cardID, $index, $from) || (DelimStringContains($cardType, "I") && $turn[0] != "M");
     SetClassState($currentPlayer, $CS_PlayedAsInstant, "0");
     IncrementClassState($currentPlayer, $CS_NumCardsPlayed);
-    if($CombatChain->HasCurrentLink() && $CombatChain->AttackCard()->ID() == "ROS076" && DelimStringContains(CardType($cardID), "I") && $currentPlayer == $mainPlayer) {
-      if(SearchCurrentTurnEffects("ROS076", $mainPlayer, true)) {
-        AddDecisionQueue("YESNO", $mainPlayer, "if you want to return ".CardLink("ROS076", "ROS076")." to your hand?");
+    if($CombatChain->HasCurrentLink() && $CombatChain->AttackCard()->ID() == "gone_in_a_flash_red" && DelimStringContains(CardType($cardID), "I") && $currentPlayer == $mainPlayer) {
+      if(SearchCurrentTurnEffects("gone_in_a_flash_red", $mainPlayer, true)) {
+        AddDecisionQueue("YESNO", $mainPlayer, "if you want to return ".CardLink("gone_in_a_flash_red", "gone_in_a_flash_red")." to your hand?");
         AddDecisionQueue("NOPASS", $mainPlayer, "-");
         AddDecisionQueue("GONEINAFLASH", $mainPlayer, "-", 1);
       }
     }
-    if($CombatChain->HasCurrentLink() && $CombatChain->AttackCard()->ID() == "HNT100" && $currentPlayer == $mainPlayer && !SearchCurrentTurnEffects("HNT100", $currentPlayer)) {
+    if($CombatChain->HasCurrentLink() && $CombatChain->AttackCard()->ID() == "obsidian_fire_vein" && $currentPlayer == $mainPlayer && !SearchCurrentTurnEffects("obsidian_fire_vein", $currentPlayer)) {
       if (!IsStaticType($cardType, $from, $cardID) && (TalentContains($cardID, "DRACONIC", $currentPlayer)) && GetResolvedAbilityType($cardID, $from) != "I") {
-        AddCurrentTurnEffect("HNT100", $currentPlayer);
+        AddCurrentTurnEffect("obsidian_fire_vein", $currentPlayer);
         GiveAttackGoAgain();
       }
     }
@@ -1636,26 +1636,26 @@ function PlayCard($cardID, $from, $dynCostResolved = -1, $index = -1, $uniqueID 
       if (DelimStringContains($cardType, "A") && !$canPlayAsInstant && !GoesOnCombatChain($turn[0], $layers[count($layers)-LayerPieces()], $from, $currentPlayer)) {
         ResetCombatChainState();
       }
-      $remorselessCount = CountCurrentTurnEffects("CRU123-DMG", $playerID);
+      $remorselessCount = CountCurrentTurnEffects("remorseless_red-DMG", $playerID);
       if ((DelimStringContains($cardType, "A") || $cardType == "AA") && $remorselessCount > 0 && GetAbilityTypes($cardID, from: $from) == "") {
-        WriteLog("Player " . $playerID . " lost " . $remorselessCount . " life to " . CardLink("CRU123", "CRU123"));
+        WriteLog("Player " . $playerID . " lost " . $remorselessCount . " life to " . CardLink("remorseless_red", "remorseless_red"));
         LoseHealth($remorselessCount, $playerID);
       } elseif ((DelimStringContains($cardType, "A") || $cardType == "AA") && $remorselessCount > 0 && (GetResolvedAbilityType($cardID, $from) == "" || GetResolvedAbilityType($cardID, $from) == "AA" || GetResolvedAbilityType($cardID, $from) == "A")) {
-        WriteLog("Player " . $playerID . " lost " . $remorselessCount . " life to " . CardLink("CRU123", "CRU123"));
+        WriteLog("Player " . $playerID . " lost " . $remorselessCount . " life to " . CardLink("remorseless_red", "remorseless_red"));
         LoseHealth($remorselessCount, $playerID);
       }
-      if (CardNameContains($cardID, "Moon Wish", $currentPlayer)) AddCurrentTurnEffect("ARC185-GA", $currentPlayer);
-      if (ClassContains($cardID, "ILLUSIONIST", $currentPlayer) && DelimStringContains(CardSubType($cardID), "Aura") && CardCost($cardID, $from) <= 2 && SearchCurrentTurnEffects("MST155-INST", $currentPlayer, true)) {
-        AddCurrentTurnEffect("MST155", $currentPlayer);
+      if (CardNameContains($cardID, "Moon Wish", $currentPlayer)) AddCurrentTurnEffect("moon_wish_red-GA", $currentPlayer);
+      if (ClassContains($cardID, "ILLUSIONIST", $currentPlayer) && DelimStringContains(CardSubType($cardID), "Aura") && CardCost($cardID, $from) <= 2 && SearchCurrentTurnEffects("vengeful_apparition_red-INST", $currentPlayer, true)) {
+        AddCurrentTurnEffect("vengeful_apparition_red", $currentPlayer);
       }
-      if (ClassContains($cardID, "ILLUSIONIST", $currentPlayer) && DelimStringContains(CardSubType($cardID), "Aura") && CardCost($cardID, $from) <= 1 && SearchCurrentTurnEffects("MST156-INST", $currentPlayer, true)) {
-        AddCurrentTurnEffect("MST156", $currentPlayer);
+      if (ClassContains($cardID, "ILLUSIONIST", $currentPlayer) && DelimStringContains(CardSubType($cardID), "Aura") && CardCost($cardID, $from) <= 1 && SearchCurrentTurnEffects("vengeful_apparition_yellow-INST", $currentPlayer, true)) {
+        AddCurrentTurnEffect("vengeful_apparition_yellow", $currentPlayer);
       }
-      if (ClassContains($cardID, "ILLUSIONIST", $currentPlayer) && DelimStringContains(CardSubType($cardID), "Aura") && CardCost($cardID, $from) <= 0 && SearchCurrentTurnEffects("MST157-INST", $currentPlayer, true)) {
-        AddCurrentTurnEffect("MST157", $currentPlayer);
+      if (ClassContains($cardID, "ILLUSIONIST", $currentPlayer) && DelimStringContains(CardSubType($cardID), "Aura") && CardCost($cardID, $from) <= 0 && SearchCurrentTurnEffects("vengeful_apparition_blue-INST", $currentPlayer, true)) {
+        AddCurrentTurnEffect("vengeful_apparition_blue", $currentPlayer);
       }
       if (DelimStringContains(CardSubType($cardID), "Aura")) {
-        SearchCurrentTurnEffects("ROS251", $currentPlayer, true);
+        SearchCurrentTurnEffects("fluttersteps", $currentPlayer, true);
       }
       CombatChainPlayAbility($cardID);
       ItemPlayAbilities($cardID, $from);
@@ -1663,7 +1663,7 @@ function PlayCard($cardID, $from, $dynCostResolved = -1, $index = -1, $uniqueID 
     if (EffectPlayCardRestricted($cardID, $playType, $from, true)) return;
     if (TalentContains($cardID, "DRACONIC", $currentPlayer) && $from != "EQUIP" && $from != "PLAY" && GetResolvedAbilityName($cardID, $from) != "Ability") {
       IncrementClassState($currentPlayer, $CS_NumDraconicPlayed);
-      SearchCurrentTurnEffects("HNT167", $currentPlayer, remove:true);
+      SearchCurrentTurnEffects("fealty", $currentPlayer, remove:true);
     }
     if (HasStealth($cardID) && (GetResolvedAbilityType($cardID, $from) == "AA" || GetResolvedAbilityType($cardID, $from) == "")) {
       IncrementClassState($currentPlayer, piece: $CS_NumStealthAttacks);
@@ -1756,41 +1756,41 @@ function GetLayerTarget($cardID, $from)
 {
   global $currentPlayer, $CombatChain;
   switch ($cardID) {
-    case "CRU143":
+    case "rattle_bones_red":
       AddDecisionQueue("MULTIZONEINDICES", $currentPlayer, "MYDISCARD:type=AA;class=RUNEBLADE");
       AddDecisionQueue("SETDQCONTEXT", $currentPlayer, "Choose target Runeblade attack action card");
       AddDecisionQueue("CHOOSEMULTIZONE", $currentPlayer, "<-", 1);
       AddDecisionQueue("SHOWSELECTEDTARGET", $currentPlayer, "-", 1);
       AddDecisionQueue("SETLAYERTARGET", $currentPlayer, $cardID, 1);
       break;
-    case "CRU164":
+    case "aetherize_blue":
       AddDecisionQueue("MULTIZONEINDICES", $currentPlayer, "LAYER:type=I;maxCost=1");
       AddDecisionQueue("CHOOSEMULTIZONE", $currentPlayer, "<-", 1);
       AddDecisionQueue("SETLAYERTARGET", $currentPlayer, $cardID, 1);
       break;
-    case "MON084":
-    case "MON085":
-    case "MON086":
+    case "blinding_beam_red":
+    case "blinding_beam_yellow":
+    case "blinding_beam_blue":
       AddDecisionQueue("FINDINDICES", $currentPlayer, "CCAA");
       AddDecisionQueue("CHOOSECOMBATCHAIN", $currentPlayer, "<-", 1);
       AddDecisionQueue("SETLAYERTARGET", $currentPlayer, $cardID, 1);
       break;
-    case "MON303":
-    case "MON304":
-    case "MON305":
+    case "memorial_ground_red":
+    case "memorial_ground_yellow":
+    case "memorial_ground_blue":
       $maxCost = 2;
-      if ($cardID == "MON304") $maxCost = 1;
-      elseif ($cardID == "MON305") $maxCost = 0;
+      if ($cardID == "memorial_ground_yellow") $maxCost = 1;
+      elseif ($cardID == "memorial_ground_blue") $maxCost = 0;
       AddDecisionQueue("MULTIZONEINDICES", $currentPlayer, "MYDISCARD:maxCost=" . $maxCost . ";type=AA");
       AddDecisionQueue("CHOOSEMULTIZONE", $currentPlayer, "<-", 1);
       AddDecisionQueue("SHOWSELECTEDTARGET", $currentPlayer, "-", 1);
       AddDecisionQueue("SETLAYERTARGET", $currentPlayer, $cardID, 1);
       break;
-    case "ELE140":
-    case "ELE141":
-    case "ELE142":
-      if($cardID == "ELE140") $minCost = 0;
-      else if($cardID == "ELE141") $minCost = 1;
+    case "sow_tomorrow_red":
+    case "sow_tomorrow_yellow":
+    case "sow_tomorrow_blue":
+      if($cardID == "sow_tomorrow_red") $minCost = 0;
+      else if($cardID == "sow_tomorrow_yellow") $minCost = 1;
       else $minCost = 2;
       AddDecisionQueue("MULTIZONEINDICES", $currentPlayer, "MYDISCARD:type=A;talent=EARTH,ELEMENTAL;minCost=" . $minCost . "&MYDISCARD:type=AA;talent=EARTH,ELEMENTAL;minCost=" . $minCost);
       AddDecisionQueue("SETDQCONTEXT", $currentPlayer, "Choose target action card");
@@ -1798,24 +1798,24 @@ function GetLayerTarget($cardID, $from)
       AddDecisionQueue("SHOWSELECTEDTARGET", $currentPlayer, "-", 1);
       AddDecisionQueue("SETLAYERTARGET", $currentPlayer, $cardID, 1);
       break;
-    case "ELE183":
-    case "ELE184":
-    case "ELE185":
+    case "lightning_press_red":
+    case "lightning_press_yellow":
+    case "lightning_press_blue":
       AddDecisionQueue("MULTIZONEINDICES", $currentPlayer, "COMBATCHAINLINK:maxCost=1;type=AA");
       AddDecisionQueue("CHOOSEMULTIZONE", $currentPlayer, "<-", 1);
       AddDecisionQueue("SHOWSELECTEDTARGET", $currentPlayer, "-", 1);
       AddDecisionQueue("SETLAYERTARGET", $currentPlayer, $cardID, 1);
       break;
-    case "EVR033":
-    case "EVR034":
-    case "EVR035":
+    case "steadfast_red":
+    case "steadfast_yellow":
+    case "steadfast_blue":
       AddDecisionQueue("FINDINDICES", $currentPlayer, "DAMAGEPREVENTIONTARGET");
       AddDecisionQueue("SETDQCONTEXT", $currentPlayer, "Choose a damage source for Steadfast");
       AddDecisionQueue("CHOOSEMULTIZONE", $currentPlayer, "<-", 1);
       AddDecisionQueue("SHOWSELECTEDTARGET", $currentPlayer, "-", 1);
       AddDecisionQueue("SETLAYERTARGET", $currentPlayer, $cardID, 1);
       break;
-    case "EVR124":
+    case "scour_blue":
       global $CS_LastDynCost;
       AddDecisionQueue("PASSPARAMETER", $currentPlayer, $cardID);
       AddDecisionQueue("SETDQVAR", $currentPlayer, "0");
@@ -1828,110 +1828,110 @@ function GetLayerTarget($cardID, $from)
       AddDecisionQueue("SHOWSELECTEDTARGET", $currentPlayer, "-", 1);
       AddDecisionQueue("SETLAYERTARGET", $currentPlayer, $cardID, 1);  
       break;
-    case "UPR169":
+    case "rewind_blue":
       AddDecisionQueue("MULTIZONEINDICES", $currentPlayer, "LAYER:type=A");
       AddDecisionQueue("CHOOSEMULTIZONE", $currentPlayer, "<-", 1);
       AddDecisionQueue("SHOWSELECTEDTARGET", $currentPlayer, "-", 1);
       AddDecisionQueue("SETLAYERTARGET", $currentPlayer, $cardID, 1);
       break;
-    case "UPR004": //Invocations must target Ash
-    case "UPR006":
-    case "UPR007":
-    case "UPR008":
-    case "UPR009":
-    case "UPR010":
-    case "UPR011":
-    case "UPR012":
-    case "UPR013":
-    case "UPR014":
-    case "UPR015":
-    case "UPR016":
-    case "UPR017":
-    case "UPR036":
-    case "UPR037":
-    case "UPR038":
+    case "silken_form": //Invocations must target Ash
+    case "invoke_dracona_optimai_red":
+    case "invoke_tomeltai_red":
+    case "invoke_dominia_red":
+    case "invoke_azvolai_red":
+    case "invoke_cromai_red":
+    case "invoke_kyloria_red":
+    case "invoke_miragai_red":
+    case "invoke_nekria_red":
+    case "invoke_ouvia_red":
+    case "invoke_themai_red":
+    case "invoke_vynserakai_red":
+    case "invoke_yendurai_red":
+    case "skittering_sands_red":
+    case "skittering_sands_yellow":
+    case "skittering_sands_blue":
       AddDecisionQueue("MULTIZONEINDICES", $currentPlayer, "MYPERM:subtype=Ash");
       AddDecisionQueue("SETDQCONTEXT", $currentPlayer, "Choose an Ash to transform");
       AddDecisionQueue("CHOOSEMULTIZONE", $currentPlayer, "<-", 1);
       AddDecisionQueue("SETLAYERTARGET", $currentPlayer, $cardID, 1);
       break;
-    case "UPR039": //sand cover
-    case "UPR040":
-    case "UPR041":
+    case "sand_cover_red": //sand cover
+    case "sand_cover_yellow":
+    case "sand_cover_blue":
       AddDecisionQueue("MULTIZONEINDICES", $currentPlayer, "MYPERM:subtype=Ash");
       AddDecisionQueue("SETDQCONTEXT", $currentPlayer, "Choose an Ash to grant ward");
       AddDecisionQueue("CHOOSEMULTIZONE", $currentPlayer, "<-", 1);
       AddDecisionQueue("SETLAYERTARGET", $currentPlayer, $cardID, 1);
       break;
-    case "UPR183":
+    case "helios_mitre":
       AddDecisionQueue("FINDINDICES", $currentPlayer, "DAMAGEPREVENTIONTARGET");
       AddDecisionQueue("SETDQCONTEXT", $currentPlayer, "Choose a damage source for Helio's Mitre");
       AddDecisionQueue("CHOOSEMULTIZONE", $currentPlayer, "<-", 1);
       AddDecisionQueue("SHOWSELECTEDTARGET", $currentPlayer, "-", 1);
       AddDecisionQueue("SETLAYERTARGET", $currentPlayer, $cardID, 1);
       break;
-    case "UPR221":
-    case "UPR222":
-    case "UPR223":
+    case "oasis_respite_red":
+    case "oasis_respite_yellow":
+    case "oasis_respite_blue":
       AddDecisionQueue("FINDINDICES", $currentPlayer, "DAMAGEPREVENTIONTARGET");
       AddDecisionQueue("SETDQCONTEXT", $currentPlayer, "Choose a damage source for Oasis Respite");
       AddDecisionQueue("CHOOSEMULTIZONE", $currentPlayer, "<-", 1);
       AddDecisionQueue("SHOWSELECTEDTARGET", $currentPlayer, "-", 1);
       AddDecisionQueue("SETLAYERTARGET", $currentPlayer, $cardID, 1);
       break;
-    case "DTD001":
-    case "DTD002":
+    case "prism_awakener_of_sol":
+    case "prism_advent_of_thrones":
       AddDecisionQueue("MULTIZONEINDICES", $currentPlayer, "MYPERM:subtype=Figment");
       AddDecisionQueue("SETDQCONTEXT", $currentPlayer, "Choose a figment to awaken");
       AddDecisionQueue("CHOOSEMULTIZONE", $currentPlayer, "<-", 1);
       AddDecisionQueue("SETLAYERTARGET", $currentPlayer, $cardID, 1);
       break;
-    case "DTD038":
-    case "DTD039":
-    case "DTD040":
+    case "celestial_reprimand_red":
+    case "celestial_reprimand_yellow":
+    case "celestial_reprimand_blue":
       AddDecisionQueue("FINDINDICES", $currentPlayer, "CCDEFLESSX,999");
       AddDecisionQueue("CHOOSECOMBATCHAIN", $currentPlayer, "<-", 1);
       AddDecisionQueue("SETLAYERTARGET", $currentPlayer, $cardID, 1);
       break;
-    case "DTD088":
-    case "DTD089":
-    case "DTD090":
-      if($cardID == "DTD088") $targetPitch = 1;
-      else if($cardID == "DTD089") $targetPitch = 2;
-      else if($cardID == "DTD090") $targetPitch = 3;
+    case "cleansing_light_red":
+    case "cleansing_light_yellow":
+    case "cleansing_light_blue":
+      if($cardID == "cleansing_light_red") $targetPitch = 1;
+      else if($cardID == "cleansing_light_yellow") $targetPitch = 2;
+      else if($cardID == "cleansing_light_blue") $targetPitch = 3;
       AddDecisionQueue("MULTIZONEINDICES", $currentPlayer, "THEIRAURAS:pitch=" . $targetPitch . "&MYAURAS:pitch=" . $targetPitch);
       AddDecisionQueue("SETDQCONTEXT", $currentPlayer, "Choose a target aura");
       AddDecisionQueue("CHOOSEMULTIZONE", $currentPlayer, "<-", 1);
       AddDecisionQueue("SHOWSELECTEDTARGET", $currentPlayer, "-", 1);
       AddDecisionQueue("SETLAYERTARGET", $currentPlayer, $cardID, 1);
       break;
-    case "MST097":
+    case "pass_over_blue":
       AddDecisionQueue("MULTIZONEINDICES", $currentPlayer, "THEIRDISCARD");
       AddDecisionQueue("SETDQCONTEXT", $currentPlayer, "Choose target card");
       AddDecisionQueue("CHOOSEMULTIZONE", $currentPlayer, "<-", 1);
       AddDecisionQueue("SHOWSELECTEDTARGET", $currentPlayer, "-", 1);
       AddDecisionQueue("SETLAYERTARGET", $currentPlayer, $cardID, 1);
       break;
-    case "MST099":
+    case "preserve_tradition_blue":
       AddDecisionQueue("MULTIZONEINDICES", $currentPlayer, "MYDISCARD:type=A&MYDISCARD:type=AA");
       AddDecisionQueue("SETDQCONTEXT", $currentPlayer, "Choose target action card");
       AddDecisionQueue("CHOOSEMULTIZONE", $currentPlayer, "<-", 1);
       AddDecisionQueue("SHOWSELECTEDTARGET", $currentPlayer, "-", 1);
       AddDecisionQueue("SETLAYERTARGET", $currentPlayer, $cardID, 1);
       break;
-    case "MST105":
+    case "just_a_nick_red":
       AddDecisionQueue("PASSPARAMETER", $currentPlayer, "COMBATCHAIN");
       AddDecisionQueue("SETLAYERTARGET", $currentPlayer, $cardID);
       break;
-    case "MST134":
-    case "MST135":
-    case "MST136":
+    case "astral_etchings_red":
+    case "astral_etchings_yellow":
+    case "astral_etchings_blue":
       AddDecisionQueue("MULTIZONEINDICES", $currentPlayer, "MYAURAS:hasWard=true");
       AddDecisionQueue("SETDQCONTEXT", $currentPlayer, "Choose target aura");
       AddDecisionQueue("CHOOSEMULTIZONE", $currentPlayer, "<-", 1);
       AddDecisionQueue("SETLAYERTARGET", $currentPlayer, $cardID, 1);
       break;
-    case "ROS027":
+    case "sanctuary_of_aria":
       if($from != "HAND"){
         AddDecisionQueue("FINDINDICES", $currentPlayer, "DAMAGEPREVENTIONTARGET");
         AddDecisionQueue("SETDQCONTEXT", $currentPlayer, "Choose a damage source for Sanctuary of Aria");
@@ -1978,10 +1978,10 @@ function AddPrePitchDecisionQueue($cardID, $from, $index = -1)
   if(HasMeld($cardID)) {
     $names = explode(" // ", CardName($cardID));
     $option = $names[0].",".$names[1].",Both";
-    if (DelimStringContains($cardType, "A") && SearchCurrentTurnEffects("ARC043", $currentPlayer) && GetClassState($currentPlayer, $CS_NumActionsPlayed) >= 1) {
+    if (DelimStringContains($cardType, "A") && SearchCurrentTurnEffects("red_in_the_ledger_red", $currentPlayer) && GetClassState($currentPlayer, $CS_NumActionsPlayed) >= 1) {
       $option = $names[1];
     } elseif (
-      $mod != "INST" && $mod != "ELE064" 
+      $mod != "INST" && $mod != "blossoming_spellblade_red" 
       && $cardType != "I"
       && (!$combatChainState[$CCS_EclecticMag]
       && GetClassState($currentPlayer, $CS_NextWizardNAAInstant) == 0
@@ -1997,7 +1997,7 @@ function AddPrePitchDecisionQueue($cardID, $from, $index = -1)
     AddDecisionQueue("SHOWMODES", $currentPlayer, $cardID, 1);
   }
   switch ($cardID) {
-    case "WTR081":
+    case "lord_of_wind_blue":
       if (ComboActive($cardID)) {
         AddDecisionQueue("FINDINDICES", $currentPlayer, $cardID);
         AddDecisionQueue("MULTICHOOSEDISCARD", $currentPlayer, "<-", 1);
@@ -2007,61 +2007,61 @@ function AddPrePitchDecisionQueue($cardID, $from, $index = -1)
         AddDecisionQueue("SHUFFLEDECK", $currentPlayer, "-", 1);
       }
       break;
-    case "ARC185":
-    case "ARC186":
-    case "ARC187":
+    case "moon_wish_red":
+    case "moon_wish_yellow":
+    case "moon_wish_blue":
       HandToTopDeck($currentPlayer);
-      AddDecisionQueue("ADDCURRENTEFFECT", $currentPlayer, "ARC185", 1);
+      AddDecisionQueue("ADDCURRENTEFFECT", $currentPlayer, "moon_wish_red", 1);
       break;
-    case "CRU188":
-      if (CountItem("CRU197", $currentPlayer) >= 4) //Copper
+    case "cash_in_yellow":
+      if (CountItem("copper", $currentPlayer) >= 4) //Copper
       {
-        AddDecisionQueue("YESNO", $currentPlayer, "if_you_want_to_pay_4_" . CardLink("CRU197", "CRU197"), 1);
+        AddDecisionQueue("YESNO", $currentPlayer, "if_you_want_to_pay_4_" . CardLink("copper", "copper"), 1);
         AddDecisionQueue("NOPASS", $currentPlayer, "-", 1);
-        AddDecisionQueue("FINDANDDESTROYITEM", $currentPlayer, "CRU197-4", 1);
-        AddDecisionQueue("ADDCURRENTEFFECT", $currentPlayer, "CRU188", 1);
-        AddDecisionQueue("WRITELOG", $currentPlayer, CardLink("CRU197", "CRU197") . "_alternative_cost_was_paid.", 1);
+        AddDecisionQueue("FINDANDDESTROYITEM", $currentPlayer, "copper-4", 1);
+        AddDecisionQueue("ADDCURRENTEFFECT", $currentPlayer, "cash_in_yellow", 1);
+        AddDecisionQueue("WRITELOG", $currentPlayer, CardLink("copper", "copper") . "_alternative_cost_was_paid.", 1);
       }
-      if (CountItem("EVR195", $currentPlayer) >= 2) //Silver
+      if (CountItem("silver", $currentPlayer) >= 2) //Silver
       {
-        AddDecisionQueue("SEARCHCURRENTEFFECTPASS", $currentPlayer, "CRU188");
-        AddDecisionQueue("YESNO", $currentPlayer, "if_you_want_to_pay_2_" . CardLink("EVR195", "EVR195"), 1);
+        AddDecisionQueue("SEARCHCURRENTEFFECTPASS", $currentPlayer, "cash_in_yellow");
+        AddDecisionQueue("YESNO", $currentPlayer, "if_you_want_to_pay_2_" . CardLink("silver", "silver"), 1);
         AddDecisionQueue("NOPASS", $currentPlayer, "-", 1);
-        AddDecisionQueue("FINDANDDESTROYITEM", $currentPlayer, "EVR195-2", 1);
-        AddDecisionQueue("ADDCURRENTEFFECT", $currentPlayer, "CRU188", 1);
-        AddDecisionQueue("WRITELOG", $currentPlayer, CardLink("EVR195", "EVR195") . "_alternative_cost_was_paid.", 1);
+        AddDecisionQueue("FINDANDDESTROYITEM", $currentPlayer, "silver-2", 1);
+        AddDecisionQueue("ADDCURRENTEFFECT", $currentPlayer, "cash_in_yellow", 1);
+        AddDecisionQueue("WRITELOG", $currentPlayer, CardLink("silver", "silver") . "_alternative_cost_was_paid.", 1);
       }
-      if (CountItem("DYN243", $currentPlayer) >= 1) //Gold
+      if (CountItem("gold", $currentPlayer) >= 1) //Gold
       {
-        AddDecisionQueue("SEARCHCURRENTEFFECTPASS", $currentPlayer, "CRU188");
-        AddDecisionQueue("YESNO", $currentPlayer, "if_you_want_to_pay_1_" . CardLink("DYN243", "DYN243"), 1);
+        AddDecisionQueue("SEARCHCURRENTEFFECTPASS", $currentPlayer, "cash_in_yellow");
+        AddDecisionQueue("YESNO", $currentPlayer, "if_you_want_to_pay_1_" . CardLink("gold", "gold"), 1);
         AddDecisionQueue("NOPASS", $currentPlayer, "-", 1);
-        if (SearchCharacterAlive($currentPlayer, "HVY051")) {
-          AddDecisionQueue("MULTIZONEINDICES", $currentPlayer, "MYITEMS:isSameName=DYN243&MYCHAR:cardID=HVY051", 1);
+        if (SearchCharacterAlive($currentPlayer, "aurum_aegis")) {
+          AddDecisionQueue("MULTIZONEINDICES", $currentPlayer, "MYITEMS:isSameName=gold&MYCHAR:cardID=aurum_aegis", 1);
           AddDecisionQueue("MAYCHOOSEMULTIZONE", $currentPlayer, "<-", 1);
           AddDecisionQueue("MZDESTROY", $currentPlayer, "-", 1);
         } else
-          AddDecisionQueue("FINDANDDESTROYITEM", $currentPlayer, "DYN243-1", 1);
-        AddDecisionQueue("ADDCURRENTEFFECT", $currentPlayer, "CRU188", 1);
-        AddDecisionQueue("WRITELOG", $currentPlayer, CardLink("DYN243", "DYN243") . "_alternative_cost_was_paid.", 1);
+          AddDecisionQueue("FINDANDDESTROYITEM", $currentPlayer, "gold-1", 1);
+        AddDecisionQueue("ADDCURRENTEFFECT", $currentPlayer, "cash_in_yellow", 1);
+        AddDecisionQueue("WRITELOG", $currentPlayer, CardLink("gold", "gold") . "_alternative_cost_was_paid.", 1);
       }
       break;
-    case "MON199":
+    case "soul_reaping_red":
       AddDecisionQueue("FINDINDICES", $currentPlayer, "MULTIHAND");
       AddDecisionQueue("MULTICHOOSEHAND", $currentPlayer, "<-", 1);
       AddDecisionQueue("MULTIREMOVEHAND", $currentPlayer, "-", 1);
       AddDecisionQueue("MULTIBANISH", $currentPlayer, "HAND,NA", 1);
       AddDecisionQueue("SPECIFICCARD", $currentPlayer, "SOULREAPING", 1);
       break;
-    case "MON257":
-    case "MON258":
-    case "MON259":
+    case "rise_above_red":
+    case "rise_above_yellow":
+    case "rise_above_blue":
       HandToTopDeck($currentPlayer);
-      AddDecisionQueue("ADDCURRENTEFFECT", $currentPlayer, "MON257", 1);
+      AddDecisionQueue("ADDCURRENTEFFECT", $currentPlayer, "rise_above_red", 1);
       break;
-    case "EVR161":
-    case "EVR162":
-    case "EVR163":
+    case "life_of_the_party_red":
+    case "life_of_the_party_yellow":
+    case "life_of_the_party_blue":
       global $chainLinkSummary;
       $attackNames = explode(",", $chainLinkSummary[count($chainLinkSummary) - ChainLinkSummaryPieces() + 4]);
       for ($i = 0; $i < count($attackNames); ++$i) {
@@ -2077,31 +2077,31 @@ function AddPrePitchDecisionQueue($cardID, $from, $index = -1)
       AddDecisionQueue("ADDCURRENTEFFECT", $currentPlayer, $cardID, 1);
       break;
     //Windups
-    case "HVY143":
-    case "HVY144":
-    case "HVY145":
-    case "HVY163":
-    case "HVY164":
-    case "HVY165":
-    case "HVY186":
-    case "HVY187":
-    case "HVY188":
-    case "HVY209":
-    case "ROS055":
-    case "ROS056":
-    case "ROS057":
-    case "ROS104":
-    case "ROS105":
-    case "ROS106":
-    case "HNT013":
-    case "HNT044":
-    case "HNT045":
-    case "HNT046":
-    case "HNT232":
-    case "HNT233":
-    case "HNT234":
+    case "mighty_windup_red":
+    case "mighty_windup_yellow":
+    case "mighty_windup_blue":
+    case "agile_windup_red":
+    case "agile_windup_yellow":
+    case "agile_windup_blue":
+    case "vigorous_windup_red":
+    case "vigorous_windup_yellow":
+    case "vigorous_windup_blue":
+    case "ripple_away_blue":
+    case "fruits_of_the_forest_red":
+    case "fruits_of_the_forest_yellow":
+    case "fruits_of_the_forest_blue":
+    case "trip_the_light_fantastic_red":
+    case "trip_the_light_fantastic_yellow":
+    case "trip_the_light_fantastic_blue":
+    case "under_the_trapdoor_blue":
+    case "reapers_call_red":
+    case "reapers_call_yellow":
+    case "reapers_call_blue":
+    case "tipoff_red":
+    case "tipoff_yellow":
+    case "tipoff_blue":
       $names = GetAbilityNames($cardID, $index, $from);
-      if (SearchCurrentTurnEffects("ARC043", $currentPlayer) && GetClassState($currentPlayer, $CS_NumActionsPlayed) >= 1) {
+      if (SearchCurrentTurnEffects("red_in_the_ledger_red", $currentPlayer) && GetClassState($currentPlayer, $CS_NumActionsPlayed) >= 1) {
         AddDecisionQueue("SETABILITYTYPEABILITY", $currentPlayer, $cardID);
       } elseif ($names != "" && $from == "HAND") {
         AddDecisionQueue("SETDQCONTEXT", $currentPlayer, "Choose to play the ability or attack");
@@ -2111,19 +2111,19 @@ function AddPrePitchDecisionQueue($cardID, $from, $index = -1)
         AddDecisionQueue("SETABILITYTYPEATTACK", $currentPlayer, $cardID);
       }
       break;
-    case "HVY176":
-      AddDecisionQueue("COUNTITEM", $currentPlayer, "DYN243"); //Gold
+    case "double_down_red":
+      AddDecisionQueue("COUNTITEM", $currentPlayer, "gold"); //Gold
       AddDecisionQueue("LESSTHANPASS", $currentPlayer, "1");
-      AddDecisionQueue("YESNO", $currentPlayer, "if_you_want_to_pay_1_" . CardLink("DYN243", "DYN243"), 1);
+      AddDecisionQueue("YESNO", $currentPlayer, "if_you_want_to_pay_1_" . CardLink("gold", "gold"), 1);
       AddDecisionQueue("NOPASS", $currentPlayer, "-", 1);
-      if (SearchCharacterAlive($currentPlayer, "HVY051")) {
-        AddDecisionQueue("MULTIZONEINDICES", $currentPlayer, "MYITEMS:isSameName=DYN243&MYCHAR:cardID=HVY051", 1);
+      if (SearchCharacterAlive($currentPlayer, "aurum_aegis")) {
+        AddDecisionQueue("MULTIZONEINDICES", $currentPlayer, "MYITEMS:isSameName=gold&MYCHAR:cardID=aurum_aegis", 1);
         AddDecisionQueue("MAYCHOOSEMULTIZONE", $currentPlayer, "<-", 1);
         AddDecisionQueue("MZDESTROY", $currentPlayer, "-", 1);
-      } else AddDecisionQueue("FINDANDDESTROYITEM", $currentPlayer, "DYN243-1", 1);
-      AddDecisionQueue("ADDCURRENTEFFECT", $currentPlayer, "HVY176-PAID", 1);
+      } else AddDecisionQueue("FINDANDDESTROYITEM", $currentPlayer, "gold-1", 1);
+      AddDecisionQueue("ADDCURRENTEFFECT", $currentPlayer, "double_down_red-PAID", 1);
       break;
-    case "MST131":
+    case "10000_year_reunion_red":
       $count = CountAuraAtkCounters($currentPlayer);
       if ($from != "PLAY" && $count >= 3) {
         AddDecisionQueue("MULTIZONEINDICES", $currentPlayer, "MYAURAS:hasAttackCounters=true");
@@ -2139,7 +2139,7 @@ function AddPrePitchDecisionQueue($cardID, $from, $index = -1)
         AddDecisionQueue("ADDCURRENTEFFECT", $currentPlayer, $cardID, 1);
       }
       break;
-    case "HER117":
+    case "blaze_firemind":
       $char = &GetPlayerCharacter($currentPlayer);
       $numCounters = $char[2];
       $costChoices = "0";
@@ -2148,25 +2148,25 @@ function AddPrePitchDecisionQueue($cardID, $from, $index = -1)
       }
       AddDecisionQueue("SETDQCONTEXT", $currentPlayer, "Choose how much you want to pay");
       AddDecisionQueue("BUTTONINPUT", $currentPlayer, $costChoices);
-      AddDecisionQueue("ADDCURRENTEFFECTLASTRESULT", $currentPlayer, "HER117-", 1);
+      AddDecisionQueue("ADDCURRENTEFFECTLASTRESULT", $currentPlayer, "blaze_firemind-", 1);
       AddDecisionQueue("BLAZEPAYCOST", $currentPlayer, "<-", 1);
       break;
-    case "ROS120":
-    case "ROS169":
+    case "haunting_rendition_red":
+    case "mental_block_blue":
       AddDecisionQueue("SETABILITYTYPEABILITY", $currentPlayer, $cardID);
       break;
-    case "ROS170":
-    case "ROS171":
-    case "ROS172":
-    case "ROS186":
-    case "ROS187":
-    case "ROS188":
-    case "ROS204":
-    case "ROS205":
-    case "ROS206":
-    case "HNT257":
+    case "chorus_of_the_amphitheater_red":
+    case "chorus_of_the_amphitheater_yellow":
+    case "chorus_of_the_amphitheater_blue":
+    case "arcane_twining_red":
+    case "arcane_twining_yellow":
+    case "arcane_twining_blue":
+    case "photon_splicing_red":
+    case "photon_splicing_yellow":
+    case "photon_splicing_blue":
+    case "war_cry_of_themis_yellow":
       $names = GetAbilityNames($cardID, $index, $from);
-      if (SearchCurrentTurnEffects("ARC043", $currentPlayer) && GetClassState($currentPlayer, $CS_NumActionsPlayed) >= 1) {
+      if (SearchCurrentTurnEffects("red_in_the_ledger_red", $currentPlayer) && GetClassState($currentPlayer, $CS_NumActionsPlayed) >= 1) {
         AddDecisionQueue("SETABILITYTYPEABILITY", $currentPlayer, $cardID);
       } elseif ($names != "" && $from == "HAND"){
         AddDecisionQueue("SETDQCONTEXT", $currentPlayer, "Choose to play the ability or the action");
@@ -2176,7 +2176,7 @@ function AddPrePitchDecisionQueue($cardID, $from, $index = -1)
         AddDecisionQueue("SETABILITYTYPEACTION", $currentPlayer, $cardID);
       }
       break;
-    case "HNT222":
+    case "shelter_from_the_storm_red":
       $names = GetAbilityNames($cardID, $index, $from);
       if ($names == "Ability,Defense Reaction") {
         AddDecisionQueue("SETDQCONTEXT", $currentPlayer, "Choose to play the defense reaction or ability");
@@ -2190,7 +2190,7 @@ function AddPrePitchDecisionQueue($cardID, $from, $index = -1)
         AddDecisionQueue("SETABILITYTYPEABILITY", $currentPlayer, $cardID);
       }
       break;
-    case "HNT258":
+    case "war_cry_of_bellona_yellow":
       $names = GetAbilityNames($cardID, $index, $from);
       if ($names == "Ability,Attack Reaction") {
         AddDecisionQueue("SETDQCONTEXT", $currentPlayer, "Choose to play the attack reaction or ability");
@@ -2224,7 +2224,7 @@ function GetTargetOfAttack($cardID = "")
       if (HasSpectra($auras[$i])) {
         $targets .= ",THEIRAURAS-" . $i;
         ++$numTargets;
-        if ($auras[$i] == "MON005") $arcLightIndex = $i;
+        if ($auras[$i] == "arc_light_sentinel_yellow") $arcLightIndex = $i;
       }
     }
     $allies = &GetAllies($defPlayer);
@@ -2248,7 +2248,7 @@ function PayAbilityAdditionalCosts($cardID, $index)
 {
   global $currentPlayer;
   switch ($cardID) {
-    case "MON000":
+    case "great_library_of_solana":
       for ($i = 0; $i < 2; ++$i) {
         AddDecisionQueue("FINDINDICES", $currentPlayer, "HANDPITCH,2");
         AddDecisionQueue("CHOOSEHANDCANCEL", $currentPlayer, "<-", 1);
@@ -2256,17 +2256,17 @@ function PayAbilityAdditionalCosts($cardID, $index)
         AddDecisionQueue("DISCARDCARD", $currentPlayer, "HAND-" . $currentPlayer, 1);
       }
       break;
-    case "HNT003":
-    case "HNT004":
-    case "HNT005":
-    case "HNT006":
-    case "HNT007":
+    case "arakni_black_widow":
+    case "arakni_funnel_web":
+    case "arakni_orbweaver":
+    case "arakni_redback":
+    case "arakni_tarantula":
       AddDecisionQueue("FINDINDICES", $currentPlayer, "HANDCLASS,ASSASSIN");
       AddDecisionQueue("CHOOSEHAND", $currentPlayer, "<-", 1);
       AddDecisionQueue("MULTIREMOVEHAND", $currentPlayer, "-", 1);
       AddDecisionQueue("DISCARDCARD", $currentPlayer, "HAND-" . $currentPlayer, 1);
       break;
-    case "HNT056":
+    case "kunai_of_retribution":
       $character = GetPlayerCharacter($currentPlayer);
       $uniqueID = $character[$index + 11];
       AddCurrentTurnEffect("$cardID-$uniqueID", $currentPlayer);
@@ -2288,14 +2288,14 @@ function PayAdditionalCosts($cardID, $from, $index="-")
     return;
   } else if ($from == "EQUIP") {
     switch ($cardID) {
-      case "EVO434":
-      case "EVO435":
-      case "EVO436":
-      case "EVO437":
-      case "EVO446":
-      case "EVO447":
-      case "EVO448":
-      case "EVO449":
+      case "evo_command_center_yellow_equip":
+      case "evo_engine_room_yellow_equip":
+      case "evo_smoothbore_yellow_equip":
+      case "evo_thruster_yellow_equip":
+      case "evo_data_mine_yellow_equip":
+      case "evo_battery_pack_yellow_equip":
+      case "evo_cogspitter_yellow_equip":
+      case "evo_charging_rods_yellow_equip":
         CharacterChooseSubcard($currentPlayer, GetClassState($currentPlayer, $CS_PlayIndex), fromDQ: true);
         AddDecisionQueue("ADDDISCARD", $currentPlayer, "-", 1);
         break;
@@ -2303,7 +2303,7 @@ function PayAdditionalCosts($cardID, $from, $index="-")
         break;
     }
   }
-  if (HasBoost($cardID, $currentPlayer) && $cardID != "EVO142") Boost($cardID);
+  if (HasBoost($cardID, $currentPlayer) && $cardID != "twin_drive_red") Boost($cardID);
   $fuseType = HasFusion($cardID);
   if ($fuseType != "") Fuse($cardID, $currentPlayer, $fuseType);
   if (HasScrap($cardID)) Scrap($currentPlayer);
@@ -2336,7 +2336,7 @@ function PayAdditionalCosts($cardID, $from, $index="-")
     }
   }
   switch ($cardID) {
-    case "WTR159":
+    case "enlightened_strike_red":
       $hand = &GetHand($currentPlayer);
       if (count($hand) == 0) {
         WriteLog("You do not have a card to sink. Reverting gamestate.", highlight: true);
@@ -2349,42 +2349,42 @@ function PayAdditionalCosts($cardID, $from, $index="-")
       AddDecisionQueue("SHOWMODES", $currentPlayer, $cardID, 1);
       AddDecisionQueue("SETCLASSSTATE", $currentPlayer, $CS_AdditionalCosts, 1);
       break;
-    case "WTR179":
-    case "WTR180":
-    case "WTR181":
+    case "demolition_crew_red":
+    case "demolition_crew_yellow":
+    case "demolition_crew_blue":
       $indices = SearchHand($currentPlayer, "", "", -1, 2);
       AddDecisionQueue("SETDQCONTEXT", $currentPlayer, "Choose a card to reveal");
       AddDecisionQueue("CHOOSEHANDCANCEL", $currentPlayer, $indices);
       AddDecisionQueue("REVEALHANDCARDS", $currentPlayer, "-");
       break;
-    case "WTR182":
-    case "WTR183":
-    case "WTR184":
+    case "flock_of_the_feather_walkers_red":
+    case "flock_of_the_feather_walkers_yellow":
+    case "flock_of_the_feather_walkers_blue":
       $indices = SearchHand($currentPlayer, "", "", 1, 0);
       AddDecisionQueue("SETDQCONTEXT", $currentPlayer, "Choose a card to reveal");
       AddDecisionQueue("CHOOSEHANDCANCEL", $currentPlayer, $indices);
       AddDecisionQueue("REVEALHANDCARDS", $currentPlayer, "-");
       break;
-    case "WTR185":
-    case "WTR186":
-    case "WTR187":
-      AddDecisionQueue("MULTIZONEINDICES", $currentPlayer, "MYDISCARD:cardID=WTR218;cardID=WTR219;cardID=WTR220");
+    case "nimble_strike_red":
+    case "nimble_strike_yellow":
+    case "nimble_strike_blue":
+      AddDecisionQueue("MULTIZONEINDICES", $currentPlayer, "MYDISCARD:cardID=nimblism_red;cardID=nimblism_yellow;cardID=nimblism_blue");
       AddDecisionQueue("MAYCHOOSEMULTIZONE", $currentPlayer, "<-", 1);
       AddDecisionQueue("MZADDZONE", $currentPlayer, "MYBANISH,GY,-", 1);
       AddDecisionQueue("MZREMOVE", $currentPlayer, "-", 1);
       AddDecisionQueue("ADDCURRENTEFFECT", $currentPlayer, $cardID, 1);
       AddDecisionQueue("OP", $currentPlayer, "GIVEATTACKGOAGAIN", 1);
       break;
-    case "WTR197":
-    case "WTR198":
-    case "WTR199":
-      AddDecisionQueue("MULTIZONEINDICES", $currentPlayer, "MYDISCARD:cardID=WTR221;cardID=WTR222;cardID=WTR223");
+    case "regurgitating_slog_red":
+    case "regurgitating_slog_yellow":
+    case "regurgitating_slog_blue":
+      AddDecisionQueue("MULTIZONEINDICES", $currentPlayer, "MYDISCARD:cardID=sloggism_red;cardID=sloggism_yellow;cardID=sloggism_blue");
       AddDecisionQueue("MAYCHOOSEMULTIZONE", $currentPlayer, "<-", 1);
       AddDecisionQueue("MZADDZONE", $currentPlayer, "MYBANISH,GY,-", 1);
       AddDecisionQueue("MZREMOVE", $currentPlayer, "-", 1);
       AddDecisionQueue("ADDCURRENTEFFECT", $currentPlayer, $cardID, 1);
       break;
-    case "ARC003":
+    case "teklo_plasma_pistol":
       $abilityType = GetResolvedAbilityType($cardID);
       if ($abilityType == "AA") {
         $character = &GetPlayerCharacter($currentPlayer);
@@ -2392,31 +2392,31 @@ function PayAdditionalCosts($cardID, $from, $index="-")
         $character[$index + 2] = 0;
       }
       break;
-    case "ARC041":
+    case "skullbone_crosswrap":
       if (ArsenalHasFaceDownCard($currentPlayer)) {
         SetArsenalFacing("UP", $currentPlayer);
       }
       break;
-    case "ARC122":
+    case "tome_of_aetherwind_red":
       AddDecisionQueue("SETDQCONTEXT", $currentPlayer, "Choose 2 modes");
       AddDecisionQueue("MULTICHOOSETEXT", $currentPlayer, "2-Buff_Arcane,Buff_Arcane,Draw_card,Draw_card-2");
       AddDecisionQueue("SETCLASSSTATE", $currentPlayer, $CS_AdditionalCosts, 1);
       AddDecisionQueue("SHOWMODES", $currentPlayer, $cardID, 1);
       break;
-    case "ARC160":
+    case "art_of_war_yellow":
       AddDecisionQueue("SETDQCONTEXT", $currentPlayer, "Choose 2 modes");
       AddDecisionQueue("MULTICHOOSETEXT", $currentPlayer, "2-Buff_your_attack_action_cards_this_turn,Your_next_attack_action_card_gains_go_again,Defend_with_attack_action_cards_from_arsenal,Banish_an_attack_action_card_to_draw_2_cards-2");
       AddDecisionQueue("SETCLASSSTATE", $currentPlayer, $CS_AdditionalCosts, 1);
       AddDecisionQueue("SHOWMODES", $currentPlayer, $cardID, 1);
       break;
-    case "CRU097":
+    case "shiyana_diamond_gemini":
       $otherPlayer = ($currentPlayer == 1 ? 2 : 1);
       $otherCharacter = &GetPlayerCharacter($otherPlayer);
       if (SearchCurrentTurnEffects($otherCharacter[0] . "-SHIYANA", $currentPlayer)) {
         PayAdditionalCosts($otherCharacter[0], $from);
       }
       break;
-    case "CRU101":
+    case "plasma_barrel_shot":
       $abilityType = GetResolvedAbilityType($cardID);
       if ($abilityType == "AA") {
         $character = &GetPlayerCharacter($currentPlayer);
@@ -2424,15 +2424,15 @@ function PayAdditionalCosts($cardID, $from, $index="-")
         $character[$index + 2] = 0;
       }
       break;
-    case "MON001":
-    case "MON002":
+    case "prism_sculptor_of_arc_light":
+    case "prism":
       BanishFromSoul($currentPlayer);
       break;
-    case "MON029":
-    case "MON030":
+    case "ser_boltyn_breaker_of_dawn":
+    case "boltyn":
       BanishFromSoul($currentPlayer);
       break;
-    case "MON033":
+    case "beacon_of_victory_yellow":
       AddDecisionQueue("FINDINDICES", $currentPlayer, "SOULINDICES");
       AddDecisionQueue("SETDQCONTEXT", $currentPlayer, "Choose how many cards to banish from your soul");
       AddDecisionQueue("BUTTONINPUT", $currentPlayer, "<-", 1);
@@ -2441,32 +2441,32 @@ function PayAdditionalCosts($cardID, $from, $index="-")
       AddDecisionQueue("FINDINDICES", $currentPlayer, "<-", 1);
       AddDecisionQueue("MULTIBANISHSOUL", $currentPlayer, "-", 1);
       break;
-    case "MON035":
+    case "v_of_the_vanguard_yellow":
       AddDecisionQueue("VOFTHEVANGUARD", $currentPlayer, "-");
       break;
-    case "MON042":
-    case "MON043":
-    case "MON044":
-    case "MON045":
-    case "MON046":
-    case "MON047":
-    case "MON048":
-    case "MON049":
-    case "MON050":
-    case "MON051":
-    case "MON052":
-    case "MON053":
-    case "MON054":
-    case "MON055":
-    case "MON056":
+    case "bolt_of_courage_red":
+    case "bolt_of_courage_yellow":
+    case "bolt_of_courage_blue":
+    case "cross_the_line_red":
+    case "cross_the_line_yellow":
+    case "cross_the_line_blue":
+    case "engulfing_light_red":
+    case "engulfing_light_yellow":
+    case "engulfing_light_blue":
+    case "express_lightning_red":
+    case "express_lightning_yellow":
+    case "express_lightning_blue":
+    case "take_flight_red":
+    case "take_flight_yellow":
+    case "take_flight_blue":
       Charge();
       break;
-    case "MON062":
+    case "celestial_cataclysm_yellow":
       BanishFromSoul($currentPlayer);
       BanishFromSoul($currentPlayer);
       BanishFromSoul($currentPlayer);
       break;
-    case "MST105":
+    case "just_a_nick_red":
       if ($combatChainState[$CCS_LinkBaseAttack] <= 1 && CardType($CombatChain->AttackCard()->ID()) == "AA" && HasStealth($combatChain[0])) $modalities = "Buff_Power,Gain_On-Hit,Both";
       elseif ($combatChainState[$CCS_LinkBaseAttack] <= 1 && CardType($CombatChain->AttackCard()->ID()) == "AA") $modalities = "Buff_Power";
       else $modalities = "Gain_On-Hit";
@@ -2475,36 +2475,36 @@ function PayAdditionalCosts($cardID, $from, $index="-")
       AddDecisionQueue("SETCLASSSTATE", $currentPlayer, $CS_AdditionalCosts, 1);
       AddDecisionQueue("SHOWMODES", $currentPlayer, $cardID, 1);
       break;
-    case "MON126":
-    case "MON127":
-    case "MON128":
-    case "MON129":
-    case "MON130":
-    case "MON131":
-    case "MON132":
-    case "MON133":
-    case "MON134":
-    case "MON141":
-    case "MON142":
-    case "MON143":
+    case "endless_maw_red":
+    case "endless_maw_yellow":
+    case "endless_maw_blue":
+    case "writhing_beast_hulk_red":
+    case "writhing_beast_hulk_yellow":
+    case "writhing_beast_hulk_blue":
+    case "convulsions_from_the_bellows_of_hell_red":
+    case "convulsions_from_the_bellows_of_hell_yellow":
+    case "convulsions_from_the_bellows_of_hell_blue":
+    case "dread_screamer_red":
+    case "dread_screamer_yellow":
+    case "dread_screamer_blue":
       if (RandomBanish3GY($cardID) > 0) AddCurrentTurnEffect($cardID, $currentPlayer);
       break;
-    case "MON135":
-    case "MON136":
-    case "MON137":
-    case "MON147":
-    case "MON148":
-    case "MON149":
-    case "MON150":
-    case "MON151":
-    case "MON152":
+    case "boneyard_marauder_red":
+    case "boneyard_marauder_yellow":
+    case "boneyard_marauder_blue":
+    case "hungering_slaughterbeast_red":
+    case "hungering_slaughterbeast_yellow":
+    case "hungering_slaughterbeast_blue":
+    case "unworldly_bellow_red":
+    case "unworldly_bellow_yellow":
+    case "unworldly_bellow_blue":
       RandomBanish3GY($cardID);
       break;
-    case "MON156":
+    case "shadow_of_ursur_blue":
       MZMoveCard($currentPlayer, "MYHAND:bloodDebtOnly=true", "MYBANISH,HAND,-", may: true);
       AddDecisionQueue("OP", $currentPlayer, "GIVEATTACKGOAGAIN", 1);
       break;
-    case "MST162":
+    case "maul_yellow":
       if ($combatChainState[$CCS_LinkBaseAttack] <= 1 && CardNameContains($combatChain[0], "Crouching Tiger", $currentPlayer)) $modalities = "Buff_Power,Gain_On-Hit,Both";
       elseif ($combatChainState[$CCS_LinkBaseAttack] <= 1 && CardType($combatChain[0]) == "AA") $modalities = "Buff_Power";
       else $modalities = "Gain_On-Hit";
@@ -2513,14 +2513,14 @@ function PayAdditionalCosts($cardID, $from, $index="-")
       AddDecisionQueue("SETCLASSSTATE", $currentPlayer, $CS_AdditionalCosts, 1);
       AddDecisionQueue("SHOWMODES", $currentPlayer, $cardID, 1);
       break;
-    case "MON195":
-    case "MON196":
-    case "MON197":
+    case "consuming_aftermath_red":
+    case "consuming_aftermath_yellow":
+    case "consuming_aftermath_blue":
       MZMoveCard($currentPlayer, "MYHAND", "MYBANISH,HAND,-", may: true);
       AddDecisionQueue("ALLCARDTALENTORPASS", $currentPlayer, "SHADOW", 1);
       AddDecisionQueue("ADDCURRENTEFFECT", $currentPlayer, $cardID, 1);
       break;
-    case "MON198":
+    case "soul_harvest_blue":
       AddDecisionQueue("FINDINDICES", $currentPlayer, "GY");
       AddDecisionQueue("PREPENDLASTRESULT", $currentPlayer, "6-", 1);
       AddDecisionQueue("MULTICHOOSEDISCARD", $currentPlayer, "<-", 1, 1);
@@ -2529,7 +2529,7 @@ function PayAdditionalCosts($cardID, $from, $index="-")
       AddDecisionQueue("MULTIREMOVEDISCARD", $currentPlayer, "-", 1);
       AddDecisionQueue("MULTIBANISH", $currentPlayer, "GY,-", 1);
       break;
-    case "MON247":
+    case "rouse_the_ancients_blue":
       if (CanRevealCards($currentPlayer)) {
         AddDecisionQueue("FINDINDICES", $currentPlayer, "MULTIHANDAA");
         AddDecisionQueue("LESSTHANPASS", $currentPlayer, "1", 1);
@@ -2539,9 +2539,9 @@ function PayAdditionalCosts($cardID, $from, $index="-")
         AddDecisionQueue("ROUSETHEANCIENTS", $currentPlayer, "-", 1);
       }
       break;
-    case "MON251":
-    case "MON252":
-    case "MON253":
+    case "seek_horizon_red":
+    case "seek_horizon_yellow":
+    case "seek_horizon_blue":
       AddDecisionQueue("MULTIZONEINDICES", $currentPlayer, "MYHAND");
       AddDecisionQueue("SETDQCONTEXT", $currentPlayer, "Choose which cards to put on top of your deck (or pass)", 1);
       AddDecisionQueue("MAYCHOOSEMULTIZONE", $currentPlayer, "<-", 1);
@@ -2549,17 +2549,17 @@ function PayAdditionalCosts($cardID, $from, $index="-")
       AddDecisionQueue("MZREMOVE", $currentPlayer, "-", 1);
       AddDecisionQueue("SETCLASSSTATE", $currentPlayer, $CS_AdditionalCosts, 1);
       break;
-    case "MON260":
-    case "MON261":
-    case "MON262":
+    case "captains_call_red":
+    case "captains_call_yellow":
+    case "captains_call_blue":
       AddDecisionQueue("SETDQCONTEXT", $currentPlayer, "Choose a mode");
       AddDecisionQueue("BUTTONINPUT", $currentPlayer, "Buff_Power,Go_Again");
       AddDecisionQueue("SHOWMODES", $currentPlayer, $cardID, 1);
       AddDecisionQueue("SETCLASSSTATE", $currentPlayer, $CS_AdditionalCosts, 1);
       break;
-    case "MON266":
-    case "MON267":
-    case "MON268":
+    case "belittle_red":
+    case "belittle_yellow":
+    case "belittle_blue":
       if (CanRevealCards($currentPlayer)) {
         AddDecisionQueue("SETDQCONTEXT", $currentPlayer, "Choose a card to reveal for Belittle");
         AddDecisionQueue("MULTIZONEINDICES", $currentPlayer, "MYHAND:type=AA;maxAttack=3");
@@ -2571,9 +2571,9 @@ function PayAdditionalCosts($cardID, $from, $index="-")
         AddDecisionQueue("SHUFFLEDECK", $currentPlayer, "-", 1);
       }
       break;
-    case "MON281":
-    case "MON282":
-    case "MON283":
+    case "rally_the_rearguard_red":
+    case "rally_the_rearguard_yellow":
+    case "rally_the_rearguard_blue":
       if ($from == "PLAY") {
         $hand = &GetHand($currentPlayer);
         if (count($hand) == 0) {
@@ -2585,46 +2585,46 @@ function PayAdditionalCosts($cardID, $from, $index="-")
         MZMoveCard($currentPlayer, "MYHAND", "MYDISCARD," . $currentPlayer, silent: true);
       }
       break;
-    case "ELE031":
-    case "ELE032":
+    case "lexi_livewire":
+    case "lexi":
       if (ArsenalHasFaceDownCard($currentPlayer)) {
         $cardFlipped = SetArsenalFacing("UP", $currentPlayer);
         AddAdditionalCost($currentPlayer, TalentOverride($cardFlipped, $currentPlayer));
         WriteLog("Lexi turns " . CardLink($cardFlipped, $cardFlipped) . " face up.");
       }
       break;
-    case "ELE115":
+    case "crown_of_seeds":
       FaceDownArsenalBotDeck($currentPlayer);
       break;
-    case "ELE116":
+    case "plume_of_evergrowth":
       AddDecisionQueue("MULTIZONEINDICES", $currentPlayer, "MYDISCARD:type=I;talent=EARTH&MYDISCARD:type=A;talent=EARTH&MYDISCARD:type=AA;talent=EARTH");
       AddDecisionQueue("SETDQCONTEXT", $currentPlayer, "Choose Earth action card or Earth instant card");
       AddDecisionQueue("CHOOSEMULTIZONE", $currentPlayer, "<-", 1);
       AddDecisionQueue("SHOWSELECTEDTARGET", $currentPlayer, "-", 1);
       AddDecisionQueue("SETLAYERTARGET", $currentPlayer, $cardID, 1);
       break;
-    case "ELE118":
+    case "tome_of_harvests_blue":
       AddDecisionQueue("FINDINDICES", $currentPlayer, "ARSENAL");
       AddDecisionQueue("CHOOSEARSENAL", $currentPlayer, "<-", 1);
       AddDecisionQueue("REMOVEARSENAL", $currentPlayer, "-", 1);
       AddDecisionQueue("ADDBOTDECK", $currentPlayer, "-", 1);
       break;
-    case "ELE234":
+    case "deep_blue":
       AddDecisionQueue("FINDINDICES", $currentPlayer, "HAND");
       AddDecisionQueue("CHOOSEHANDCANCEL", $currentPlayer, "<-", 1);
       AddDecisionQueue("MULTIREMOVEHAND", $currentPlayer, "-", 1);
       AddDecisionQueue("ADDBOTDECK", $currentPlayer, "-", 1);
       break;
-    case "EVR047":
-    case "EVR048":
-    case "EVR049":
+    case "twin_twisters_red":
+    case "twin_twisters_yellow":
+    case "twin_twisters_blue":
       AddDecisionQueue("SETDQCONTEXT", $currentPlayer, "Choose a mode");
       AddDecisionQueue("BUTTONINPUT", $currentPlayer, "Hit_Effect,1_Attack");
       AddDecisionQueue("SHOWMODES", $currentPlayer, $cardID, 1);
       AddDecisionQueue("SETCLASSSTATE", $currentPlayer, $CS_AdditionalCosts, 1);
       break;
-    case "EVR055":
-      $numCopper = CountItem("CRU197", $currentPlayer);
+    case "blood_on_her_hands_yellow":
+      $numCopper = CountItem("copper", $currentPlayer);
       if ($numCopper == 0) return "No copper.";
       if ($numCopper > 6) $numCopper = 6;
       $buttons = "";
@@ -2635,7 +2635,7 @@ function PayAdditionalCosts($cardID, $from, $index="-")
       AddDecisionQueue("SETDQCONTEXT", $currentPlayer, "Choose how many Copper to destroy");
       AddDecisionQueue("BUTTONINPUT", $currentPlayer, $buttons);
       AddDecisionQueue("SETDQVAR", $currentPlayer, "0");
-      AddDecisionQueue("PREPENDLASTRESULT", $currentPlayer, "CRU197-", 1);
+      AddDecisionQueue("PREPENDLASTRESULT", $currentPlayer, "copper-", 1);
       AddDecisionQueue("FINDANDDESTROYITEM", $currentPlayer, "<-", 1);
       AddDecisionQueue("LASTRESULTPIECE", $currentPlayer, "1", 1);
       AddDecisionQueue("APPENDLASTRESULT", $currentPlayer, "-Buff_Weapon,Buff_Weapon,Go_Again,Go_Again,Attack_Twice,Attack_Twice", 1);
@@ -2644,7 +2644,7 @@ function PayAdditionalCosts($cardID, $from, $index="-")
       AddDecisionQueue("SETCLASSSTATE", $currentPlayer, $CS_AdditionalCosts, 1);
       AddDecisionQueue("SHOWMODES", $currentPlayer, $cardID, 1);
       break;
-    case "EVR158":
+    case "cash_out_blue":
       AddDecisionQueue("PASSPARAMETER", $currentPlayer, "0");
       AddDecisionQueue("SETDQVAR", $currentPlayer, "0");
       AddDecisionQueue("FINDINDICES", $currentPlayer, "CASHOUT");
@@ -2654,34 +2654,34 @@ function PayAdditionalCosts($cardID, $from, $index="-")
       AddDecisionQueue("SETCLASSSTATE", $currentPlayer, $CS_AdditionalCosts, 1);
       AddDecisionQueue("SPECIFICCARD", $currentPlayer, "CASHOUTCONTINUE", 1);
       break;
-    case "EVR159":
-      $numCopper = CountItem("CRU197", $currentPlayer);
+    case "knick_knack_bricabrac_red":
+      $numCopper = CountItem("copper", $currentPlayer);
       AddDecisionQueue("PASSPARAMETER", $currentPlayer, "0");
       AddDecisionQueue("SETDQVAR", $currentPlayer, "0");
       if ($numCopper > 0) {
         AddDecisionQueue("SETDQCONTEXT", $currentPlayer, "Choose how many Copper to pay");
         AddDecisionQueue("BUTTONINPUT", $currentPlayer, GetIndices($numCopper + 1));
-        AddDecisionQueue("PREPENDLASTRESULT", $currentPlayer, "CRU197-");
+        AddDecisionQueue("PREPENDLASTRESULT", $currentPlayer, "copper-");
         AddDecisionQueue("FINDANDDESTROYITEM", $currentPlayer, "<-");
         AddDecisionQueue("LASTRESULTPIECE", $currentPlayer, "1", 1);
         AddDecisionQueue("DIVIDE", $currentPlayer, "4");
         AddDecisionQueue("INCDQVAR", $currentPlayer, "0");
       }
-      $numSilver = CountItem("EVR195", $currentPlayer);
+      $numSilver = CountItem("silver", $currentPlayer);
       if ($numSilver > 0) {
         AddDecisionQueue("SETDQCONTEXT", $currentPlayer, "Choose how many Silver to pay");
         AddDecisionQueue("BUTTONINPUT", $currentPlayer, GetIndices($numSilver + 1));
-        AddDecisionQueue("PREPENDLASTRESULT", $currentPlayer, "EVR195-");
+        AddDecisionQueue("PREPENDLASTRESULT", $currentPlayer, "silver-");
         AddDecisionQueue("FINDANDDESTROYITEM", $currentPlayer, "<-");
         AddDecisionQueue("LASTRESULTPIECE", $currentPlayer, "1", 1);
         AddDecisionQueue("DIVIDE", $currentPlayer, "2");
         AddDecisionQueue("INCDQVAR", $currentPlayer, "0");
       }
-      $numGold = CountItem("DYN243", $currentPlayer);
+      $numGold = CountItem("gold", $currentPlayer);
       if ($numGold > 0) {
         AddDecisionQueue("SETDQCONTEXT", $currentPlayer, "Choose how many Gold to pay");
         AddDecisionQueue("BUTTONINPUT", $currentPlayer, GetIndices($numGold + 1));
-        AddDecisionQueue("PREPENDLASTRESULT", $currentPlayer, "DYN243-");
+        AddDecisionQueue("PREPENDLASTRESULT", $currentPlayer, "gold-");
         AddDecisionQueue("FINDANDDESTROYITEM", $currentPlayer, "<-");
         AddDecisionQueue("LASTRESULTPIECE", $currentPlayer, "1", 1);
         AddDecisionQueue("INCDQVAR", $currentPlayer, "0");
@@ -2689,31 +2689,31 @@ function PayAdditionalCosts($cardID, $from, $index="-")
       AddDecisionQueue("PASSPARAMETER", $currentPlayer, "{0}");
       AddDecisionQueue("SETCLASSSTATE", $currentPlayer, $CS_AdditionalCosts);
       break;
-    case "UPR094":
-      MZMoveCard($currentPlayer, "MYDISCARD:isSameName=UPR101", "MYBANISH,GY,-", may: true);
+    case "burn_away_red":
+      MZMoveCard($currentPlayer, "MYDISCARD:isSameName=phoenix_flame_red", "MYBANISH,GY,-", may: true);
       AddDecisionQueue("APPENDCLASSSTATE", $currentPlayer, $CS_AdditionalCosts . "-PHOENIXBANISH", 1);
       break;
-    case "OUT001":
-    case "OUT002":
+    case "uzuri_switchblade":
+    case "uzuri":
       AddDecisionQueue("MULTIZONEINDICES", $currentPlayer, "MYHAND");
       AddDecisionQueue("SETDQCONTEXT", $currentPlayer, "Choose a card to banish with Uzuri", 1);
       AddDecisionQueue("CHOOSEMULTIZONE", $currentPlayer, "<-", 1);
       AddDecisionQueue("MZBANISH", $currentPlayer, "HAND,UZURI," . $currentPlayer . ",1", 1);
       AddDecisionQueue("MZREMOVE", $currentPlayer, "-", 1);
       break;
-    case "OUT094":
+    case "trench_of_sunken_treasure":
       FaceDownArsenalBotDeck($currentPlayer);
       break;
-    case "OUT139":
+    case "flick_knives":
       AddDecisionQueue("MULTIZONEINDICES", $currentPlayer, "MYCHAR:subtype=Dagger&COMBATCHAINATTACKS:subtype=Dagger;type=AA");
       AddDecisionQueue("REMOVEINDICESIFACTIVECHAINLINK", $currentPlayer, "<-", 1);
       AddDecisionQueue("CHOOSEMULTIZONE", $currentPlayer, "<-", 1);
       AddDecisionQueue("SHOWSELECTEDTARGET", $currentPlayer, "-", 1);
-      AddDecisionQueue("SETLAYERTARGET", $currentPlayer, "OUT139", 1);
+      AddDecisionQueue("SETLAYERTARGET", $currentPlayer, "flick_knives", 1);
       break;
-    case "OUT148":
-    case "OUT149":
-    case "OUT150":
+    case "hurl_red":
+    case "hurl_yellow":
+    case "hurl_blue":
       AddDecisionQueue("SETDQCONTEXT", $currentPlayer, "Choose how much to pay for " . CardLink($cardID, $cardID));
       AddDecisionQueue("BUTTONINPUT", $currentPlayer, "0,1");
       AddDecisionQueue("PAYRESOURCES", $currentPlayer, "<-", 1);
@@ -2721,12 +2721,12 @@ function PayAdditionalCosts($cardID, $from, $index="-")
       AddDecisionQueue("APPENDCLASSSTATE", $currentPlayer, $CS_AdditionalCosts . "-PAY1", 1);
       AddDecisionQueue("WRITELOG", $currentPlayer, "Paid extra resource to throw a dagger", 1);
       break;
-    case "OUT157":
+    case "mask_of_malicious_manifestations":
       BottomDeckMultizone($currentPlayer, "MYHAND", "MYARS", true, "Choose a card from your hand or arsenal to add on the bottom of your deck");
       break;
-    case "OUT195":
-    case "OUT196":
-    case "OUT197":
+    case "looking_for_a_scrap_red":
+    case "looking_for_a_scrap_yellow":
+    case "looking_for_a_scrap_blue":
       AddDecisionQueue("MULTIZONEINDICES", $currentPlayer, "MYDISCARD:maxAttack=1;minAttack=1");
       AddDecisionQueue("SETDQCONTEXT", $currentPlayer, "Choose a card to banish", 1);
       AddDecisionQueue("MAYCHOOSEMULTIZONE", $currentPlayer, "<-", 1);
@@ -2734,22 +2734,22 @@ function PayAdditionalCosts($cardID, $from, $index="-")
       AddDecisionQueue("MZREMOVE", $currentPlayer, "-", 1);
       AddDecisionQueue("APPENDCLASSSTATE", $currentPlayer, $CS_AdditionalCosts . "-BANISH1ATTACK", 1);
       break;
-    case "DTD051":
-    case "DTD052":
-    case "DTD057":
-    case "DTD058":
-    case "DTD059":
-    case "DTD063":
-    case "DTD064":
-    case "DTD065":
-    case "DTD066":
-    case "DTD067":
-    case "DTD068":
+    case "beckoning_light_red":
+    case "spirit_of_war_red":
+    case "beaming_bravado_red":
+    case "beaming_bravado_yellow":
+    case "beaming_bravado_blue":
+    case "glaring_impact_red":
+    case "glaring_impact_yellow":
+    case "glaring_impact_blue":
+    case "light_the_way_red":
+    case "light_the_way_yellow":
+    case "light_the_way_blue":
       Charge();
       AddDecisionQueue("ALLCARDPITCHORPASS", $currentPlayer, "2", 1);
       AddDecisionQueue("ADDCURRENTEFFECT", $currentPlayer, $cardID, 1);
       break;
-    case "DTD080":
+    case "lumina_lance_yellow":
       $soul = &GetSoul($currentPlayer);
       if (!TalentContains($CombatChain->AttackCard()->ID(), "LIGHT", $currentPlayer)) break;
       $numModes = count($soul) / SoulPieces() < 3 ? count($soul) / SoulPieces() : 3;
@@ -2758,72 +2758,72 @@ function PayAdditionalCosts($cardID, $from, $index="-")
       AddDecisionQueue("SETCLASSSTATE", $currentPlayer, $CS_AdditionalCosts, 1);
       AddDecisionQueue("SHOWMODES", $currentPlayer, $cardID, 1);
       break;
-    case "DTD110":
+    case "expendable_limbs_blue":
       $banish = &GetBanish($currentPlayer);
       $index = count($banish) - BanishPieces();
       if (ModifiedAttackValue($banish[$index], $currentPlayer, "BANISH") >= 6) $banish[$index + 1] = "NT";
       break;
-    case "DTD111":
+    case "blood_dripping_frenzy_blue":
       $banishedCards = BanishHand($currentPlayer);
       SetClassState($currentPlayer, $CS_AdditionalCosts, $banishedCards);
       break;
-    case "EVO101":
+    case "scrap_trader_red":
       Scrap($currentPlayer);
       break;
-    case "EVO140":
+    case "moonshot_yellow":
       global $CS_DynCostResolved;
       $xVal = GetClassState($currentPlayer, $CS_DynCostResolved) / 2;
-      if (SearchCount(SearchMultizone($currentPlayer, "MYITEMS:isSameName=ARC036")) < $xVal) {
+      if (SearchCount(SearchMultizone($currentPlayer, "MYITEMS:isSameName=hyper_driver_red")) < $xVal) {
         WriteLog("You do not have enough Hyper Drivers. Reverting gamestate.", highlight: true);
         RevertGamestate();
         return;
       }
-      for ($i = 0; $i < $xVal; ++$i) MZChooseAndDestroy($currentPlayer, "MYITEMS:isSameName=ARC036");
+      for ($i = 0; $i < $xVal; ++$i) MZChooseAndDestroy($currentPlayer, "MYITEMS:isSameName=hyper_driver_red");
       break;
-    case "EVO142":
+    case "twin_drive_red":
       $amountBoostChoices = "0,1,2";
-      if (SearchCurrentTurnEffects("MST231", $currentPlayer)) $amountBoostChoices = "0,1,2,3";
+      if (SearchCurrentTurnEffects("evo_speedslip_blue", $currentPlayer)) $amountBoostChoices = "0,1,2,3";
       AddDecisionQueue("SETDQCONTEXT", $currentPlayer, "Choose how many times you want to activate boost on " . CardLink($cardID, $cardID));
       AddDecisionQueue("BUTTONINPUT", $currentPlayer, $amountBoostChoices);
       AddDecisionQueue("OP", $currentPlayer, "BOOST-" . $cardID, 1);
       break;
-    case "EVO146":
+    case "fabricate_red":
       AddDecisionQueue("SETDQCONTEXT", $currentPlayer, "Choose 2;");
       AddDecisionQueue("MULTICHOOSETEXT", $currentPlayer, "2-Equip_Proto_equipment,Evo_permanents_get_+1_block,Put_this_under_an_Evo_permanent,Banish_an_Evo_and_draw_a_card-2");
       AddDecisionQueue("SETCLASSSTATE", $currentPlayer, $CS_AdditionalCosts, 1);
       AddDecisionQueue("SHOWMODES", $currentPlayer, $cardID, 1);
       break;
-    case "EVO410":
-    case "DYN492a":
+    case "teklovossen_the_mechropotent":
+    case "nitro_mechanoida":
       if ($from == "EQUIP") {
         $character = &GetPlayerCharacter($currentPlayer);
         $index = GetClassState($currentPlayer, $CS_CharacterIndex);
-        CharacterChooseSubcard($currentPlayer, $index, count: $cardID == "EVO410" ? 2 : 1);
+        CharacterChooseSubcard($currentPlayer, $index, count: $cardID == "teklovossen_the_mechropotent" ? 2 : 1);
         AddDecisionQueue("MULTIBANISH", $currentPlayer, "EQUIP,-", 1);
       }
       break;
-    case "HVY016":
-      AddDecisionQueue("FINDINDICES", $currentPlayer, "HVY016");
+    case "no_fear_red":
+      AddDecisionQueue("FINDINDICES", $currentPlayer, "no_fear_red");
       AddDecisionQueue("LESSTHANPASS", $currentPlayer, "1", 1);
       AddDecisionQueue("SETDQCONTEXT", $currentPlayer, "Choose which cards to banish", 1);
       AddDecisionQueue("MAYMULTICHOOSEHAND", $currentPlayer, "<-", 1);
       AddDecisionQueue("SPECIFICCARD", $currentPlayer, "NOFEAR", 1);
       break;
-    case "HVY059":
-      if (CountItem("DYN243", $currentPlayer) > 0) {
-        AddDecisionQueue("YESNO", $currentPlayer, "if_you_want_to_pay_the_additional_cost_of_1_" . CardLink("DYN243", "DYN243"), 1);
+    case "the_golden_son_yellow":
+      if (CountItem("gold", $currentPlayer) > 0) {
+        AddDecisionQueue("YESNO", $currentPlayer, "if_you_want_to_pay_the_additional_cost_of_1_" . CardLink("gold", "gold"), 1);
         AddDecisionQueue("NOPASS", $currentPlayer, "-", 1);
-        if (SearchCharacterAlive($currentPlayer, "HVY051")) {
-          AddDecisionQueue("MULTIZONEINDICES", $currentPlayer, "MYITEMS:isSameName=DYN243&MYCHAR:cardID=HVY051", 1);
+        if (SearchCharacterAlive($currentPlayer, "aurum_aegis")) {
+          AddDecisionQueue("MULTIZONEINDICES", $currentPlayer, "MYITEMS:isSameName=gold&MYCHAR:cardID=aurum_aegis", 1);
           AddDecisionQueue("MAYCHOOSEMULTIZONE", $currentPlayer, "<-", 1);
           AddDecisionQueue("MZDESTROY", $currentPlayer, "-", 1);
-        } else AddDecisionQueue("FINDANDDESTROYITEM", $currentPlayer, "DYN243-1", 1);
+        } else AddDecisionQueue("FINDANDDESTROYITEM", $currentPlayer, "gold-1", 1);
         AddDecisionQueue("ADDCURRENTEFFECT", $currentPlayer, $cardID, 1);
         AddDecisionQueue("SETCLASSSTATE", $currentPlayer, $CS_AdditionalCosts, 1);
       }
       break;
-    case "HVY090":
-    case "HVY091":
+    case "kassai_of_the_golden_sand":
+    case "kassai":
       if ($from == "EQUIP") {
         MZMoveCard($currentPlayer, "MYDISCARD:pitch=1", "MYBANISH,GY,-");
         MZMoveCard($currentPlayer, "MYDISCARD:pitch=1", "MYBANISH,GY,-");
@@ -2831,11 +2831,11 @@ function PayAdditionalCosts($cardID, $from, $index="-")
         MZMoveCard($currentPlayer, "MYDISCARD:pitch=2", "MYBANISH,GY,-");
       }
       break;
-    case "HVY099":
+    case "hood_of_red_sand":
       MZMoveCard($currentPlayer, "MYDISCARD:pitch=1", "MYBANISH,GY");
       MZMoveCard($currentPlayer, "MYDISCARD:pitch=2", "MYBANISH,GY");
       break;
-    case "HVY103":
+    case "up_the_ante_blue":
       global $CS_LastDynCost;
       $dynCost = GetClassState($currentPlayer, $CS_LastDynCost);
       $max = $dynCost > 4 ? 4 : $dynCost + 1;
@@ -2851,23 +2851,23 @@ function PayAdditionalCosts($cardID, $from, $index="-")
         AddDecisionQueue("SHOWMODES", $currentPlayer, $cardID);
       }
       break;
-    case "HVY105":
-      $numGold = CountItem("DYN243", $currentPlayer);
+    case "raise_an_army_yellow":
+      $numGold = CountItem("gold", $currentPlayer);
       AddDecisionQueue("SETDQCONTEXT", $currentPlayer, "Choose how many Gold to pay");
       AddDecisionQueue("BUTTONINPUT", $currentPlayer, GetIndices($numGold + 1));
       AddDecisionQueue("SETCLASSSTATE", $currentPlayer, $CS_AdditionalCosts, 1);
       AddDecisionQueue("SETDQVAR", $currentPlayer, 0, 1);
       AddDecisionQueue("SPECIFICCARD", $currentPlayer, "RAISEANARMY", 1);
       break;
-    case "HVY245":
+    case "graven_call":
       if ($from == "GY") {
-        AddDecisionQueue("PASSPARAMETER", $currentPlayer, "EVR195-2", 1);
+        AddDecisionQueue("PASSPARAMETER", $currentPlayer, "silver-2", 1);
         AddDecisionQueue("FINDANDDESTROYITEM", $currentPlayer, "<-", 1);
-        $index = SearchGetFirstIndex(SearchMultizone($currentPlayer, "MYDISCARD:cardID=HVY245"));
+        $index = SearchGetFirstIndex(SearchMultizone($currentPlayer, "MYDISCARD:cardID=graven_call"));
         RemoveGraveyard($currentPlayer, $index);
       }
       break;
-    case "MST010":
+    case "sacred_art_undercurrent_desires_blue":
       $modalities = "Create_a_Fang_Strike_and_Slither,Banish_up_to_2_cards_in_an_opposing_hero_graveyard,Transcend";
       $numModes = GetClassState($currentPlayer, $CS_NumBluePlayed) > 1 ? 3 : 1;
       if ($numModes == 1) {
@@ -2881,7 +2881,7 @@ function PayAdditionalCosts($cardID, $from, $index="-")
         AddDecisionQueue("SHOWMODES", $currentPlayer, $cardID);
       }
       break;
-    case "MST032":
+    case "sacred_art_immortal_lunar_shrine_blue":
       $modalities = "Create_2_Spectral_Shield,Put_a_+1_counter_on_each_aura_with_ward_you_control,Transcend";
       $numModes = GetClassState($currentPlayer, $CS_NumBluePlayed) > 1 ? 3 : 1;
       if ($numModes == 1) {
@@ -2895,7 +2895,7 @@ function PayAdditionalCosts($cardID, $from, $index="-")
         AddDecisionQueue("SHOWMODES", $currentPlayer, $cardID);
       }
       break;
-    case "MST053":
+    case "sacred_art_jade_tiger_domain_blue":
       $modalities = "Create_2_Crouching_Tigers,Crouching_Tigers_Get_+1_this_turn,Transcend";
       $numModes = GetClassState($currentPlayer, $CS_NumBluePlayed) > 1 ? 3 : 1;
       if ($numModes == 1) {
@@ -2909,9 +2909,9 @@ function PayAdditionalCosts($cardID, $from, $index="-")
         AddDecisionQueue("SHOWMODES", $currentPlayer, $cardID);
       }
       break;
-    case "MST197":
-    case "MST198":
-    case "MST199":
+    case "emissary_of_moon_red":
+    case "emissary_of_tides_red":
+    case "emissary_of_wind_red":
       AddDecisionQueue("MULTIZONEINDICES", $currentPlayer, "MYHAND");
       AddDecisionQueue("SETDQCONTEXT", $currentPlayer, "Choose which cards to put on the bottom of your deck (or pass)", 1);
       AddDecisionQueue("MAYCHOOSEMULTIZONE", $currentPlayer, "<-", 1);
@@ -2919,7 +2919,7 @@ function PayAdditionalCosts($cardID, $from, $index="-")
       AddDecisionQueue("MZREMOVE", $currentPlayer, "-", 1);
       AddDecisionQueue("SETCLASSSTATE", $currentPlayer, $CS_AdditionalCosts, 1);
       break;
-    case "MST232":
+    case "longdraw_halfglove":
       $myHand = &GetHand($currentPlayer);
       $myArsenal = &GetArsenal($currentPlayer);
       if(count($myHand) + count($myArsenal) < 2) {
@@ -2929,30 +2929,30 @@ function PayAdditionalCosts($cardID, $from, $index="-")
       MZMoveCard($currentPlayer, "MYHAND&MYARS", "MYBOTDECK", silent: true);
       MZMoveCard($currentPlayer, "MYHAND&MYARS", "MYBOTDECK", silent: true);
       break;
-    case "MST226":
-      $numGold = CountItem("DYN243", $currentPlayer);
+    case "visit_the_golden_anvil_blue":
+      $numGold = CountItem("gold", $currentPlayer);
       AddDecisionQueue("SETDQCONTEXT", $currentPlayer, "Choose how many Gold to pay");
       AddDecisionQueue("BUTTONINPUT", $currentPlayer, GetIndices($numGold + 1));
       AddDecisionQueue("SETCLASSSTATE", $currentPlayer, $CS_AdditionalCosts, 1);
       AddDecisionQueue("SETDQVAR", $currentPlayer, 0, 1);
       AddDecisionQueue("SPECIFICCARD", $currentPlayer, "GOLDENANVIL", 1);
       break;
-    case "MST236":
+    case "shadowrealm_horror_red":
       $num6Banished = RandomBanish3GY($cardID, $cardID);
       if ($num6Banished > 0) AddCurrentTurnEffect($cardID . "-1", $currentPlayer);
       if ($num6Banished > 1) AddCurrentTurnEffect($cardID . "-2", $currentPlayer);
       if ($num6Banished > 2) AddCurrentTurnEffect($cardID . "-3", $currentPlayer);
       break;
-    case "ASB025":
+    case "saving_grace_yellow":
       Charge();
       break;
-    case "AAZ005":
+    case "hidden_agenda":
       if (ArsenalHasFaceDownCard($currentPlayer)) {
         SetArsenalFacing("UP", $currentPlayer);
       }
       break;
-    case "ROS019":
-    case "ROS020":
+    case "oscilio_constella_intelligence":
+    case "oscilio":
       if(SearchCount(SearchMultiZone($currentPlayer, "MYHAND:type=I")) == 0) {
         WriteLog("No instant card in hand pay the discard cost of " . CardLink($cardID, $cardID) . ". Reverting the gamestate.", highlight:true);
         RevertGamestate();
@@ -2960,13 +2960,13 @@ function PayAdditionalCosts($cardID, $from, $index="-")
       $index = GetClassState($currentPlayer, $CS_PlayIndex);
       MZMoveCard($currentPlayer, "MYHAND:type=I", "MYDISCARD," . $currentPlayer);
       break;
-    case "ROS035":
+    case "seeds_of_tomorrow_blue":
       AddDecisionQueue("FINDINDICES", $currentPlayer, "ARSENAL");
       AddDecisionQueue("CHOOSEARSENAL", $currentPlayer, "<-", 1);
       AddDecisionQueue("REMOVEARSENAL", $currentPlayer, "-", 1);
       AddDecisionQueue("ADDBOTDECK", $currentPlayer, "-", 1);
       break;
-    case "HNT015":
+    case "tarantula_toxin_red":
       if (SubtypeContains($combatChain[0], "Dagger") && HasStealth($combatChain[0]) && NumCardsBlocking() > 0) $modalities = "Buff_Power,Reduce_Block,Both";
       elseif (SubtypeContains($combatChain[0], "Dagger")) $modalities = "Buff_Power";
       else $modalities = "Reduce_Block";
@@ -2975,7 +2975,7 @@ function PayAdditionalCosts($cardID, $from, $index="-")
       AddDecisionQueue("SETCLASSSTATE", $currentPlayer, $CS_AdditionalCosts, 1);
       AddDecisionQueue("SHOWMODES", $currentPlayer, $cardID, 1);
       break;
-    case "HNT051":
+    case "two_sides_to_the_blade_red":
       if (SubtypeContains($combatChain[0], "Dagger", $currentPlayer) && HasStealth($combatChain[0]) && TypeContains($combatChain[0], "AA", $currentPlayer)) $modalities = "Buff_Dagger,Buff_Stealth";
       elseif (SubtypeContains($combatChain[0], "Dagger", $currentPlayer)) $modalities = "Buff_Dagger";
       elseif (TypeContains($combatChain[0], "AA", $currentPlayer) && HasStealth($combatChain[0])) $modalities = "Buff_Stealth";
@@ -2984,7 +2984,7 @@ function PayAdditionalCosts($cardID, $from, $index="-")
       AddDecisionQueue("SETCLASSSTATE", $currentPlayer, $CS_AdditionalCosts, 1);
       AddDecisionQueue("SHOWMODES", $currentPlayer, $cardID, 1);
       break;
-    case "HNT102":
+    case "long_whisker_loyalty_red":
       if (SubtypeContains($combatChain[0], "Dagger")) $modalities = "Buff_Power,Additional_Attack,Mark";
       else $modalities = "Additional_Attack,Mark";
       $numModes = min(count(explode(",", $modalities)), NumDraconicChainLinks());
@@ -3001,15 +3001,15 @@ function PayAdditionalCosts($cardID, $from, $index="-")
         }
       }
       break;
-    case "HNT173":
-    case "HNT175":
+    case "danger_digits":
+    case "throw_dagger_blue":
       AddDecisionQueue("MULTIZONEINDICES", $currentPlayer, "MYCHAR:subtype=Dagger&COMBATCHAINATTACKS:subtype=Dagger;type=AA");
       AddDecisionQueue("REMOVEINDICESIFACTIVECHAINLINK", $currentPlayer, "<-", 1);
       AddDecisionQueue("CHOOSEMULTIZONE", $currentPlayer, "<-", 1);
       AddDecisionQueue("SHOWSELECTEDTARGET", $currentPlayer, "-", 1);
       AddDecisionQueue("SETLAYERTARGET", $currentPlayer, $cardID, 1);
       break;
-    case "HNT257":
+    case "war_cry_of_themis_yellow":
       if (GetResolvedAbilityType($cardID, $from) == "I")   
       {
         AddDecisionQueue("FINDINDICES", $currentPlayer, "SOULINDICES");
@@ -3021,7 +3021,7 @@ function PayAdditionalCosts($cardID, $from, $index="-")
         AddDecisionQueue("MULTIBANISHSOUL", $currentPlayer, "-", 1);
       }
       break;
-    case "HNT258":
+    case "war_cry_of_bellona_yellow":
       if (GetResolvedAbilityType($cardID, $from) == "I")   
       {
         AddDecisionQueue("FINDINDICES", $currentPlayer, "SOULINDICES");
@@ -3056,12 +3056,12 @@ function PlayCardEffect($cardID, $from, $resourcesPaid, $target = "-", $addition
   if ($additionalCosts == "-" || $additionalCosts == "") $additionalCosts = GetClassState($currentPlayer, $CS_AdditionalCosts);
   if ($layerIndex > -1) SetClassState($currentPlayer, $CS_PlayIndex, $layerIndex);
   $index = SearchForUniqueID($uniqueID, $currentPlayer);
-  if ($cardID == "ARC003" || $cardID == "CRU101") $index = FindCharacterIndex($currentPlayer, $cardID);
+  if ($cardID == "teklo_plasma_pistol" || $cardID == "plasma_barrel_shot") $index = FindCharacterIndex($currentPlayer, $cardID);
   if ($currentPlayer == $mainPlayer && CardClass($cardID) == "MECHANOLOGIST" && CardType($cardID) == "AA") {
-    $index = FindCharacterIndex($currentPlayer, "EVO410");
+    $index = FindCharacterIndex($currentPlayer, "teklovossen_the_mechropotent");
     if ($index != -1) {
       GiveAttackGoAgain();
-      WriteLog(CardLink("EVO410", "EVO410") . " grants the attack go again.");
+      WriteLog(CardLink("teklovossen_the_mechropotent", "teklovossen_the_mechropotent") . " grants the attack go again.");
     }
   }
   if ($index > -1) SetClassState($currentPlayer, $CS_PlayIndex, $index);
@@ -3097,7 +3097,7 @@ function PlayCardEffect($cardID, $from, $resourcesPaid, $target = "-", $addition
       if ($target != "-") {
         $missingTarget = false;
         switch ($cardID) {
-          case "MST105":
+          case "just_a_nick_red":
             $targetUID = explode("-", $target)[1];
             if ($CombatChain->AttackCard()->UniqueID() != $targetUID) $missingTarget = true;
             break;
@@ -3116,9 +3116,9 @@ function PlayCardEffect($cardID, $from, $resourcesPaid, $target = "-", $addition
     }
     if ($resourcesPaid != "Skipped") {
       switch ($cardID) {
-        case "OUT139":
-        case "HNT173":
-        case "HNT175":
+        case "flick_knives":
+        case "danger_digits":
+        case "throw_dagger_blue":
           break;
         default:
           $target = GetMzCard($currentPlayer, GetAttackTarget());
@@ -3159,7 +3159,7 @@ function PlayCardEffect($cardID, $from, $resourcesPaid, $target = "-", $addition
       $combatChainState[$CCS_LinkBaseAttack] = BaseAttackModifiers($cardID, $attackValue);
       $combatChainState[$CCS_AttackUniqueID] = $uniqueID;
       if ($definedCardType == "AA" && $attackValue < 3) IncrementClassState($currentPlayer, $CS_NumLess3PowAAPlayed);
-      if ($definedCardType == "AA" && (GetResolvedAbilityType($cardID) == "" || GetResolvedAbilityType($cardID) == "AA") && (SearchCharacterActive($currentPlayer, "CRU002") || (SearchCharacterActive($currentPlayer, "CRU097") && SearchCurrentTurnEffects("CRU002-SHIYANA", $currentPlayer))) && $attackValue >= 6) KayoStaticAbility($cardID);
+      if ($definedCardType == "AA" && (GetResolvedAbilityType($cardID) == "" || GetResolvedAbilityType($cardID) == "AA") && (SearchCharacterActive($currentPlayer, "kayo_berserker_runt") || (SearchCharacterActive($currentPlayer, "shiyana_diamond_gemini") && SearchCurrentTurnEffects("kayo_berserker_runt-SHIYANA", $currentPlayer))) && $attackValue >= 6) KayoStaticAbility($cardID);
       $openedChain = true;
       if ($definedCardType != "AA") $combatChainState[$CCS_WeaponIndex] = GetClassState($currentPlayer, $CS_PlayIndex);
       if ($additionalCosts != "-" && HasFusion($cardID)) $combatChainState[$CCS_AttackFused] = 1;

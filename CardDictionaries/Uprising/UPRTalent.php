@@ -7,23 +7,23 @@
     $otherPlayer = ($currentPlayer == 1 ? 2 : 1);
     switch($cardID)
     {
-      case "UPR084":
+      case "flamescale_furnace":
         $pitch = &GetPitch($currentPlayer);
         $numRed = 0;
         for($i=0; $i<count($pitch); $i+=PitchPieces()) if(PitchValue($pitch[$i]) == 1) ++$numRed;
         GainResources($currentPlayer, $numRed);
         return "";
-      case "UPR085":
+      case "sash_of_sandikai":
         GainResources($currentPlayer, 1);
         return "";
-      case "UPR088":
+      case "uprising_red":
         AddCurrentTurnEffect($cardID, $currentPlayer);
         return "";
-      case "UPR089":
+      case "tome_of_firebrand_red":
         Draw($currentPlayer);
         Draw($currentPlayer);
         return "";
-      case "UPR090":
+      case "red_hot_red":
         if(RuptureActive()) {
           $deck = new Deck($currentPlayer);
           $num = NumDraconicChainLinks();
@@ -41,19 +41,19 @@
           }
         }
         return "";
-      case "UPR091":
+      case "rise_up_red":
         if(RuptureActive()) AddCurrentTurnEffect($cardID, $currentPlayer);
         return "";
-      case "UPR094":
+      case "burn_away_red":
         if($additionalCosts != "-") AddCurrentTurnEffect($cardID, $currentPlayer);
         return "";
-      case "UPR096":
+      case "flamecall_awakening_red":
         AddLayer("TRIGGER", $currentPlayer, $cardID);
         return "";
-      case "UPR097":
-        if(GetClassState($currentPlayer, $CS_NumRedPlayed) > 1) MZMoveCard($currentPlayer, "MYDISCARD:isSameName=UPR101", "MYHAND");
+      case "inflame_red":
+        if(GetClassState($currentPlayer, $CS_NumRedPlayed) > 1) MZMoveCard($currentPlayer, "MYDISCARD:isSameName=phoenix_flame_red", "MYHAND");
         return "";
-      case "UPR099":
+      case "searing_touch_red":
         if(RuptureActive()) {
           AddDecisionQueue("MULTIZONEINDICES", $currentPlayer, "MYCHAR:type=C&THEIRCHAR:type=C&MYALLY&THEIRALLY", 1);
           AddDecisionQueue("SETDQCONTEXT", $currentPlayer, "Choose a target to deal 2 damage");
@@ -61,7 +61,7 @@
           AddDecisionQueue("MZDAMAGE", $currentPlayer, "2,DAMAGE," . $cardID, 1);
         }
         return "";
-      case "UPR136":
+      case "coronet_peak":
         if(ShouldAutotargetOpponent($currentPlayer)) {
           AddDecisionQueue("PASSPARAMETER", $currentPlayer, "Target_Opponent");
           AddDecisionQueue("PLAYERTARGETEDABILITY", $currentPlayer, "CORONETPEAK", 1);
@@ -71,7 +71,7 @@
           AddDecisionQueue("PLAYERTARGETEDABILITY", $currentPlayer, "CORONETPEAK", 1);
         }
         return "";
-      case "UPR137":
+      case "glacial_horns":
         AddDecisionQueue("MULTIZONEINDICES", $currentPlayer, "THEIRARS", 1);
         AddDecisionQueue("SETDQCONTEXT", $currentPlayer, "Choose which card you want to freeze", 1);
         AddDecisionQueue("CHOOSEMULTIZONE", $currentPlayer, "<-", 1);
@@ -81,18 +81,18 @@
         AddDecisionQueue("CHOOSEMULTIZONE", $currentPlayer, "<-", 1);
         AddDecisionQueue("MZOP", $currentPlayer, "FREEZE", 1);
         return "";
-      case "UPR141": case "UPR142": case "UPR143":
+      case "isenhowl_weathervane_red": case "isenhowl_weathervane_yellow": case "isenhowl_weathervane_blue":
         AddCurrentTurnEffect($cardID, $currentPlayer);
         return "";
-      case "UPR144": case "UPR145": case "UPR146":
-        if($cardID == "UPR144") $numFrostbites = 3;
-        else if($cardID == "UPR145") $numFrostbites = 2;
+      case "arctic_incarceration_red": case "arctic_incarceration_yellow": case "arctic_incarceration_blue":
+        if($cardID == "arctic_incarceration_red") $numFrostbites = 3;
+        else if($cardID == "arctic_incarceration_yellow") $numFrostbites = 2;
         else $numFrostbites = 1;
-        PlayAura("ELE111", ($currentPlayer == 1 ? 2 : 1), $numFrostbites, effectController: $currentPlayer);
+        PlayAura("frostbite", ($currentPlayer == 1 ? 2 : 1), $numFrostbites, effectController: $currentPlayer);
         return "";
-      case "UPR147": case "UPR148": case "UPR149":
-        if($cardID == "UPR147") $cost = 3;
-        else if($cardID == "UPR148") $cost = 2;
+      case "cold_snap_red": case "cold_snap_yellow": case "cold_snap_blue":
+        if($cardID == "cold_snap_red") $cost = 3;
+        else if($cardID == "cold_snap_yellow") $cost = 2;
         else $cost = 1;
         AddDecisionQueue("SETDQCONTEXT", $currentPlayer, "Choose if you want to pay $cost to prevent an arsenal or ally from being frozen");
         AddDecisionQueue("BUTTONINPUT", $otherPlayer, "0," . $cost, 0, 1);
@@ -104,23 +104,23 @@
         AddDecisionQueue("MZOP", $currentPlayer, "FREEZE", 1);
         if($from == "ARS") Draw($currentPlayer);
         return "";
-      case "UPR183":
+      case "helios_mitre":
         if($target != "-") AddCurrentTurnEffect($cardID, $currentPlayer, $from, GetMZCard($currentPlayer, $target));
         AddCurrentTurnEffect($cardID . "-1", $currentPlayer);
         return "";
-      case "UPR191": case "UPR192": case "UPR193":
+      case "flex_red": case "flex_yellow": case "flex_blue":
         AddDecisionQueue("SETDQCONTEXT", $currentPlayer, "Choose if you want to pay to buff Flex", 1);
         AddDecisionQueue("BUTTONINPUT", $currentPlayer, "0," . 2, 0, 1);
         AddDecisionQueue("PAYRESOURCES", $currentPlayer, "<-", 1);
         AddDecisionQueue("LESSTHANPASS", $currentPlayer, "1", 1);
         AddDecisionQueue("ADDCURRENTEFFECT", $currentPlayer, $cardID, 1);
         return "";
-      case "UPR194": case "UPR195": case "UPR196":
+      case "fyendals_fighting_spirit_red": case "fyendals_fighting_spirit_yellow": case "fyendals_fighting_spirit_blue":
         if(PlayerHasLessHealth($currentPlayer)) { GainHealth(1, $currentPlayer); }
         return "";
-      case "UPR197": case "UPR198": case "UPR199":
-        if($cardID == "UPR197") $numCards = 4;
-        else if($cardID == "UPR198") $numCards = 3;
+      case "sift_red": case "sift_yellow": case "sift_blue":
+        if($cardID == "sift_red") $numCards = 4;
+        else if($cardID == "sift_yellow") $numCards = 3;
         else $numCards = 2;
         AddDecisionQueue("FINDINDICES", $currentPlayer, "HAND");
         AddDecisionQueue("PREPENDLASTRESULT", $currentPlayer, $numCards . "-", 1);
@@ -129,9 +129,9 @@
         AddDecisionQueue("MULTIADDDECK", $currentPlayer, "-", 1);
         AddDecisionQueue("SPECIFICCARD", $currentPlayer, "SIFT", 1);
         return "";
-      case "UPR200": case "UPR201": case "UPR202":
-        if($cardID == "UPR200") $maxCost = 2;
-        else if($cardID == "UPR201") $maxCost = 1;
+      case "strategic_planning_red": case "strategic_planning_yellow": case "strategic_planning_blue":
+        if($cardID == "strategic_planning_red") $maxCost = 2;
+        else if($cardID == "strategic_planning_yellow") $maxCost = 1;
         else $maxCost = 0;
         AddDecisionQueue("MULTIZONEINDICES", $currentPlayer,"MYDISCARD:maxCost=".$maxCost.";type=AA&MYDISCARD:maxCost=".$maxCost.";type=A&THEIRDISCARD:maxCost=".$maxCost.";type=AA&THEIRDISCARD:maxCost=".$maxCost.";type=A");
         AddDecisionQueue("SETDQCONTEXT", $currentPlayer, "Choose a graveyard card", 1);
@@ -146,7 +146,7 @@
         AddDecisionQueue("WRITELOG", $currentPlayer, "<1> recurred from Strategic Planning", 1);
         AddCurrentTurnEffect($cardID, $currentPlayer);
         return "";
-      case "UPR212": case "UPR213": case "UPR214":
+      case "trade_in_red": case "trade_in_yellow": case "trade_in_blue":
         if($from == "ARS") GiveAttackGoAgain();
         AddDecisionQueue("FINDINDICES", $currentPlayer, "HAND");
         AddDecisionQueue("MAYCHOOSEHAND", $currentPlayer, "<-", 1);
@@ -154,13 +154,13 @@
         AddDecisionQueue("DISCARDCARD", $currentPlayer, "HAND-".$currentPlayer, 1);
         AddDecisionQueue("DRAW", $currentPlayer, "-", 1);
         return "";
-      case "UPR215": case "UPR216": case "UPR217":
-        if($cardID == "UPR215") $amount = 3;
-        else if($cardID == "UPR216") $amount = 2;
+      case "healing_balm_red": case "healing_balm_yellow": case "healing_balm_blue":
+        if($cardID == "healing_balm_red") $amount = 3;
+        else if($cardID == "healing_balm_yellow") $amount = 2;
         else $amount = 1;
         GainHealth($amount, $currentPlayer);
         return "";
-      case "UPR221": case "UPR222": case "UPR223":
+      case "oasis_respite_red": case "oasis_respite_yellow": case "oasis_respite_blue":
         if($target != "-") AddCurrentTurnEffect($cardID, $currentPlayer, $from, GetMZCard($currentPlayer, $target));
         if(PlayerHasLessHealth($currentPlayer)) GainHealth(1, $currentPlayer);
         return "";
@@ -173,7 +173,7 @@
     global $mainPlayer, $defPlayer;
     switch($cardID)
     {
-      case "UPR087":
+      case "liquefy_red":
         if(IsHeroAttackTarget() && RuptureActive()) {
           AddDecisionQueue("FINDINDICES", $defPlayer, "EQUIP");
           AddDecisionQueue("CHOOSETHEIRCHARACTER", $mainPlayer, "<-", 1);
@@ -181,20 +181,20 @@
           AddDecisionQueue("DESTROYEQUIPDEF0", $mainPlayer, "-", 1);
         }
         break;
-      case "UPR093":
+      case "breaking_point_red":
         if(IsHeroAttackTarget() && RuptureActive()) DestroyArsenal($defPlayer, effectController:$mainPlayer);
         break;
-      case "UPR100":
-        MZMoveCard($mainPlayer, "MYDISCARD:isSameName=UPR101", "MYHAND");
+      case "stoke_the_flames_red":
+        MZMoveCard($mainPlayer, "MYDISCARD:isSameName=phoenix_flame_red", "MYHAND");
         AddDecisionQueue("OP", $mainPlayer, "GIVEATTACKGOAGAIN", 1);
         break;
-      case "UPR187":
+      case "erase_face_red":
         if(IsHeroAttackTarget()) {
           AddCurrentTurnEffect($cardID, $defPlayer);
           AddNextTurnEffect($cardID, $defPlayer);
         }
         break;
-      case "UPR188":
+      case "vipox_red":
         if(IsHeroAttackTarget()) {
           $hand = &GetHand($defPlayer);
           LoseHealth(count($hand)/HandPieces(), $defPlayer);
@@ -209,8 +209,8 @@
   {
     switch($cardID)
     {
-      case "UPR087": case "UPR090": case "UPR091": return true;
-      case "UPR093": case "UPR098": case "UPR099": return true;
+      case "liquefy_red": case "red_hot_red": case "rise_up_red": return true;
+      case "breaking_point_red": case "lava_burst_red": case "searing_touch_red": return true;
       default: return false;
     }
   }
@@ -256,7 +256,7 @@
   function ChainLinkNameContains($index, $name)
   {
     global $mainPlayer, $chainLinkSummary;
-    if(SearchCurrentTurnEffects("OUT183", $mainPlayer)) return false;
+    if(SearchCurrentTurnEffects("amnesia_red", $mainPlayer)) return false;
     if($index >= count($chainLinkSummary)) return false;
     $attackNames = explode(",", $chainLinkSummary[$index+4]);
     for($i=0; $i<count($attackNames); ++$i) {
@@ -268,9 +268,9 @@
 
   function ThawIndices($player) {
     $iceAfflictions = SearchMultiZoneFormat(SearchAura($player, "", "Affliction", -1, -1, "", "ICE"), "MYAURAS");
-    $frostbites = SearchMultiZoneFormat(SearchAurasForCard("ELE111", $player), "MYAURAS");
+    $frostbites = SearchMultiZoneFormat(SearchAurasForCard("frostbite", $player), "MYAURAS");
     $search = CombineSearches($iceAfflictions, $frostbites);
-    $equipmentSlotFrostbites = SearchMultiZoneFormat(SearchCharacterForCards("ELE111", $player), "MYCHAR");
+    $equipmentSlotFrostbites = SearchMultiZoneFormat(SearchCharacterForCards("frostbite", $player), "MYCHAR");
     $search = CombineSearches($search, $equipmentSlotFrostbites);
     $myFrozenArsenal = SearchMultiZoneFormat(SearchArsenal($player, frozenOnly:true), "MYARS");
     $search = CombineSearches($search, $myFrozenArsenal);

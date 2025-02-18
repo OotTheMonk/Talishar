@@ -45,30 +45,29 @@ include "CardDictionaries/ArmoryDecks/AJVShared.php";
 include "CardDictionaries/Hunted/HNTShared.php";
 
 include "GeneratedCode/GeneratedCardDictionaries.php";
-include "GeneratedCode/DatabaseGeneratedCardDictionaries.php";
 
-$CID_BloodRotPox = "OUT234";
-$CID_Frailty = "OUT235";
-$CID_Inertia = "OUT236";
+$CID_BloodRotPox = "bloodrot_pox";
+$CID_Frailty = "frailty";
+$CID_Inertia = "inertia";
 
-$CID_TekloHead = "LGS186";
-$CID_TekloChest = "LGS187";
-$CID_TekloArms = "LGS188";
-$CID_TekloLegs = "LGS189";
+$CID_TekloHead = "teklo_base_head";
+$CID_TekloChest = "teklo_base_chest";
+$CID_TekloArms = "teklo_base_arms";
+$CID_TekloLegs = "teklo_base_legs";
 
 function CardType($cardID, $from="")
 {
   global $CS_AdditionalCosts, $currentPlayer;
   if (!$cardID || $cardID == "TRIGGER") return "";
   switch ($cardID) {
-    case "HVY096":
+    case "parry_blade":
       return "W,E";
-    case "ROS005":
-    case "ROS006":
-    case "ROS012":
-    case "ROS018":
-    case "ROS024":
-    case "ROS253":
+    case "thistle_bloom__life_yellow":
+    case "arcane_seeds__life_red":
+    case "burn_up__shock_red":
+    case "pulsing_aether__life_red":
+    case "comet_storm__shock_red":
+    case "regrowth__shock_blue":
       if($from == "DECK" || $from == "DISCARD" || $from == "BANISH") return "A,I";
       if(function_exists("GetClassState")) {
         if(GetClassState($currentPlayer, $CS_AdditionalCosts) == "Both") return "A,I";
@@ -76,20 +75,21 @@ function CardType($cardID, $from="")
         elseif (IsMeldActionName(GetClassState($currentPlayer, $CS_AdditionalCosts))) return "A";  
       }
       return "A,I";
-    case "ROS027":
+    case "sanctuary_of_aria":
       return "Macro";
-    case "AJV002":
+    case "summit_the_unforgiving":
       return "W";
-    case "HNT053":
+    case "graphene_chelicera":
       return "W,T";
     default:
       break;
   }
   $set = CardSet($cardID);
   if ($set != "ROG" && $set != "DUM") {
-    $number = intval(substr($cardID, 3));
+    $setID = SetID($cardID);
+    $number = intval(substr($setID, 3));
     if ($number < 400) return GeneratedCardType($cardID);
-    else if ($set != "MON" && $set != "DYN" && $set != "HNT" && $cardID != "UPR551" && $cardID != "EVO410" && $cardID != "EVO410b") return GeneratedCardType($cardID);
+    else if ($set != "MON" && $set != "DYN" && $set != "HNT" && $setID != "UPR551" && $cardID != "teklovossen_the_mechropotent" && $cardID != "teklovossen_the_mechropotentb") return GeneratedCardType($cardID);
   }
   if ($set == "ROG") return ROGUECardType($cardID);
   switch ($cardID) {
@@ -97,30 +97,30 @@ function CardType($cardID, $from="")
     case "MON401":
     case "MON402":
       return "E";
-    case "MON404":
+    case "the_librarian":
       return "M";
-    case "MON405":
+    case "minerva_themis":
       return "M";
-    case "MON406":
-    case "MON407":
+    case "lady_barthimont":
+    case "lord_sutcliffe":
       return "M";
     case "UPR551":
       return "-";
-    case "DYN492a":
+    case "nitro_mechanoida":
       return "W";
-    case "DYN492b":
-    case "EVO410b":
+    case "nitro_mechanoidb":
+    case "teklovossen_the_mechropotentb":
       return "E";
-    case "EVO410":
+    case "teklovossen_the_mechropotent":
       return "C";
-    case "DTD564":
+    case "levia_redeemed":
       return "D";
-    case "DYN612":
+    case "suraya_archangel_of_knowledge":
       return "-";
     case "DUMMY":
     case "DUMMYDISHONORED":
       return "C";
-    case "HNT407":
+    case "the_hand_that_pulls_the_strings":
       return "M";
     default:
       return "";
@@ -130,57 +130,57 @@ function CardType($cardID, $from="")
 function CardTypeExtended($cardID, $from="") // used to handle evos
 {
   switch ($cardID) {
-    case "EVO026"://steel soul
-    case "EVO027":
-    case "EVO028":
-    case "EVO029":
-    case "EVO426":
-    case "EVO427":
-    case "EVO428":
-    case "EVO429":
-    case "EVO046"://yellow 2 blocks
-    case "EVO047":
-    case "EVO048":
-    case "EVO049":
-    case "EVO446":
-    case "EVO447":
-    case "EVO448":
-    case "EVO449":
-    case "EVO034"://yellow 3 blocks
-    case "EVO035":
-    case "EVO036":
-    case "EVO037":
-    case "EVO434":
-    case "EVO435":
-    case "EVO436":
-    case "EVO437":
-    case "HVY248"://evo magneto
-    case "HVY648":
+    case "evo_steel_soul_memory_blue"://steel soul
+    case "evo_steel_soul_processor_blue":
+    case "evo_steel_soul_controller_blue":
+    case "evo_steel_soul_tower_blue":
+    case "evo_steel_soul_memory_blue_equip":
+    case "evo_steel_soul_processor_blue_equip":
+    case "evo_steel_soul_controller_blue_equip":
+    case "evo_steel_soul_tower_blue_equip":
+    case "evo_data_mine_yellow"://yellow 2 blocks
+    case "evo_battery_pack_yellow":
+    case "evo_cogspitter_yellow":
+    case "evo_charging_rods_yellow":
+    case "evo_data_mine_yellow_equip":
+    case "evo_battery_pack_yellow_equip":
+    case "evo_cogspitter_yellow_equip":
+    case "evo_charging_rods_yellow_equip":
+    case "evo_command_center_yellow"://yellow 3 blocks
+    case "evo_engine_room_yellow":
+    case "evo_smoothbore_yellow":
+    case "evo_thruster_yellow":
+    case "evo_command_center_yellow_equip":
+    case "evo_engine_room_yellow_equip":
+    case "evo_smoothbore_yellow_equip":
+    case "evo_thruster_yellow_equip":
+    case "evo_magneto_blue"://evo magneto
+    case "evo_magneto_blue_equip":
       return "A,E";
-    case "EVO030"://breakers
-    case "EVO031":
-    case "EVO032":
-    case "EVO033":
-    case "EVO430":
-    case "EVO431":
-    case "EVO432":
-    case "EVO433":
-    case "EVO050"://yellow 0 blocks
-    case "EVO051":
-    case "EVO052":
-    case "EVO053":
-    case "EVO450":
-    case "EVO451":
-    case "EVO452":
-    case "EVO453":
-    case "MST228"://AB evos
-    case "MST229":
-    case "MST230":
-    case "MST231":
-    case "MST628":
-    case "MST629":
-    case "MST630":
-    case "MST631":
+    case "evo_circuit_breaker_red"://breakers
+    case "evo_atom_breaker_red":
+    case "evo_face_breaker_red":
+    case "evo_mach_breaker_red":
+    case "evo_circuit_breaker_red_equip":
+    case "evo_atom_breaker_red_equip":
+    case "evo_face_breaker_red_equip":
+    case "evo_mach_breaker_red_equip":
+    case "evo_zoom_call_yellow"://yellow 0 blocks
+    case "evo_buzz_hive_yellow":
+    case "evo_whizz_bang_yellow":
+    case "evo_zip_line_yellow":
+    case "evo_zoom_call_yellow_equip":
+    case "evo_buzz_hive_yellow_equip":
+    case "evo_whizz_bang_yellow_equip":
+    case "evo_zip_line_yellow_equip":
+    case "evo_recall_blue"://AB evos
+    case "evo_heartdrive_blue":
+    case "evo_shortcircuit_blue":
+    case "evo_speedslip_blue":
+    case "evo_recall_blue_equip":
+    case "evo_heartdrive_blue_equip":
+    case "evo_shortcircuit_blue_equip":
+    case "evo_speedslip_blue_equip":
       return "I,E";
     default:
       break;
@@ -188,26 +188,41 @@ function CardTypeExtended($cardID, $from="") // used to handle evos
   return CardType($cardID, $from);
 }
 
+function SetID($cardID)
+{
+  switch ($cardID) {
+    case "teklovossen_the_mechropotentb":
+    case "nitro_mechanoida":
+    case "nitro_mechanoidb":
+    case "nitro_mechanoidc":
+      return GeneratedSetID(substr($cardID, 0, strlen($cardID) - 1));
+    case "the_hand_that_pulls_the_strings":
+      return "HNT407";
+    default:
+      return GeneratedSetID($cardID);
+  }
+}
+
 function CardSubType($cardID, $uniqueID = -1)
 {
   if (!$cardID) return "";
   switch ($cardID) {
-    case "ROS027"://Technically false, but helps with Rosetta Limited
+    case "sanctuary_of_aria"://Technically false, but helps with Rosetta Limited
       return "Item";
     case "UPR439":
     case "UPR440":
     case "UPR441": //resolved sand cover
       return "Ash";
-    case "HNT012":
+    case "kiss_of_death_red":
       return "Dagger,Attack";
     default:
       break;
   }
-  if ($uniqueID > -1 && (IsModular($cardID) || $cardID == "ELE111")) {
+  if ($uniqueID > -1 && (IsModular($cardID) || $cardID == "frostbite")) {
     global $currentTurnEffects;
     for ($i = 0; $i < count($currentTurnEffects); $i += CurrentTurnEffectsPieces()) {
       $effectArr = explode("-", $currentTurnEffects[$i]);
-      if ($effectArr[0] != "EVO013" && $effectArr[0] != "ROS246" && $effectArr[0] != "ELE111") continue;
+      if ($effectArr[0] != "adaptive_plating" && $effectArr[0] != "adaptive_dissolver" && $effectArr[0] != "frostbite") continue;
       $effectArr = explode(",", $effectArr[1]);
       if ($effectArr[0] != $uniqueID) continue;
       if($effectArr[1] == "Base") return $effectArr[2];
@@ -217,10 +232,12 @@ function CardSubType($cardID, $uniqueID = -1)
   }
   $set = CardSet($cardID);
   if ($set != "ROG" && $set != "DUM") {
-    $number = intval(substr($cardID, 3));
+    $setID = SetID($cardID);
+
+    $number = intval(substr($setID, 3));
     if ($number < 400) return GeneratedCardSubtype($cardID);
     else if (
-      $set != "MON" && $set != "DYN" && $cardID != "UPR551" && $cardID != "DYN492c" && $cardID != "EVO410" && $cardID != "EVO410b" && $set != "MST")
+      $set != "MON" && $set != "DYN" && $cardID != "UPR551" && $cardID != "nitro_mechanoidc" && $cardID != "teklovossen_the_mechropotent" && $cardID != "teklovossen_the_mechropotentb" && $set != "MST")
       return GeneratedCardSubtype($cardID);
   }
   if ($set == "ROG") return ROGUECardSubtype($cardID);
@@ -233,38 +250,38 @@ function CardSubType($cardID, $uniqueID = -1)
       return "Legs";
     case "UPR551":
       return "Ally";
-    case "DYN492b":
+    case "nitro_mechanoidb":
       return "Chest"; // Technically not true, but needed to work.
-    case "DYN492c":
+    case "nitro_mechanoidc":
       return "Item";
-    case "DYN612":
+    case "suraya_archangel_of_knowledge":
       return "Angel,Ally";
-    case "DTD564":
+    case "levia_redeemed":
       return "Demon";
-    case "EVO410":
+    case "teklovossen_the_mechropotent":
       return "Evo";
-    case "EVO410b":
+    case "teklovossen_the_mechropotentb":
       return "Chest,Evo";
-    case "MST400":
-    case "MST410":
-    case "MST432":
-    case "MST453":
-    case "MST495":
-    case "MST496":
-    case "MST497":
-    case "MST498":
-    case "MST499":
-    case "MST500":
-    case "MST501":
-    case "MST502":
+    case "MST000_inner_chi_blue":
+    case "MST010_inner_chi_blue":
+    case "MST032_inner_chi_blue":
+    case "MST053_inner_chi_blue":
+    case "MST095_inner_chi_blue":
+    case "MST096_inner_chi_blue":
+    case "MST097_inner_chi_blue":
+    case "MST098_inner_chi_blue":
+    case "MST099_inner_chi_blue":
+    case "MST100_inner_chi_blue":
+    case "MST101_inner_chi_blue":
+    case "MST102_inner_chi_blue":
       return "Chi";
-    case "MST628":
+    case "evo_recall_blue_equip":
       return "Head,Evo";
-    case "MST629":
+    case "evo_heartdrive_blue_equip":
       return "Chest,Evo";
-    case "MST630":
+    case "evo_shortcircuit_blue_equip":
       return "Arms,Evo";
-    case "MST631":
+    case "evo_speedslip_blue_equip":
       return "Legs,Evo";
     default:
       return "";
@@ -339,9 +356,9 @@ function CharacterIntellect($cardID)
 {
   $cardID = ShiyanaCharacter($cardID);
   switch ($cardID) {
-    case "CRU099":
+    case "data_doll_mkii":
       return 3;
-    case "EVO410":
+    case "teklovossen_the_mechropotent":
       return 3;
     case "ROGUE001":
       return 3;
@@ -403,7 +420,10 @@ function CharacterIntellect($cardID)
 function CardSet($cardID)
 {
   if (!$cardID) return "";
-  return substr($cardID, 0, 3);
+  if (substr($cardID, 0, 3) == "ROG") return "ROG";
+  if (substr($cardID, 0, 3) == "DUM") return "DUM";
+  $setID = SetID(explode("-", $cardID)[0]);
+  return substr($setID, 0, 3);
 }
 
 function CardClass($cardID)
@@ -411,23 +431,23 @@ function CardClass($cardID)
   global $currentPlayer, $CS_AdditionalCosts;
   if (!$cardID) return "";
   switch ($cardID) {
-    case "ROS005":
-    case "ROS006":
-    case "ROS011":
-    case "ROS012":
+    case "thistle_bloom__life_yellow":
+    case "arcane_seeds__life_red":
+    case "vaporize__shock_yellow":
+    case "burn_up__shock_red":
       if(function_exists("GetClassState")) {
         if (IsMeldInstantName(GetClassState($currentPlayer, $CS_AdditionalCosts))) return "NONE";
       }
       return "RUNEBLADE";
-    case "ROS017":
-    case "ROS018":
-    case "ROS023":
-    case "ROS024":
+    case "rampant_growth__life_yellow":
+    case "pulsing_aether__life_red":
+    case "null__shock_yellow":
+    case "comet_storm__shock_red":
       if(function_exists("GetClassState")) {
         if (IsMeldInstantName(GetClassState($currentPlayer, $CS_AdditionalCosts))) return "NONE";
       }
       return "WIZARD";
-    case "ROS253":
+    case "regrowth__shock_blue":
       if(function_exists("GetClassState")) {
         if (IsMeldInstantName(GetClassState($currentPlayer, $CS_AdditionalCosts))) return "NONE";
       }
@@ -435,9 +455,10 @@ function CardClass($cardID)
     default:
       break;
   }
-  $number = intval(substr($cardID, 3));
+  $setID = SetID($cardID);
+  $number = intval(substr($setID, 3));
   if ($number >= 400) {
-    $set = substr($cardID, 0, 3);
+    $set = substr($setID, 0, 3);
     switch ($set) {
       case "MON":
         if ($number == 404) return "ILLUSIONIST";
@@ -453,14 +474,14 @@ function CardClass($cardID)
     }
   }
   switch ($cardID) {
-    case "DYN612":
+    case "suraya_archangel_of_knowledge":
       return "ILLUSIONIST";
-    case "DYN492a":
-    case "DYN492b":
-    case "DYN492c":
+    case "nitro_mechanoida":
+    case "nitro_mechanoidb":
+    case "nitro_mechanoidc":
       return "MECHANOLOGIST";
-    case "EVO410":
-    case "EVO410b":
+    case "teklovossen_the_mechropotent":
+    case "teklovossen_the_mechropotentb":
       return "MECHANOLOGIST";
     default:
       break;
@@ -473,25 +494,25 @@ function CardTalent($cardID, $from="-")
   global $currentPlayer, $CS_AdditionalCosts;
   if (!$cardID) return "";
   switch ($cardID) {
-    case "ROS005":
-    case "ROS006":
-    case "ROS017":
-    case "ROS018":
+    case "thistle_bloom__life_yellow":
+    case "arcane_seeds__life_red":
+    case "rampant_growth__life_yellow":
+    case "pulsing_aether__life_red":
       if(function_exists("GetClassState") && $from == "-") {
         if(IsMeldLeftSideName(GetClassState($currentPlayer, $CS_AdditionalCosts))) return "NONE";
         return "EARTH";
       }
       return "EARTH";
-    case "ROS011":
-    case "ROS012":
-    case "ROS023":
-    case "ROS024":
+    case "vaporize__shock_yellow":
+    case "burn_up__shock_red":
+    case "null__shock_yellow":
+    case "comet_storm__shock_red":
       if(function_exists("GetClassState") && $from == "-") {
         if(IsMeldLeftSideName(GetClassState($currentPlayer, $CS_AdditionalCosts))) return "NONE";
         return "LIGHTNING";        
       }
       return "LIGHTNING";
-    case "ROS253":
+    case "regrowth__shock_blue":
       if(function_exists("GetClassState")) {
         if (IsMeldRightSideName(GetClassState($currentPlayer, $CS_AdditionalCosts))) return "LIGHTNING";
         elseif (IsMeldLeftSideName(GetClassState($currentPlayer, $CS_AdditionalCosts))) return "EARTH";
@@ -500,9 +521,10 @@ function CardTalent($cardID, $from="-")
     default:
       break;
   }
-  $set = substr($cardID, 0, 3);
+  $setID = SetID($cardID);
+  $set = substr($setID, 0, 3);
   if ($set == "ROG") return ROGUECardTalent($cardID);
-  $number = intval(substr($cardID, 3));
+  $number = intval(substr($setID, 3));
   if ($number >= 400) {
     switch ($set) {
       case "MON":
@@ -518,10 +540,10 @@ function CardTalent($cardID, $from="-")
     }
   }
   switch ($cardID) {
-    case "EVO410":
-    case "EVO410b":
+    case "teklovossen_the_mechropotent":
+    case "teklovossen_the_mechropotentb":
       return "SHADOW";
-    case "DTD564":
+    case "levia_redeemed":
       return "SHADOW";
     default:
       break;
@@ -535,62 +557,62 @@ function CardCost($cardID, $from="-")
   $cardID = ShiyanaCharacter($cardID);
   $set = CardSet($cardID);
   switch ($cardID) {
-    case "EVR022":
+    case "imposing_visage_blue":
       return 3;
-    case "HVY143":
-    case "HVY144":
-    case "HVY145":
-    case "HVY163":
-    case "HVY164":
-    case "HVY165":
-    case "HVY186":
-    case "HVY187":
-    case "ROS057":
-    case "ROS056":
-    case "ROS055":
-    case "HVY188":
+    case "mighty_windup_red":
+    case "mighty_windup_yellow":
+    case "mighty_windup_blue":
+    case "agile_windup_red":
+    case "agile_windup_yellow":
+    case "agile_windup_blue":
+    case "vigorous_windup_red":
+    case "vigorous_windup_yellow":
+    case "fruits_of_the_forest_blue":
+    case "fruits_of_the_forest_yellow":
+    case "fruits_of_the_forest_red":
+    case "vigorous_windup_blue":
       if (GetResolvedAbilityType($cardID, "HAND") == "I" && $from == "HAND") return 0;
       return 3;
-    case "HVY209":
+    case "ripple_away_blue":
       if (GetResolvedAbilityType($cardID, "HAND") == "I" && $from == "HAND") return 0;
       return 2;
-    case "MST400":
-    case "MST410":
-    case "MST432":
-    case "MST453":
-    case "MST495":
-    case "MST496":
-    case "MST497":
-    case "MST498":
-    case "MST499":
-    case "MST500":
-    case "MST501":
-    case "MST502":
+    case "MST000_inner_chi_blue":
+    case "MST010_inner_chi_blue":
+    case "MST032_inner_chi_blue":
+    case "MST053_inner_chi_blue":
+    case "MST095_inner_chi_blue":
+    case "MST096_inner_chi_blue":
+    case "MST097_inner_chi_blue":
+    case "MST098_inner_chi_blue":
+    case "MST099_inner_chi_blue":
+    case "MST100_inner_chi_blue":
+    case "MST101_inner_chi_blue":
+    case "MST102_inner_chi_blue":
       return -1;
-    case "ROS106":
-    case "ROS105":
-    case "ROS104":
-    case "HNT232":
-    case "HNT233":
-    case "HNT234":
+    case "trip_the_light_fantastic_blue":
+    case "trip_the_light_fantastic_yellow":
+    case "trip_the_light_fantastic_red":
+    case "tipoff_red":
+    case "tipoff_yellow":
+    case "tipoff_blue":
       if (GetResolvedAbilityType($cardID, "HAND") == "I" && $from == "HAND") return 0;
       return 1;
-    case "ROS120":
-    case "ROS169":
+    case "haunting_rendition_red":
+    case "mental_block_blue":
       if (GetResolvedAbilityType($cardID, "HAND") == "I" && $from == "HAND") return 0;
       return -1;
-    case "ROS170":
-    case "ROS171":
-    case "ROS172":
+    case "chorus_of_the_amphitheater_red":
+    case "chorus_of_the_amphitheater_yellow":
+    case "chorus_of_the_amphitheater_blue":
       if (GetResolvedAbilityType($cardID, "HAND") == "I") return 0;
       return 2;
-    case "ROS204":
-    case "ROS205":
-    case "ROS206":
+    case "photon_splicing_red":
+    case "photon_splicing_yellow":
+    case "photon_splicing_blue":
       if (GetResolvedAbilityType($cardID, "HAND") == "I") return 0;
       return 1;
-    case "HNT051":
-    case "HNT248":
+    case "two_sides_to_the_blade_red":
+    case "roiling_fissure_blue":
       return 1;
     default:
       break;
@@ -608,18 +630,18 @@ function AbilityCost($cardID)
   $set = CardSet($cardID);
   $class = CardClass($cardID);
   $subtype = CardSubtype($cardID);
-  if ($cardID == "MST133") {
+  if ($cardID == "restless_coalescence_yellow") {
     $abilityType = GetResolvedAbilityType($cardID);
     if ($abilityType == "I") return 0;
   }
   if ($class == "ILLUSIONIST" && DelimStringContains($subtype, "Aura")) {
-    if (SearchCharacterForCard($currentPlayer, "MON003")) return 0;
-    if (SearchCharacterForCard($currentPlayer, "MON088")) return 3;
-    if (SearchCharacterForCard($currentPlayer, "DTD216")) return 2;
+    if (SearchCharacterForCard($currentPlayer, "luminaris")) return 0;
+    if (SearchCharacterForCard($currentPlayer, "iris_of_reality")) return 3;
+    if (SearchCharacterForCard($currentPlayer, "reality_refractor")) return 2;
   }
-  if (SearchCharacterForCard($currentPlayer, "MST130") && HasWard($cardID, $currentPlayer) && DelimStringContains($subtype, "Aura")) return 1;
+  if (SearchCharacterForCard($currentPlayer, "cosmo_scroll_of_ancestral_tapestry") && HasWard($cardID, $currentPlayer) && DelimStringContains($subtype, "Aura")) return 1;
 
-  if (DelimStringContains($subtype, "Dragon") && SearchCharacterActive($currentPlayer, "UPR003")) return 0;
+  if (DelimStringContains($subtype, "Dragon") && SearchCharacterActive($currentPlayer, "storm_of_sandikai")) return 0;
   if ($set == "WTR") return WTRAbilityCost($cardID);
   else if ($set == "ARC") return ARCAbilityCost($cardID);
   else if ($set == "CRU") return CRUAbilityCost($cardID);
@@ -650,57 +672,57 @@ function DynamicCost($cardID)
 {
   global $currentPlayer;
   switch ($cardID) {
-    case "WTR051":
-    case "WTR052":
-    case "WTR053":
+    case "staunch_response_red":
+    case "staunch_response_yellow":
+    case "staunch_response_blue":
       return "2,6";
-    case "ARC009":
+    case "spark_of_genius_yellow":
       return "0,2,4,6,8,10,12";
-    case "MON231":
-      if(SearchCurrentTurnEffects("CRU141-NAA", $currentPlayer) || SearchCurrentTurnEffects("CRU141-AA", $currentPlayer)) {
+    case "sonata_arcanix_red":
+      if(SearchCurrentTurnEffects("bloodsheath_skeleta-NAA", $currentPlayer) || SearchCurrentTurnEffects("bloodsheath_skeleta-AA", $currentPlayer)) {
         return "0,2,4,6,8,10,12,14,16,18,20,22,24,26,28,30,32,34,36,38,40,42,44,46,48,50,52,54,56,58,60,62,64,66,68,70,72,74,76,78,80,82,84,86,88,90,92,94,96,98,100,102,104,106,108,110";
       }
       return "0,2,4,6,8,10,12,14,16,18,20";
-    case "EVR022":
+    case "imposing_visage_blue":
       return "3,4,5,6,7,8,9,10,11,12,13,14,15";
-    case "EVR124":
+    case "scour_blue":
       $myAurasCount = SearchCount(SearchAura($currentPlayer, "", "", 0));
       $otherPlayerAurasCount = SearchCount(SearchAura(($currentPlayer == 1 ? 2 : 1), "", "", 0));
       return $myAurasCount > $otherPlayerAurasCount ? GetIndices(SearchCount(SearchAura($currentPlayer, "", "", 0)) + 1) : GetIndices(SearchCount(SearchAura(($currentPlayer == 1 ? 2 : 1), "", "", 0)) + 1);
-    case "UPR109":
+    case "ice_eternal_blue":
       return "0,2,4,6,8,10,12,14,16,18,20";
-    case "EVO100":
+    case "hyper_scrapper_blue":
       return "0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20";
-    case "EVO140":
+    case "moonshot_yellow":
       return "0,2,4,6,8,10,12,14,16,18,20";
-    case "EVO143":
+    case "meganetic_lockwave_blue":
       return "0,3,6,9,12,15,18,21,24,27,30";
-    case "EVO145":
+    case "system_reset_yellow":
       return "0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20";
-    case "EVO238":
+    case "tectonic_rift_blue":
       return "0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15";
-    case "EVO242":
-      if(SearchCurrentTurnEffects("CRU141-NAA", $currentPlayer) || SearchCurrentTurnEffects("CRU141-AA", $currentPlayer)) {
+    case "sonata_fantasmia_blue":
+      if(SearchCurrentTurnEffects("bloodsheath_skeleta-NAA", $currentPlayer) || SearchCurrentTurnEffects("bloodsheath_skeleta-AA", $currentPlayer)) {
         return "0,2,4,6,8,10,12,14,16,18,20,22,24,26,28,30,32,34,36,38,40,42,44,46,48,50,52,54,56,58,60,62,64,66,68,70,72,74,76,78,80,82,84,86,88,90,92,94,96,98,100,102,104,106,108,110";
       }
       return "0,2,4,6,8,10,12,14,16,18,20";
-    case "HVY103":
+    case "up_the_ante_blue":
       return "0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15";
-    case "HVY250":
+    case "reel_in_blue":
       return "0,1,2,3,4,5,6,7,8,9,10,11,12";
-    case "HVY251":
-      if(SearchCurrentTurnEffects("CRU141-NAA", $currentPlayer) || SearchCurrentTurnEffects("CRU141-AA", $currentPlayer)) {
+    case "sonata_galaxia_red":
+      if(SearchCurrentTurnEffects("bloodsheath_skeleta-NAA", $currentPlayer) || SearchCurrentTurnEffects("bloodsheath_skeleta-AA", $currentPlayer)) {
         return "0,2,4,6,8,10,12,14,16,18,20,22,24,26,28,30,32,34,36,38,40,42,44,46,48,50,52,54,56,58,60,62,64,66,68,70,72,74,76,78,80,82,84,86,88,90,92,94,96,98,100,102,104,106,108,110";
       }
       return "0,2,4,6,8,10,12,14,16,18,20,22,24,26,28,30,32,34,36,38,40,42,44,46,48,50,52,54,56,58,60";
-    case "MST227":
+    case "supercell_blue":
       return GetIndices(SearchCount(SearchItemsByName($currentPlayer, "Hyper Driver")) + 1);
-    case "ROS004":
-      if(SearchCurrentTurnEffects("CRU141-NAA", $currentPlayer) || SearchCurrentTurnEffects("CRU141-AA", $currentPlayer)) {
+    case "germinate_blue":
+      if(SearchCurrentTurnEffects("bloodsheath_skeleta-NAA", $currentPlayer) || SearchCurrentTurnEffects("bloodsheath_skeleta-AA", $currentPlayer)) {
         return "0,2,4,6,8,10,12,14,16,18,20,22,24,26,28,30,32,34,36,38,40,42,44,46,48,50,52,54,56,58,60,62,64,66,68,70,72,74,76,78,80,82,84,86,88,90,92,94,96,98,100,102,104,106,108,110";
       }
       return "0,2,4,6,8,10,12,14,16,18,20";
-    case "HNT248":
+    case "roiling_fissure_blue":
       return "1,2,3,4,5,6,7,8,9,10,11,12,13,14,15";  
     default:
       return "";
@@ -712,31 +734,28 @@ function PitchValue($cardID)
   if (!$cardID) return "";
   $set = CardSet($cardID);
   if (CardType($cardID) == "M" || CardSubType($cardID) == "Landmark") return -1;
-  $number = intval(substr($cardID, 3));
-  if ($number > 400) {
-    switch ($cardID) {
-      case "MST400":
-      case "MST410":
-      case "MST432":
-      case "MST453":
-      case "MST495":
-      case "MST496":
-      case "MST497":
-      case "MST498":
-      case "MST499":
-      case "MST500":
-      case "MST501":
-      case "MST502":
-        return 3;
-      default:
-        break;
-    }
+  switch ($cardID) {
+    case "MST000_inner_chi_blue":
+    case "MST010_inner_chi_blue":
+    case "MST032_inner_chi_blue":
+    case "MST053_inner_chi_blue":
+    case "MST095_inner_chi_blue":
+    case "MST096_inner_chi_blue":
+    case "MST097_inner_chi_blue":
+    case "MST098_inner_chi_blue":
+    case "MST099_inner_chi_blue":
+    case "MST100_inner_chi_blue":
+    case "MST101_inner_chi_blue":
+    case "MST102_inner_chi_blue":
+      return 3;
+    default:
+      break;
   }
   if ($set == "LGS") {
     switch ($cardID) {
-      case "LGS177":
+      case "jackolantern_yellow":
         return 2;
-      case "LGS178":
+      case "jackolantern_blue":
         return 3;
       default:
         break;
@@ -753,12 +772,13 @@ function BlockValue($cardID)
   global $defPlayer;
   if (!$cardID) return "";
   $set = CardSet($cardID);
-  if ($cardID == "MON191") return SearchPitchForNumCosts($defPlayer) * 2;
-  if ($cardID == "EVR138") return FractalReplicationStats("Block");
-  if ($cardID == "ROS211") return SearchCount(SearchMultiZone($defPlayer, "MYCHAR:type=E;nameIncludes=Arcanite"));
+  if ($cardID == "mutated_mass_blue") return SearchPitchForNumCosts($defPlayer) * 2;
+  if ($cardID == "fractal_replication_red") return FractalReplicationStats("Block");
+  if ($cardID == "arcanite_fortress") return SearchCount(SearchMultiZone($defPlayer, "MYCHAR:type=E;nameIncludes=Arcanite"));
   if ($set != "ROG" && $set != "DUM") {
-    $number = intval(substr($cardID, 3));
-    if ($number < 400 || ($set != "MON" && $set != "DYN" && $set != "MST" && $set != "HNT" && $cardID != "EVO410" && $cardID != "EVO410b")) return GeneratedBlockValue($cardID);
+    $setID = SetID($cardID);
+    $number = intval(substr($setID, 3));
+    if ($number < 400 || ($set != "MON" && $set != "DYN" && $set != "MST" && $set != "HNT" && $cardID != "teklovossen_the_mechropotent" && $cardID != "teklovossen_the_mechropotentb")) return GeneratedBlockValue($cardID);
   }
   if ($set == "ROG") return ROGUEBlockValue($cardID);
   switch ($cardID) {
@@ -766,40 +786,40 @@ function BlockValue($cardID)
     case "MON401":
     case "MON402":
       return 0;
-    case "MON404":
-    case "MON405":
-    case "MON406":
-    case "MON407":
+    case "the_librarian":
+    case "minerva_themis":
+    case "lady_barthimont":
+    case "lord_sutcliffe":
       return 3;
-    case "DYN492a":
+    case "nitro_mechanoida":
       return -1;
-    case "DYN492b":
+    case "nitro_mechanoidb":
       return 5;
-    case "EVO410":
+    case "teklovossen_the_mechropotent":
       return -1;
-    case "EVO410b":
+    case "teklovossen_the_mechropotentb":
       return 6;
     case "DUMMYDISHONORED":
       return -1;
-    case "MST400":
-    case "MST410":
-    case "MST432":
-    case "MST453":
-    case "MST495":
-    case "MST496":
-    case "MST497":
-    case "MST498":
-    case "MST499":
-    case "MST500":
-    case "MST501":
-    case "MST502":
+    case "MST000_inner_chi_blue":
+    case "MST010_inner_chi_blue":
+    case "MST032_inner_chi_blue":
+    case "MST053_inner_chi_blue":
+    case "MST095_inner_chi_blue":
+    case "MST096_inner_chi_blue":
+    case "MST097_inner_chi_blue":
+    case "MST098_inner_chi_blue":
+    case "MST099_inner_chi_blue":
+    case "MST100_inner_chi_blue":
+    case "MST101_inner_chi_blue":
+    case "MST102_inner_chi_blue":
       return -1;
-    case "MST628":
-    case "MST629":
-    case "MST630":
-    case "MST631":
+    case "evo_recall_blue_equip":
+    case "evo_heartdrive_blue_equip":
+    case "evo_shortcircuit_blue_equip":
+    case "evo_speedslip_blue_equip":
       return 0;
-    case "HNT407":
+    case "the_hand_that_pulls_the_strings":
       return 4;
     default:
       return 3;
@@ -817,43 +837,44 @@ function AttackValue($cardID, $index=-1, $base=false)
 
   //Only weapon that gains power, NOT on their attack
   if (!$base) {
-    if ($cardID == "WTR040") return SearchCount(SearchPitch($mainPlayer, minCost: 3)) >= 2 ? 6 : 4;
-    if ($cardID == "ARC077") return GetClassState($mainPlayer, $CS_NumNonAttackCards) > 0 ? 4 : 1;
-    if ($cardID == "ELE202") return SearchCount(SearchPitch($mainPlayer, minCost: 3)) >= 1 ? 4 : 3;
-    if ($cardID == "TCC028") return SearchPitchForCard($mainPlayer, "TCC048") > -1 ? 4 : 3;
-    if ($cardID == "HVY006") return GetClassState($mainPlayer, $CS_Num6PowDisc) >= 1 ? 4 : 3;
-    if ($cardID == "HVY049") return GetClassState($mainPlayer, $CS_NumCardsDrawn) >= 1 ? 4 : 3;
-    if ($cardID == "ROS003") return (GetClassState($mainPlayer, $CS_NumAuras) > 0 ? 4 : 2);
-    if ($cardID == "HNT010") {
+    if ($cardID == "anothos") return SearchCount(SearchPitch($mainPlayer, minCost: 3)) >= 2 ? 6 : 4;
+    if ($cardID == "nebula_blade") return GetClassState($mainPlayer, $CS_NumNonAttackCards) > 0 ? 4 : 1;
+    if ($cardID == "titans_fist") return SearchCount(SearchPitch($mainPlayer, minCost: 3)) >= 1 ? 4 : 3;
+    if ($cardID == "hammer_of_havenhold") return SearchPitchForCard($mainPlayer, "chivalry_blue") > -1 ? 4 : 3;
+    if ($cardID == "ball_breaker") return GetClassState($mainPlayer, $CS_Num6PowDisc) >= 1 ? 4 : 3;
+    if ($cardID == "high_riser") return GetClassState($mainPlayer, $CS_NumCardsDrawn) >= 1 ? 4 : 3;
+    if ($cardID == "rotwood_reaper") return (GetClassState($mainPlayer, $CS_NumAuras) > 0 ? 4 : 2);
+    if ($cardID == "mark_of_the_huntsman") {
       if (!IsHeroAttackTarget()) return 1;
       else return CheckMarked($defPlayer) ? 2 : 1;
     }
   }
   if ($class == "ILLUSIONIST" && DelimStringContains($subtype, "Aura")) {
-    if (SearchCharacterForCard($mainPlayer, "MON003")) return 1;
-    if (SearchCharacterForCard($mainPlayer, "MON088")) return 4;
-    if (SearchCharacterForCard($mainPlayer, "DTD216")) return 5;
-    if (SearchCharacterForCard($mainPlayer, "MST130")) {
+    if (SearchCharacterForCard($mainPlayer, "luminaris")) return 1;
+    if (SearchCharacterForCard($mainPlayer, "iris_of_reality")) return 4;
+    if (SearchCharacterForCard($mainPlayer, "reality_refractor")) return 5;
+    if (SearchCharacterForCard($mainPlayer, "cosmo_scroll_of_ancestral_tapestry")) {
       if ($index != -1) {
         return WardAmount($cardID, $mainPlayer, $index);
       }
     }
   }
-  if ($cardID == "MON191") return SearchPitchForNumCosts($mainPlayer) * 2;
-  else if ($cardID == "EVR138") return FractalReplicationStats("Attack");
-  else if ($cardID == "DYN216") return CountAura("MON104", $currentPlayer);
+  if ($cardID == "mutated_mass_blue") return SearchPitchForNumCosts($mainPlayer) * 2;
+  else if ($cardID == "fractal_replication_red") return FractalReplicationStats("Attack");
+  else if ($cardID == "spectral_procession_red") return CountAura("spectral_shield", $currentPlayer);
   if ($set != "ROG" && $set != "DUM") {
-    $number = intval(substr($cardID, 3));
+    $setID = SetID($cardID);
+    $number = intval(substr($setID, 3));
     if ($number < 400 || ($set != "MON" && $set != "DYN"))
     return GeneratedAttackValue($cardID);
   }
   if ($set == "ROG") return ROGUEAttackValue($cardID);
   switch ($cardID) {
-    case "DYN492a":
+    case "nitro_mechanoida":
       return 5;
-    case "DYN612":
+    case "suraya_archangel_of_knowledge":
       return 4;
-    case "EVO410":
+    case "teklovossen_the_mechropotent":
       return 6;
     default:
       return 0;
@@ -863,162 +884,162 @@ function AttackValue($cardID, $index=-1, $base=false)
 function HasGoAgain($cardID): bool|int
 {
   switch ($cardID) {
-    case "MST003":
-    case "MST052":
-    case "MST054":
-    case "MST055":
-    case "MST056":
-    case "MST057":
-    case "MST058":
-    case "MST059":
-    case "MST060":
-    case "MST061":
-    case "MST062":
-    case "MST063":
-    case "MST064":
-    case "MST065":
-    case "MST092":
-    case "MST093":
-    case "MST094":
-    case "MST152":
-    case "MST153":
-    case "MST154":
-    case "MST159":
-    case "MST173":
-    case "MST174":
-    case "MST175":
-    case "MST185":
-    case "MST186":
-    case "MST187":
-    case "MST193":
-    case "MST212":
-    case "MST213":
-    case "MST214":
-    case "AAZ024":
-    case "ROS006":
-    case "ROS012":
-    case "ROS016":
-    case "ROS033":
-    case "ROS034":
-    case "ROS092":
-    case "ROS093":
-    case "ROS094":
-    case "AUR014":
-    case "AUR021":
-    case "TER017":
-    case "TER019":
-    case "TER024":
-    case "ROS010":
-    case "ROS061":
-    case "ROS062":
-    case "ROS063":
-    case "ROS064":
-    case "ROS065":
-    case "ROS066":
-    case "ROS070":
-    case "ROS127":
-    case "ROS118":
-    case "ROS119":
-    case "ROS128":
-    case "ROS129":
-    case "ROS130":
-    case "ROS131":
-    case "ROS132":
-    case "ROS133":
-    case "ROS152":
-    case "ROS153":
-    case "ROS154":
-    case "ROS155":
-    case "ROS156":
-    case "ROS157":
-    case "ROS161":
-    case "ROS192":
-    case "ROS193":
-    case "ROS194":
-    case "ROS218":
-    case "ROS226":
-    case "ROS230":
-    case "ROS248":
-    case "ROS253":
-    case "AIO004":
-    case "AJV017":
-    case "HNT009":
-    case "HNT010":
-    case "HNT026":
-    case "HNT027":
-    case "HNT028":
-    case "HNT056":
-    case "HNT058":
-    case "HNT061":
-    case "HNT062":
-    case "HNT063":
-    case "HNT057":
-    case "HNT072":
-    case "HNT083":
-    case "HNT084":
-    case "HNT085":
-    case "HNT086":
-    case "HNT087":
-    case "HNT088":
-    case "HNT092":
-    case "HNT093":
-    case "HNT094":
-    case "HNT095":
-    case "HNT096":
-    case "HNT097":
-    case "HNT118":
-    case "HNT122":
-    case "HNT123":
-    case "HNT124":
-    case "HNT125":
-    case "HNT126":
-    case "HNT127":
-    case "HNT128":
-    case "HNT129":
-    case "HNT130":
-    case "HNT131":
-    case "HNT132":
-    case "HNT133":
-    case "HNT134":
-    case "HNT135":
-    case "HNT136":
-    case "HNT137":
-    case "HNT138":
-    case "HNT139":
-    case "HNT140":
-    case "HNT141":
-    case "HNT142":
-    case "HNT148":
-    case "HNT149":
-    case "HNT152":
-    case "HNT174":
-    case "HNT179":
-    case "HNT180":
-    case "HNT181":
-    case "HNT182":
-    case "HNT183":
-    case "HNT184":
-    case "HNT185":
-    case "HNT186":
-    case "HNT187":
-    case "HNT188":
-    case "HNT189":
-    case "HNT190":
-    case "HNT198":
-    case "HNT202":
-    case "HNT203":
-    case "HNT204":
-    case "HNT223":
-    case "HNT229":
-    case "HNT235":
-    case "HNT240":
-    case "HNT241":
-    case "HNT242":
-    case "HNT243":
-    case "HNT248":
-    case "HNT255":
+    case "beckoning_mistblade":
+    case "shifting_winds_of_the_mystic_beast_blue":
+    case "wind_chakra_red":
+    case "wind_chakra_yellow":
+    case "wind_chakra_blue":
+    case "companion_of_the_claw_red":
+    case "companion_of_the_claw_yellow":
+    case "companion_of_the_claw_blue":
+    case "harmony_of_the_hunt_red":
+    case "harmony_of_the_hunt_yellow":
+    case "harmony_of_the_hunt_blue":
+    case "tiger_form_incantation_red":
+    case "tiger_form_incantation_yellow":
+    case "tiger_form_incantation_blue":
+    case "first_tenet_of_chi_moon_blue":
+    case "first_tenet_of_chi_tide_blue":
+    case "first_tenet_of_chi_wind_blue":
+    case "spectral_manifestations_red":
+    case "spectral_manifestations_yellow":
+    case "spectral_manifestations_blue":
+    case "tiger_taming_khakkara":
+    case "biting_breeze_red":
+    case "biting_breeze_yellow":
+    case "biting_breeze_blue":
+    case "untamed_red":
+    case "untamed_yellow":
+    case "untamed_blue":
+    case "prismatic_leyline_yellow":
+    case "water_the_seeds_red":
+    case "water_the_seeds_yellow":
+    case "water_the_seeds_blue":
+    case "line_it_up_yellow":
+    case "arcane_seeds__life_red":
+    case "burn_up__shock_red":
+    case "heartbeat_of_candlehold_blue":
+    case "channel_the_millennium_tree_red":
+    case "earths_embrace_blue":
+    case "fry_red":
+    case "fry_yellow":
+    case "fry_blue":
+    case "sizzle_red":
+    case "sizzle_yellow":
+    case "flourish_yellow":
+    case "thrive_yellow":
+    case "flourish_blue":
+    case "arc_lightning_yellow":
+    case "harvest_season_red":
+    case "harvest_season_yellow":
+    case "harvest_season_blue":
+    case "strong_yield_red":
+    case "strong_yield_yellow":
+    case "strong_yield_blue":
+    case "sigil_of_earth_blue":
+    case "condemn_to_slaughter_red":
+    case "machinations_of_dominion_blue":
+    case "succumb_to_temptation_yellow":
+    case "condemn_to_slaughter_yellow":
+    case "condemn_to_slaughter_blue":
+    case "malefic_incantation_red":
+    case "malefic_incantation_yellow":
+    case "malefic_incantation_blue":
+    case "sigil_of_the_arknight_blue":
+    case "arcane_cussing_red":
+    case "arcane_cussing_yellow":
+    case "arcane_cussing_blue":
+    case "deadwood_dirge_red":
+    case "deadwood_dirge_yellow":
+    case "deadwood_dirge_blue":
+    case "sigil_of_deadwood_blue":
+    case "exploding_aether_red":
+    case "exploding_aether_yellow":
+    case "exploding_aether_blue":
+    case "call_to_the_grave_blue":
+    case "sigil_of_cycles_blue":
+    case "sigil_of_fyendal_blue":
+    case "unsheathed_red":
+    case "regrowth__shock_blue":
+    case "heavy_industry_power_plant":
+    case "channel_mount_isen_blue":
+    case "hunters_klaive":
+    case "mark_of_the_huntsman":
+    case "orbweaver_spinneret_red":
+    case "orbweaver_spinneret_yellow":
+    case "orbweaver_spinneret_blue":
+    case "kunai_of_retribution":
+    case "ignite_red":
+    case "wrath_of_retribution_red":
+    case "blood_drop_red":
+    case "blood_line_red":
+    case "blood_runs_deep_red":
+    case "devotion_never_dies_red":
+    case "fire_tenet_strike_first_red":
+    case "fire_tenet_strike_first_yellow":
+    case "fire_tenet_strike_first_blue":
+    case "grow_claws_red":
+    case "grow_claws_yellow":
+    case "grow_claws_blue":
+    case "tag_the_target_red":
+    case "tag_the_target_yellow":
+    case "tag_the_target_blue":
+    case "trap_and_release_red":
+    case "trap_and_release_yellow":
+    case "trap_and_release_blue":
+    case "sharpened_senses_yellow":
+    case "twist_and_turn_red":
+    case "twist_and_turn_yellow":
+    case "twist_and_turn_blue":
+    case "agility_stance_yellow":
+    case "flurry_stance_red":
+    case "power_stance_blue":
+    case "cut_deep_red":
+    case "cut_deep_yellow":
+    case "cut_deep_blue":
+    case "hunt_a_killer_red":
+    case "hunt_a_killer_yellow":
+    case "hunt_a_killer_blue":
+    case "knife_through_butter_red":
+    case "knife_through_butter_yellow":
+    case "knife_through_butter_blue":
+    case "point_of_engagement_red":
+    case "point_of_engagement_yellow":
+    case "point_of_engagement_blue":
+    case "sworn_vengeance_red":
+    case "sworn_vengeance_yellow":
+    case "sworn_vengeance_blue":
+    case "coat_of_allegiance":
+    case "oath_of_loyalty_red":
+    case "hunt_to_the_ends_of_rathe_red":
+    case "pain_in_the_backside_red":
+    case "up_sticks_and_run_red":
+    case "up_sticks_and_run_yellow":
+    case "up_sticks_and_run_blue":
+    case "pick_up_the_point_red":
+    case "pick_up_the_point_yellow":
+    case "pick_up_the_point_blue":
+    case "poisoned_blade_red":
+    case "poisoned_blade_yellow":
+    case "poisoned_blade_blue":
+    case "throw_yourself_at_them_red":
+    case "throw_yourself_at_them_yellow":
+    case "throw_yourself_at_them_blue":
+    case "savor_bloodshed_red":
+    case "cut_from_the_same_cloth_red":
+    case "cut_from_the_same_cloth_yellow":
+    case "cut_from_the_same_cloth_blue":
+    case "dual_threat_yellow":
+    case "relentless_pursuit_blue":
+    case "outed_red":
+    case "trot_along_blue":
+    case "public_bounty_red":
+    case "public_bounty_yellow":
+    case "public_bounty_blue":
+    case "roiling_fissure_blue":
+    case "spur_locked_blue":
       return true;
-    case "HNT257":
+    case "war_cry_of_themis_yellow":
       return GetResolvedAbilityType($cardID) == "A";
   }
   $set = CardSet($cardID);
@@ -1033,10 +1054,10 @@ function GetAbilityType($cardID, $index = -1, $from = "-")
   $set = CardSet($cardID);
   $subtype = CardSubtype($cardID);
   if ($from == "PLAY" && ClassContains($cardID, "ILLUSIONIST", $currentPlayer) && DelimStringContains($subtype, "Aura")) {
-    if (SearchCharacterForCard($currentPlayer, "MON003") || SearchCharacterForCard($currentPlayer, "MON088") || SearchCharacterForCard($currentPlayer, "DTD216")) return "AA";
+    if (SearchCharacterForCard($currentPlayer, "luminaris") || SearchCharacterForCard($currentPlayer, "iris_of_reality") || SearchCharacterForCard($currentPlayer, "reality_refractor")) return "AA";
   }
-  if ($from == "PLAY" && DelimStringContains($subtype, "Aura") && SearchCharacterForCard($currentPlayer, "MST130") && HasWard($cardID, $currentPlayer) && $currentPlayer == $mainPlayer) return "AA";
-  if (DelimStringContains($subtype, "Dragon") && SearchCharacterActive($currentPlayer, "UPR003")) return "AA";
+  if ($from == "PLAY" && DelimStringContains($subtype, "Aura") && SearchCharacterForCard($currentPlayer, "cosmo_scroll_of_ancestral_tapestry") && HasWard($cardID, $currentPlayer) && $currentPlayer == $mainPlayer) return "AA";
+  if (DelimStringContains($subtype, "Dragon") && SearchCharacterActive($currentPlayer, "storm_of_sandikai")) return "AA";
   if ($set == "WTR") return WTRAbilityType($cardID, $index, $from);
   else if ($set == "ARC") return ARCAbilityType($cardID, $index);
   else if ($set == "CRU") return CRUAbilityType($cardID, $index);
@@ -1062,22 +1083,22 @@ function GetAbilityType($cardID, $index = -1, $from = "-")
   else if ($set == "AIO") return AIOAbilityType($cardID, $index, $from);
   else if ($set == "AJV") return AJVAbilityType($cardID);
   else if ($set == "HNT") return HNTAbilityType($cardID);
-  else if ($cardID == "HER117") return "I";
-  else if ($cardID == "JDG038") return "A";
+  else if ($cardID == "blaze_firemind") return "I";
+  else if ($cardID == "magrar") return "A";
 }
 
 function GetAbilityTypes($cardID, $index = -1, $from = "-"): string
 {
   return match ($cardID) {
-    "ARC003", "TCC050", "CRU101" => "A,AA",
-    "OUT093" => "I,I",
-    "HVY143", "HVY144", "HVY145", "HVY163", "HVY164", "HVY165", "HVY186", "HVY187", "HVY188", "MST133", 
-    "ROS104", "ROS105", "ROS106", "ROS055", "ROS056", "ROS057", "HVY209", "HNT013", "HNT044", "HNT045", "HNT046",
-    "HNT232", "HNT233", "HNT234" => "I,AA",
-    "ROS170", "ROS171", "ROS172", "ROS186", "ROS187", "ROS188", "ROS204", "ROS205", "ROS206", "HNT257" => "I,A",
-    "ROS120", "ROS169" => "B,I",
-    "HNT222" => "I,DR",
-    "HNT258" => "I,AR",
+    "teklo_plasma_pistol", "jinglewood_smash_hit", "plasma_barrel_shot" => "A,AA",
+    "barbed_castaway" => "I,I",
+    "mighty_windup_red", "mighty_windup_yellow", "mighty_windup_blue", "agile_windup_red", "agile_windup_yellow", "agile_windup_blue", "vigorous_windup_red", "vigorous_windup_yellow", "vigorous_windup_blue", "restless_coalescence_yellow", 
+    "trip_the_light_fantastic_red", "trip_the_light_fantastic_yellow", "trip_the_light_fantastic_blue", "fruits_of_the_forest_red", "fruits_of_the_forest_yellow", "fruits_of_the_forest_blue", "ripple_away_blue", "under_the_trapdoor_blue", "reapers_call_red", "reapers_call_yellow", "reapers_call_blue",
+    "tipoff_red", "tipoff_yellow", "tipoff_blue" => "I,AA",
+    "chorus_of_the_amphitheater_red", "chorus_of_the_amphitheater_yellow", "chorus_of_the_amphitheater_blue", "arcane_twining_red", "arcane_twining_yellow", "arcane_twining_blue", "photon_splicing_red", "photon_splicing_yellow", "photon_splicing_blue", "war_cry_of_themis_yellow" => "I,A",
+    "haunting_rendition_red", "mental_block_blue" => "B,I",
+    "shelter_from_the_storm_red" => "I,DR",
+    "war_cry_of_bellona_yellow" => "I,AR",
     default => "",
   };
 }
@@ -1091,85 +1112,85 @@ function GetAbilityNames($cardID, $index = -1, $from = "-"): string
   $names = "";
   if ($index == -1) $index = GetClassState($currentPlayer, $CS_PlayIndex);
   switch ($cardID) {
-    case "ARC003":
-    case "CRU101":
+    case "teklo_plasma_pistol":
+    case "plasma_barrel_shot":
       if ($index == -1) return "";
       $rv = "Add_a_steam_counter";
-      if ($character[$index + 2] > 0 && !SearchCurrentTurnEffects("HNT115", $mainPlayer)) $rv .= ",Attack";
+      if ($character[$index + 2] > 0 && !SearchCurrentTurnEffects("kabuto_of_imperial_authority", $mainPlayer)) $rv .= ",Attack";
       return $rv;
-    case "OUT093":
-      if(!SearchCurrentTurnEffects("OUT093-Load", $currentPlayer)) return "Aim";
-      if(!SearchCurrentTurnEffects("OUT093-Aim", $currentPlayer)) return "Load";
+    case "barbed_castaway":
+      if(!SearchCurrentTurnEffects("barbed_castaway-Load", $currentPlayer)) return "Aim";
+      if(!SearchCurrentTurnEffects("barbed_castaway-Aim", $currentPlayer)) return "Load";
       return "Load,Aim";
-    case "TCC050":
+    case "jinglewood_smash_hit":
       if ($index == -1) return "";
       return "Create_tokens,Smash_Jinglewood";
-    case "HVY143":
-    case "HVY144":
-    case "HVY145":
-    case "HVY163":
-    case "HVY164":
-    case "HVY165":
-    case "HVY186":
-    case "HVY187":
-    case "HVY188":
-    case "ROS104":
-    case "ROS105":
-    case "ROS106":
-    case "ROS055":
-    case "ROS056":
-    case "ROS057":
-    case "HVY209":
-    case "HNT013":
-    case "HNT044":
-    case "HNT045":
-    case "HNT046":
-    case "HNT232":
-    case "HNT233":
-    case "HNT234":
+    case "mighty_windup_red":
+    case "mighty_windup_yellow":
+    case "mighty_windup_blue":
+    case "agile_windup_red":
+    case "agile_windup_yellow":
+    case "agile_windup_blue":
+    case "vigorous_windup_red":
+    case "vigorous_windup_yellow":
+    case "vigorous_windup_blue":
+    case "trip_the_light_fantastic_red":
+    case "trip_the_light_fantastic_yellow":
+    case "trip_the_light_fantastic_blue":
+    case "fruits_of_the_forest_red":
+    case "fruits_of_the_forest_yellow":
+    case "fruits_of_the_forest_blue":
+    case "ripple_away_blue":
+    case "under_the_trapdoor_blue":
+    case "reapers_call_red":
+    case "reapers_call_yellow":
+    case "reapers_call_blue":
+    case "tipoff_red":
+    case "tipoff_yellow":
+    case "tipoff_blue":
       $names = "Ability";
       if ($currentPlayer == $mainPlayer && count($combatChain) == 0 && count($layers) <= LayerPieces() && $actionPoints > 0){
         $warmongersPeace = SearchCurrentTurnEffects("WarmongersPeace", $currentPlayer);
-        $underEdict = SearchCurrentTurnEffects("DYN240-" . GamestateSanitize(CardName($cardID)), $currentPlayer);
+        $underEdict = SearchCurrentTurnEffects("imperial_edict_red-" . GamestateSanitize(CardName($cardID)), $currentPlayer);
         if (!$warmongersPeace && !$underEdict) {
-          if (!SearchCurrentTurnEffects("HNT149", $currentPlayer) || SearchCurrentTurnEffects("HNT167", $currentPlayer)) $names .= ",Attack";
+          if (!SearchCurrentTurnEffects("oath_of_loyalty_red", $currentPlayer) || SearchCurrentTurnEffects("fealty", $currentPlayer)) $names .= ",Attack";
         }
       }
       return $names;
-    case "ROS120": case "ROS169":
+    case "haunting_rendition_red": case "mental_block_blue":
       return "Block,Ability";
-    case "MST133":
+    case "restless_coalescence_yellow":
       if ($auras[$index + 3] > 0) $names = "Instant";
-      if (SearchCurrentTurnEffects("ARC043", $currentPlayer) && GetClassState($currentPlayer, $CS_NumActionsPlayed) >= 1) {
+      if (SearchCurrentTurnEffects("red_in_the_ledger_red", $currentPlayer) && GetClassState($currentPlayer, $CS_NumActionsPlayed) >= 1) {
         return $names;
-      } else if ($currentPlayer == $mainPlayer && count($combatChain) == 0 && count($layers) <= LayerPieces() && $actionPoints > 0 && $auras[$index + 1] == 2 && !SearchCurrentTurnEffects("HNT115", $currentPlayer)) {
+      } else if ($currentPlayer == $mainPlayer && count($combatChain) == 0 && count($layers) <= LayerPieces() && $actionPoints > 0 && $auras[$index + 1] == 2 && !SearchCurrentTurnEffects("kabuto_of_imperial_authority", $currentPlayer)) {
         $names != "" ? $names .= ",Attack" : $names = "-,Attack";
       }
       return $names;
-    case "ROS170":
-    case "ROS171":
-    case "ROS172":
-    case "ROS186":
-    case "ROS187":
-    case "ROS188":
-    case "ROS204":
-    case "ROS205":
-    case "ROS206":
-    case "HNT257":
+    case "chorus_of_the_amphitheater_red":
+    case "chorus_of_the_amphitheater_yellow":
+    case "chorus_of_the_amphitheater_blue":
+    case "arcane_twining_red":
+    case "arcane_twining_yellow":
+    case "arcane_twining_blue":
+    case "photon_splicing_red":
+    case "photon_splicing_yellow":
+    case "photon_splicing_blue":
+    case "war_cry_of_themis_yellow":
       $names = "Ability";
       if(GetClassState($currentPlayer, $CS_NextWizardNAAInstant)) $names .= ",Action";
       elseif($combatChainState[$CCS_EclecticMag]) $names .= ",Action";
       elseif($currentPlayer == $mainPlayer && count($combatChain) == 0 && count($layers) <= LayerPieces() && $actionPoints > 0) $names .= ",Action";
       if($from != "HAND") $names = "-,Action";
       return $names;
-    case "HNT222":
+    case "shelter_from_the_storm_red":
       $names = "Ability";
       $dominateRestricted = $from == "HAND" && CachedDominateActive() && CachedNumDefendedFromHand() >= 1 && NumDefendedFromHand() >= 1;
       $effectRestricted = $from == "HAND" && !IsDefenseReactionPlayable($cardID, $from);
       if ($from != "HAND") $names = "-,Defense Reaction";
       elseif ($currentPlayer == $defPlayer && count($combatChain) > 0 && !$dominateRestricted && !$effectRestricted && IsReactionPhase()) $names .= ",Defense Reaction";
       return $names;
-    case "HNT258":
+    case "war_cry_of_bellona_yellow":
       $names = "Ability";
       $hasRaydn = false;//CardNameContains($combatChain[0], "Raydn", $mainPlayer, true);
       $char = GetPlayerCharacter($currentPlayer);
@@ -1250,14 +1271,14 @@ function IsPlayable($cardID, $phase, $from, $index = -1, &$restriction = null, $
     $banishCard = $theirBanish->Card($index);
     if (!(PlayableFromOtherPlayerBanish($banishCard->ID(), $banishCard->Modifier()))) return false;
   } else if ($from == "GY" && !PlayableFromGraveyard($cardID)) return false;
-  if ($from == "DECK" && ($character[5] == 0 || $character[1] < 2 || $character[0] != "EVO001" && $character[0] != "EVO002" || CardCost($cardID, $from) > 1 || !SubtypeContains($cardID, "Item", $player) || !ClassContains($cardID, "MECHANOLOGIST", $player))) return false;
+  if ($from == "DECK" && ($character[5] == 0 || $character[1] < 2 || $character[0] != "dash_io" && $character[0] != "dash_database" || CardCost($cardID, $from) > 1 || !SubtypeContains($cardID, "Item", $player) || !ClassContains($cardID, "MECHANOLOGIST", $player))) return false;
   if (TypeContains($cardID, "E", $player) && $character[$index + 12] == "DOWN" && HasCloaked($cardID, $player) == "UP") return false;
   if ($phase == "B") {
     if (TypeContains($cardID, "E", $player) && $character[$index + 6] == 1) return false;
     if (IsBlockRestricted($cardID, $restriction, $player)) return false;
   }
   if ($phase != "B" && $from == "CHAR" && $character[$index + 1] != "2") return false;
-  if ($phase != "B" && TypeContains($cardID, "E", $player) && GetCharacterGemState($player, $cardID) == 0 && (ManualTunicSetting($player) == 0 && $cardID != "WTR150")) return false;
+  if ($phase != "B" && TypeContains($cardID, "E", $player) && GetCharacterGemState($player, $cardID) == 0 && (ManualTunicSetting($player) == 0 && $cardID != "fyendals_spring_tunic")) return false;
   if ($from == "CHAR" && $phase != "B" && $character[$index + 8] == "1") {
     $restriction = "Frozen";
     return false;
@@ -1275,36 +1296,36 @@ function IsPlayable($cardID, $phase, $from, $index = -1, &$restriction = null, $
   if ($CombatChain->HasCurrentLink() && ($phase == "B" || (($phase == "D" || $phase == "INSTANT") && $cardType == "DR"))) {
     if ($from == "HAND") {
       if (!DelimStringContains($abilityTypes, "I", true) && CachedDominateActive() && CachedNumDefendedFromHand() >= 1 && NumDefendedFromHand() >= 1) return false;
-      if (CachedTotalAttack() <= 2 && (SearchCharacterForCard($mainPlayer, "CRU047") || SearchCurrentTurnEffects("CRU047-SHIYANA", $mainPlayer)) && (SearchCharacterActive($mainPlayer, "CRU047") || SearchCharacterActive($mainPlayer, "CRU097")) && CardType($CombatChain->AttackCard()->ID()) == "AA") return false;
+      if (CachedTotalAttack() <= 2 && (SearchCharacterForCard($mainPlayer, "benji_the_piercing_wind") || SearchCurrentTurnEffects("benji_the_piercing_wind-SHIYANA", $mainPlayer)) && (SearchCharacterActive($mainPlayer, "benji_the_piercing_wind") || SearchCharacterActive($mainPlayer, "shiyana_diamond_gemini")) && CardType($CombatChain->AttackCard()->ID()) == "AA") return false;
     }
     if (CachedOverpowerActive() && CachedNumActionBlocked() >= 1) {
       if (DelimStringContains($cardType, "A") || $cardType == "AA") return false;
-      if (SubtypeContains($cardID, "Evo") && $cardID != "EVO410b" && $cardID != "DYN492b") {
+      if (SubtypeContains($cardID, "Evo") && $cardID != "teklovossen_the_mechropotentb" && $cardID != "nitro_mechanoidb") {
         if (CardType(GetCardIDBeforeTransform($cardID)) == "A") return false;
       }
     }
   }
-  if ($phase == "B" && $from == "ARS" && !(($cardType == "AA" && SearchCurrentTurnEffects("ARC160-2", $player)) || $cardID == "OUT184" || HasAmbush($cardID))) return false;
+  if ($phase == "B" && $from == "ARS" && !(($cardType == "AA" && SearchCurrentTurnEffects("art_of_war_yellow-2", $player)) || $cardID == "down_and_dirty_red" || HasAmbush($cardID))) return false;
   if ($phase == "B" || $phase == "D") {
     if ($cardType == "AA") {
       $baseAttackMax = $combatChainState[$CCS_BaseAttackDefenseMax];
       if ($baseAttackMax > -1 && AttackValue($cardID) > $baseAttackMax) return false;
     }
-    if ($CombatChain->AttackCard()->ID() == "DYN121" && $phase == "B" && SearchBanishForCardName($player, $cardID) > -1) return false;
+    if ($CombatChain->AttackCard()->ID() == "regicide_blue" && $phase == "B" && SearchBanishForCardName($player, $cardID) > -1) return false;
     $resourceMin = $combatChainState[$CCS_ResourceCostDefenseMin];
     if ($resourceMin > -1 && CardCost($cardID, $from) < $resourceMin && $cardType != "E") return false;
     if ($combatChainState[$CCS_CardTypeDefenseRequirement] == "Attack_Action" && $cardType != "AA") return false;
     if ($combatChainState[$CCS_CardTypeDefenseRequirement] == "Non-attack_Action" && $cardType != "A") return false;
   }
-  if ($CombatChain->AttackCard()->ID() == "DYN121" && $cardType == "DR") return SearchBanishForCardName($player, $cardID) == -1;
+  if ($CombatChain->AttackCard()->ID() == "regicide_blue" && $cardType == "DR") return SearchBanishForCardName($player, $cardID) == -1;
   if ($from != "PLAY" && $phase == "B" && $cardType != "DR") return BlockValue($cardID) > -1;
   if (($phase == "P" || $phase == "CHOOSEHANDCANCEL") && IsPitchRestricted($cardID, $restriction, $from, $index, $pitchRestriction, phase:$phase)) return false;
   elseif ($phase == "CHOOSEHANDCANCEL" && $from == "HAND") {
     if (count($layers) > 0) {
       $topLayer = $layers[0];
       return match($topLayer) {
-        "MON000" => ColorContains($cardID, 2, $currentPlayer),
-        "HNT007" => ClassContains($cardID, "ASSASSIN", $currentPlayer),
+        "great_library_of_solana" => ColorContains($cardID, 2, $currentPlayer),
+        "arakni_tarantula" => ClassContains($cardID, "ASSASSIN", $currentPlayer),
         default => true
       };
     }
@@ -1314,7 +1335,7 @@ function IsPlayable($cardID, $phase, $from, $index = -1, &$restriction = null, $
   $isStaticType = IsStaticType($cardType, $from, $cardID);
   if ($isStaticType) $cardType = GetAbilityType($cardID, $index, $from);
   if ($cardType == "") return false;
-  if (RequiresDiscard($cardID) || $cardID == "WTR159") {
+  if (RequiresDiscard($cardID) || $cardID == "enlightened_strike_red") {
     if ($from == "HAND" && count($myHand) < 2) return false;
     else if (count($myHand) < 1) return false;
   }
@@ -1324,19 +1345,19 @@ function IsPlayable($cardID, $phase, $from, $index = -1, &$restriction = null, $
     if ($from != "ARS") return false;
     if (!SubtypeContains($character[CharacterPieces()], "Bow") && !SubtypeContains($character[CharacterPieces() * 2], "Bow")) return false;
   }
-  if (SearchCurrentTurnEffects("ARC044", $player) && !$isStaticType && $from != "ARS") return false;
-  if (SearchCurrentTurnEffects("ARC043", $player)) {
+  if (SearchCurrentTurnEffects("three_of_a_kind_red", $player) && !$isStaticType && $from != "ARS") return false;
+  if (SearchCurrentTurnEffects("red_in_the_ledger_red", $player)) {
     if (!HasMeld($cardID) && (DelimStringContains($cardType, "A") || $cardType == "AA") && !str_contains($abilityTypes, "I") && GetClassState($player, $CS_NumActionsPlayed) >= 1) return false;
     if (str_contains($abilityTypes, "I") && ($from == "BANISH" || $from == "THEIRBANISH")) return false;
   }
-  if (SearchCurrentTurnEffects("DYN154", $player) && !$isStaticType && DelimStringContains($cardType, "A") && GetClassState($player, $CS_NumNonAttackCards) >= 1) return false;
-  if (SearchCurrentTurnEffects("DYN154", $player) && !$isStaticType && $cardType == "AA" && GetClassState($player, $CS_NumAttackCards) >= 1) return false;
+  if (SearchCurrentTurnEffects("immobilizing_shot_red", $player) && !$isStaticType && DelimStringContains($cardType, "A") && GetClassState($player, $CS_NumNonAttackCards) >= 1) return false;
+  if (SearchCurrentTurnEffects("immobilizing_shot_red", $player) && !$isStaticType && $cardType == "AA" && GetClassState($player, $CS_NumAttackCards) >= 1) return false;
   if ($CombatChain->HasCurrentLink()
-    && $CombatChain->AttackCard()->ID() == "MON245"
+    && $CombatChain->AttackCard()->ID() == "exude_confidence_red"
     && $player == $defPlayer
     && ($abilityType == "I" || DelimStringContains($cardType, "I") || str_contains($abilityTypes, "I"))) {
     $restriction = "Exude Confidance";
-    $exudeAttack = AttackValue("MON245");
+    $exudeAttack = AttackValue("exude_confidence_red");
     for ($i = CombatChainPieces(); $i < count($combatChain); $i += CombatChainPieces()) {
       if (DelimStringContains(CardType($combatChain[$i]), "AA")) {
         $attackValue = AttackValue($combatChain[$i]);
@@ -1347,26 +1368,26 @@ function IsPlayable($cardID, $phase, $from, $index = -1, &$restriction = null, $
     }
     if ($restriction == "Exude Confidance") return false;
   }
-  if (SearchCurrentTurnEffects("MON245", $mainPlayer) && $player == $defPlayer && ($abilityType == "I" || DelimStringContains($cardType, "I")) && !str_contains($phase, "CHOOSE")) {
+  if (SearchCurrentTurnEffects("exude_confidence_red", $mainPlayer) && $player == $defPlayer && ($abilityType == "I" || DelimStringContains($cardType, "I")) && !str_contains($phase, "CHOOSE")) {
     $restriction = "Exude Confidance";
     return false;
   }
-  if ($cardID == "MST133" && $from == "PLAY") {
+  if ($cardID == "restless_coalescence_yellow" && $from == "PLAY") {
     if ($auras[$index + 1] == 2 && $currentPlayer == $mainPlayer && $actionPoints > 0) return true;
     if (SearchCurrentTurnEffectsForUniqueID($auras[$index + 6]) != -1 && CanPlayInstant($phase) && $auras[$index + 3] > 0) return true;
     if ($auras[$index + 1] != 2 || $auras[$index + 3] <= 0) return false;
   }
-  if ($cardID == "HNT407" && $from == "ARS" && SearchArsenalForCard($currentPlayer, $cardID, "DOWN") != "" && $phase == "A") return true;
+  if ($cardID == "the_hand_that_pulls_the_strings" && $from == "ARS" && SearchArsenalForCard($currentPlayer, $cardID, "DOWN") != "" && $phase == "A") return true;
   if ((DelimStringContains($cardType, "I") || CanPlayAsInstant($cardID, $index, $from)) && CanPlayInstant($phase)) return true;
   if ($from == "PLAY" && AbilityPlayableFromCombatChain($cardID) && $phase != "B") return true;
   if ((DelimStringContains($cardType, "A") || $cardType == "AA") && $actionPoints < 1) return false;
-  if ($cardID == "DYN492a" || $cardID == "EVO410") {
+  if ($cardID == "nitro_mechanoida" || $cardID == "teklovossen_the_mechropotent") {
     if (($phase == "M" && $mainPlayer == $currentPlayer)) {
       $charIndex = FindCharacterIndex($currentPlayer, $cardID);
       switch ($cardID) {
-        case "DYN492a":
+        case "nitro_mechanoida":
           return $character[$charIndex + 2] > 0;
-        case "EVO410":
+        case "teklovossen_the_mechropotent":
           return $character[$charIndex + 2] > 1;
       }
     }
@@ -1407,11 +1428,11 @@ function IsBlockRestricted($cardID, &$restriction = null, $player = "")
       return true;
     }
   }
-  if (SearchCurrentTurnEffects("EVO073-B-" . $cardID, $player)) {
-    $restriction = "EVO073";
+  if (SearchCurrentTurnEffects("stasis_cell_blue-B-" . $cardID, $player)) {
+    $restriction = "stasis_cell_blue";
     return true;
   }
-  if ($CombatChain->AttackCard()->ID() == "EVO061" || $CombatChain->AttackCard()->ID() == "EVO062" || $CombatChain->AttackCard()->ID() == "EVO063") {
+  if ($CombatChain->AttackCard()->ID() == "heavy_artillery_red" || $CombatChain->AttackCard()->ID() == "heavy_artillery_yellow" || $CombatChain->AttackCard()->ID() == "heavy_artillery_blue") {
     if (CardCost($cardID) < EvoUpgradeAmount($mainPlayer) && CardType($cardID) == "AA") {
       $restriction = $CombatChain->AttackCard()->ID();
       return true;
@@ -1428,7 +1449,7 @@ function IsBlockRestricted($cardID, &$restriction = null, $player = "")
       $effectArr = explode(",", $currentTurnEffects[$i]);
       $effectID = $effectArr[0];
       switch ($effectID) {
-        case "ARC162":
+        case "chains_of_eminence_red":
           if (GamestateSanitize(NameOverride($cardID)) == $effectArr[1]) return true;
           break;
         default:
@@ -1438,13 +1459,13 @@ function IsBlockRestricted($cardID, &$restriction = null, $player = "")
   }
   if(SubtypeContains($cardID, "Aura", $player) && !CanBlockWithAura()) return true;
   switch ($cardID) {
-    case "HVY198":
+    case "face_adversity":
       return GetClassState($mainPlayer, $CS_NumCardsDrawn) == 0;
-    case "HVY199":
+    case "confront_adversity":
       return GetClassState($mainPlayer, $CS_NumVigorDestroyed) == 0;
-    case "HVY200":
+    case "embrace_adversity":
       return GetClassState($mainPlayer, $CS_NumMightDestroyed) == 0;
-    case "HVY201":
+    case "overcome_adversity":
       return GetClassState($mainPlayer, $CS_NumAgilityDestroyed) == 0;
     default:
       break;
@@ -1456,14 +1477,14 @@ function CanBlockWithEquipment()
 {
   global $CombatChain, $mainPlayer;
   switch ($CombatChain->AttackCard()->ID()) {
-    case "EVO154":
-      return !SearchCurrentTurnEffects("EVO154", $mainPlayer);
-    case "EVO204":
-    case "EVO205":
-    case "EVO206":
-    case "EVO207":
-    case "EVO208":
-    case "EVO209":
+    case "burn_rubber_red":
+      return !SearchCurrentTurnEffects("burn_rubber_red", $mainPlayer);
+    case "out_pace_red":
+    case "out_pace_yellow":
+    case "out_pace_blue":
+    case "lay_waste_red":
+    case "lay_waste_yellow":
+    case "lay_waste_blue":
       return false;
     default:
       return true;
@@ -1474,7 +1495,7 @@ function CanBlockWithAura()
 {
   global $CombatChain;
   switch ($CombatChain->AttackCard()->ID()) {
-    case "ROS216":
+    case "cut_through_the_facade_red":
       return false;
     default:
       return true;
@@ -1488,11 +1509,11 @@ function GoesWhereAfterResolving($cardID, $from = null, $player = "", $playedFro
   $otherPlayer = $player == 2 ? 1 : 2;
   if (($from == "THEIRBANISH" || $playedFrom == "THEIRBANISH")) {
     switch ($cardID) {
-      case "DTD202":
+      case "dig_up_dinner_blue":
         return "THEIRBANISH";
-      case "MST010":
-      case "MST032":
-      case "MST053":
+      case "sacred_art_undercurrent_desires_blue":
+      case "sacred_art_immortal_lunar_shrine_blue":
+      case "sacred_art_jade_tiger_domain_blue":
         if (GetClassState($currentPlayer, $CS_NumBluePlayed) > 1) return "-";
         else if ($additionalCosts != "-") {
           $modes = explode(",", $additionalCosts);
@@ -1501,14 +1522,14 @@ function GoesWhereAfterResolving($cardID, $from = null, $player = "", $playedFro
           }
         }
         return "THEIRDISCARD";
-      case "MST095":
-      case "MST096":
-      case "MST097":
-      case "MST098":
-      case "MST099":
-      case "MST100":
-      case "MST101":
-      case "MST102":
+      case "a_drop_in_the_ocean_blue":
+      case "homage_to_ancestors_blue":
+      case "pass_over_blue":
+      case "path_well_traveled_blue":
+      case "preserve_tradition_blue":
+      case "rising_sun_setting_moon_blue":
+      case "stir_the_pot_blue":
+      case "the_grain_that_tips_the_scale_blue":
         if (GetClassState($currentPlayer, $CS_NumBluePlayed) > 1) return "-";
         else return "THEIRDISCARD";
       default:
@@ -1523,13 +1544,13 @@ function GoesWhereAfterResolving($cardID, $from = null, $player = "", $playedFro
   $type = CardType($cardID);
   if (HasMeld($cardID) && $additionalCosts == "Both" && $from != "MELD") return "-";
   if (DelimStringContains($type, "W")) return "-";
-  if (DelimStringContains($subtype, "Invocation") || DelimStringContains($subtype, "Ash") || $cardID == "UPR439" || $cardID == "UPR440" || $cardID == "UPR441" || $cardID == "EVO410") return "-";
+  if (DelimStringContains($subtype, "Invocation") || DelimStringContains($subtype, "Ash") || $cardID == "UPR439" || $cardID == "UPR440" || $cardID == "UPR441" || $cardID == "teklovossen_the_mechropotent") return "-";
   if (DelimStringContains($subtype, "Construct")) {
     switch ($cardID) {
-      case "DYN092":
+      case "construct_nitro_mechanoid_yellow":
         if (CheckIfConstructNitroMechanoidConditionsAreMet($currentPlayer) == "") return "-";
         break;
-      case "EVO010":
+      case "singularity_red":
         if (CheckIfSingularityConditionsAreMet($currentPlayer) == "") return "-";
         break;
       default:
@@ -1538,61 +1559,61 @@ function GoesWhereAfterResolving($cardID, $from = null, $player = "", $playedFro
 
   }
   switch ($cardID) {
-    case "WTR163":
+    case "remembrance_yellow":
       return "BANISH";
-    case "CRU163":
+    case "gaze_the_ages_blue":
       if (substr($from, 0, 5) != "THEIR") return GetClassState($player, $CS_NumWizardNonAttack) >= 2 ? "HAND" : "GY";
       else return GetClassState($player, $CS_NumWizardNonAttack) >= 2 ? "THEIRHAND" : "THEIRDISCARD";
-    case "MON063":
+    case "soul_shield_yellow":
       return ($from == "CHAINCLOSING" && $stillOnCombatChain ? "SOUL" : "GY");
-    case "MON064":
+    case "soul_food_yellow":
       return "SOUL";
-    case "MON231":
+    case "sonata_arcanix_red":
       return "BANISH";
-    case "ELE113":
+    case "pulse_of_candlehold_yellow":
       return "BANISH";
-    case "ELE119":
-    case "ELE120":
-    case "ELE121":
+    case "evergreen_red":
+    case "evergreen_yellow":
+    case "evergreen_blue":
       if ($playedFrom == "ARS" && $from == "CHAINCLOSING") return "BOTDECK";
       if (substr($from, 0, 5) != "THEIR") return "GY";
       else return "THEIRDISCARD";
-    case "ELE140":
-    case "ELE141":
-    case "ELE142":
+    case "sow_tomorrow_red":
+    case "sow_tomorrow_yellow":
+    case "sow_tomorrow_blue":
       return "-";
-    case "MON066":
-    case "MON067":
-    case "MON068":
+    case "invigorating_light_red":
+    case "invigorating_light_yellow":
+    case "invigorating_light_blue":
       return ($from == "CHAINCLOSING" && SearchCurrentTurnEffects($cardID, $mainPlayer) ? "SOUL" : "GY");
-    case "MON087":
+    case "ray_of_hope_yellow":
       $theirChar = &GetPlayerCharacter($otherPlayer);
       return (PlayerHasLessHealth($player) && TalentContains($theirChar[0], "SHADOW") ? "SOUL" : "GY");
-    case "MON192":
+    case "guardian_of_the_shadowrealm_red":
       return ($from == "BANISH" ? "HAND" : "GY");
-    case "EVR082":
-    case "EVR083":
-    case "EVR084":
+    case "rotary_ram_red":
+    case "rotary_ram_yellow":
+    case "rotary_ram_blue":
       return (GetClassState($player, $CS_NumBoosted) > 0 ? "BOTDECK" : "GY");
-    case "EVR134":
-    case "EVR135":
-    case "EVR136":
+    case "timekeepers_whim_red":
+    case "timekeepers_whim_yellow":
+    case "timekeepers_whim_blue":
       if ($player != $mainPlayer && substr($from, 0, 5) != "THEIR") return "BOTDECK";
       else if ($player != $mainPlayer) return "THEIRBOTDECK";
       else return "GY";
-    case "UPR160":
+    case "double_strike_red":
       if ($from == "COMBATCHAIN" && !SearchCurrentTurnEffects($cardID, $player)) {
         AddCurrentTurnEffect($cardID, $player);
         return "BANISH,TCC";
       } else SearchCurrentTurnEffects($cardID, $player, 1);
       return "GY";
-    case "DTD202":
+    case "dig_up_dinner_blue":
       return "BANISH";
-    case "EVO146":
+    case "fabricate_red":
       return "-";
-    case "MST010":
-    case "MST032":
-    case "MST053":
+    case "sacred_art_undercurrent_desires_blue":
+    case "sacred_art_immortal_lunar_shrine_blue":
+    case "sacred_art_jade_tiger_domain_blue":
       if (GetClassState($currentPlayer, $CS_NumBluePlayed) > 1) return "-";
       else if ($additionalCosts != "-") {
         $modes = explode(",", $additionalCosts);
@@ -1601,20 +1622,20 @@ function GoesWhereAfterResolving($cardID, $from = null, $player = "", $playedFro
         }
       }
       return "GY";
-    case "MST095":
-    case "MST096":
-    case "MST097":
-    case "MST098":
-    case "MST099":
-    case "MST100":
-    case "MST101":
-    case "MST102":
+    case "a_drop_in_the_ocean_blue":
+    case "homage_to_ancestors_blue":
+    case "pass_over_blue":
+    case "path_well_traveled_blue":
+    case "preserve_tradition_blue":
+    case "rising_sun_setting_moon_blue":
+    case "stir_the_pot_blue":
+    case "the_grain_that_tips_the_scale_blue":
       if (GetClassState($currentPlayer, $CS_NumBluePlayed) > 1) return "-";
       else return "GY";
-    case "HNT229":
+    case "relentless_pursuit_blue":
       if (GetClassState($currentPlayer, $CS_NumAttacks) > 0) return "BOTDECK";
       else return "GY";
-    case "HNT407":
+    case "the_hand_that_pulls_the_strings":
       return "-";
     default:
       return "GY";
@@ -1625,23 +1646,23 @@ function GoesWhereEffectsModifier($cardID, $from, $player)
 {
   global $currentTurnEffects;
   for ($i = count($currentTurnEffects) - CurrentTurnEffectsPieces(); $i >= 0; $i -= CurrentTurnEffectsPieces()) {
-    $effectID = substr($currentTurnEffects[$i], 0, 6);
+    $effectID = ExtractCardID($currentTurnEffects[$i]);
     if ($currentTurnEffects[$i + 1] == $player) {
       switch ($effectID) {
-        case "ELE064":
+        case "blossoming_spellblade_red":
           if ($from == "BANISH" && SearchCurrentTurnEffectsForUniqueID($cardID) != -1) {
             RemoveCurrentTurnEffect($i);
             return "BANISH";
           }
           break;
-        case "EVR181":
+        case "amulet_of_oblation_blue":
           $effectArr = explode("-", $currentTurnEffects[$i]);
           if ($cardID == $effectArr[1]) {
             RemoveCurrentTurnEffect($i);
             return "BOTDECK";
           }
           break;
-        case "HNT013":
+        case "under_the_trapdoor_blue":
           if ($cardID == $currentTurnEffects[$i + 2]) {
             RemoveCurrentTurnEffect($i);
             return "BANISH";
@@ -1674,9 +1695,9 @@ function IsPitchRestricted($cardID, &$restrictedBy, $from = "", $index = -1, $pi
       $effectArr = explode(",", $currentTurnEffects[$i]);
       $effectID = $effectArr[0];
       switch ($effectID) {
-        case "ARC162":
+        case "chains_of_eminence_red":
           if (GamestateSanitize(NameOverride($cardID)) == $effectArr[1]) {
-            $restrictedBy = "ARC162";
+            $restrictedBy = "chains_of_eminence_red";
             return true;
           }
         default:
@@ -1684,25 +1705,25 @@ function IsPitchRestricted($cardID, &$restrictedBy, $from = "", $index = -1, $pi
       }
     }
   }
-  if (SearchCurrentTurnEffects("ELE035-3", $playerID) && CardCost($cardID, $from) == 0) {
-    $restrictedBy = "ELE035";
+  if (SearchCurrentTurnEffects("frost_lock_blue-3", $playerID) && CardCost($cardID, $from) == 0) {
+    $restrictedBy = "frost_lock_blue";
     return true;
   }
-  if (ColorContains($cardID, 1, $playerID) && SearchCurrentTurnEffects("OUT101-1", $playerID)) {
-    $restrictedBy = "OUT101";
+  if (ColorContains($cardID, 1, $playerID) && SearchCurrentTurnEffects("barbed_undertow_red-1", $playerID)) {
+    $restrictedBy = "barbed_undertow_red";
     return true;
-  } else if (ColorContains($cardID, 2, $playerID) && SearchCurrentTurnEffects("OUT101-2", $playerID)) {
-    $restrictedBy = "OUT101";
+  } else if (ColorContains($cardID, 2, $playerID) && SearchCurrentTurnEffects("barbed_undertow_red-2", $playerID)) {
+    $restrictedBy = "barbed_undertow_red";
     return true;
-  } else if (ColorContains($cardID, 3, $playerID) && SearchCurrentTurnEffects("OUT101-3", $playerID)) {
-    $restrictedBy = "OUT101";
+  } else if (ColorContains($cardID, 3, $playerID) && SearchCurrentTurnEffects("barbed_undertow_red-3", $playerID)) {
+    $restrictedBy = "barbed_undertow_red";
     return true;
   }
   if (CardCareAboutChiPitch($pitchRestriction) && !SubtypeContains($cardID, "Chi") && $resources[0] < 3) return true;
-  $foundNullTime = SearchItemForModalities(GamestateSanitize(NameOverride($cardID)), $otherPlayer, "HNT251") != -1;
-  $foundNullTime = $foundNullTime || SearchItemForModalities(GamestateSanitize(NameOverride($cardID)), $playerID, "HNT251") != -1;
+  $foundNullTime = SearchItemForModalities(GamestateSanitize(NameOverride($cardID)), $otherPlayer, "null_time_zone_blue") != -1;
+  $foundNullTime = $foundNullTime || SearchItemForModalities(GamestateSanitize(NameOverride($cardID)), $playerID, "null_time_zone_blue") != -1;
   if(($phase == "P" || $phase == "CHOOSEHANDCANCEL") && $foundNullTime){
-    $restrictedBy = "HNT251";
+    $restrictedBy = "null_time_zone_blue";
     return true;
   }
   return false;
@@ -1727,43 +1748,43 @@ function IsPlayRestricted($cardID, &$restriction, $from = "", $index = -1, $play
   $type = CardType($cardID);
   if (IsStaticType($type, $from, $cardID)) $type = GetResolvedAbilityType($cardID, $from);
   if (CardCareAboutChiPitch($cardID) && SearchHand($player, subtype: "Chi") == "") return true;
-  if (SearchCurrentTurnEffects("CRU032", $player) && CardType($cardID) == "AA" && AttackValue($cardID) <= 3) {
-    $restriction = "CRU032";
+  if (SearchCurrentTurnEffects("crush_the_weak_red", $player) && CardType($cardID) == "AA" && AttackValue($cardID) <= 3) {
+    $restriction = "crush_the_weak_red";
     return true;
   }
-  if (SearchCurrentTurnEffects("MON007", $player) && $from == "BANISH") {
-    $restriction = "MON007";
+  if (SearchCurrentTurnEffects("herald_of_judgment_yellow", $player) && $from == "BANISH") {
+    $restriction = "herald_of_judgment_yellow";
     return true;
   }
-  if (SearchCurrentTurnEffects("ELE036", $player) && TypeContains($cardID, "E", $player)) {
-    $restriction = "ELE036";
+  if (SearchCurrentTurnEffects("light_it_up_yellow", $player) && TypeContains($cardID, "E", $player)) {
+    $restriction = "light_it_up_yellow";
     return true;
   }
-  if (SearchCurrentTurnEffects("ELE035-3", $player) && CardCost($cardID, $from) == 0 && !IsStaticType(CardType($cardID), $from, $cardID)) {
-    $restriction = "ELE035";
+  if (SearchCurrentTurnEffects("frost_lock_blue-3", $player) && CardCost($cardID, $from) == 0 && !IsStaticType(CardType($cardID), $from, $cardID)) {
+    $restriction = "frost_lock_blue";
     return true;
   }
-  if (SearchCurrentTurnEffects("DYN240-" . GamestateSanitize(CardName($cardID)), $player)) {
+  if (SearchCurrentTurnEffects("imperial_edict_red-" . GamestateSanitize(CardName($cardID)), $player)) {
     if ($from != "PLAY" && $from != "EQUIP" && !DelimStringContains(GetAbilityNames($cardID, $from), "Ability", true)) {
-      $restriction = "DYN240";
+      $restriction = "imperial_edict_red";
       return true;
     }
   } //Can't be played
-  if (SearchCurrentTurnEffects("EVO073-" . $cardID, $player)) {
-    $restriction = "EVO073";
+  if (SearchCurrentTurnEffects("stasis_cell_blue-" . $cardID, $player)) {
+    $restriction = "stasis_cell_blue";
     return true;
   } //Can't be activated
   if (CardType($cardID) == "A" 
     && $from != "PLAY" 
     && GetClassState($player, $CS_NumNonAttackCards) >= 1 
-    && (SearchItemsForCard("EVR071", 1) != "" || SearchItemsForCard("EVR071", 2) != "") 
+    && (SearchItemsForCard("signal_jammer_blue", 1) != "" || SearchItemsForCard("signal_jammer_blue", 2) != "") 
     && (GetAbilityTypes($cardID) == "" || !DelimStringContains(GetAbilityTypes($cardID), "I"))
     ){
-    $restriction = "EVR071";
+    $restriction = "signal_jammer_blue";
     return true;
   }
-  if ($player != $mainPlayer && SearchAlliesActive($mainPlayer, "UPR415")) {
-    $restriction = "UPR415";
+  if ($player != $mainPlayer && SearchAlliesActive($mainPlayer, "themai")) {
+    $restriction = "themai";
     return true;
   }
   if (EffectPlayCardRestricted($cardID, $type, $from, resolutionCheck: $resolutionCheck) != "") {
@@ -1775,566 +1796,566 @@ function IsPlayRestricted($cardID, &$restriction, $from = "", $index = -1, $play
     return true;
   }
   switch ($cardID) {
-    case "WTR080":
+    case "breaking_scales":
       return !$CombatChain->HasCurrentLink() || !HasCombo($CombatChain->AttackCard()->ID());
-    case "WTR082":
+    case "ancestral_empowerment_red":
       return !$CombatChain->HasCurrentLink() || !ClassContains($CombatChain->AttackCard()->ID(), "NINJA", $player) || CardType($CombatChain->AttackCard()->ID()) != "AA";
-    case "WTR116":
+    case "braveforge_bracers":
       return GetClassState($player, $CS_HitsWithWeapon) == 0;
-    case "WTR120":
-    case "WTR121":
-    case "WTR123":
-    case "WTR124":
-    case "WTR125":
-    case "WTR118":
-    case "WTR135":
-    case "WTR136":
-    case "WTR137":
-    case "WTR138":
-    case "WTR139":
-    case "WTR140":
+    case "rout_red":
+    case "singing_steelblade_yellow":
+    case "overpower_red":
+    case "overpower_yellow":
+    case "overpower_blue":
+    case "glint_the_quicksilver_blue":
+    case "biting_blade_red":
+    case "biting_blade_yellow":
+    case "biting_blade_blue":
+    case "stroke_of_foresight_red":
+    case "stroke_of_foresight_yellow":
+    case "stroke_of_foresight_blue":
       return !$CombatChain->HasCurrentLink() || !TypeContains($CombatChain->AttackCard()->ID(), "W", $mainPlayer);
-    case "WTR132":
-    case "WTR133":
-    case "WTR134":
+    case "ironsong_response_red":
+    case "ironsong_response_yellow":
+    case "ironsong_response_blue":
       if (!$CombatChain->HasCurrentLink()) return true;
       if (!RepriseActive()) return false;
       return !TypeContains($CombatChain->AttackCard()->ID(), "W", $mainPlayer);
-    case "WTR150":
+    case "fyendals_spring_tunic":
       if ($character[$index + 2] == 3) return false;
       if ($currentPlayer != $mainPlayer) return true; //only tick up on your own turn
       if (ManualTunicSetting($player) && GetClassState($player, piece: $CS_TunicTicks) == 0) {
         if (GetClassState($player, $CS_NumCardsPlayed) == 0) return false;
       }
       return true;
-    case "WTR154":
+    case "snapdragon_scalers":
       if (!$CombatChain->HasCurrentLink()) return true;
       if (CardType($CombatChain->AttackCard()->ID()) != "AA") return true;
       if (CardCost($CombatChain->AttackCard()->ID()) > 1) return true;
       return false;
-    case "WTR179":
-    case "WTR180":
-    case "WTR181":
+    case "demolition_crew_red":
+    case "demolition_crew_yellow":
+    case "demolition_crew_blue":
       return SearchCount(SearchHand($currentPlayer, "", "", -1, 2)) < 2;
-    case "WTR182":
-    case "WTR183":
-    case "WTR184":    
+    case "flock_of_the_feather_walkers_red":
+    case "flock_of_the_feather_walkers_yellow":
+    case "flock_of_the_feather_walkers_blue":    
       return SearchCount(SearchHand($currentPlayer, "", "", -1, 0)) < 2;
-    case "WTR206":
-    case "WTR207":
-    case "WTR208":
+    case "pummel_red":
+    case "pummel_yellow":
+    case "pummel_blue":
       if (!$CombatChain->HasCurrentLink()) return true;
       $subtype = CardSubtype($CombatChain->AttackCard()->ID());
       if ($subtype == "Club" || $subtype == "Hammer" || (CardType($CombatChain->AttackCard()->ID()) == "AA" && CardCost($CombatChain->AttackCard()->ID(), "CC") >= 2)) return false;
       return true;
-    case "WTR209":
-    case "WTR210":
-    case "WTR211":
+    case "razor_reflex_red":
+    case "razor_reflex_yellow":
+    case "razor_reflex_blue":
       if (!$CombatChain->HasCurrentLink()) return true;
       $subtype = CardSubtype($CombatChain->AttackCard()->ID());
       if ($subtype == "Sword" || $subtype == "Dagger" || (CardType($CombatChain->AttackCard()->ID()) == "AA" && CardCost($CombatChain->AttackCard()->ID(), "CC") <= 1)) return false;
       return true;
-    case "ARC004":
+    case "teklo_foundry_heart":
       return GetClassState($player, $CS_NumBoosted) < 1;
-    case "ARC005":
+    case "achilles_accelerator":
       return GetClassState($player, $CS_NumBoosted) < 1;
-    case "ARC008":
+    case "maximum_velocity_red":
       return GetClassState($player, $CS_NumBoosted) < 3;
-    case "ARC010":
+    case "induction_chamber_red":
       return $CombatChain->HasCurrentLink()
         && $from == "PLAY"
         && (!ClassContains($CombatChain->AttackCard()->ID(), "MECHANOLOGIST", $player)
           || $myItems[$index + 1] == 0
           || CardSubtype($CombatChain->AttackCard()->ID()) != "Pistol"
           || $myItems[$index + 2] != 2);
-    case "ARC018":
+    case "cognition_nodes_blue":
       return ($CombatChain->HasCurrentLink() && $from == "PLAY" && ($myItems[$index + 1] == 0 || CardType($CombatChain->AttackCard()->ID()) != "AA" || $myItems[$index + 2] != 2));
-    case "ARC041":
+    case "skullbone_crosswrap":
       return !ArsenalHasFaceDownCard($player);
-    case "CRU082":
-    case "CRU083":
+    case "twinning_blade_yellow":
+    case "unified_decree_yellow":
       return !$CombatChain->HasCurrentLink() || !TypeContains($CombatChain->AttackCard()->ID(), "W", $mainPlayer);
-    case "CRU088":
-    case "CRU089":
-    case "CRU090":
+    case "out_for_blood_red":
+    case "out_for_blood_yellow":
+    case "out_for_blood_blue":
       return !$CombatChain->HasCurrentLink() || !TypeContains($CombatChain->AttackCard()->ID(), "W", $mainPlayer);
-    case "CRU097":
-      return IsPlayRestricted(ShiyanaCharacter("CRU097"), $restriction, $from, $index, $player);
-    case "CRU125":
+    case "shiyana_diamond_gemini":
+      return IsPlayRestricted(ShiyanaCharacter("shiyana_diamond_gemini"), $restriction, $from, $index, $player);
+    case "feign_death_yellow":
       return !HasTakenDamage($player);
-    case "CRU126":
-    case "CRU127":
-    case "CRU128":
+    case "tripwire_trap_red":
+    case "pitfall_trap_yellow":
+    case "rockslide_trap_blue":
       return $from != "ARS";
-    case "CRU143":
+    case "rattle_bones_red":
       return SearchCount(SearchDiscard($player, "AA", "", -1, -1, "RUNEBLADE")) == 0;
-    case "CRU164":
+    case "aetherize_blue":
       return count($layers) == 0 || SearchLayer($player, "I", "", 1) == "";
-    case "CRU186":
+    case "lunging_press_blue":
       return !$CombatChain->HasCurrentLink() || CardType($CombatChain->AttackCard()->ID()) != "AA";
-    case "CRU189":
-    case "CRU190":
-    case "CRU191":
+    case "reinforce_the_line_red":
+    case "reinforce_the_line_yellow":
+    case "reinforce_the_line_blue":
       $found = SearchCombatChainLink($player, "AA");
       return $found == "" || $found == "0";
-    case "MON000":
+    case "great_library_of_solana":
       return $from == "PLAY" && SearchCount(SearchHand($player, "", "", -1, -1, "", "", false, false, 2)) < 2;
-    case "MON001":
-    case "MON002":
+    case "prism_sculptor_of_arc_light":
+    case "prism":
       return count($mySoul) == 0;
-    case "MON029":
-    case "MON030":
+    case "ser_boltyn_breaker_of_dawn":
+    case "boltyn":
       return count($mySoul) == 0 || !HasIncreasedAttack();
-    case "MON033":
+    case "beacon_of_victory_yellow":
       return count($mySoul) == 0;
-    case "MON062":
+    case "celestial_cataclysm_yellow":
       return count($mySoul) < 3;
-    case "MON084":
-    case "MON085":
-    case "MON086":
+    case "blinding_beam_red":
+    case "blinding_beam_yellow":
+    case "blinding_beam_blue":
       return !$CombatChain->HasCurrentLink();
-    case "MON144":
-    case "MON145":
-    case "MON146":
+    case "graveling_growl_red":
+    case "graveling_growl_yellow":
+    case "graveling_growl_blue":
       return GetClassState($player, $CS_Num6PowBan) == 0;
-    case "MON126":
-    case "MON127":
-    case "MON128":
-    case "MON129":
-    case "MON130":
-    case "MON131":
-    case "MON132":
-    case "MON133":
-    case "MON134":
-    case "MON135":
-    case "MON136":
-    case "MON137":
-    case "MON141":
-    case "MON142":
-    case "MON143":
-    case "MON147":
-    case "MON148":
-    case "MON149":
-    case "MON150":
-    case "MON151":
-    case "MON152":
+    case "endless_maw_red":
+    case "endless_maw_yellow":
+    case "endless_maw_blue":
+    case "writhing_beast_hulk_red":
+    case "writhing_beast_hulk_yellow":
+    case "writhing_beast_hulk_blue":
+    case "convulsions_from_the_bellows_of_hell_red":
+    case "convulsions_from_the_bellows_of_hell_yellow":
+    case "convulsions_from_the_bellows_of_hell_blue":
+    case "boneyard_marauder_red":
+    case "boneyard_marauder_yellow":
+    case "boneyard_marauder_blue":
+    case "dread_screamer_red":
+    case "dread_screamer_yellow":
+    case "dread_screamer_blue":
+    case "hungering_slaughterbeast_red":
+    case "hungering_slaughterbeast_yellow":
+    case "hungering_slaughterbeast_blue":
+    case "unworldly_bellow_red":
+    case "unworldly_bellow_yellow":
+    case "unworldly_bellow_blue":
       return $discard->NumCards() < 3;
-    case "MON189":
+    case "doomsday_blue":
       return SearchCount(SearchBanish($player, "", "", -1, -1, "", "", true)) < 6;
-    case "MON190":
+    case "eclipse_blue":
       return GetClassState($player, $CS_NumBloodDebtPlayed) < 6;
-    case "MON198":
+    case "soul_harvest_blue":
       return $discard->NumCards() < 6;
-    case "MON230":
+    case "aether_ironweave":
       return GetClassState($player, $CS_NumAttackCards) == 0 || GetClassState($player, $CS_NumNonAttackCards) == 0;
-    case "MON238":
+    case "blood_drop_brocade":
       return GetClassState($player, $CS_DamageTaken) == 0 && GetClassState($otherPlayer, $CS_DamageTaken) == 0;
-    case "MON281":
-    case "MON282":
-    case "MON283":
+    case "rally_the_rearguard_red":
+    case "rally_the_rearguard_yellow":
+    case "rally_the_rearguard_blue":
       if (isset($combatChain[$index + 7]) && $from == "PLAY") return SearchCurrentTurnEffects($cardID, $player, false, true) == $combatChain[$index + 7];
       else return false;
-    case "MON303":
-    case "MON304":
-    case "MON305":
+    case "memorial_ground_red":
+    case "memorial_ground_yellow":
+    case "memorial_ground_blue":
       $maxCost = 2;
-      if ($cardID == "MON304") $maxCost = 1;
-      elseif ($cardID == "MON305") $maxCost = 0;
+      if ($cardID == "memorial_ground_yellow") $maxCost = 1;
+      elseif ($cardID == "memorial_ground_blue") $maxCost = 0;
       return SearchDiscard($player, "AA", "", $maxCost) == "";
-    case "ELE031":
-    case "ELE032":
-    case "ELE115":
+    case "lexi_livewire":
+    case "lexi":
+    case "crown_of_seeds":
       return !ArsenalHasFaceDownCard($player);
-    case "ELE116":
+    case "plume_of_evergrowth":
       $found = CombineSearches(SearchDiscard($player, "AA", talent: "EARTH"), SearchDiscard($player, "A", talent: "EARTH"));
       $found = CombineSearches(SearchDiscard($player, "I", talent: "EARTH"), $found);
       return $found == "";
-    case "ELE118":
+    case "tome_of_harvests_blue":
       return $from == "ARS" || ArsenalEmpty($player);
-    case "ELE125":
-    case "ELE126":
-    case "ELE127":
+    case "summerwood_shelter_red":
+    case "summerwood_shelter_yellow":
+    case "summerwood_shelter_blue":
       $found = CombineSearches(SearchCombatChainLink($defPlayer, "A", talent: "EARTH,ELEMENTAL"), SearchCombatChainLink($defPlayer, "AA", talent: "EARTH,ELEMENTAL"));
       return $found == "" || $found == "0";
-    case "ELE140":
-    case "ELE141":
-    case "ELE142":
+    case "sow_tomorrow_red":
+    case "sow_tomorrow_yellow":
+    case "sow_tomorrow_blue":
       return SowTomorrowIndices($player, $cardID) == "";
-    case "ELE143":
+    case "amulet_of_earth_blue":
       return $from == "PLAY" && GetClassState($player, $CS_NumFusedEarth) == 0;
-    case "ELE147":
+    case "blizzard_blue":
       if ($CombatChain->HasCurrentLink()) return false;//If there's an attack, there's a valid target
       return !HasAttackLayer();
-    case "ELE172":
+    case "amulet_of_ice_blue":
       return $from == "PLAY" && GetClassState($player, $CS_NumFusedIce) == 0;
-    case "ELE183":
-    case "ELE184":
-    case "ELE185":
+    case "lightning_press_red":
+    case "lightning_press_yellow":
+    case "lightning_press_blue":
       if (count($layers) == 0 && !$CombatChain->HasCurrentLink()) return true;
       if (SearchCount(SearchCombatChainLink($currentPlayer, type: "AA", maxCost: 1)) > 0) return false;
       for ($i = 0; $i < count($layers); $i += LayerPieces()) {
         if (strlen($layers[$i]) == 6 && CardType($layers[$i]) == "AA" && CardCost($layers[$i]) <= 1) return false;
       }
       return true;
-    case "ELE195":
-    case "ELE196":
-    case "ELE197":
+    case "shock_striker_red":
+    case "shock_striker_yellow":
+    case "shock_striker_blue":
       return SearchCurrentTurnEffects($cardID, $player);
-    case "ELE201":
+    case "amulet_of_lightning_blue":
       return $from == "PLAY" && GetClassState($player, $CS_NumFusedLightning) == 0;
-    case "ELE224":
+    case "spellbound_creepers":
       return GetClassState($player, $CS_NumAttackCards) == 0; // Blocked/Played
-    case "ELE225":
+    case "sutcliffes_suede_hides":
       return !$CombatChain->HasCurrentLink() || CardType($CombatChain->AttackCard()->ID()) != "AA" || GetClassState($currentPlayer, $CS_NumNonAttackCards) == 0;
-    case "ELE233":
+    case "ragamuffins_hat":
       return count($myHand) != 1;
-    case "ELE234":
+    case "deep_blue":
       return count($myHand) == 0;
-    case "ELE236":
+    case "runaways":
       return !HasTakenDamage($player);
-    case "EVR054":
+    case "shatter_yellow":
       return !$CombatChain->HasCurrentLink() || !TypeContains($CombatChain->AttackCard()->ID(), "W", $mainPlayer) || Is1H($CombatChain->AttackCard()->ID());
-    case "EVR060":
-    case "EVR061":
-    case "EVR062":
+    case "blade_runner_red":
+    case "blade_runner_yellow":
+    case "blade_runner_blue":
       return !$CombatChain->HasCurrentLink() || !TypeContains($CombatChain->AttackCard()->ID(), "W", $mainPlayer) || !Is1H($CombatChain->AttackCard()->ID());
-    case "EVR063":
-    case "EVR064":
-    case "EVR065":
+    case "in_the_swing_red":
+    case "in_the_swing_yellow":
+    case "in_the_swing_blue":
       return GetClassState($player, $CS_AtksWWeapon) < 1 || !TypeContains($CombatChain->AttackCard()->ID(), "W", $mainPlayer);
-    case "EVR137":
+    case "crown_of_reflection":
       return $player != $mainPlayer;
-    case "EVR173":
-    case "EVR174":
-    case "EVR175":
+    case "even_bigger_than_that_red":
+    case "even_bigger_than_that_yellow":
+    case "even_bigger_than_that_blue":
       return GetClassState($player, piece: $CS_PowDamageDealt) == 0;
-    case "EVR176":
+    case "amulet_of_assertiveness_yellow":
       return $from == "PLAY" && count($myHand) < 4;
-    case "EVR177":
+    case "amulet_of_echoes_blue":
       return $from == "PLAY" && IsAmuletOfEchoesRestricted($from, $otherPlayer);
-    case "EVR178":
+    case "amulet_of_havencall_blue":
       return ($from == "PLAY" && count($myHand) > 0);
-    case "EVR179":
+    case "amulet_of_ignition_yellow":
       return ($from == "PLAY" && GetClassState($player, $CS_NumCardsPlayed) >= 1);
-    case "EVR053":
+    case "helm_of_sharp_eye":
       return !IsWeaponGreaterThanTwiceBasePower();
-    case "EVR181":
+    case "amulet_of_oblation_blue":
       return $from == "PLAY" && (GetClassState(1, $CS_CardsEnteredGY) == 0 && GetClassState(2, $CS_CardsEnteredGY) == 0 || !$CombatChain->HasCurrentLink() || CardType($CombatChain->AttackCard()->ID()) != "AA");
-    case "DVR013":
+    case "run_through_yellow":
       return (!$CombatChain->HasCurrentLink() || !TypeContains($CombatChain->AttackCard()->ID(), "W", $mainPlayer) || CardSubType($CombatChain->AttackCard()->ID()) != "Sword");
-    case "DVR014":
-    case "DVR023":
+    case "thrust_red":
+    case "blade_flash_blue":
       return !$CombatChain->HasCurrentLink() || CardSubType($CombatChain->AttackCard()->ID()) != "Sword";
-    case "UPR050":
+    case "combustion_point_red":
       return (!$CombatChain->HasCurrentLink() || CardType($CombatChain->AttackCard()->ID()) != "AA" || (!ClassContains($CombatChain->AttackCard()->ID(), "NINJA", $player) && !TalentContains($CombatChain->AttackCard()->ID(), "DRACONIC", $currentPlayer)));
-    case "UPR084":
+    case "flamescale_furnace":
       return GetClassState($player, $CS_NumRedPlayed) == 0;
-    case "UPR085":
+    case "sash_of_sandikai":
       return GetClassState($player, $CS_NumRedPlayed) == 0;
-    case "UPR087":
+    case "liquefy_red":
       return !$CombatChain->HasCurrentLink() || CardType($CombatChain->AttackCard()->ID()) != "AA";
-    case "UPR089":
+    case "tome_of_firebrand_red":
       return ($player != $mainPlayer || NumDraconicChainLinks() < 4);
-    case "UPR151":
+    case "ghostly_touch":
       return ($character[$index + 2] < 2 && !SearchCurrentTurnEffects($cardID, $player));
-    case "UPR153":
+    case "frightmare_red":
       return GetClassState($player, $CS_NumPhantasmAADestroyed) < 1;
-    case "UPR154":
+    case "semblance_blue":
       if ($CombatChain->HasCurrentLink()) return !ClassContains($CombatChain->AttackCard()->ID(), "ILLUSIONIST", $player);
       else if (count($layers) != 0) return !ClassContains($layers[0], "ILLUSIONIST", $player);
       return true;
-    case "UPR159":
+    case "tide_flippers":
       return !$CombatChain->HasCurrentLink() || AttackValue($CombatChain->AttackCard()->ID()) > 2 || CardType($CombatChain->AttackCard()->ID()) != "AA";
-    case "UPR162":
-    case "UPR163":
-    case "UPR164":
+    case "rapid_reflex_red":
+    case "rapid_reflex_yellow":
+    case "rapid_reflex_blue":
       return !$CombatChain->HasCurrentLink() || CardType($CombatChain->AttackCard()->ID()) != "AA" || CardCost($CombatChain->AttackCard()->ID()) > 0;
-    case "UPR165":
+    case "waning_moon":
       return GetClassState($player, $CS_NumNonAttackCards) == 0;
-    case "UPR166":
+    case "alluvion_constellas":
       return $character[$index + 2] < 2;
-    case "UPR167":
+    case "spellfire_cloak":
       return $player == $mainPlayer;
-    case "UPR169":
+    case "rewind_blue":
       return SearchLayer($otherPlayer, "A") == "";
     //Invocations must target Ash
-    case "UPR004":
-    case "UPR006":
-    case "UPR007":
-    case "UPR008":
-    case "UPR009":
-    case "UPR010":
-    case "UPR011":
-    case "UPR012":
-    case "UPR013":
-    case "UPR014":
-    case "UPR015":
-    case "UPR016":
-    case "UPR017":
-    case "UPR036":
-    case "UPR037":
-    case "UPR038":
-    case "UPR039":
-    case "UPR040":
-    case "UPR041":
+    case "silken_form":
+    case "invoke_dracona_optimai_red":
+    case "invoke_tomeltai_red":
+    case "invoke_dominia_red":
+    case "invoke_azvolai_red":
+    case "invoke_cromai_red":
+    case "invoke_kyloria_red":
+    case "invoke_miragai_red":
+    case "invoke_nekria_red":
+    case "invoke_ouvia_red":
+    case "invoke_themai_red":
+    case "invoke_vynserakai_red":
+    case "invoke_yendurai_red":
+    case "skittering_sands_red":
+    case "skittering_sands_yellow":
+    case "skittering_sands_blue":
+    case "sand_cover_red":
+    case "sand_cover_yellow":
+    case "sand_cover_blue":
       return SearchCount(SearchPermanents($player, "", "Ash")) < 1;
-    case "DYN005":
+    case "rok":
       return count(GetHand($player)) != 0;
-    case "DYN007":
+    case "savage_beatdown_red":
       return GetClassState($mainPlayer, $CS_Num6PowDisc) > 0 ? 0 : 1;
-    case "DYN022":
-    case "DYN023":
-    case "DYN024":
+    case "rumble_grunting_red":
+    case "rumble_grunting_yellow":
+    case "rumble_grunting_blue":
       return GetClassState($mainPlayer, $CS_Num6PowDisc) > 0 ? 0 : 1;
-    case "DYN088":
+    case "hanabi_blaster":
       return $character[$index + 2] < 2;
-    case "DYN079":
-    case "DYN080":
-    case "DYN081":
+    case "puncture_red":
+    case "puncture_yellow":
+    case "puncture_blue":
       if (!$CombatChain->HasCurrentLink()) return true;
       $subtype = CardSubType($CombatChain->AttackCard()->ID());
       return $subtype != "Sword" && $subtype != "Dagger";
-    case "DYN117":
+    case "blacktek_whisperers":
       return !$CombatChain->HasCurrentLink() || !ClassContains($CombatChain->AttackCard()->ID(), "ASSASSIN", $mainPlayer) || CardType($CombatChain->AttackCard()->ID()) != "AA";
-    case "DYN118":
+    case "mask_of_perdition":
       return !$CombatChain->HasCurrentLink() || !ClassContains($CombatChain->AttackCard()->ID(), "ASSASSIN", $mainPlayer) || CardType($CombatChain->AttackCard()->ID()) != "AA";
-    case "DYN130":
-    case "DYN131":
-    case "DYN132":
+    case "shred_red":
+    case "shred_yellow":
+    case "shred_blue":
       return NumCardsBlocking() < 1 || !ClassContains($CombatChain->AttackCard()->ID(), "ASSASSIN", $mainPlayer);
-    case "DYN148":
-    case "DYN149":
-    case "DYN150":
+    case "cut_to_the_chase_red":
+    case "cut_to_the_chase_yellow":
+    case "cut_to_the_chase_blue":
       return !$CombatChain->HasCurrentLink() || !ClassContains($CombatChain->AttackCard()->ID(), "ASSASSIN", $mainPlayer) || ContractType($CombatChain->AttackCard()->ID()) == "";
-    case "DYN168":
-    case "DYN169":
-    case "DYN170":
+    case "point_the_tip_red":
+    case "point_the_tip_yellow":
+    case "point_the_tip_blue":
       $arsenalHasFaceUp = ArsenalHasFaceUpArrowCard($mainPlayer);
       if (!$arsenalHasFaceUp) $restriction = "There must be a face up arrow in your arsenal.";
       return !$arsenalHasFaceUp;
-    case "DYN212":
-      return CountAura("MON104", $currentPlayer) < 1;
-    case "OUT001":
-    case "OUT002":
+    case "invoke_suraya_yellow":
+      return CountAura("spectral_shield", $currentPlayer) < 1;
+    case "uzuri_switchblade":
+    case "uzuri":
       return !$CombatChain->HasCurrentLink() || !HasStealth($CombatChain->AttackCard()->ID()) || count($myHand) == 0;
-    case "OUT021":
-    case "OUT022":
-    case "OUT023":
-    case "OUT042":
-    case "OUT043":
-    case "OUT044":
+    case "spike_with_bloodrot_red":
+    case "spike_with_frailty_red":
+    case "spike_with_inertia_red":
+    case "razors_edge_red":
+    case "razors_edge_yellow":
+    case "razors_edge_blue":
       return !$CombatChain->HasCurrentLink() || !HasStealth($CombatChain->AttackCard()->ID()) || (CardType($CombatChain->AttackCard()->ID()) != "AA");
-    case "OUT054":
+    case "silverwind_shuriken_blue":
       return ($from == "PLAY" ? !$CombatChain->HasCurrentLink() || !HasCombo($CombatChain->AttackCard()->ID()) : false);
-    case "OUT094":
+    case "trench_of_sunken_treasure":
       return !ArsenalHasFaceDownCard($player);
-    case "OUT139":
+    case "flick_knives":
       if (!$CombatChain->HasCurrentLink()) return true;
       if (!SearchCharacterAliveSubtype($player, "Dagger", true) && SearchCombatChainAttacks($player, subtype:"Dagger") == "") {
         $restriction = "No dagger to throw";
         return true;
       }
       return false;
-    case "OUT143":
+    case "concealed_blade_blue":
       return !$CombatChain->HasCurrentLink() || CardType($CombatChain->AttackCard()->ID()) != "AA" || (!ClassContains($CombatChain->AttackCard()->ID(), "ASSASSIN", $mainPlayer) && !ClassContains($CombatChain->AttackCard()->ID(), "NINJA", $mainPlayer));
-    case "OUT154":
-    case "OUT155":
-    case "OUT156":
+    case "short_and_sharp_red":
+    case "short_and_sharp_yellow":
+    case "short_and_sharp_blue":
       if (!$CombatChain->HasCurrentLink()) return true;
       $subtype = CardSubtype($CombatChain->AttackCard()->ID());
       if ($subtype == "Dagger" || (CardType($CombatChain->AttackCard()->ID()) == "AA" && AttackValue($CombatChain->AttackCard()->ID()) <= 2)) return false;
       return true;
-    case "OUT157":
+    case "mask_of_malicious_manifestations":
       return (count($myHand) + count($myArsenal)) < 2;
-    case "OUT162":
-    case "OUT163":
-    case "OUT164":
+    case "death_touch_red":
+    case "death_touch_yellow":
+    case "death_touch_blue":
       return $from == "HAND";
-    case "OUT168":
-    case "OUT169":
-    case "OUT170":
+    case "virulent_touch_red":
+    case "virulent_touch_yellow":
+    case "virulent_touch_blue":
       return $from == "HAND";
-    case "OUT180":
+    case "threadbare_tunic":
       return count($myHand) > 0;
-    case "OUT181":
+    case "fisticuffs":
       return !$CombatChain->HasCurrentLink() || CardType($CombatChain->AttackCard()->ID()) != "AA";
-    case "OUT182":
+    case "fleet_foot_sandals":
       return !$CombatChain->HasCurrentLink() || (CardType($CombatChain->AttackCard()->ID()) != "AA" && !TypeContains($CombatChain->AttackCard()->ID(), "W", $mainPlayer)) || AttackValue($CombatChain->AttackCard()->ID()) > 1;
-    case "DTD001":
-    case "DTD002":
+    case "prism_awakener_of_sol":
+    case "prism_advent_of_thrones":
       return (count($mySoul) == 0 || $character[5] == 0 || SearchPermanents($player, subtype: "Figment") == "");
-    case "DTD003":
+    case "luminaris_celestial_fury":
       return !$CombatChain->HasCurrentLink() || (!str_contains(NameOverride($CombatChain->AttackCard()->ID(), $mainPlayer), "Herald") && !SubtypeContains($CombatChain->AttackCard()->ID(), "Angel", $mainPlayer));
-    case "DTD032":
-    case "DTD033":
-    case "DTD034":
+    case "angelic_descent_red":
+    case "angelic_descent_yellow":
+    case "angelic_descent_blue":
       return !$CombatChain->HasCurrentLink() || !str_contains(NameOverride($CombatChain->AttackCard()->ID(), $mainPlayer), "Herald");
-    case "DTD035":
-    case "DTD036":
-    case "DTD037":
+    case "angelic_wrath_red":
+    case "angelic_wrath_yellow":
+    case "angelic_wrath_blue":
       return !$CombatChain->HasCurrentLink() || !str_contains(NameOverride($CombatChain->AttackCard()->ID(), $mainPlayer), "Herald");
-    case "DTD038":
-    case "DTD039":
-    case "DTD040":
+    case "celestial_reprimand_red":
+    case "celestial_reprimand_yellow":
+    case "celestial_reprimand_blue":
       return count($combatChain) < (CombatChainPieces() * 2) || !str_contains(NameOverride($CombatChain->AttackCard()->ID(), $mainPlayer), "Herald");
-    case "DTD041":
-    case "DTD042":
-    case "DTD043":
+    case "celestial_resolve_red":
+    case "celestial_resolve_yellow":
+    case "celestial_resolve_blue":
       return count($combatChain) < (CombatChainPieces() * 2) || GetChainLinkCards($defPlayer, nameContains: "Herald") == "";
-    case "DTD060":
-    case "DTD061":
-    case "DTD062":
+    case "v_for_valor_red":
+    case "v_for_valor_yellow":
+    case "v_for_valor_blue":
       $hand = &GetHand($currentPlayer);
       return $from == "PLAY" && count($hand) == 0;
-    case "DTD069":
-    case "DTD070":
-    case "DTD071"://Resounding Courage
+    case "resounding_courage_red":
+    case "resounding_courage_yellow":
+    case "resounding_courage_blue"://Resounding Courage
       return !$CombatChain->HasCurrentLink() || !ClassContains($CombatChain->AttackCard()->ID(), "WARRIOR", $mainPlayer) || !TalentContains($CombatChain->AttackCard()->ID(), "LIGHT", $mainPlayer);
-    case "DTD075":
-    case "DTD076":
-    case "DTD077":
-    case "DTD078":
+    case "radiant_view":
+    case "radiant_raiment":
+    case "radiant_touch":
+    case "radiant_flow":
       return count($mySoul) == 0;
-    case "DTD106":
+    case "spoiled_skull":
       $index = CombineSearches(SearchBanish($player, "AA"), SearchBanish($player, "A"));
       $cleanIndexes = RemoveCardSameNames($player, $index, GetBanish($player));
       return SearchCount($cleanIndexes) < 3;
-    case "DTD142":
-      return CountAura("ARC112", $currentPlayer) != 6;
-    case "DTD164":
+    case "oblivion_blue":
+      return CountAura("runechant", $currentPlayer) != 6;
+    case "levia_redeemed":
       return $from != "PLAY" || SearchCount(SearchBanish($currentPlayer, bloodDebtOnly: true)) < 13;
-    case "DTD199":
+    case "rugged_roller":
       return GetClassState($currentPlayer, $CS_HighestRoll) != 6;
-    case "DTD208":
+    case "chorus_of_ironsong_yellow":
       return !$CombatChain->HasCurrentLink() || !CardNameContains($CombatChain->AttackCard()->ID(), "Dawnblade", $mainPlayer, true);
-    case "TCC011":
+    case "apocalypse_automaton_red":
       return EvoUpgradeAmount($player) == 0;//Restricted if no EVOs
-    case "TCC079":
+    case "mask_of_three_tails":
       return HitsInCombatChain() < 3 || $player != $mainPlayer;
-    case "TCC080":
+    case "blood_scent":
       return GetClassState($player, $CS_NumCrouchingTigerPlayedThisTurn) == 0;
-    case "EVO003":
+    case "symbiosis_shot":
       return $character[$index + 2] <= 0;
-    case "EVO004":
-    case "EVO005": //Maxx Nitro
-    case "EVO007":
-    case "EVO008": //Teklovossen
+    case "maxx_the_hype_nitro":
+    case "maxx_nitro": //Maxx Nitro
+    case "teklovossen_esteemed_magnate":
+    case "teklovossen": //Teklovossen
       return $character[5] == 0;
-    case "EVO014":
-    case "EVO015":
-    case "EVO016":
-    case "EVO017":
+    case "cogwerx_base_head":
+    case "cogwerx_base_chest":
+    case "cogwerx_base_arms":
+    case "cogwerx_base_legs":
       return $character[$index + 2] == 0 || GetClassState($player, $CS_NumBoosted) == 0;
-    case "EVO071":
-    case "EVO072":
+    case "prismatic_lens_yellow":
+    case "quantum_processor_yellow":
       if ($from == "PLAY") return $myItems[$index + 2] != 2; else return false;
-    case "EVO087":
-    case "EVO088":
-    case "EVO089":
+    case "dissolving_shield_red":
+    case "dissolving_shield_yellow":
+    case "dissolving_shield_blue":
       if ($from == "PLAY") return $myItems[$index + 1] == 0; else return false;
-    case "EVO140":
+    case "moonshot_yellow":
       return GetClassState($player, $CS_NumBoosted) <= 0;
-    case "EVO235":
+    case "shriek_razors":
       return !$CombatChain->HasCurrentLink() || !ClassContains($CombatChain->AttackCard()->ID(), "ASSASSIN", $mainPlayer) || CardType($CombatChain->AttackCard()->ID()) != "AA";
-    case "EVO434":
-    case "EVO435":
-    case "EVO436":
-    case "EVO437":
-    case "EVO446":
-    case "EVO447":
-    case "EVO448":
-    case "EVO449":
+    case "evo_command_center_yellow_equip":
+    case "evo_engine_room_yellow_equip":
+    case "evo_smoothbore_yellow_equip":
+    case "evo_thruster_yellow_equip":
+    case "evo_data_mine_yellow_equip":
+    case "evo_battery_pack_yellow_equip":
+    case "evo_cogspitter_yellow_equip":
+    case "evo_charging_rods_yellow_equip":
       return !EvoHasUnderCard($currentPlayer, $index);
-    case "HVY055":
-      return CountItem("DYN243", $currentPlayer) <= 0;
-    case "HVY090":
-    case "HVY091":
+    case "good_time_chapeau":
+      return CountItem("gold", $currentPlayer) <= 0;
+    case "kassai_of_the_golden_sand":
+    case "kassai":
       return SearchCount(SearchDiscard($currentPlayer, pitch: 1)) < 2 || SearchCount(SearchDiscard($currentPlayer, pitch: 2)) < 2;
-    case "HVY098":
+    case "prized_galea":
       return !TypeContains($CombatChain->AttackCard()->ID(), "W", $currentPlayer);
-    case "HVY099":
+    case "hood_of_red_sand":
       return SearchCount(SearchDiscard($currentPlayer, pitch: 1)) < 1 || SearchCount(SearchDiscard($currentPlayer, pitch: 2)) < 1 || !CardSubtype($CombatChain->AttackCard()->ID()) == "Sword";
-    case "HVY101":
+    case "blade_flurry_red":
       return !$CombatChain->HasCurrentLink() || !TypeContains($CombatChain->AttackCard()->ID(), "W", $mainPlayer);
-    case "HVY102":
+    case "shift_the_tide_of_battle_yellow":
       return !$CombatChain->HasCurrentLink() || !ClassContains($CombatChain->AttackCard()->ID(), "WARRIOR", $mainPlayer) || CachedTotalAttack() <= AttackValue($CombatChain->AttackCard()->ID());
-    case "HVY106":
-    case "HVY107":
-    case "HVY108":
+    case "cut_the_deck_red":
+    case "cut_the_deck_yellow":
+    case "cut_the_deck_blue":
       return !$CombatChain->HasCurrentLink() || !ClassContains($CombatChain->AttackCard()->ID(), "WARRIOR", $mainPlayer);
-    case "HVY109":
-    case "HVY110":
-    case "HVY111":
+    case "fatal_engagement_red":
+    case "fatal_engagement_yellow":
+    case "fatal_engagement_blue":
       return !$CombatChain->HasCurrentLink() || NumAttacksBlocking() == 0;
-    case "HVY112":
-    case "HVY113":
-    case "HVY114":
+    case "take_the_upper_hand_red":
+    case "take_the_upper_hand_yellow":
+    case "take_the_upper_hand_blue":
       return !$CombatChain->HasCurrentLink() || $combatChainState[$CCS_WagersThisLink] == 0;
-    case "HVY115":
-    case "HVY116":
-    case "HVY117":
+    case "agile_engagement_red":
+    case "agile_engagement_yellow":
+    case "agile_engagement_blue":
       return !$CombatChain->HasCurrentLink() || !ClassContains($CombatChain->AttackCard()->ID(), "WARRIOR", $mainPlayer);
-    case "HVY118":
-    case "HVY119":
-    case "HVY120":
+    case "vigorous_engagement_red":
+    case "vigorous_engagement_yellow":
+    case "vigorous_engagement_blue":
       return !$CombatChain->HasCurrentLink() || !ClassContains($CombatChain->AttackCard()->ID(), "WARRIOR", $mainPlayer);
-    case "HVY134":
+    case "cintari_sellsword":
       return GetClassState($player, $CS_AtksWWeapon) <= 0;
-    case "HVY195":
+    case "balance_of_justice":
       return GetClassState($otherPlayer, $CS_NumCardsDrawn) < 2;
-    case "HVY245":
-      if ($from == "GY") return CountItem("EVR195", $currentPlayer) < 2; else return false;
-    case "MST097":
+    case "graven_call":
+      if ($from == "GY") return CountItem("silver", $currentPlayer) < 2; else return false;
+    case "pass_over_blue":
       return count($otherPlayerDiscard) <= 0;
-    case "MST099":
+    case "preserve_tradition_blue":
       return CombineSearches(SearchDiscard($player, "A"), SearchDiscard($player, "AA")) == "";
-    case "AKO024":
+    case "run_roughshod_blue":
       return GetClassState($mainPlayer, $CS_Num6PowDisc) > 0 ? 0 : 1;
-    case "MST011":
-    case "MST012":
-    case "MST013":
-    case "MST014":
-    case "MST015":
-    case "MST016":
-    case "MST017":
-    case "MST018":
-    case "MST019":
-    case "MST020":
-    case "MST021":
-    case "MST022":
+    case "tide_chakra_red":
+    case "tide_chakra_yellow":
+    case "tide_chakra_blue":
+    case "hiss_red":
+    case "hiss_yellow":
+    case "hiss_blue":
+    case "intimate_inducement_red":
+    case "intimate_inducement_yellow":
+    case "intimate_inducement_blue":
+    case "venomous_bite_red":
+    case "venomous_bite_yellow":
+    case "venomous_bite_blue":
       if (!$CombatChain->HasCurrentLink()) return true;
       if ((CardType($CombatChain->AttackCard()->ID()) == "AA" && (ClassContains($CombatChain->AttackCard()->ID(), "ASSASSIN", $player) || TalentContains($CombatChain->AttackCard()->ID(), "MYSTIC", $player)))) return false;
       return true;
-    case "MST023":
-    case "MST024":
+    case "fang_strike":
+    case "slither":
       return !$CombatChain->HasCurrentLink() || CardType($CombatChain->AttackCard()->ID()) != "AA";
-    case "MST029":
-    case "MST030":
-    case "MST067":
-    case "MST071":
-    case "MST072":
-    case "MST073":
-    case "MST074":
+    case "truths_retold":
+    case "uphold_tradition":
+    case "aqua_seeing_shell":
+    case "skycrest_keikoi":
+    case "skybody_keikoi":
+    case "skyhold_keikoi":
+    case "skywalker_keikoi":
       $charIndex = FindCharacterIndex($player, $cardID);
       return $character[$charIndex + 12] != "DOWN";
-    case "MST069":
-    case "MST070":
+    case "waves_of_aqua_marine":
+    case "aqua_laps":
       $charIndex = FindCharacterIndex($player, $cardID);
       return $character[$charIndex + 12] != "DOWN" || !$CombatChain->HasCurrentLink();
-    case "MST095":
-    case "MST098":
-    case "MST102":
+    case "a_drop_in_the_ocean_blue":
+    case "path_well_traveled_blue":
+    case "the_grain_that_tips_the_scale_blue":
       if ($CombatChain->HasCurrentLink()) return false;//If there's an attack, there's a valid target
       if (count($chainLinks) > 0) return false; //If there's an attack on previous chain links, there's a valid target
       return !HasAttackLayer();
-    case "MST105":
+    case "just_a_nick_red":
       if (!$CombatChain->HasCurrentLink()) return true;
       if (HasStealth($CombatChain->AttackCard()->ID())) return false;
       if ($combatChainState[$CCS_LinkBaseAttack] <= 1 && CardType($CombatChain->AttackCard()->ID()) == "AA") return false;
       return true;
-    case "MST134":
-    case "MST135":
-    case "MST136":
+    case "astral_etchings_red":
+    case "astral_etchings_yellow":
+    case "astral_etchings_blue":
       $haveAuraWard = 0;
       $auras = &GetAuras($player);
       foreach ($auras as &$aura) {
@@ -2343,84 +2364,84 @@ function IsPlayRestricted($cardID, &$restriction, $from = "", $index = -1, $play
         } 
        }
       return $haveAuraWard <= 0;
-    case "ROS115":
+    case "bloodtorn_bodice":
       $auras = &GetAuras($player);
       return Count($auras) <= 0;
-    case "MST162":
+    case "maul_yellow":
       if (!$CombatChain->HasCurrentLink()) return true;
       if (CardNameContains($CombatChain->AttackCard()->ID(), "Crouching Tiger", $player)) return false;
       if ($combatChainState[$CCS_LinkBaseAttack] <= 1 && CardType($CombatChain->AttackCard()->ID()) == "AA") return false;
       return true;
-    case "MST232":
+    case "longdraw_halfglove":
       return (count($myHand) + count($myArsenal)) < 2;
-    case "MST236":
+    case "shadowrealm_horror_red":
       return $discard->NumCards() < 3;
-    case "MST238":
+    case "enigma_new_moon":
       return GetPlayerNumEquipment($player, "DOWN") <= 0;
-    case "ROS007":
-    case "ROS008":
+    case "aurora_shooting_star":
+    case "aurora":
       return GetClassState($player, $CS_NumLightningPlayed) == 0;
-    case "ROS019":
-    case "ROS020":
+    case "oscilio_constella_intelligence":
+    case "oscilio":
       return SearchCount(SearchMultiZone($player, "MYHAND:type=I")) == 0;
-    case "ROS035":
+    case "seeds_of_tomorrow_blue":
       return $from == "ARS" || ArsenalEmpty($player);
-    case "ASB004":
+    case "solar_plexus":
       return count($mySoul) == 0;
-    case "AAZ005":
+    case "hidden_agenda":
       return !ArsenalHasFaceDownArrowCard($player);
-    case "AAZ007":
+    case "flight_path":
       return !HasAimCounter();
-    case "ROS030":
+    case "well_grounded":
       return SearchCount(SearchBanish($player, talent: "EARTH")) < 4;
-    case "ROS073":
+    case "twinkle_toes":
       return GetClassState($player, $CS_NumInstantPlayed) <= 0;
-    case "ROS212":
-    case "ROS213":
-    case "ROS214":
+    case "hood_of_second_thoughts":
+    case "bruised_leather":
+    case "four_finger_gloves":
       return !HasTakenDamage($player);
-    case "ROS164":
+    case "inklined_cloak":
       return !HasAuraWithSigilInName($currentPlayer);
-    case "AIO026":
+    case "cerebellum_processor_blue":
       if ($from == "PLAY") return $myItems[$index + 2] != 2;
       else return false;
-    case "HNT003":
-    case "HNT004":
-    case "HNT006":
+    case "arakni_black_widow":
+    case "arakni_funnel_web":
+    case "arakni_redback":
       if (!($CombatChain->HasCurrentLink() && ClassContains($CombatChain->AttackCard()->ID(), "ASSASSIN", $currentPlayer))) return true;
       if (SearchHand($currentPlayer, class:"ASSASSIN") == "") return true;
       return false;
-    case "HNT005":
+    case "arakni_orbweaver":
       if (SearchHand($currentPlayer, class:"ASSASSIN") == "") return true;
       return false;
-    case "HNT007":
+    case "arakni_tarantula":
       if (!($CombatChain->HasCurrentLink() && SubtypeContains($CombatChain->AttackCard()->ID(), "Dagger", $currentPlayer))) return true;
       if (SearchHand($currentPlayer, class:"ASSASSIN") == "") return true;
       return false;
-    case "HNT014":
+    case "take_up_the_mantle_yellow":
       if (!$CombatChain->HasCurrentLink()) return true;
       if (HasStealth($CombatChain->AttackCard()->ID()) && DelimStringContains(CardType($CombatChain->AttackCard()->ID()), "AA", true)) return false;
       return true;
-    case "HNT015":
+    case "tarantula_toxin_red":
       if (!$CombatChain->HasCurrentLink()) return true;
       if (HasStealth($CombatChain->AttackCard()->ID()) && NumCardsBlocking() > 0) return false;
       if (SubtypeContains($CombatChain->AttackCard()->ID(), "Dagger", $currentPlayer)) return false;
       return true;
-    case "HNT023":
-    case "HNT024":
-    case "HNT025":
+    case "stains_of_the_redback_red":
+    case "stains_of_the_redback_yellow":
+    case "stains_of_the_redback_blue":
       return !$CombatChain->HasCurrentLink() || !HasStealth($CombatChain->AttackCard()->ID());
-    case "HNT051":
+    case "two_sides_to_the_blade_red":
       if (!$CombatChain->HasCurrentLink()) return true;
       if (HasStealth($CombatChain->AttackCard()->ID())) return false;
       if (SubtypeContains($CombatChain->AttackCard()->ID(), "Dagger", $currentPlayer)) return false;
       return true;
-    case "HNT101";
+    case "hunts_end_red";
       if (!$CombatChain->HasCurrentLink()) return true;
-      if (CountAura("HNT167", $currentPlayer) < 3) return true;
+      if (CountAura("fealty", $currentPlayer) < 3) return true;
       $subtype = CardSubType($CombatChain->AttackCard()->ID());
       return $subtype != "Dagger";
-    case "HNT102":
+    case "long_whisker_loyalty_red":
       if (!$CombatChain->HasCurrentLink()) return true;
       // This next line is based on my interpretation of the card. It seems to require you to pick all 3 modes
       // if you have 3 draconic chain links, and you can't pick the first mode without a dagger attack
@@ -2436,117 +2457,117 @@ function IsPlayRestricted($cardID, &$restriction, $from = "", $index = -1, $play
       }
       // you can play it, but it won't do anything
       return false;
-    case "HNT103":
-    case "HNT104":
-    case "HNT106":
-    case "HNT108":
-    case "HNT109":
+    case "affirm_loyalty_red":
+    case "endear_devotion_red":
+    case "blistering_blade_red":
+    case "dynastic_dedication_red":
+    case "imperial_intent_red":
       if (!$CombatChain->HasCurrentLink()) return true;
       if (!SubtypeContains($CombatChain->CurrentAttack(), "Dagger", $currentPlayer)) return true;
       return false;
-    case "HNT107":
+    case "brothers_of_flame_red":
       if (NumDraconicChainLinks() < 2) return true;
       if (!$CombatChain->HasCurrentLink()) return true;
       if (!SubtypeContains($CombatChain->CurrentAttack(), "Dagger", $currentPlayer)) return true;
       return false;
-    case "HNT110":
-    case "HNT111":
-    case "HNT113":
-    case "HNT114":
+    case "scalding_iron_red":
+    case "searing_gaze_red":
+    case "sizzling_steel_red":
+    case "stabbing_pain_red":
       if (!$CombatChain->HasCurrentLink()) return true;
       if (!SubtypeContains($CombatChain->CurrentAttack(), "Dagger", $currentPlayer)) return true;
       return false;
-    case "HNT112":
+    case "sisters_of_fire_red":
       if (NumDraconicChainLinks() < 2) return true;
-    case "HNT116":
+    case "jagged_edge_red":
       return !$CombatChain->HasCurrentLink() || !TypeContains($CombatChain->AttackCard()->ID(), "W", $mainPlayer);
-    case "HNT117":
+    case "provoke_blue":
       return !$CombatChain->HasCurrentLink();
-    case "HNT119":
-    case "HNT120":
-    case "HNT121":
+    case "diced_red":
+    case "diced_yellow":
+    case "diced_blue":
       if (!$CombatChain->HasCurrentLink()) return true;
       return CardSubType($CombatChain->AttackCard()->ID()) != "Dagger";
-    case "HNT143":
+    case "dragonscaler_flight_path":
       if(!$CombatChain->HasCurrentLink()) return true;
       if(!TalentContains($CombatChain->AttackCard()->ID(), "DRACONIC", $currentPlayer)) return true;
       return false;
-    case "HNT144":
+    case "vow_of_vengeance":
       $otherChar = &GetPlayerCharacter($otherPlayer);
       if (!CardNameContains($otherChar[0], "Arakni")) return true;
       break;
-    case "HNT146":
+    case "hand_of_vengeance":
       $otherChar = &GetPlayerCharacter($otherPlayer);
       if (!CardNameContains($otherChar[0], "Arakni")) return true;
       break;
-    case "HNT147":
+    case "path_of_vengeance":
       $otherChar = &GetPlayerCharacter($otherPlayer);
       if (!CardNameContains($otherChar[0], "Arakni")) return true;
       break;
-    case "HNT149":
+    case "oath_of_loyalty_red":
       return GetClassState($currentPlayer, piece: $CS_NumActionsPlayed) > 0;
-    case "HNT173":
+    case "danger_digits":
       if (!$CombatChain->HasCurrentLink()) return true;
       if (!SearchCharacterAliveSubtype($player, "Dagger", true) && SearchCombatChainAttacks($player, subtype:"Dagger") == "") {
         $restriction = "No dagger to throw";
         return true;
       }
       return false;
-    case "HNT175":
+    case "throw_dagger_blue":
       if (!$CombatChain->HasCurrentLink()) return true;
       if (!SearchCharacterAliveSubtype($player, "Dagger", true) && SearchCombatChainAttacks($player, subtype:"Dagger") == "") {
         $restriction = "No dagger to throw";
         return true;
       }
       return false;
-    case "HNT196":
+    case "starting_point":
       return $combatChainState[$CCS_NumUsedInReactions] == 0;
-    case "HNT197":
+    case "perforate_yellow":
       // make sure you have at least one dagger equipped
       $mainCharacter = &GetPlayerCharacter($mainPlayer);
       for ($i = 0; $i < count($mainCharacter); $i += CharacterPieces()) {
         if (SubtypeContains($mainCharacter[$i], "Dagger", $mainPlayer)) return false;
       }
       return true;
-    case "HNT199":
-    case "HNT200":
-    case "HNT201":
-    case "HNT205":
-    case "HNT206":
-    case "HNT207":
-    case "HNT208":
-    case "HNT209":
-    case "HNT210":
-    case "HNT211":
-    case "HNT212":
-    case "HNT213":
+    case "to_the_point_red":
+    case "to_the_point_yellow":
+    case "to_the_point_blue":
+    case "incision_red":
+    case "incision_yellow":
+    case "incision_blue":
+    case "scar_tissue_red":
+    case "scar_tissue_yellow":
+    case "scar_tissue_blue":
+    case "take_a_stab_red":
+    case "take_a_stab_yellow":
+    case "take_a_stab_blue":
       if (!$CombatChain->HasCurrentLink()) return true;
       return !DelimStringContains(CardSubType($CombatChain->AttackCard()->ID()), "Dagger");
-    case "HNT220":
+    case "bunker_beard":
       if (!$CombatChain->HasCurrentLink()) return true;
       return (SearchArsenal($currentPlayer, type:"A") == "") && SearchArsenal($currentPlayer, type:"AA");
-    case "HNT235":
+    case "outed_red":
       return CheckMarked($currentPlayer);
-    case "HNT236":
+    case "lay_low_yellow":
       return CheckMarked($currentPlayer);
-    case "HNT237":
+    case "exposed_blue":
       if (!$CombatChain->HasCurrentLink()) return true;
       if (CheckMarked($currentPlayer)) return true;
       return false;
-    case "HNT238":
+    case "put_in_context_blue":
       if (!$CombatChain->HasCurrentLink()) return true;
       if (AttackValue($CombatChain->AttackCard()->ID()) > 3) return true;
       return false;
-    case "HNT239":
+    case "nip_at_the_heels_blue":
       if (!$CombatChain->HasCurrentLink()) return true;
       if (AttackValue($CombatChain->AttackCard()->ID()) > 3) return true;
       return false;
-    case "HNT258":
+    case "war_cry_of_bellona_yellow":
       if ($from == "HAND") return false;
       if (!$CombatChain->HasCurrentLink()) return true;
       if (!CardNameContains($CombatChain->AttackCard()->ID(), "Raydn", $mainPlayer, true)) return true;
       return false;
-    case "HNT407":
+    case "the_hand_that_pulls_the_strings":
       return ArsenalFaceDownCard($player) == "";
     default:
       return false;
@@ -2556,12 +2577,12 @@ function IsPlayRestricted($cardID, &$restriction, $from = "", $index = -1, $play
 function IsDefenseReactionPlayable($cardID, $from)
 {
   global $CombatChain, $mainPlayer;
-  if (($CombatChain->AttackCard()->ID() == "ARC159" || $CombatChain->AttackCard()->ID() == "OUT015" || $CombatChain->AttackCard()->ID() == "OUT016" || $CombatChain->AttackCard()->ID() == "OUT017" || $CombatChain->AttackCard()->ID() == "OUT133" || $CombatChain->AttackCard()->ID() == "OUT134" || $CombatChain->AttackCard()->ID() == "OUT135" || $CombatChain->AttackCard()->ID() == "OUT198" || $CombatChain->AttackCard()->ID() == "OUT199" || $CombatChain->AttackCard()->ID() == "OUT200") && CardType($cardID) == "DR") return false;
-  if ($CombatChain->AttackCard()->ID() == "MON245") if (!ExudeConfidenceReactionsPlayable()) return false;
-  if ($from == "HAND" && CardSubType($CombatChain->AttackCard()->ID()) == "Arrow" && SearchCharacterForCard($mainPlayer, "EVR087")) return false;
+  if (($CombatChain->AttackCard()->ID() == "command_and_conquer_red" || $CombatChain->AttackCard()->ID() == "back_stab_red" || $CombatChain->AttackCard()->ID() == "back_stab_yellow" || $CombatChain->AttackCard()->ID() == "back_stab_blue" || $CombatChain->AttackCard()->ID() == "widowmaker_red" || $CombatChain->AttackCard()->ID() == "widowmaker_yellow" || $CombatChain->AttackCard()->ID() == "widowmaker_blue" || $CombatChain->AttackCard()->ID() == "wreck_havoc_red" || $CombatChain->AttackCard()->ID() == "wreck_havoc_yellow" || $CombatChain->AttackCard()->ID() == "wreck_havoc_blue") && CardType($cardID) == "DR") return false;
+  if ($CombatChain->AttackCard()->ID() == "exude_confidence_red") if (!ExudeConfidenceReactionsPlayable()) return false;
+  if ($from == "HAND" && CardSubType($CombatChain->AttackCard()->ID()) == "Arrow" && SearchCharacterForCard($mainPlayer, "dreadbore")) return false;
   if (CurrentEffectPreventsDefenseReaction($from)) return false;
-  if (SearchCurrentTurnEffects("MON245", $mainPlayer)) return false;
-  if (SearchCurrentTurnEffects("HNT228", $mainPlayer) && CardType($cardID) == "DR") return false;
+  if (SearchCurrentTurnEffects("exude_confidence_red", $mainPlayer)) return false;
+  if (SearchCurrentTurnEffects("imperial_seal_of_command_red", $mainPlayer) && CardType($cardID) == "DR") return false;
   return true;
 }
 
@@ -2589,49 +2610,49 @@ function GoesOnCombatChain($phase, $cardID, $from, $currentPlayer)
 {
   global $layers, $combatChain;
   switch ($cardID) {
-    case "HVY143":
-    case "HVY144":
-    case "HVY145":
-    case "HVY163":
-    case "HVY164":
-    case "HVY165":
-    case "HVY186":
-    case "HVY187":
-    case "HVY188":
-    case "ROS106":
-    case "ROS105":
-    case "ROS104":
-    case "ROS057":
-    case "ROS056":
-    case "ROS055":
-    case "HVY209":
-    case "HNT013":
-    case "HNT044":
-    case "HNT045":
-    case "HNT046":
-    case "HNT232":
-    case "HNT233":
-    case "HNT234":
+    case "mighty_windup_red":
+    case "mighty_windup_yellow":
+    case "mighty_windup_blue":
+    case "agile_windup_red":
+    case "agile_windup_yellow":
+    case "agile_windup_blue":
+    case "vigorous_windup_red":
+    case "vigorous_windup_yellow":
+    case "vigorous_windup_blue":
+    case "trip_the_light_fantastic_blue":
+    case "trip_the_light_fantastic_yellow":
+    case "trip_the_light_fantastic_red":
+    case "fruits_of_the_forest_blue":
+    case "fruits_of_the_forest_yellow":
+    case "fruits_of_the_forest_red":
+    case "ripple_away_blue":
+    case "under_the_trapdoor_blue":
+    case "reapers_call_red":
+    case "reapers_call_yellow":
+    case "reapers_call_blue":
+    case "tipoff_red":
+    case "tipoff_yellow":
+    case "tipoff_blue":
       return ($phase == "B" && count($layers) == 0) || GetResolvedAbilityType($cardID, $from) == "AA";
-    case "MST133":
+    case "restless_coalescence_yellow":
       return GetResolvedAbilityType($cardID, $from) == "AA";
-    case "HNT222":
+    case "shelter_from_the_storm_red":
       return GetResolvedAbilityType($cardID, $from) == "DR";
-    case "HNT258":
+    case "war_cry_of_bellona_yellow":
       return $phase == "B" || GetResolvedAbilityType($cardID, $from) == "AR";
-    case "HNT215":
+    case "quickdodge_flexors":
       for ($i = 0; $i < count(value: $combatChain); $i += CombatChainPieces()) {
         if ($combatChain[$i] == $cardID) return false;
       }
       return true;
-    case "HNT220":
+    case "bunker_beard":
       return $phase == "B";
     default:
       break;
   }
   if (canBeAddedToChainDuringDR($cardID) && $phase == "D") return true;
   if ($phase != "B" && $from == "EQUIP" || $from == "PLAY") $cardType = GetResolvedAbilityType($cardID, $from);
-  else if ($phase == "M" && $cardID == "MON192" && $from == "BANISH") $cardType = GetResolvedAbilityType($cardID, $from);
+  else if ($phase == "M" && $cardID == "guardian_of_the_shadowrealm_red" && $from == "BANISH") $cardType = GetResolvedAbilityType($cardID, $from);
   else $cardType = CardType($cardID);
   if ($phase == "B" && count($layers) == 0) return true; //Anything you play during these combat phases would go on the chain
   if (DelimStringContains($cardType, "I")) return false; //Instants as yet never go on the combat chain
@@ -2655,146 +2676,146 @@ function HasBladeBreak($cardID)
 {
   global $defPlayer, $CID_TekloHead, $CID_TekloChest, $CID_TekloArms, $CID_TekloLegs;
   switch ($cardID) {
-    case "WTR079":
-    case "WTR150":
-    case "WTR155":
-    case "WTR156":
-    case "WTR157":
-    case "WTR158":
+    case "mask_of_momentum":
+    case "fyendals_spring_tunic":
+    case "ironrot_helm":
+    case "ironrot_plate":
+    case "ironrot_gauntlet":
+    case "ironrot_legs":
       return true;
-    case "ARC041":
+    case "skullbone_crosswrap":
       return true;
-    case "CRU122":
+    case "perch_grapplers":
       return true;
-    case "MON060":
+    case "vestige_of_sol":
       return true;
-    case "ELE144":
-    case "ELE204":
-    case "ELE213":
-    case "ELE224":
+    case "heart_of_ice":
+    case "rotten_old_buckler":
+    case "new_horizon":
+    case "spellbound_creepers":
       return true;
-    case "EVR037":
-    case "EVR086":
+    case "mask_of_the_pouncing_lynx":
+    case "silver_palms":
       return true;
-    case "DVR003":
-    case "DVR006":
+    case "ironrot_helm":
+    case "ironrot_legs":
       return true;
-    case "RVD003":
+    case "bone_vizier":
       return true;
-    case "UPR136":
-    case "UPR158":
-    case "UPR182":
+    case "coronet_peak":
+    case "tiger_stripe_shuko":
+    case "crown_of_providence":
       return true;
-    case "DYN045":
-    case "DYN152":
-    case "DYN171":
+    case "blazen_yoroi":
+    case "hornets_sting":
+    case "amethyst_tiara":
       return true;
-    case "OUT049":
-    case "OUT094":
-    case "OUT099":
-    case "OUT139":
-    case "OUT140":
-    case "OUT141":
-    case "OUT157":
-    case "OUT158":
+    case "mask_of_many_faces":
+    case "trench_of_sunken_treasure":
+    case "wayfinders_crest":
+    case "flick_knives":
+    case "mask_of_shifting_perspectives":
+    case "blade_cuff":
+    case "mask_of_malicious_manifestations":
+    case "toxic_tips":
       return true;
-    case "OUT174":
+    case "vambrace_of_determination":
       return SearchCurrentTurnEffects($cardID . "-BB", $defPlayer); //Vambrace of determination
-    case "DTD200":
+    case "scowling_flesh_bag":
       return true;
-    case "DTD222":
-    case "DTD223":
-    case "DTD224":
-    case "DTD225":
+    case "frontline_helm":
+    case "frontline_plating":
+    case "frontline_gauntlets":
+    case "frontline_legs":
       return true;
     case $CID_TekloHead:
     case $CID_TekloChest:
     case $CID_TekloArms:
     case $CID_TekloLegs:
       return true;
-    case "EVO013":
+    case "adaptive_plating":
       return true;
-    case "EVO018":
-    case "EVO019":
-    case "EVO020":
-    case "EVO021":
+    case "teklo_base_head":
+    case "teklo_base_chest":
+    case "teklo_base_arms":
+    case "teklo_base_legs":
       return true;
-    case "EVO434":
-    case "EVO435":
-    case "EVO436":
-    case "EVO437":
+    case "evo_command_center_yellow_equip":
+    case "evo_engine_room_yellow_equip":
+    case "evo_smoothbore_yellow_equip":
+    case "evo_thruster_yellow_equip":
       return true;
     case "EVO418":
     case "EVO419":
     case "EVO420":
     case "EVO421":
       return true;
-    case "EVO446":
-    case "EVO447":
-    case "EVO448":
-    case "EVO449":
+    case "evo_data_mine_yellow_equip":
+    case "evo_battery_pack_yellow_equip":
+    case "evo_cogspitter_yellow_equip":
+    case "evo_charging_rods_yellow_equip":
       return true;
-    case "HVY054":
-    case "HVY096":
+    case "golden_glare":
+    case "parry_blade":
       return true;
-    case "HVY135":
-    case "HVY155":
-    case "HVY175":
+    case "gauntlet_of_might":
+    case "flat_trackers":
+    case "vigor_girth":
       return true;
-    case "HVY198":
-    case "HVY199":
-    case "HVY200":
-    case "HVY201":
+    case "face_adversity":
+    case "confront_adversity":
+    case "embrace_adversity":
+    case "overcome_adversity":
       return true;
-    case "HVY202":
-    case "HVY203":
-    case "HVY204":
-    case "HVY205":
-    case "HVY206":
+    case "headliner_helm":
+    case "stadium_centerpiece":
+    case "ticket_puncher":
+    case "grandstand_legplates":
+    case "bloodied_oval":
       return true;
-    case "MST004":
+    case "mask_of_recurring_nightmares":
       return true;
-    case "MST048":
+    case "twelve_petal_kasaya":
       return true;
-    case "MST049":
+    case "heirloom_of_tiger_hide":
       $char = &GetPlayerCharacter($defPlayer);
       $index = FindCharacterIndex($defPlayer, $cardID);
       return $char[$index + 12] == "UP";
-    case "MST050":
-    case "MST160":
+    case "stride_of_reprisal":
+    case "mask_of_wizened_whiskers":
       return true;
-    case "MST066":
+    case "traverse_the_universe":
       return true;
-    case "MST190":
+    case "stonewall_gauntlet":
       return true;
-    case "ASB003":
-    case "ASB005":
-    case "ASB006":
+    case "helm_of_halos_grace":
+    case "bracers_of_bellonas_grace":
+    case "warpath_of_winged_grace":
       return true;
-    case "ROS029":
-    case "ROS072":
-    case "ROS114":
+    case "helm_of_lignum_vitae":
+    case "flash_of_brilliance":
+    case "face_purgatory":
       return true;
-    case "AJV004":
-    case "AJV007":
+    case "ollin_ice_cap":
+    case "rootbound_trunks":
       return true;
-    case "HNT011":
-    case "HNT115":
-    case "HNT144":
-    case "HNT145":
-    case "HNT146":
-    case "HNT147":
-    case "HNT168":
-    case "HNT169":
-    case "HNT170":
-    case "HNT171":
-    case "HNT172":
-    case "HNT192":
-    case "HNT193":
-    case "HNT194":
-    case "HNT195":
-    case "HNT247":
-    case "HNT250":
+    case "mask_of_deceit":
+    case "kabuto_of_imperial_authority":
+    case "vow_of_vengeance":
+    case "heart_of_vengeance":
+    case "hand_of_vengeance":
+    case "path_of_vengeance":
+    case "blood_splattered_vest":
+    case "leap_frog_vocal_sac":
+    case "leap_frog_slime_skin":
+    case "leap_frog_gloves":
+    case "leap_frog_leggings":
+    case "red_alert_visor":
+    case "red_alert_vest":
+    case "red_alert_gloves":
+    case "red_alert_boots":
+    case "tremorshield_sabatons":
+    case "misfire_dampener":
       return true;
     default:
       return false;
@@ -2805,84 +2826,84 @@ function HasBattleworn($cardID)
 {
   global $defPlayer;
   switch ($cardID) {
-    case "WTR004":
-    case "WTR005":
-    case "WTR041":
-    case "WTR042":
-    case "WTR080":
-    case "WTR116":
-    case "WTR117":
+    case "scabskin_leathers":
+    case "barkbone_strapping":
+    case "tectonic_plating":
+    case "helm_of_isens_peak":
+    case "breaking_scales":
+    case "braveforge_bracers":
+    case "refraction_bolters":
       return true;
-    case "ARC004":
-    case "ARC078":
-    case "ARC150":
+    case "teklo_foundry_heart":
+    case "grasp_of_the_arknight":
+    case "arcanite_skullcap":
       return true;
-    case "CRU053":
+    case "breeze_rider_boots":
       return true;
-    case "MON107":
-    case "MON108":
-    case "MON122":
-    case "MON230":
+    case "valiant_dynamo":
+    case "gallantry_gold":
+    case "hooves_of_the_shadowbeast":
+    case "aether_ironweave":
       return true;
-    case "EVR001":
-    case "EVR053":
+    case "skull_crushers":
+    case "helm_of_sharp_eye":
       return true;
-    case "DVR005":
+    case "gallantry_gold":
       return true;
-    case "DYN006":
-    case "DYN026":
-    case "DYN046":
-    case "DYN089":
-    case "DYN117":
-    case "DYN118":
+    case "beaten_trackers":
+    case "seasoned_saviour":
+    case "tearing_shuko":
+    case "galvanic_bender":
+    case "blacktek_whisperers":
+    case "mask_of_perdition":
       return true;
-    case "OUT011":
+    case "redback_shroud":
       return true;
-    case "TCC080":
-    case "TCC082":
-    case "TCC407":
-    case "TCC408":
-    case "TCC409":
-    case "TCC410":
+    case "blood_scent":
+    case "pouncing_paws":
+    case "evo_tekloscope_blue_equip":
+    case "evo_energy_matrix_blue_equip":
+    case "evo_scatter_shot_blue_equip":
+    case "evo_rapid_fire_blue_equip":
       return true;
-    case "EVO011":
+    case "hyperx3":
       return true;
-    case "EVO410b":
-    case "EVO438":
-    case "EVO439":
-    case "EVO440":
-    case "EVO441":
-    case "EVO235":
+    case "teklovossen_the_mechropotentb":
+    case "evo_tekloscope_blue_equip":
+    case "evo_energy_matrix_blue_equip":
+    case "evo_scatter_shot_blue_equip":
+    case "evo_rapid_fire_blue_equip":
+    case "shriek_razors":
       return true;
-    case "EVO442":
-    case "EVO443":
-    case "EVO444":
-    case "EVO445":
+    case "evo_sentry_base_head_red_equip":
+    case "evo_sentry_base_chest_red_equip":
+    case "evo_sentry_base_arms_red_equip":
+    case "evo_sentry_base_legs_red_equip":
       return true;
-    case "HVY010":
-    case "HVY099":
+    case "monstrous_veil":
+    case "hood_of_red_sand":
       return true;
-    case "MST005":
+    case "heirloom_of_snake_hide":
       $char = &GetPlayerCharacter($defPlayer);
       $index = FindCharacterIndex($defPlayer, $cardID);
       return $char[$index + 12] == "UP";
-    case "MST006":
-    case "MST007":
+    case "arousing_wave":
+    case "undertow_stilettos":
       return true;
-    case "MST232":
+    case "longdraw_halfglove":
       return true;
-    case "AKO005":
+    case "hide_tanner":
       return true;
-    case "AAZ006":
-    case "AAZ007":
+    case "sharp_shooters":
+    case "flight_path":
       return true;
-    case "AIO006":
+    case "heavy_industry_gear_shift":
       return true;
-    case "ROS071":
+    case "lightning_greaves":
       return true;
-    case "ROS163"://Aether Bindings
+    case "aether_bindings_of_the_third_age"://Aether Bindings
       return true;
-    case "HNT143":
+    case "dragonscaler_flight_path":
       return true;
     default:
       return false;
@@ -2892,58 +2913,58 @@ function HasBattleworn($cardID)
 function HasTemper($cardID)
 {
   switch ($cardID) {
-    case "CRU025":
-    case "CRU081":
-    case "CRU141":
+    case "crater_fist":
+    case "courage_of_bladehold":
+    case "bloodsheath_skeleta":
       return true;
-    case "EVR018":
+    case "stalagmite_bastion_of_isenloft":
       return true;
-    case "EVR020":
+    case "earthlore_bounty":
       return true;
-    case "UPR084":
+    case "flamescale_furnace":
       return true;
-    case "DYN027":
-    case "DYN492b":
+    case "steelbraid_buckler":
+    case "nitro_mechanoidb":
       return true;
-    case "DTD047":
-    case "DTD206":
-    case "DTD207":
-    case "DTD211":
+    case "soulbond_resolve":
+    case "bastion_of_unity":
+    case "ironsong_versus":
+    case "dyadic_carapace":
       return true;
-    case "TCC029":
-    case "TCC030":
-    case "TCC031":
-    case "TCC032":
-    case "TCC033":
+    case "bastion_of_duty":
+    case "civic_peak":
+    case "civic_duty":
+    case "civic_guide":
+    case "civic_steps":
       return true;
-    case "EVO247":
-    case "EVO426":
-    case "EVO427":
-    case "EVO428":
-    case "EVO429":
+    case "warband_of_bellona":
+    case "evo_steel_soul_memory_blue_equip":
+    case "evo_steel_soul_processor_blue_equip":
+    case "evo_steel_soul_controller_blue_equip":
+    case "evo_steel_soul_tower_blue_equip":
       return true;
-    case "HVY008":
-    case "HVY009":
-    case "HVY011":
-    case "HVY051":
-    case "HVY052":
-    case "HVY053":
-    case "HVY055":
-    case "HVY056":
-    case "HVY097":
-    case "HVY098":
-    case "HVY100":
-    case "HVY648":
-    case "AKO004":
-    case "AIO003":
-    case "AIO004":
-    case "AIO005":
+    case "apex_bonebreaker":
+    case "knucklehead":
+    case "raw_meat":
+    case "aurum_aegis":
+    case "stonewall_impasse":
+    case "gauntlets_of_iron_will":
+    case "good_time_chapeau":
+    case "stand_ground":
+    case "grains_of_bloodspill":
+    case "prized_galea":
+    case "beckon_applause":
+    case "evo_magneto_blue_equip":
+    case "savage_sash":
+    case "heavy_industry_surveillance":
+    case "heavy_industry_power_plant":
+    case "heavy_industry_ram_stop":
       return true;
-    case "AJV006":
+    case "gauntlets_of_the_boreal_domain":
       return true;
-    case "ROS028":
+    case "barkskin_of_the_millennium_tree":
       return true;
-    case "AJV005":
+    case "tectonic_crust":
       return true;
     default:
       return false;
@@ -2953,12 +2974,12 @@ function HasTemper($cardID)
 function HasGuardwell($cardID)
 {
   switch ($cardID) {
-    case "HVY195":
-    case "ROS211":
-    case "HNT216":
-    case "HNT217":
-    case "HNT218":
-    case "HNT219":
+    case "balance_of_justice":
+    case "arcanite_fortress":
+    case "blade_beckoner_helm":
+    case "blade_beckoner_plating":
+    case "blade_beckoner_gauntlets":
+    case "blade_beckoner_boots":
       return true;
     default:
       return false;
@@ -2967,33 +2988,34 @@ function HasGuardwell($cardID)
 
 function HasPiercing($cardID, $from = "")
 {
-  $cardID = substr($cardID, 0, 6);
+  // TODO see what breaks this
+  // $cardID = substr($cardID, 0, 6);
   switch ($cardID) {
-    case "DYN115":
-    case "DYN116":
-    case "OUT004":
-    case "OUT005":
-    case "OUT006":
-    case "OUT007":
-    case "OUT008":
-    case "OUT009":
-    case "OUT010": //Weapons with Piercing
-    case "HVY245":
-    case "HNT009":
+    case "spiders_bite":
+    case "spiders_bite":
+    case "spiders_bite":
+    case "nerve_scalpel":
+    case "nerve_scalpel":
+    case "orbitoclast":
+    case "orbitoclast":
+    case "scale_peeler":
+    case "scale_peeler": //Weapons with Piercing
+    case "graven_call":
+    case "hunters_klaive":
       return true;
-    case "DYN076":
-    case "DYN077":
-    case "DYN078":
-    case "DYN079":
-    case "DYN080":
-    case "DYN081": //Warrior NAA + Reactions
-    case "DYN085":
-    case "DYN086":
-    case "DYN087":
+    case "precision_press_red":
+    case "precision_press_yellow":
+    case "precision_press_blue":
+    case "puncture_red":
+    case "puncture_yellow":
+    case "puncture_blue": //Warrior NAA + Reactions
+    case "visit_the_imperial_forge_red":
+    case "visit_the_imperial_forge_yellow":
+    case "visit_the_imperial_forge_blue":
       return (!IsPlayRestricted($cardID, $restriction, $from) || IsCombatEffectActive($cardID));
-    case "DYN156":
-    case "DYN157":
-    case "DYN158": // Arrows
+    case "drill_shot_red":
+    case "drill_shot_yellow":
+    case "drill_shot_blue": // Arrows
       return HasAimCounter();
     default:
       return false;
@@ -3003,12 +3025,12 @@ function HasPiercing($cardID, $from = "")
 function HasTower($cardID)
 {
   switch ($cardID) {
-    case "TCC034":
-    case "TCC035":
-    case "TCC036":
-    case "HVY062":
-    case "HVY063":
-    case "HVY064":
+    case "colossal_bearing_red":
+    case "lay_down_the_law_red":
+    case "smack_of_reality_red":
+    case "colossal_bearing_red":
+    case "lay_down_the_law_red":
+    case "smack_of_reality_red":
       return true;
     default:
       return false;
@@ -3018,37 +3040,37 @@ function HasTower($cardID)
 function RequiresDiscard($cardID)
 {
   switch ($cardID) {
-    case "WTR006":
-    case "WTR007":
-    case "WTR008":
-    case "WTR011":
-    case "WTR012":
-    case "WTR013":
-    case "WTR014":
-    case "WTR015":
-    case "WTR016":
-    case "WTR020":
-    case "WTR021":
-    case "WTR022":
-    case "WTR029":
-    case "WTR030":
-    case "WTR031":
-    case "WTR035":
-    case "WTR036":
-    case "WTR037":
-    case "CRU010":
-    case "CRU011":
-    case "CRU012":
-    case "CRU019":
-    case "CRU020":
-    case "CRU021":
-    case "DYN007":
-    case "DYN016":
-    case "DYN017":
-    case "DYN018":
-    case "DYN019":
-    case "DYN020":
-    case "DYN021":
+    case "alpha_rampage_red":
+    case "bloodrush_bellow_yellow":
+    case "reckless_swing_blue":
+    case "breakneck_battery_red":
+    case "breakneck_battery_yellow":
+    case "breakneck_battery_blue":
+    case "savage_feast_red":
+    case "savage_feast_yellow":
+    case "savage_feast_blue":
+    case "savage_swing_red":
+    case "savage_swing_yellow":
+    case "savage_swing_blue":
+    case "wrecker_romp_red":
+    case "wrecker_romp_yellow":
+    case "wrecker_romp_blue":
+    case "primeval_bellow_red":
+    case "primeval_bellow_yellow":
+    case "primeval_bellow_blue":
+    case "barraging_big_horn_red":
+    case "barraging_big_horn_yellow":
+    case "barraging_big_horn_blue":
+    case "swing_fist_think_later_red":
+    case "swing_fist_think_later_yellow":
+    case "swing_fist_think_later_blue":
+    case "savage_beatdown_red":
+    case "madcap_charger_red":
+    case "madcap_charger_yellow":
+    case "madcap_charger_blue":
+    case "madcap_muscle_red":
+    case "madcap_muscle_yellow":
+    case "madcap_muscle_blue":
       return true;
     default:
       return false;
@@ -3058,22 +3080,22 @@ function RequiresDiscard($cardID)
 function RequiresBanish($cardID)
 {
   switch ($cardID) {
-    case "DTD110":
-    case "DTD112":
-    case "DTD113":
-    case "DTD114":
-    case "DTD118":
-    case "DTD119":
-    case "DTD120":
-    case "DTD124":
-    case "DTD125":
-    case "DTD126":
-    case "DTD127":
-    case "DTD128":
-    case "DTD129":
-    case "DTD130":
-    case "DTD131":
-    case "DTD132":
+    case "expendable_limbs_blue":
+    case "ram_raider_red":
+    case "ram_raider_yellow":
+    case "ram_raider_blue":
+    case "shaden_scream_red":
+    case "shaden_scream_yellow":
+    case "shaden_scream_blue":
+    case "shaden_swing_red":
+    case "shaden_swing_yellow":
+    case "shaden_swing_blue":
+    case "tribute_to_demolition_red":
+    case "tribute_to_demolition_yellow":
+    case "tribute_to_demolition_blue":
+    case "tribute_to_the_legions_of_doom_red":
+    case "tribute_to_the_legions_of_doom_yellow":
+    case "tribute_to_the_legions_of_doom_blue":
       return true;
     default:
       return false;
@@ -3083,18 +3105,18 @@ function RequiresBanish($cardID)
 function HasBeatChest($cardID)
 {
   switch ($cardID) {
-    case "HVY023":
-    case "HVY024":
-    case "HVY025":
-    case "HVY026":
-    case "HVY027":
-    case "HVY028":
-    case "HVY035":
-    case "HVY036":
-    case "HVY037":
-    case "HVY041":
-    case "HVY042":
-    case "HVY043":
+    case "rawhide_rumble_red":
+    case "rawhide_rumble_yellow":
+    case "rawhide_rumble_blue":
+    case "assault_and_battery_red":
+    case "assault_and_battery_yellow":
+    case "assault_and_battery_blue":
+    case "pound_town_red":
+    case "pound_town_yellow":
+    case "pound_town_blue":
+    case "bonebreaker_bellow_red":
+    case "bonebreaker_bellow_yellow":
+    case "bonebreaker_bellow_blue":
       return true;
     default:
       return false;
@@ -3104,78 +3126,78 @@ function HasBeatChest($cardID)
 function ETASteamCounters($cardID)
 {
   switch ($cardID) {
-    case "ARC017":
+    case "aether_sink_yellow":
       return 1;
-    case "ARC007":
-    case "ARC019":
+    case "teklo_core_blue":
+    case "convection_amplifier_red":
       return 2;
-    case "ARC036":
+    case "hyper_driver_red":
       return 3;
-    case "ARC035":
+    case "dissipation_shield_yellow":
       return 4;
-    case "ARC037":
+    case "optekal_monocle_blue":
       return 5;
-    case "CRU104":
+    case "absorption_dome_yellow":
       return 0;
-    case "CRU105":
+    case "plasma_purifier_red":
       return 0;
-    case "EVR069":
+    case "dissolution_sphere_yellow":
       return 1;
-    case "EVR071":
+    case "signal_jammer_blue":
       return 1;
-    case "EVR072":
+    case "teklo_pounder_blue":
       return 3;
-    case "DYN093":
+    case "plasma_mainline_red":
       return 5;
-    case "DYN110":
+    case "hyper_driver_red":
       return 3;
-    case "DYN111":
+    case "hyper_driver_yellow":
       return 2;
-    case "DYN112":
+    case "hyper_driver_blue":
       return 1;
-    case "EVO071":
+    case "prismatic_lens_yellow":
       return 1;
-    case "EVO072":
+    case "quantum_processor_yellow":
       return 1;
-    case "EVO074":
+    case "tick_tock_clock_red":
       return 1;
-    case "EVO078":
-    case "EVO079":
-    case "EVO080":
+    case "polarity_reversal_script_red":
+    case "penetration_script_yellow":
+    case "security_script_blue":
       return 1;
-    case "EVO081":
-    case "EVO082":
-    case "EVO083":
+    case "backup_protocol_red_red":
+    case "backup_protocol_yel_yellow":
+    case "backup_protocol_blu_blue":
       return 1;
-    case "EVO084":
-    case "EVO085":
-    case "EVO086":
+    case "boom_grenade_red":
+    case "boom_grenade_yellow":
+    case "boom_grenade_blue":
       return 1;
-    case "EVO093":
+    case "mini_forcefield_red":
       return 4;
-    case "EVO087":
-    case "EVO094":
+    case "dissolving_shield_red":
+    case "mini_forcefield_yellow":
       return 3;
-    case "EVO088":
-    case "EVO095":
+    case "dissolving_shield_yellow":
+    case "mini_forcefield_blue":
       return 2;
-    case "EVO089":
+    case "dissolving_shield_blue":
       return 1;
-    case "EVO070":
+    case "grinding_gears_blue":
       return 1;
-    case "EVO090":
+    case "hadron_collider_red":
       return 4;
-    case "EVO091":
+    case "hadron_collider_yellow":
       return 3;
-    case "EVO092":
+    case "hadron_collider_blue":
       return 2;
-    case "EVO096":
-    case "EVO097":
-    case "EVO098":
+    case "overload_script_red":
+    case "mhz_script_yellow":
+    case "autosave_script_blue":
       return 1;
-    case "AIO026":
+    case "cerebellum_processor_blue":
       return 2;
-    case "HNT251":
+    case "null_time_zone_blue":
       return 2;
     default:
       return 0;
@@ -3190,7 +3212,7 @@ function AbilityHasGoAgain($cardID)
   $class = CardClass($cardID);
   $subtype = CardSubtype($cardID);
   $abilityType = GetResolvedAbilityType($cardID);
-  if ($class == "ILLUSIONIST" && DelimStringContains($subtype, "Aura") && SearchCharacterForCard($currentPlayer, "MON088") && $abilityType == "AA") return true;
+  if ($class == "ILLUSIONIST" && DelimStringContains($subtype, "Aura") && SearchCharacterForCard($currentPlayer, "iris_of_reality") && $abilityType == "AA") return true;
   if ($set == "WTR") return WTRAbilityHasGoAgain($cardID);
   else if ($set == "ARC") return ARCAbilityHasGoAgain($cardID);
   else if ($set == "CRU") return CRUAbilityHasGoAgain($cardID);
@@ -3212,9 +3234,9 @@ function AbilityHasGoAgain($cardID)
   else if ($set == "AJV") return AJVAbilityHasGoAgain($cardID);
   else if ($set == "HNT") return HNTAbilityHasGoAgain($cardID);
   switch ($cardID) {
-    case "RVD004":
-    case "TER005":
-    case "DVR004":
+    case "blossom_of_spring":
+    case "blossom_of_spring":
+    case "blossom_of_spring":
       return true;
     default:
       return false;
@@ -3225,7 +3247,7 @@ function DoesEffectGrantOverpower($cardID): bool
 {
   $cardID = ShiyanaCharacter($cardID);
   return match ($cardID) {
-    "HVY045", "HVY046", "HVY059", "HVY213", "HVY214", "HVY215", "TER011", "TER015", "ROS118" => true,
+    "betsy_skin_in_the_game", "betsy", "the_golden_son_yellow", "down_but_not_out_red", "down_but_not_out_yellow", "down_but_not_out_blue", "log_fall_red", "log_fall_yellow", "machinations_of_dominion_blue" => true,
     default => false,
   };
 }
@@ -3235,80 +3257,80 @@ function DoesEffectGrantDominate($cardID): bool
   global $combatChainState, $CCS_AttackFused;
   $cardID = ShiyanaCharacter($cardID);
   switch ($cardID) {
-    case "WTR038":
-    case "WTR039":
-    case "WTR197":
-    case "WTR198":
-    case "WTR199":
-    case "ARC011":
-    case "ARC012":
-    case "ARC013":
-    case "ARC019":
-    case "ARC038":
-    case "ARC039":
-    case "CRU013":
-    case "CRU014":
-    case "CRU015":
-    case "CRU038":
-    case "CRU039":
-    case "CRU040":
-    case "CRU094-2":
-    case "CRU095-2":
-    case "CRU096-2":
-    case "CRU106":
-    case "CRU107":
-    case "CRU108":
-    case "MON109":
-    case "MON129":
-    case "MON130":
-    case "MON131":
-    case "MON132":
-    case "MON133":
-    case "MON134":
-    case "MON195":
-    case "MON196":
-    case "MON197":
-    case "MON223":
-    case "MON224":
-    case "MON225":
-    case "MON278":
-    case "MON279":
-    case "MON280":
-    case "MON406":
-    case "ELE005":
-    case "ELE016":
-    case "ELE017":
-    case "ELE018":
-    case "ELE033-2":
-    case "ELE056":
-    case "ELE057":
-    case "ELE058":
-    case "ELE092-DOMATK":
-    case "ELE097":
-    case "ELE098":
-    case "ELE099":
-    case "ELE166":
-    case "ELE167":
-    case "ELE168":
-    case "ELE205":
-    case "EVR017":
-    case "EVR019":
-    case "UPR091":
-    case "DYN028":
+    case "bravo_showstopper":
+    case "bravo":
+    case "regurgitating_slog_red":
+    case "regurgitating_slog_yellow":
+    case "regurgitating_slog_blue":
+    case "pedal_to_the_metal_red":
+    case "pedal_to_the_metal_yellow":
+    case "pedal_to_the_metal_blue":
+    case "convection_amplifier_red":
+    case "azalea_ace_in_the_hole":
+    case "azalea":
+    case "predatory_assault_red":
+    case "predatory_assault_yellow":
+    case "predatory_assault_blue":
+    case "emerging_dominance_red":
+    case "emerging_dominance_yellow":
+    case "emerging_dominance_blue":
+    case "push_forward_red-2":
+    case "push_forward_yellow-2":
+    case "push_forward_blue-2":
+    case "high_speed_impact_red":
+    case "high_speed_impact_yellow":
+    case "high_speed_impact_blue":
+    case "spill_blood_red":
+    case "writhing_beast_hulk_red":
+    case "writhing_beast_hulk_yellow":
+    case "writhing_beast_hulk_blue":
+    case "convulsions_from_the_bellows_of_hell_red":
+    case "convulsions_from_the_bellows_of_hell_yellow":
+    case "convulsions_from_the_bellows_of_hell_blue":
+    case "consuming_aftermath_red":
+    case "consuming_aftermath_yellow":
+    case "consuming_aftermath_blue":
+    case "pulping_red":
+    case "pulping_yellow":
+    case "pulping_blue":
+    case "pound_for_pound_red":
+    case "pound_for_pound_yellow":
+    case "pound_for_pound_blue":
+    case "lady_barthimont":
+    case "oaken_old_red":
+    case "glacial_footsteps_red":
+    case "glacial_footsteps_yellow":
+    case "glacial_footsteps_blue":
+    case "shiver-2":
+    case "flake_out_red":
+    case "flake_out_yellow":
+    case "flake_out_blue":
+    case "flashfreeze_red-DOMATK":
+    case "entwine_ice_red":
+    case "entwine_ice_yellow":
+    case "entwine_ice_blue":
+    case "polar_blast_red":
+    case "polar_blast_yellow":
+    case "polar_blast_blue":
+    case "tear_asunder_blue":
+    case "bravo_star_of_the_show":
+    case "valda_brightaxe":
+    case "rise_up_red":
+    case "buckle_blue":
     case "ROGUE710-DO":
-    case "DTD010":
-    case "DTD410":
-    case "AJV018":
+    case "figment_of_tenacity_yellow":
+    case "metis_archangel_of_tenacity":
+    case "crumble_to_eternity_blue":
       return true;
-    case "ELE154":
-    case "ELE155":
-    case "ELE156":
+    case "weave_ice_red":
+    case "weave_ice_yellow":
+    case "weave_ice_blue":
       return $combatChainState[$CCS_AttackFused] == 1;
-    case "MST233":
+    case "murky_water_red":
       return true;
-    case "AAZ016":
+    case "stone_rain_red":
       return true;
-    case "AJV006-I":
+    case "gauntlets_of_the_boreal_domain-I":
       return true;
     default:
       return false;
@@ -3318,31 +3340,31 @@ function DoesEffectGrantDominate($cardID): bool
 function CharacterNumUsesPerTurn($cardID)
 {
   switch ($cardID) {
-    case "WTR038":
-    case "WTR039":
+    case "bravo_showstopper":
+    case "bravo":
       return 999;
-    case "ELE034":
+    case "voltaire_strike_twice":
       return 2;
-    case "UPR183":
+    case "helios_mitre":
       return 999;
-    case "DYN001":
-    case "DYN193":
+    case "emperor_dracai_of_aesir":
+    case "seerstone":
       return 999;
-    case "DYN492a":
+    case "nitro_mechanoida":
       return 999;
-    case "OUT093":
+    case "barbed_castaway":
       return 2;
-    case "EVO073":
+    case "stasis_cell_blue":
       return 999;
-    case "EVO410":
+    case "teklovossen_the_mechropotent":
       return 999;
-    case "MST001":
-    case "MST002":
-    case "MST238":
+    case "nuu_alluring_desire":
+    case "nuu":
+    case "enigma_new_moon":
       return 999;
-    case "ROS027":
+    case "sanctuary_of_aria":
       return 999;
-    case "HNT215":
+    case "quickdodge_flexors":
       return 999;
     default:
       return 1;
@@ -3353,83 +3375,83 @@ function CharacterNumUsesPerTurn($cardID)
 function CharacterDefaultActiveState($cardID)
 {
   switch ($cardID) {
-    case "WTR117":
+    case "refraction_bolters":
       return 1;
-    // case "WTR150":
+    // case "fyendals_spring_tunic":
     //   return 0;
-    case "ARC152":
+    case "vest_of_the_first_fist":
       return 1;
-    case "CRU053":
-    case "CRU161":
+    case "breeze_rider_boots":
+    case "metacarpus_node":
       return 1;
-    case "MON122":
+    case "hooves_of_the_shadowbeast":
       return 1;
-    case "ELE116":
-    case "ELE173":
-    case "ELE174":
+    case "plume_of_evergrowth":
+    case "shock_charmers":
+    case "mark_of_lightning":
       return 1;
-    case "MON061":
-    case "MON090":
-    case "MON188":
+    case "halo_of_illumination":
+    case "dream_weavers":
+    case "ebon_fold":
     case "MON400":
     case "MON401":
     case "MON402":
       return 1;
-    case "DYN236":
-    case "DYN237":
-    case "DYN238":
-    case "DYN239":
+    case "spell_fray_tiara":
+    case "spell_fray_cloak":
+    case "spell_fray_gloves":
+    case "spell_fray_leggings":
       return 1;
-    case "EVR037":
+    case "mask_of_the_pouncing_lynx":
       return 1;
-    case "UPR004":
-    case "UPR047":
-    case "UPR125":
-    case "UPR184":
-    case "UPR185":
-    case "UPR186":
+    case "silken_form":
+    case "heat_wave":
+    case "conduit_of_frostburn":
+    case "quelling_robe":
+    case "quelling_sleeves":
+    case "quelling_slippers":
       return 0;
-    case "DYN006":
+    case "beaten_trackers":
       return 1;
-    case "OUT095":
-    case "OUT096":
-    case "OUT098":
+    case "quiver_of_abyssal_depths":
+    case "quiver_of_rustling_leaves":
+    case "driftwood_quiver":
       return 1;
-    case "DTD165":
-    case "DTD166":
-    case "DTD167":
-    case "DTD168":
+    case "shroud_of_darkness":
+    case "cloak_of_darkness":
+    case "grasp_of_darkness":
+    case "dance_of_darkness":
       return 0;
-    case "DTD564":
+    case "levia_redeemed":
       return 0;
-    case "EVO430":
-    case "EVO431":
-    case "EVO432":
-    case "EVO433":
+    case "evo_circuit_breaker_red_equip":
+    case "evo_atom_breaker_red_equip":
+    case "evo_face_breaker_red_equip":
+    case "evo_mach_breaker_red_equip":
       return 1;
-    case "AKO005":
+    case "hide_tanner":
       return 1;
-    case "HVY097":
-    case "MST027":
-    case "MST232":
+    case "grains_of_bloodspill":
+    case "meridian_pathway":
+    case "longdraw_halfglove":
       return 1;
-    case "AUR005":
-    case "TER006":
+    case "aether_crackers":
+    case "hard_knuckle":
       return 1;
-    case "ROS013":
-    case "ROS014":
-    case "ROS211":
-    case "ROS239":
-    case "ROS240":
-    case "ROS241":
-    case "ROS242":
+    case "verdance_thorn_of_the_rose":
+    case "verdance":
+    case "arcanite_fortress":
+    case "widow_veil_respirator":
+    case "widow_back_abdomen":
+    case "widow_claw_tarsus":
+    case "widow_web_crawler":
       return 1;
-    case "HNT168":
+    case "blood_splattered_vest":
       return 1;
-    case "HNT169"://leapfrog equipment
-    case "HNT170":
-    case "HNT171":
-    case "HNT172":
+    case "leap_frog_vocal_sac"://leapfrog equipment
+    case "leap_frog_slime_skin":
+    case "leap_frog_gloves":
+    case "leap_frog_leggings":
       return 1;
     default:
       return 2;
@@ -3440,12 +3462,12 @@ function CharacterDefaultActiveState($cardID)
 function AuraDefaultHoldTriggerState($cardID): int
 {
   return match ($cardID) {
-    "WTR046", "WTR047", "WTR054", "WTR055", "WTR056", "WTR069", "WTR070", "WTR071", "WTR072", "WTR073", "WTR074",
-    "WTR075", "DTD233", "DYN217", "UPR190", "UPR218", "UPR219", "UPR220", "EVR107", "EVR108", "EVR109", "EVR131",
-    "EVR132", "EVR133", "ELE025", "ELE026", "ELE027", "ELE028", "ELE029", "ELE030", "ELE206", "ELE207", "ELE208",
-    "ELE109", "ELE110", "ELE111", "CRU028", "CRU029", "CRU030", "CRU031", "CRU038", "CRU039", "CRU040", "CRU075",
-    "CRU144", "MON186", "AJV017" => 0,
-    "ARC112", "DYN246", "DTD235" => 1,
+    "forged_for_war_yellow", "show_time_blue", "blessing_of_deliverance_red", "blessing_of_deliverance_yellow", "blessing_of_deliverance_blue", "emerging_power_red", "emerging_power_yellow", "emerging_power_blue", "stonewall_confidence_red", "stonewall_confidence_yellow", "stonewall_confidence_blue",
+    "seismic_surge", "eloquence", "tome_of_aeo_blue", "fog_down_yellow", "sigil_of_protection_red", "sigil_of_protection_yellow", "sigil_of_protection_blue", "runeblood_incantation_red", "runeblood_incantation_yellow", "runeblood_incantation_blue", "pyroglyphic_protection_red",
+    "pyroglyphic_protection_yellow", "pyroglyphic_protection_blue", "emerging_avalanche_red", "emerging_avalanche_yellow", "emerging_avalanche_blue", "strength_of_sequoia_red", "strength_of_sequoia_yellow", "strength_of_sequoia_blue", "embolden_red", "embolden_yellow", "embolden_blue",
+    "embodiment_of_earth", "embodiment_of_lightning", "frostbite", "stamp_authority_blue", "towering_titan_red", "towering_titan_yellow", "towering_titan_blue", "emerging_dominance_red", "emerging_dominance_yellow", "emerging_dominance_blue", "zen_state",
+    "runeblood_barrier_yellow", "soul_shackle", "channel_mount_isen_blue" => 0,
+    "runechant", "spellbane_aegis", "spellbane_aegis" => 1,
     default => 2
   };
 }
@@ -3453,11 +3475,11 @@ function AuraDefaultHoldTriggerState($cardID): int
 function ItemDefaultHoldTriggerState($cardID)
 {
   switch ($cardID) {
-    case "ARC007":
-    case "ARC035":
-    case "MON302":
-    case "EVR069":
-    case "EVR071":
+    case "teklo_core_blue":
+    case "dissipation_shield_yellow":
+    case "talisman_of_dousing_yellow":
+    case "dissolution_sphere_yellow":
+    case "signal_jammer_blue":
       return 1;
     default:
       return 2;
@@ -3473,25 +3495,25 @@ function IsCharacterActive($player, $index)
 function HasReprise($cardID)
 {
   switch ($cardID) {
-    case "WTR118":
-    case "WTR120":
-    case "WTR121":
-    case "WTR123":
-    case "WTR124":
-    case "WTR125":
-    case "WTR132":
-    case "WTR133":
-    case "WTR134":
-    case "WTR135":
-    case "WTR136":
-    case "WTR137":
-    case "WTR138":
-    case "WTR139":
-    case "WTR140":
-    case "CRU083":
-    case "CRU088":
-    case "CRU089":
-    case "CRU090":
+    case "glint_the_quicksilver_blue":
+    case "rout_red":
+    case "singing_steelblade_yellow":
+    case "overpower_red":
+    case "overpower_yellow":
+    case "overpower_blue":
+    case "ironsong_response_red":
+    case "ironsong_response_yellow":
+    case "ironsong_response_blue":
+    case "biting_blade_red":
+    case "biting_blade_yellow":
+    case "biting_blade_blue":
+    case "stroke_of_foresight_red":
+    case "stroke_of_foresight_yellow":
+    case "stroke_of_foresight_blue":
+    case "unified_decree_yellow":
+    case "out_for_blood_red":
+    case "out_for_blood_yellow":
+    case "out_for_blood_blue":
       return true;
     default:
       return false;
@@ -3509,83 +3531,83 @@ function RepriseActive()
 function HasCombo($cardID)
 {
   switch ($cardID) {
-    case "WTR081":
-    case "WTR083":
-    case "WTR084":
-    case "WTR085":
-    case "WTR086":
-    case "WTR087":
-    case "WTR088":
-    case "WTR089":
-    case "WTR090":
-    case "WTR091":
-    case "WTR095":
-    case "WTR096":
-    case "WTR097":
-    case "WTR104":
-    case "WTR105":
-    case "WTR106":
-    case "WTR110":
-    case "WTR111":
-    case "WTR112":
+    case "lord_of_wind_blue":
+    case "mugenshi_release_yellow":
+    case "hurricane_technique_yellow":
+    case "pounding_gale_red":
+    case "fluster_fist_red":
+    case "fluster_fist_yellow":
+    case "fluster_fist_blue":
+    case "blackout_kick_red":
+    case "blackout_kick_yellow":
+    case "blackout_kick_blue":
+    case "open_the_center_red":
+    case "open_the_center_yellow":
+    case "open_the_center_blue":
+    case "rising_knee_thrust_red":
+    case "rising_knee_thrust_yellow":
+    case "rising_knee_thrust_blue":
+    case "whelming_gustwave_red":
+    case "whelming_gustwave_yellow":
+    case "whelming_gustwave_blue":
       return true;
-    case "CRU054":
-    case "CRU055":
-    case "CRU056":
-    case "CRU057":
-    case "CRU058":
-    case "CRU059":
-    case "CRU060":
-    case "CRU061":
-    case "CRU062":
+    case "find_center_blue":
+    case "flood_of_force_yellow":
+    case "herons_flight_red":
+    case "crane_dance_red":
+    case "crane_dance_yellow":
+    case "crane_dance_blue":
+    case "rushing_river_red":
+    case "rushing_river_yellow":
+    case "rushing_river_blue":
       return true;
-    case "EVR038":
-    case "EVR040":
-    case "EVR041":
-    case "EVR042":
-    case "EVR043":
+    case "break_tide_yellow":
+    case "winds_of_eternity_blue":
+    case "hundred_winds_red":
+    case "hundred_winds_yellow":
+    case "hundred_winds_blue":
       return true;
-    case "DYN047":
-    case "DYN056":
-    case "DYN057":
-    case "DYN058":
-    case "DYN059":
-    case "DYN060":
-    case "DYN061":
+    case "tiger_swipe_red":
+    case "pouncing_qi_red":
+    case "pouncing_qi_yellow":
+    case "pouncing_qi_blue":
+    case "qi_unleashed_red":
+    case "qi_unleashed_yellow":
+    case "qi_unleashed_blue":
       return true;
-    case "OUT050":
-    case "OUT051":
-    case "OUT056":
-    case "OUT057":
-    case "OUT058":
-    case "OUT059":
-    case "OUT060":
-    case "OUT061":
-    case "OUT062":
-    case "OUT063":
-    case "OUT064":
-    case "OUT065":
-    case "OUT066":
-    case "OUT067":
-    case "OUT074":
-    case "OUT075":
-    case "OUT076":
-    case "OUT080":
-    case "OUT081":
-    case "OUT082":
-    case "TCC088":
+    case "cyclone_roundhouse_yellow":
+    case "dishonor_blue":
+    case "bonds_of_ancestry_red":
+    case "bonds_of_ancestry_yellow":
+    case "bonds_of_ancestry_blue":
+    case "recoil_red":
+    case "recoil_yellow":
+    case "recoil_blue":
+    case "spinning_wheel_kick_red":
+    case "spinning_wheel_kick_yellow":
+    case "spinning_wheel_kick_blue":
+    case "back_heel_kick_red":
+    case "back_heel_kick_yellow":
+    case "back_heel_kick_blue":
+    case "descendent_gustwave_red":
+    case "descendent_gustwave_yellow":
+    case "descendent_gustwave_blue":
+    case "onetwo_punch_red":
+    case "onetwo_punch_yellow":
+    case "onetwo_punch_blue":
+    case "mauling_qi_red":
       return true;
-    case "MST161":
-    case "MST164":
-    case "MST165":
-    case "MST166":
-    case "MST176":
-    case "MST177":
-    case "MST178":
+    case "chase_the_tail_red":
+    case "aspect_of_tiger_body_red":
+    case "aspect_of_tiger_soul_yellow":
+    case "aspect_of_tiger_mind_blue":
+    case "breed_anger_red":
+    case "breed_anger_yellow":
+    case "breed_anger_blue":
       return true;
-    case "ROS245":
+    case "gustwave_of_the_second_wind_red":
       return true;
-    case "HNT249"://retrace the past
+    case "retrace_the_past_blue"://retrace the past
       return true;
     default:
       return false;
@@ -3601,141 +3623,141 @@ function ComboActive($cardID = "")
   $lastAttackNames = explode(",", $chainLinkSummary[count($chainLinkSummary) - ChainLinkSummaryPieces() + 4]);
   for ($i = 0; $i < count($lastAttackNames); ++$i) {
     $lastAttackName = GamestateUnsanitize($lastAttackNames[$i]);
-    if (SearchCurrentTurnEffects("OUT183", $mainPlayer)) $lastAttackName = "";
+    if (SearchCurrentTurnEffects("amnesia_red", $mainPlayer)) $lastAttackName = "";
     switch ($cardID) {
-      case "WTR081":
+      case "lord_of_wind_blue":
         if ($lastAttackName == "Mugenshi: RELEASE") return true;
         break;
-      case "WTR083":
+      case "mugenshi_release_yellow":
         if ($lastAttackName == "Whelming Gustwave") return true;
         break;
-      case "WTR084":
+      case "hurricane_technique_yellow":
         if ($lastAttackName == "Rising Knee Thrust") return true;
         break;
-      case "WTR085":
+      case "pounding_gale_red":
         if ($lastAttackName == "Open the Center") return true;
         break;
-      case "WTR086":
-      case "WTR087":
-      case "WTR088":
+      case "fluster_fist_red":
+      case "fluster_fist_yellow":
+      case "fluster_fist_blue":
         if ($lastAttackName == "Open the Center") return true;
         break;
-      case "WTR089":
-      case "WTR090":
-      case "WTR091":
+      case "blackout_kick_red":
+      case "blackout_kick_yellow":
+      case "blackout_kick_blue":
         if ($lastAttackName == "Rising Knee Thrust") return true;
         break;
-      case "WTR095":
-      case "WTR096":
-      case "WTR097":
+      case "open_the_center_red":
+      case "open_the_center_yellow":
+      case "open_the_center_blue":
         if ($lastAttackName == "Head Jab") return true;
         break;
-      case "WTR104":
-      case "WTR105":
-      case "WTR106":
+      case "rising_knee_thrust_red":
+      case "rising_knee_thrust_yellow":
+      case "rising_knee_thrust_blue":
         if ($lastAttackName == "Leg Tap") return true;
         break;
-      case "WTR110":
-      case "WTR111":
-      case "WTR112":
+      case "whelming_gustwave_red":
+      case "whelming_gustwave_yellow":
+      case "whelming_gustwave_blue":
         if ($lastAttackName == "Surging Strike") return true;
         break;
-      case "CRU054":
+      case "find_center_blue":
         if ($lastAttackName == "Crane Dance") return true;
         break;
-      case "CRU055":
+      case "flood_of_force_yellow":
         if ($lastAttackName == "Rushing River" || $lastAttackName == "Flood of Force") return true;
         break;
-      case "CRU056":
+      case "herons_flight_red":
         if ($lastAttackName == "Crane Dance") return true;
         break;
-      case "CRU057":
-      case "CRU058":
-      case "CRU059":
+      case "crane_dance_red":
+      case "crane_dance_yellow":
+      case "crane_dance_blue":
         if ($lastAttackName == "Soulbead Strike") return true;
         break;
-      case "CRU060":
-      case "CRU061":
-      case "CRU062":
+      case "rushing_river_red":
+      case "rushing_river_yellow":
+      case "rushing_river_blue":
         if ($lastAttackName == "Torrent of Tempo") return true;
         break;
-      case "EVR038":
+      case "break_tide_yellow":
         if ($lastAttackName == "Rushing River" || $lastAttackName == "Flood of Force") return true;
         break;
-      case "EVR040":
+      case "winds_of_eternity_blue":
         if ($lastAttackName == "Hundred Winds") return true;
         break;
-      case "EVR041":
-      case "EVR042":
-      case "EVR043":
+      case "hundred_winds_red":
+      case "hundred_winds_yellow":
+      case "hundred_winds_blue":
         if ($lastAttackName == "Hundred Winds") return true;
         break;
-      case "DYN047":
-      case "DYN056":
-      case "DYN057":
-      case "DYN058":
-      case "DYN059":
-      case "DYN060":
-      case "DYN061":
+      case "tiger_swipe_red":
+      case "pouncing_qi_red":
+      case "pouncing_qi_yellow":
+      case "pouncing_qi_blue":
+      case "qi_unleashed_red":
+      case "qi_unleashed_yellow":
+      case "qi_unleashed_blue":
         if ($lastAttackName == "Crouching Tiger") return true;
         break;
-      case "OUT050":
+      case "cyclone_roundhouse_yellow":
         if ($lastAttackName == "Spinning Wheel Kick") return true;
         break;
-      case "OUT051":
+      case "dishonor_blue":
         if ($lastAttackName == "Bonds of Ancestry") return true;
         break;
-      case "OUT056":
-      case "OUT057":
-      case "OUT058":
+      case "bonds_of_ancestry_red":
+      case "bonds_of_ancestry_yellow":
+      case "bonds_of_ancestry_blue":
         if (str_contains($lastAttackName, "Gustwave")) return true;
         break;
-      case "OUT059":
-      case "OUT060":
-      case "OUT061":
+      case "recoil_red":
+      case "recoil_yellow":
+      case "recoil_blue":
         if ($lastAttackName == "Head Jab") return true;
         break;
-      case "OUT062":
-      case "OUT063":
-      case "OUT064":
+      case "spinning_wheel_kick_red":
+      case "spinning_wheel_kick_yellow":
+      case "spinning_wheel_kick_blue":
         if ($lastAttackName == "Twin Twisters" || $lastAttackName == "Spinning Wheel Kick") return true;
         break;
-      case "OUT065":
-      case "OUT066":
-      case "OUT067":
+      case "back_heel_kick_red":
+      case "back_heel_kick_yellow":
+      case "back_heel_kick_blue":
         if ($lastAttackName == "Twin Twisters") return true;
         break;
-      case "OUT074":
-      case "OUT075":
-      case "OUT076":
+      case "descendent_gustwave_red":
+      case "descendent_gustwave_yellow":
+      case "descendent_gustwave_blue":
         if ($lastAttackName == "Surging Strike") return true;
         break;
-      case "OUT080":
-      case "OUT081":
-      case "OUT082":
+      case "onetwo_punch_red":
+      case "onetwo_punch_yellow":
+      case "onetwo_punch_blue":
         if ($lastAttackName == "Head Jab") return true;
         break;
-      case "TCC088":
+      case "mauling_qi_red":
         if ($lastAttackName == "Crouching Tiger") return true;
         break;
-      case "MST161":
+      case "chase_the_tail_red":
         if ($lastAttackName == "Crouching Tiger") return true;
         break;
-      case "MST164":
+      case "aspect_of_tiger_body_red":
         return ColorContains($chainLinks[count($chainLinks) - 1][0], 1, $mainPlayer);
-      case "MST165":
+      case "aspect_of_tiger_soul_yellow":
         return ColorContains($chainLinks[count($chainLinks) - 1][0], 2, $mainPlayer);
-      case "MST166":
+      case "aspect_of_tiger_mind_blue":
         return ColorContains($chainLinks[count($chainLinks) - 1][0], 3, $mainPlayer);
-      case "MST176":
-      case "MST177":
-      case "MST178":
+      case "breed_anger_red":
+      case "breed_anger_yellow":
+      case "breed_anger_blue":
         if ($lastAttackName == "Crouching Tiger") return true;
         break;
-      case "ROS245":
+      case "gustwave_of_the_second_wind_red":
         if ($lastAttackName == "Surging Strike") return true;
         break;
-      case "HNT249":
+      case "retrace_the_past_blue":
         if (str_contains($lastAttackName, "Gustwave")) return true;
         break;
       default:
@@ -3749,143 +3771,143 @@ function HasBloodDebt($cardID)
 {
   global $currentPlayer;
   $char = GetPlayerCharacter($currentPlayer);
-  if ($char[0] == "DTD164") return false;
+  if ($char[0] == "levia_redeemed") return false;
   switch ($cardID) {
-    case "MON123";
-    case "MON124";
-    case "MON125";
-    case "MON126":
-    case "MON127":
-    case "MON128";
-    case "MON129":
-    case "MON130":
-    case "MON131";
-    case "MON135":
-    case "MON136":
-    case "MON137";
-    case "MON138":
-    case "MON139":
-    case "MON140";
-    case "MON141":
-    case "MON142":
-    case "MON143";
-    case "MON144":
-    case "MON145":
-    case "MON146";
-    case "MON147":
-    case "MON148":
-    case "MON149";
-    case "MON156":
-    case "MON158":
-    case "MON159":
-    case "MON160":
-    case "MON161":
-    case "MON165":
-    case "MON166":
-    case "MON167":
-    case "MON168":
-    case "MON169":
-    case "MON170":
-    case "MON171":
-    case "MON172":
-    case "MON173":
-    case "MON174":
-    case "MON175":
-    case "MON176":
-    case "MON177":
-    case "MON178":
-    case "MON179":
-    case "MON180":
-    case "MON181":
-    case "MON182":
-    case "MON183":
-    case "MON184":
-    case "MON185":
-    case "MON187":
-    case "MON191":
-    case "MON192":
-    case "MON194":
-    case "MON200":
-    case "MON201":
-    case "MON202":
-    case "MON203":
-    case "MON204":
-    case "MON205":
-    case "MON209":
-    case "MON210":
-    case "MON211":
-    case "DTD105":
-    case "DTD106":
-    case "DTD107":
-    case "DTD108":
-    case "DTD109":
-    case "DTD112":
-    case "DTD113":
-    case "DTD114":
-    case "DTD115":
-    case "DTD116":
-    case "DTD117":
-    case "DTD121":
-    case "DTD122":
-    case "DTD123":
-    case "DTD124":
-    case "DTD125":
-    case "DTD126":
-    case "DTD127":
-    case "DTD128":
-    case "DTD129":
-    case "DTD130":
-    case "DTD131":
-    case "DTD132":
-    case "DTD136":
-    case "DTD137":
-    case "DTD138":
-    case "DTD139":
-    case "DTD140":
-    case "DTD141":
-    case "DTD143":
-    case "DTD144":
-    case "DTD145":
-    case "DTD146":
-    case "DTD147":
-    case "DTD148":
-    case "DTD152":
-    case "DTD153":
-    case "DTD154":
-    case "DTD155":
-    case "DTD156":
-    case "DTD157":
-    case "DTD158":
-    case "DTD159":
-    case "DTD160":
-    case "DTD161":
-    case "DTD162":
-    case "DTD163":
-    case "DTD165":
-    case "DTD166":
-    case "DTD167":
-    case "DTD168":
-    case "DTD169":
-    case "DTD170":
-    case "DTD171":
-    case "DTD172":
-    case "DTD173":
-    case "DTD174":
-    case "DTD175":
-    case "DTD176":
-    case "DTD177":
-    case "DTD178":
-    case "DTD179":
-    case "DTD180":
-    case "DTD181":
-    case "DTD182":
-    case "DTD183":
-    case "DTD184":
-    case "DTD185":
-    case "DTD186":
-    case "MST236":
-    case "MST237":
-    case "HNT259":
+    case "deep_rooted_evil_yellow";
+    case "mark_of_the_beast_yellow";
+    case "shadow_of_blasmophet_red";
+    case "endless_maw_red":
+    case "endless_maw_yellow":
+    case "endless_maw_blue";
+    case "writhing_beast_hulk_red":
+    case "writhing_beast_hulk_yellow":
+    case "writhing_beast_hulk_blue";
+    case "boneyard_marauder_red":
+    case "boneyard_marauder_yellow":
+    case "boneyard_marauder_blue";
+    case "deadwood_rumbler_red":
+    case "deadwood_rumbler_yellow":
+    case "deadwood_rumbler_blue";
+    case "dread_screamer_red":
+    case "dread_screamer_yellow":
+    case "dread_screamer_blue";
+    case "graveling_growl_red":
+    case "graveling_growl_yellow":
+    case "graveling_growl_blue";
+    case "hungering_slaughterbeast_red":
+    case "hungering_slaughterbeast_yellow":
+    case "hungering_slaughterbeast_blue";
+    case "shadow_of_ursur_blue":
+    case "invert_existence_blue":
+    case "unhallowed_rites_red":
+    case "unhallowed_rites_yellow":
+    case "unhallowed_rites_blue":
+    case "seeping_shadows_red":
+    case "seeping_shadows_yellow":
+    case "seeping_shadows_blue":
+    case "bounding_demigon_red":
+    case "bounding_demigon_yellow":
+    case "bounding_demigon_blue":
+    case "piercing_shadow_vise_red":
+    case "piercing_shadow_vise_yellow":
+    case "piercing_shadow_vise_blue":
+    case "rift_bind_red":
+    case "rift_bind_yellow":
+    case "rift_bind_blue":
+    case "rifted_torment_red":
+    case "rifted_torment_yellow":
+    case "rifted_torment_blue":
+    case "rip_through_reality_red":
+    case "rip_through_reality_yellow":
+    case "rip_through_reality_blue":
+    case "seeds_of_agony_red":
+    case "seeds_of_agony_yellow":
+    case "seeds_of_agony_blue":
+    case "carrion_husk":
+    case "mutated_mass_blue":
+    case "guardian_of_the_shadowrealm_red":
+    case "tome_of_torment_red":
+    case "howl_from_beyond_red":
+    case "howl_from_beyond_yellow":
+    case "howl_from_beyond_blue":
+    case "ghostly_visit_red":
+    case "ghostly_visit_yellow":
+    case "ghostly_visit_blue":
+    case "void_wraith_red":
+    case "void_wraith_yellow":
+    case "void_wraith_blue":
+    case "hell_hammer":
+    case "spoiled_skull":
+    case "diabolic_offering_blue":
+    case "shaden_death_hydra_yellow":
+    case "slithering_shadowpede_red":
+    case "ram_raider_red":
+    case "ram_raider_yellow":
+    case "ram_raider_blue":
+    case "wall_breaker_red":
+    case "wall_breaker_yellow":
+    case "wall_breaker_blue":
+    case "battlefield_breaker_red":
+    case "battlefield_breaker_yellow":
+    case "battlefield_breaker_blue":
+    case "shaden_swing_red":
+    case "shaden_swing_yellow":
+    case "shaden_swing_blue":
+    case "tribute_to_demolition_red":
+    case "tribute_to_demolition_yellow":
+    case "tribute_to_demolition_blue":
+    case "tribute_to_the_legions_of_doom_red":
+    case "tribute_to_the_legions_of_doom_yellow":
+    case "tribute_to_the_legions_of_doom_blue":
+    case "grimoire_of_the_haunt":
+    case "widespread_annihilation_blue":
+    case "widespread_destruction_yellow":
+    case "widespread_ruin_red":
+    case "funeral_moon_red":
+    case "requiem_for_the_damned_red":
+    case "deathly_delight_red":
+    case "deathly_delight_yellow":
+    case "deathly_delight_blue":
+    case "deathly_wail_red":
+    case "deathly_wail_yellow":
+    case "deathly_wail_blue":
+    case "rift_skitter_red":
+    case "rift_skitter_yellow":
+    case "rift_skitter_blue":
+    case "vantom_banshee_red":
+    case "vantom_banshee_yellow":
+    case "vantom_banshee_blue":
+    case "vantom_wraith_red":
+    case "vantom_wraith_yellow":
+    case "vantom_wraith_blue":
+    case "putrid_stirrings_red":
+    case "putrid_stirrings_yellow":
+    case "putrid_stirrings_blue":
+    case "shroud_of_darkness":
+    case "cloak_of_darkness":
+    case "grasp_of_darkness":
+    case "dance_of_darkness":
+    case "dabble_in_darkness_red":
+    case "chains_of_mephetis_blue":
+    case "dimenxxional_vortex":
+    case "hungering_demigon_red":
+    case "hungering_demigon_yellow":
+    case "hungering_demigon_blue":
+    case "grim_feast_red":
+    case "grim_feast_yellow":
+    case "grim_feast_blue":
+    case "vile_inquisition_red":
+    case "vile_inquisition_yellow":
+    case "vile_inquisition_blue":
+    case "soul_butcher_red":
+    case "soul_butcher_yellow":
+    case "soul_butcher_blue":
+    case "soul_cleaver_red":
+    case "soul_cleaver_yellow":
+    case "soul_cleaver_blue":
+    case "shadowrealm_horror_red":
+    case "eloquent_eulogy_red":
+    case "cull_red":
           return true;
     default:
       return false;
@@ -3895,25 +3917,25 @@ function HasBloodDebt($cardID)
 function HasRunegate($cardID)
 {
   switch ($cardID) {
-    case "DTD137":
-    case "DTD138":
-    case "DTD139":
-    case "DTD143":
-    case "DTD144":
-    case "DTD145":
-    case "DTD146":
-    case "DTD147":
-    case "DTD148":
-    case "DTD152":
-    case "DTD153":
-    case "DTD154":
-    case "DTD155":
-    case "DTD156":
-    case "DTD157":
-    case "DTD158":
-    case "DTD159":
-    case "DTD160":
-    case "MST237":
+    case "widespread_annihilation_blue":
+    case "widespread_destruction_yellow":
+    case "widespread_ruin_red":
+    case "deathly_delight_red":
+    case "deathly_delight_yellow":
+    case "deathly_delight_blue":
+    case "deathly_wail_red":
+    case "deathly_wail_yellow":
+    case "deathly_wail_blue":
+    case "rift_skitter_red":
+    case "rift_skitter_yellow":
+    case "rift_skitter_blue":
+    case "vantom_banshee_red":
+    case "vantom_banshee_yellow":
+    case "vantom_banshee_blue":
+    case "vantom_wraith_red":
+    case "vantom_wraith_yellow":
+    case "vantom_wraith_blue":
+    case "eloquent_eulogy_red":
       return true;
     default:
       return false;
@@ -3927,84 +3949,84 @@ function PlayableFromBanish($cardID, $mod = "", $nonLimitedOnly = false, $player
   $mod = explode("-", $mod)[0];
   if ($mod == "TRAPDOOR") return SubtypeContains($cardID, "Trap", $currentPlayer);
   if (isFaceDownMod($mod)) return false;
-  if ($mod == "TCL" || $mod == "TT" || $mod == "TCC" || $mod == "NT" || $mod == "INST" || $mod == "MON212" || $mod == "ARC119" || $mod == "ELE064") return true;
-  if ($mod == "MST236" && SearchCurrentTurnEffects("MST236-3", $player) && CardType($cardID) != "E") return true;
-  if (HasRunegate($cardID) && SearchCount(SearchAurasForCard("ARC112", $player, false)) >= CardCost($cardID, "BANISH")) return true;
+  if ($mod == "TCL" || $mod == "TT" || $mod == "TCC" || $mod == "NT" || $mod == "INST" || $mod == "spew_shadow_red" || $mod == "sonic_boom_yellow" || $mod == "blossoming_spellblade_red") return true;
+  if ($mod == "shadowrealm_horror_red" && SearchCurrentTurnEffects("shadowrealm_horror_red-3", $player) && CardType($cardID) != "E") return true;
+  if (HasRunegate($cardID) && SearchCount(SearchAurasForCard("runechant", $player, false)) >= CardCost($cardID, "BANISH")) return true;
   $char = &GetPlayerCharacter($player);
-  if (SubtypeContains($cardID, "Evo") && ($char[0] == "TCC001" || $char[0] == "EVO007" || $char[0] == "EVO008") && $char[1] < 3) return true;
-  if (!$nonLimitedOnly && $char[0] == "DTD564" && SearchCurrentTurnEffects("DTD564", $player) && HasBloodDebt($cardID) && $char[1] < 3 && !TypeContains($cardID, "E") && !TypeContains($cardID, "W")) return true;
+  if (SubtypeContains($cardID, "Evo") && ($char[0] == "professor_teklovossen" || $char[0] == "teklovossen_esteemed_magnate" || $char[0] == "teklovossen") && $char[1] < 3) return true;
+  if (!$nonLimitedOnly && $char[0] == "levia_redeemed" && SearchCurrentTurnEffects("levia_redeemed", $player) && HasBloodDebt($cardID) && $char[1] < 3 && !TypeContains($cardID, "E") && !TypeContains($cardID, "W")) return true;
   switch ($cardID) {
-    case "MON123":
+    case "deep_rooted_evil_yellow":
       return GetClassState($player, $CS_Num6PowBan) > 0;
-    case "MON156":
-    case "MON158":
+    case "shadow_of_ursur_blue":
+    case "invert_existence_blue":
       return true;
-    case "MON159":
-    case "MON160":
-    case "MON161":
+    case "unhallowed_rites_red":
+    case "unhallowed_rites_yellow":
+    case "unhallowed_rites_blue":
       return GetClassState($player, $CS_NumNonAttackCards) > 0;
-    case "MON165":
-    case "MON166":
-    case "MON167":
+    case "seeping_shadows_red":
+    case "seeping_shadows_yellow":
+    case "seeping_shadows_blue":
       return true;
-    case "MON168":
-    case "MON169":
-    case "MON170":
+    case "bounding_demigon_red":
+    case "bounding_demigon_yellow":
+    case "bounding_demigon_blue":
       return GetClassState($player, $CS_NumNonAttackCards) > 0;
-    case "MON171":
-    case "MON172":
-    case "MON173":
+    case "piercing_shadow_vise_red":
+    case "piercing_shadow_vise_yellow":
+    case "piercing_shadow_vise_blue":
       return true;
-    case "MON174":
-    case "MON175":
-    case "MON176":
+    case "rift_bind_red":
+    case "rift_bind_yellow":
+    case "rift_bind_blue":
       return true;
-    case "MON177":
-    case "MON178":
-    case "MON179":
+    case "rifted_torment_red":
+    case "rifted_torment_yellow":
+    case "rifted_torment_blue":
       return true;
-    case "MON180":
-    case "MON181":
-    case "MON182":
+    case "rip_through_reality_red":
+    case "rip_through_reality_yellow":
+    case "rip_through_reality_blue":
       return true;
-    case "MON183":
-    case "MON184":
-    case "MON185":
+    case "seeds_of_agony_red":
+    case "seeds_of_agony_yellow":
+    case "seeds_of_agony_blue":
       return true;
-    case "MON190":
-    case "MON191":
-    case "MON194":
-    case "MON200":
-    case "MON201":
-    case "MON202":
-    case "MON203":
-    case "MON204":
-    case "MON205":
-    case "MON209":
-    case "MON210":
-    case "MON211":
+    case "eclipse_blue":
+    case "mutated_mass_blue":
+    case "tome_of_torment_red":
+    case "howl_from_beyond_red":
+    case "howl_from_beyond_yellow":
+    case "howl_from_beyond_blue":
+    case "ghostly_visit_red":
+    case "ghostly_visit_yellow":
+    case "ghostly_visit_blue":
+    case "void_wraith_red":
+    case "void_wraith_yellow":
+    case "void_wraith_blue":
       return true;
-    case "DTD141":
-    case "DTD161":
-    case "DTD162":
-    case "DTD163":
-    case "DTD175":
-    case "DTD176":
-    case "DTD177":
-    case "DTD140":
-    case "DTD170":
-    case "DTD171":
+    case "requiem_for_the_damned_red":
+    case "putrid_stirrings_red":
+    case "putrid_stirrings_yellow":
+    case "putrid_stirrings_blue":
+    case "grim_feast_red":
+    case "grim_feast_yellow":
+    case "grim_feast_blue":
+    case "funeral_moon_red":
+    case "chains_of_mephetis_blue":
+    case "dimenxxional_vortex":
       return true;
-    case "DTD172":
-    case "DTD173":
-    case "DTD174":
+    case "hungering_demigon_red":
+    case "hungering_demigon_yellow":
+    case "hungering_demigon_blue":
       $soul = &GetSoul($player == 1 ? 2 : 1);
       return count($soul) > 0;
-    case "DTD178":
-    case "DTD179":
-    case "DTD180":
+    case "vile_inquisition_red":
+    case "vile_inquisition_yellow":
+    case "vile_inquisition_blue":
       return true;
-    case "HNT259":
+    case "cull_red":
       return true;
     default:
       break;
@@ -4018,7 +4040,7 @@ function AbilityPlayableFromBanish($cardID, $mod = "")
   $mod = explode("-", $mod)[0];
   if (isFaceDownMod($mod)) return false;
   switch ($cardID) {
-    case "MON192":
+    case "guardian_of_the_shadowrealm_red":
       return $currentPlayer == $mainPlayer;
     default:
       return false;
@@ -4032,7 +4054,7 @@ function PlayableFromOtherPlayerBanish($cardID, $mod = "", $player = "")
   if ($player == "") $player = $currentPlayer;
   $otherPlayer = $player == 1 ? 2 : 1;
   if (isFaceDownMod($mod)) return false;
-  if (ColorContains($cardID, 3, $otherPlayer) && (SearchCurrentTurnEffects("MST001", $player) || SearchCurrentTurnEffects("MST002", $player))) return true;
+  if (ColorContains($cardID, 3, $otherPlayer) && (SearchCurrentTurnEffects("nuu_alluring_desire", $player) || SearchCurrentTurnEffects("nuu", $player))) return true;
   if ($mod == "NTFromOtherPlayer" || $mod == "TTFromOtherPlayer" || $mod == "TCCGorgonsGaze") return true;
   else return false;
 }
@@ -4040,7 +4062,7 @@ function PlayableFromOtherPlayerBanish($cardID, $mod = "", $player = "")
 function PlayableFromGraveyard($cardID)
 {
   switch ($cardID) {
-    case "HVY245":
+    case "graven_call":
       return true;
     default:
       return false;
@@ -4053,22 +4075,22 @@ function RequiresDieRoll($cardID, $from, $player): bool
   if (GetDieRoll($player) > 0) return false;
   if ($turn[0] == "B") return false;
   $type = CardType($cardID);
-  if ($type == "AA" && (GetResolvedAbilityType($cardID) == "" || GetResolvedAbilityType($cardID) == "AA") && AttackValue($cardID) >= 6 && (SearchCharacterActive($player, "CRU002") || SearchCurrentTurnEffects("CRU002-SHIYANA", $player))) return true;
+  if ($type == "AA" && (GetResolvedAbilityType($cardID) == "" || GetResolvedAbilityType($cardID) == "AA") && AttackValue($cardID) >= 6 && (SearchCharacterActive($player, "kayo_berserker_runt") || SearchCurrentTurnEffects("kayo_berserker_runt-SHIYANA", $player))) return true;
   return match ($cardID) {
-    "WTR162" => $from == "PLAY",
-    "WTR004", "WTR005", "WTR010", "CRU009", "EVR004", "EVR014", "EVR015", "EVR016", "HVY009" => true,
+    "crazy_brew_blue" => $from == "PLAY",
+    "scabskin_leathers", "barkbone_strapping", "bone_head_barrier_yellow", "argh_smash_yellow", "rolling_thunder_red", "bad_beats_red", "bad_beats_yellow", "bad_beats_blue", "knucklehead" => true,
     default => false
   };
 }
 
 function SpellVoidAmount($cardID, $player): int
 {
-  if ($cardID == "ARC112" && SearchCurrentTurnEffects("DYN171", $player)) return 1;
+  if ($cardID == "runechant" && SearchCurrentTurnEffects("amethyst_tiara", $player)) return 1;
   return match ($cardID) {
-    "ROS211" => SearchCount(SearchMultiZone($player, "MYCHAR:type=E;nameIncludes=Arcanite")),
-    "ELE173", "MON188", "MON061" => 2,
-    "MON090", "MON302", "MON400", "MON401", "MON402", "DYN246", "DYN236", "DYN237", "DYN238", "DYN239" => 1,
-    "ROS239", "ROS240", "ROS241", "ROS242" => 1,
+    "arcanite_fortress" => SearchCount(SearchMultiZone($player, "MYCHAR:type=E;nameIncludes=Arcanite")),
+    "shock_charmers", "ebon_fold", "halo_of_illumination" => 2,
+    "dream_weavers", "talisman_of_dousing_yellow", "MON400", "MON401", "MON402", "spellbane_aegis", "spell_fray_tiara", "spell_fray_cloak", "spell_fray_gloves", "spell_fray_leggings" => 1,
+    "widow_veil_respirator", "widow_back_abdomen", "widow_claw_tarsus", "widow_web_crawler" => 1,
     default => 0
   };
 }
@@ -4080,7 +4102,7 @@ function IsSpecialization($cardID): bool
 
 function Is1H($cardID): bool|int
 {
-  if($cardID == "JDG005") return true;
+  if($cardID == "gavel_of_natural_order") return true;
   if (SubtypeContains($cardID, "Off-Hand")) return true;
   return GeneratedIs1H($cardID);
 }
@@ -4088,7 +4110,7 @@ function Is1H($cardID): bool|int
 function AbilityPlayableFromCombatChain($cardID): bool
 {
   return match ($cardID) {
-    "MON245", "MON281", "MON282", "MON283", "ELE195", "ELE196", "ELE197", "EVR157" => true,
+    "exude_confidence_red", "rally_the_rearguard_red", "rally_the_rearguard_yellow", "rally_the_rearguard_blue", "shock_striker_red", "shock_striker_yellow", "shock_striker_blue", "firebreathing_red" => true,
     default => false
   };
 }
@@ -4097,9 +4119,9 @@ function CardCaresAboutPitch($cardID): bool
 {
   $cardID = ShiyanaCharacter($cardID);
   return match ($cardID) {
-    "ELE001", "ELE002", "ELE003", "DYN172", "DYN173", "DYN174", "DYN176", "DYN177", "DYN178", "DYN182", "DYN183",
-    "DYN184", "DYN185", "DYN186", "DYN187", "MST008", "MST031", "MST052", "MST076", "MST078", "MST079", "MST080",
-    "TER002", "TER008", "TER014", "TER012", "TER016", "TER018", "TER025", "TER011", "TER015", "ROS015", "AJV006" => true,
+    "oldhim_grandfather_of_eternity", "oldhim", "winters_wail", "annals_of_sutcliffe", "cryptic_crossing_yellow", "diabolic_ultimatum_red", "deathly_duet_red", "deathly_duet_yellow", "deathly_duet_blue", "aether_slash_red", "aether_slash_yellow",
+    "aether_slash_blue", "runic_reaping_red", "runic_reaping_yellow", "runic_reaping_blue", "gorgons_gaze_yellow", "manifestation_of_miragai_blue", "shifting_winds_of_the_mystic_beast_blue", "cosmic_awakening_blue", "unravel_aggression_blue", "dense_blue_mist_blue", "orihon_of_mystic_tenets_blue",
+    "redwood_hammer", "bracken_rap_red", "bracken_rap_yellow", "strong_wood_red", "strong_wood_yellow", "seeds_of_strength_yellow", "seeds_of_strength_blue", "log_fall_red", "log_fall_yellow", "staff_of_verdant_shoots", "gauntlets_of_the_boreal_domain" => true,
     default => false
   };
 }
@@ -4107,9 +4129,9 @@ function CardCaresAboutPitch($cardID): bool
 function IsIyslander($character)
 {
   switch ($character) {
-    case 'EVR120':
-    case 'UPR102':
-    case 'UPR103':
+    case 'iyslander':
+    case 'iyslander_stormbind':
+    case 'iyslander':
       return true;
     default:
       return false;
@@ -4121,84 +4143,84 @@ function WardAmount($cardID, $player, $index = -1)
   global $mainPlayer;
   $auras = &GetAuras($player);
   switch ($cardID) {
-    case "DYN217":
-    case "DYN214":
-    case "DYN213":
-    case "DYN220":
-    case "DYN219":
-    case "DYN218":
-    case "DYN223":
-    case "DYN222":
-    case "DYN221":
-    case "EVO244":
-    case "MST030":
-    case "MST029":
-    case "MST042":
-    case "MST045":
-    case "MST151":
-    case "MST157":
-    case "MST156":
-    case "MST155":
-    case "MON104":
-    case "ROS251":
+    case "tome_of_aeo_blue":
+    case "wave_of_reality":
+    case "celestial_kimono":
+    case "blessing_of_spirits_blue":
+    case "blessing_of_spirits_yellow":
+    case "blessing_of_spirits_red":
+    case "tranquil_passing_blue":
+    case "tranquil_passing_yellow":
+    case "tranquil_passing_red":
+    case "phantom_tidemaw_blue":
+    case "uphold_tradition":
+    case "truths_retold":
+    case "waning_vengeance_blue":
+    case "waxing_specter_blue":
+    case "solitary_companion_blue":
+    case "vengeful_apparition_blue":
+    case "vengeful_apparition_yellow":
+    case "vengeful_apparition_red":
+    case "spectral_shield":
+    case "fluttersteps":
       return 1;
-    case "DTD217":
-    case "MST041":
-    case "MST044":
-    case "MST133":
-    case "MST139":
-    case "MST138":
-    case "MST137":
-    case "MST142":
-    case "MST145":
-    case "MST148":
-    case "MST147":
-    case "MST146":
-    case "MST150":
-    case "UPR220":
+    case "diadem_of_dreamstate":
+    case "waning_vengeance_yellow":
+    case "waxing_specter_yellow":
+    case "restless_coalescence_yellow":
+    case "essence_of_ancestry_mind_blue":
+    case "essence_of_ancestry_soul_yellow":
+    case "essence_of_ancestry_body_red":
+    case "haunting_specter_blue":
+    case "sigil_of_solitude_blue":
+    case "single_minded_determination_blue":
+    case "single_minded_determination_yellow":
+    case "single_minded_determination_red":
+    case "solitary_companion_yellow":
+    case "sigil_of_protection_blue":
       return 2;
-    case "MST040":
-    case "MST043":
-    case "MST141":
-    case "MST144":
-    case "MST149":
-    case "UPR219":
+    case "waning_vengeance_red":
+    case "waxing_specter_red":
+    case "haunting_specter_yellow":
+    case "sigil_of_solitude_yellow":
+    case "solitary_companion_red":
+    case "sigil_of_protection_yellow":
       return 3;
-    case "DYN612":
-    case "DTD412":
-    case "DTD411":
-    case "DTD410":
-    case "DTD409":
-    case "DTD408":
-    case "DTD407":
-    case "DTD406":
-    case "DTD405":
-    case "MST028":
-    case "MST140":
-    case "MST143":
-    case "UPR218":
+    case "suraya_archangel_of_knowledge":
+    case "bellona_archangel_of_war":
+    case "victoria_archangel_of_triumph":
+    case "metis_archangel_of_tenacity":
+    case "avalon_archangel_of_rebirth":
+    case "sekem_archangel_of_ravages":
+    case "aegis_archangel_of_protection":
+    case "themis_archangel_of_judgment":
+    case "suraya_archangel_of_erudition":
+    case "heirloom_of_rabbit_hide":
+    case "haunting_specter_red":
+    case "sigil_of_solitude_red":
+    case "sigil_of_protection_red":
       return 4;
-    case "DTD004":
-      if (SearchCurrentTurnEffects("DTD004-1", $player)) return 1;
+    case "empyrean_rapture":
+      if (SearchCurrentTurnEffects("empyrean_rapture-1", $player)) return 1;
       else return 0;
-    case "MST027":
+    case "meridian_pathway":
       return SearchCurrentTurnEffects("MERIDIANWARD", $player) ? 3 : 0;
-    case "MST031":
+    case "manifestation_of_miragai_blue":
       return isset($auras[$index + 3]) ? $auras[$index + 3] : 0;
-    case "MST033":
+    case "three_visits_red":
       return SearchPitchForColor($player, 3) * 3;
-    case "MST037":
+    case "haze_shelter_red":
       if (SearchPitchForColor($player, 3) > 0) return 4;
       else return 1;
-    case "MST038":
+    case "haze_shelter_yellow":
       if (SearchPitchForColor($player, 3) > 0) return 3;
       else return 1;
-    case "MST039":
+    case "haze_shelter_blue":
       if (SearchPitchForColor($player, 3) > 0) return 2;
       else return 1;
-    case "MST131":
+    case "10000_year_reunion_red":
       return 10;
-    case "MST132":
+    case "rage_specter_blue":
       return $player == $mainPlayer ? 6 : 1;
     default:
       return 0;
@@ -4208,86 +4230,86 @@ function WardAmount($cardID, $player, $index = -1)
 function HasWard($cardID, $player)
 {
   switch ($cardID) {
-    case "MON104":
-    case "UPR039":
-    case "UPR040":
-    case "UPR041":
-    case "UPR218":
-    case "UPR219":
-    case "UPR220":
-    case "DYN213":
-    case "DYN214":
-    case "DYN217":
-    case "DYN218":
-    case "DYN219":
-    case "DYN220":
-    case "DYN221":
-    case "DYN222":
-    case "DYN223":
-    case "DYN612":
+    case "spectral_shield":
+    case "sand_cover_red":
+    case "sand_cover_yellow":
+    case "sand_cover_blue":
+    case "sigil_of_protection_red":
+    case "sigil_of_protection_yellow":
+    case "sigil_of_protection_blue":
+    case "celestial_kimono":
+    case "wave_of_reality":
+    case "tome_of_aeo_blue":
+    case "blessing_of_spirits_red":
+    case "blessing_of_spirits_yellow":
+    case "blessing_of_spirits_blue":
+    case "tranquil_passing_red":
+    case "tranquil_passing_yellow":
+    case "tranquil_passing_blue":
+    case "suraya_archangel_of_knowledge":
       return true;
-    case "DTD004":
-      return SearchCurrentTurnEffects("DTD004-1", $player);
-    case "DTD217":
-    case "DTD405":
-    case "DTD406":
-    case "DTD407":
-    case "DTD408"://Angels
-    case "DTD409":
-    case "DTD410":
-    case "DTD411":
-    case "DTD412":
-    case "ROS251":
+    case "empyrean_rapture":
+      return SearchCurrentTurnEffects("empyrean_rapture-1", $player);
+    case "diadem_of_dreamstate":
+    case "suraya_archangel_of_erudition":
+    case "themis_archangel_of_judgment":
+    case "aegis_archangel_of_protection":
+    case "sekem_archangel_of_ravages"://Angels
+    case "avalon_archangel_of_rebirth":
+    case "metis_archangel_of_tenacity":
+    case "victoria_archangel_of_triumph":
+    case "bellona_archangel_of_war":
+    case "fluttersteps":
       return true;
-    case "EVO093":
-    case "EVO094":
-    case "EVO095":
-    case "EVO244":
+    case "mini_forcefield_red":
+    case "mini_forcefield_yellow":
+    case "mini_forcefield_blue":
+    case "phantom_tidemaw_blue":
       return true;
-    case "MST027":
+    case "meridian_pathway":
       return SearchCurrentTurnEffects("MERIDIANWARD", $player);
-    case "MST028":
-    case "MST029":
-    case "MST030":
+    case "heirloom_of_rabbit_hide":
+    case "truths_retold":
+    case "uphold_tradition":
       $char = &GetPlayerCharacter($player);
       $index = FindCharacterIndex($player, $cardID);
       return $char[$index + 12] != "DOWN";
-    case "MST031":
-    case "MST033":
+    case "manifestation_of_miragai_blue":
+    case "three_visits_red":
       return true;
-    case "MST037":
-    case "MST038":
-    case "MST039":
-    case "MST040":
-    case "MST041":
-    case "MST042":
-    case "MST043":
-    case "MST044":
-    case "MST045":
+    case "haze_shelter_red":
+    case "haze_shelter_yellow":
+    case "haze_shelter_blue":
+    case "waning_vengeance_red":
+    case "waning_vengeance_yellow":
+    case "waning_vengeance_blue":
+    case "waxing_specter_red":
+    case "waxing_specter_yellow":
+    case "waxing_specter_blue":
       return true;
-    case "MST131":
-    case "MST132":
-    case "MST133":
+    case "10000_year_reunion_red":
+    case "rage_specter_blue":
+    case "restless_coalescence_yellow":
       return true;
-    case "MST137":
-    case "MST138":
-    case "MST139":
+    case "essence_of_ancestry_body_red":
+    case "essence_of_ancestry_soul_yellow":
+    case "essence_of_ancestry_mind_blue":
       return true;
-    case "MST140":
-    case "MST141":
-    case "MST142":
-    case "MST143":
-    case "MST144":
-    case "MST145":
-    case "MST146":
-    case "MST147":
-    case "MST148":
-    case "MST149":
-    case "MST150":
-    case "MST151":
-    case "MST155":
-    case "MST156":
-    case "MST157":
+    case "haunting_specter_red":
+    case "haunting_specter_yellow":
+    case "haunting_specter_blue":
+    case "sigil_of_solitude_red":
+    case "sigil_of_solitude_yellow":
+    case "sigil_of_solitude_blue":
+    case "single_minded_determination_red":
+    case "single_minded_determination_yellow":
+    case "single_minded_determination_blue":
+    case "solitary_companion_red":
+    case "solitary_companion_yellow":
+    case "solitary_companion_blue":
+    case "vengeful_apparition_red":
+    case "vengeful_apparition_yellow":
+    case "vengeful_apparition_blue":
       return true;
     default:
       return false;
@@ -4297,7 +4319,7 @@ function HasWard($cardID, $player)
 function ArcaneShelterAmount($cardID)
 {
   return match ($cardID) {
-    "ROS045", "ROS088" => 1,
+    "sigil_of_sanctuary_blue", "sigil_of_conductivity_blue" => 1,
     default => 0
   };
 }
@@ -4305,7 +4327,7 @@ function ArcaneShelterAmount($cardID)
 function HasArcaneShelter($cardID): bool
 {
   return match ($cardID) {
-    "ROS045", "ROS088" => true,
+    "sigil_of_sanctuary_blue", "sigil_of_conductivity_blue" => true,
     default => false
   };
 }
@@ -4315,49 +4337,49 @@ function HasDominate($cardID)
   global $mainPlayer, $combatChainState;
   global $CS_NumAuras, $CCS_NumBoosted;
   switch ($cardID) {
-    case "WTR095":
-    case "WTR096":
-    case "WTR097":
+    case "open_the_center_red":
+    case "open_the_center_yellow":
+    case "open_the_center_blue":
       return (ComboActive() ? true : false);
-    case "WTR179":
-    case "WTR180":
-    case "WTR181":
+    case "demolition_crew_red":
+    case "demolition_crew_yellow":
+    case "demolition_crew_blue":
       return true;
-    case "ARC080":
+    case "arknight_ascendancy_red":
       return true;
-    case "MON004":
+    case "herald_of_erudition_yellow":
       return true;
-    case "MON023":
-    case "MON024":
-    case "MON025":
+    case "herald_of_tenacity_red":
+    case "herald_of_tenacity_yellow":
+    case "herald_of_tenacity_blue":
       return true;
-    case "MON246":
+    case "nourishing_emptiness_red":
       return SearchDiscard($mainPlayer, "AA") == "";
-    case "MON275":
-    case "MON276":
-    case "MON277":
+    case "overload_red":
+    case "overload_yellow":
+    case "overload_blue":
       return true;
-    case "ELE209":
-    case "ELE210":
-    case "ELE211":
+    case "thump_red":
+    case "thump_yellow":
+    case "thump_blue":
       return HasIncreasedAttack();
-    case "EVR027":
-    case "EVR028":
-    case "EVR029":
+    case "macho_grande_red":
+    case "macho_grande_yellow":
+    case "macho_grande_blue":
       return true;
-    case "EVR038":
+    case "break_tide_yellow":
       return (ComboActive() ? true : false);
-    case "EVR076":
-    case "EVR077":
-    case "EVR078":
+    case "payload_red":
+    case "payload_yellow":
+    case "payload_blue":
       return $combatChainState[$CCS_NumBoosted] > 0;
-    case "EVR110":
-    case "EVR111":
-    case "EVR112":
+    case "drowning_dire_red":
+    case "drowning_dire_yellow":
+    case "drowning_dire_blue":
       return GetClassState($mainPlayer, $CS_NumAuras) > 0;
-    case "OUT027":
-    case "OUT028":
-    case "OUT029":
+    case "isolate_red":
+    case "isolate_yellow":
+    case "isolate_blue":
       return true;
     default:
       break;
@@ -4368,8 +4390,8 @@ function HasDominate($cardID)
 function HasAmbush($cardID)
 {
   switch ($cardID) {
-    case "TCC098":
-    case "TCC102":
+    case "tiger_eye_reflex_yellow":
+    case "tiger_eye_reflex_blue":
       return true;
     default:
       return false;
@@ -4379,25 +4401,25 @@ function HasAmbush($cardID)
 function HasScrap($cardID)
 {
   switch ($cardID) {
-    case "EVO101":
-    case "EVO102":
-    case "EVO103":
-    case "EVO104":
-    case "EVO108":
-    case "EVO109":
-    case "EVO110":
-    case "EVO126":
-    case "EVO127":
-    case "EVO128":
-    case "EVO129":
-    case "EVO130":
-    case "EVO131":
-    case "EVO132":
-    case "EVO133":
-    case "EVO134":
-    case "EVO135":
-    case "EVO136":
-    case "EVO137":
+    case "scrap_trader_red":
+    case "hydraulic_press_red":
+    case "hydraulic_press_yellow":
+    case "hydraulic_press_blue":
+    case "scrap_hopper_red":
+    case "scrap_hopper_yellow":
+    case "scrap_hopper_blue":
+    case "junkyard_dogg_red":
+    case "junkyard_dogg_yellow":
+    case "junkyard_dogg_blue":
+    case "scrap_compactor_red":
+    case "scrap_compactor_yellow":
+    case "scrap_compactor_blue":
+    case "scrap_harvester_red":
+    case "scrap_harvester_yellow":
+    case "scrap_harvester_blue":
+    case "scrap_prospector_red":
+    case "scrap_prospector_yellow":
+    case "scrap_prospector_blue":
       return true;
     default:
       return false;
@@ -4407,26 +4429,26 @@ function HasScrap($cardID)
 function HasGalvanize($cardID)
 {
   switch ($cardID) {
-    case "EVO013":
-    case "EVO105":
-    case "EVO106":
-    case "EVO107":
-    case "EVO111":
-    case "EVO112":
-    case "EVO113":
-    case "EVO114":
-    case "EVO115":
-    case "EVO116":
-    case "EVO117":
-    case "EVO118":
-    case "EVO119":
-    case "EVO120":
-    case "EVO121":
-    case "EVO122":
-    case "EVO123":
-    case "EVO124":
-    case "EVO125":
-    case "EVO141":
+    case "adaptive_plating":
+    case "ratchet_up_red":
+    case "ratchet_up_yellow":
+    case "ratchet_up_blue":
+    case "soup_up_red":
+    case "soup_up_yellow":
+    case "soup_up_blue":
+    case "torque_tuned_red":
+    case "torque_tuned_yellow":
+    case "torque_tuned_blue":
+    case "cognition_field_red":
+    case "cognition_field_yellow":
+    case "cognition_field_blue":
+    case "infuse_alloy_red":
+    case "infuse_alloy_yellow":
+    case "infuse_alloy_blue":
+    case "infuse_titanium_red":
+    case "infuse_titanium_yellow":
+    case "infuse_titanium_blue":
+    case "steel_street_hoons_blue":
       return true;
     default:
       return false;
@@ -4436,7 +4458,7 @@ function HasGalvanize($cardID)
 function PowerCantBeModified($cardID)
 {
   switch ($cardID) {
-    case "DTD201":
+    case "numbskull_red":
       return true;
     default:
       return false;
@@ -4446,7 +4468,7 @@ function PowerCantBeModified($cardID)
 function CostCantBeModified($cardID)
 {
   switch ($cardID) {
-    case "DTD201":
+    case "numbskull_red":
       return true;
     default:
       return false;
@@ -4456,7 +4478,7 @@ function CostCantBeModified($cardID)
 function BlockCantBeModified($cardID)
 {
   switch ($cardID) {
-    case "DTD201":
+    case "numbskull_red":
       return true;
     default:
       return false;
@@ -4467,9 +4489,9 @@ function Rarity($cardID)
 {
   $set = CardSet($cardID);
   switch ($cardID) {
-    case "MST167":
-    case "MST168":
-    case "MST169": // Commoner workaround. Can be deleted later when the database is updated.
+    case "qi_unleashed_red":
+    case "qi_unleashed_yellow":
+    case "qi_unleashed_blue": // Commoner workaround. Can be deleted later when the database is updated.
       return "C";
   }
   if ($set != "ROG" && $set != "DUM") {
@@ -4489,16 +4511,16 @@ function CardCareAboutChiPitch($cardID)
 {
   $cardID = ShiyanaCharacter($cardID);
   switch ($cardID) {
-    case "MST001":
-    case "MST002":
-    case "MST004":
-    case "MST025":
-    case "MST026":
-    case "MST027":
-    case "MST046":
-    case "MST047":
-    case "MST048":
-    case "MST238":
+    case "nuu_alluring_desire":
+    case "nuu":
+    case "mask_of_recurring_nightmares":
+    case "enigma_ledger_of_ancestry":
+    case "enigma":
+    case "meridian_pathway":
+    case "zen_tamer_of_purpose":
+    case "zen":
+    case "twelve_petal_kasaya":
+    case "enigma_new_moon":
       return true;
     default:
       return false;
@@ -4508,8 +4530,8 @@ function CardCareAboutChiPitch($cardID)
 function IsModular($cardID)
 {
   switch ($cardID) {
-    case "EVO013":
-    case "ROS246":
+    case "adaptive_plating":
+    case "adaptive_dissolver":
       return true;
     default:
       return false;
@@ -4519,21 +4541,21 @@ function IsModular($cardID)
 function HasCloaked($cardID, $player = "", $hero = "")
 {
   $char = GetPlayerCharacter($player);
-  if (TypeContains($cardID, "E", $player) && $hero == "MST238") return "DOWN";
+  if (TypeContains($cardID, "E", $player) && $hero == "enigma_new_moon") return "DOWN";
   switch ($cardID) {
-    case "MST005":
-    case "MST028":
-    case "MST029":
-    case "MST030":
-    case "MST049":
-    case "MST067":
-    case "MST068":
-    case "MST069":
-    case "MST070":
-    case "MST071":
-    case "MST072":
-    case "MST073":
-    case "MST074":
+    case "heirloom_of_snake_hide":
+    case "heirloom_of_rabbit_hide":
+    case "truths_retold":
+    case "uphold_tradition":
+    case "heirloom_of_tiger_hide":
+    case "aqua_seeing_shell":
+    case "koi_blessed_kimono":
+    case "waves_of_aqua_marine":
+    case "aqua_laps":
+    case "skycrest_keikoi":
+    case "skybody_keikoi":
+    case "skyhold_keikoi":
+    case "skywalker_keikoi":
       return "DOWN";
     default:
       return "UP";
@@ -4543,9 +4565,9 @@ function HasCloaked($cardID, $player = "", $hero = "")
 function HasEphemeral($cardID)
 {
   switch ($cardID) {
-    case "DYN065":
-    case "MST023":
-    case "MST024":
+    case "crouching_tiger":
+    case "fang_strike":
+    case "slither":
       return true;
     default:
       return false;
@@ -4569,15 +4591,15 @@ function HasAttackLayer()
 
 function HasMeld($cardID){
   switch ($cardID) {
-    case "ROS005":
-    case "ROS006":
-    case "ROS011":
-    case "ROS012":
-    case "ROS017":
-    case "ROS018":
-    case "ROS023":
-    case "ROS024":
-    case "ROS253":
+    case "thistle_bloom__life_yellow":
+    case "arcane_seeds__life_red":
+    case "vaporize__shock_yellow":
+    case "burn_up__shock_red":
+    case "rampant_growth__life_yellow":
+    case "pulsing_aether__life_red":
+    case "null__shock_yellow":
+    case "comet_storm__shock_red":
+    case "regrowth__shock_blue":
       return true;
     default:
       return false;
@@ -4641,17 +4663,17 @@ Function IsMeldLeftSideName($term){
 
 function HasEssenceOfEarth($cardID){
   switch ($cardID) {
-    case "ELE001":
-    case "ELE002":
-    case "ELE062":
-    case "ELE063":
-    case "EVR017":
-    case "ROS001":
-    case "ROS002":
-    case "ROS013":
-    case "ROS014":
-    case "TER001":
-    case "AJV001": 
+    case "oldhim_grandfather_of_eternity":
+    case "oldhim":
+    case "briar_warden_of_thorns":
+    case "briar":
+    case "bravo_star_of_the_show":
+    case "florian_rotwood_harbinger":
+    case "florian":
+    case "verdance_thorn_of_the_rose":
+    case "verdance":
+    case "terra":
+    case "jarl_vetreidi": 
       return true;
     default:
       return false;
@@ -4660,12 +4682,20 @@ function HasEssenceOfEarth($cardID){
 
 function canBeAddedToChainDuringDR($cardID){
   switch ($cardID) {
-    case "HNT169":
-    case "HNT170":
-    case "HNT171":
-    case "HNT172":
+    case "leap_frog_vocal_sac":
+    case "leap_frog_slime_skin":
+    case "leap_frog_gloves":
+    case "leap_frog_leggings":
       return true;
     default:
       return false;
   }
+}
+
+//utility function for stripping "," and "-" from a card id
+//replaces substr($cardID, 0, 6)
+function ExtractCardID($cardID) {
+  $cardID = explode(",", $cardID)[0];
+  $cardID = explode("-", $cardID)[0];
+  return $cardID;
 }

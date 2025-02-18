@@ -234,7 +234,7 @@ if ($decklink != "") {
         $restrictedCard .= PitchValue($id) > 0 ? CardName($id) . " (" . PitchValue($id) . ")" : CardName($id);
       }
 
-      if($character != "TCC027" && $id != "TCC048") { //Exclude Brevant and Chivalry
+      if($character != "brevant,_civic_protector" && $id != "chivalry_3") { //Exclude Brevant and Chivalry
         // Deck Check to make sure players don't run more than 2 copies of cards in Young Hero formats
         if (($format == "blitz" || $format == "compblitz" || $format == "openformatblitz" || $format == "clash") && $cardCounts[$id] > 2) {
           if ($isDeckBlitzLegal != "") $isDeckBlitzLegal .= ", ";
@@ -432,75 +432,76 @@ session_write_close();
 function GetAltCardID($cardID)
 {
   switch ($cardID) {
-    case "OXO001": return "WTR155";
-    case "OXO002": return "WTR156";
-    case "OXO003": return "WTR157";
-    case "OXO004": return "WTR158";
-    case "BOL002": return "MON405";
-    case "BOL006": return "MON400";
-    case "CHN002": return "MON407";
-    case "CHN006": return "MON401";
-    case "LEV002": return "MON406";
-    case "LEV005": return "MON400";
-    case "PSM002": return "MON404";
-    case "PSM007": return "MON402";
-    case "FAB015": return "WTR191";
-    case "FAB016": return "WTR162";
-    case "FAB023": return "MON135";
-    case "FAB024": return "ARC200";
-    case "FAB030": return "DYN030";
-    case "FAB057": return "EVR063";
-    case "DVR026": return "WTR182";
-    case "RVD008": return "WTR006";
-    case "EVR120": return "UPR103";
-    case "UPR209": return "WTR191";
-    case "UPR210": return "WTR192";
-    case "UPR211": return "WTR193";
-    case "HER075": return "DYN025";
-    case "LGS112": return "DYN070";
-    case "LGS116": return "DYN200";
-    case "LGS117": return "DYN201";
-    case "LGS118": return "DYN202";
-    case "ARC218": case "UPR224": case "MON306": case "ELE237": return "WTR224";
-    case "DYN238": return "MON401";
-    case "LGS157": return "DTD155";
-    case "LGS158": return "DTD156";
-    case "LGS159": return "DTD157";
-    case "HER085": return "DTD134";
-    case "DTD013": return "MON007";
-    case "FAB161": return "DTD048";
-    case "FAB162": return "DTD049";
-    case "FAB163": return "DTD050";
-    case "LGS179": return "DTD054";
-    case "LGS180": return "DTD055";
-    case "LGS181": return "DTD056";
-    case "EVO038": return "TCC007";
-    case "EVO039": return "TCC008";
-    case "EVO040": return "TCC009";
-    case "EVO041": return "TCC010";
-    case "EVO064"; return "TCC012";
-    case "EVO099": return "ARC036";
-    case "EVO159": return "TCC019";
-    case "EVO160": return "TCC022";
-    case "EVO161": return "TCC026";
-    case "EVO216": return "TCC016";
-    case "TCC003": return "EVO022";
-    case "TCC004": return "EVO023";
-    case "TCC005": return "EVO024";
-    case "TCC006": return "EVO025";
-    case "DRO026": return "WTR173";
-    case "AUR002": return "ROS009";
-    case "JDG032": return "AIO004";
-    case "ARK007": return "HNT407";
+    case "ironrot_helm": return "ironrot_helm";
+    case "ironrot_plate": return "ironrot_plate";
+    case "ironrot_gauntlet": return "ironrot_gauntlet";
+    case "ironrot_legs": return "ironrot_legs";
+    case "minerva_themis": return "minerva_themis";
+    case "spell_fray_cloak": return "MON400";
+    case "lord_sutcliffe": return "lord_sutcliffe";
+    case "spell_fray_gloves": return "MON401";
+    case "lady_barthimont": return "lady_barthimont";
+    case "spell_fray_cloak": return "MON400";
+    case "the_librarian": return "the_librarian";
+    case "spell_fray_leggings": return "MON402";
+    case "scar_for_a_scar_1": return "scar_for_a_scar_1";
+    case "crazy_brew_3": return "crazy_brew_3";
+    case "boneyard_marauder_1": return "boneyard_marauder_1";
+    case "fate_foreseen_1": return "fate_foreseen_1";
+    case "herald_of_protection_2": return "shield_bash_1";
+    case "in_the_swing_1": return "in_the_swing_1";
+    case "flock_of_the_feather_walkers_1": return "flock_of_the_feather_walkers_1";
+    case "alpha_rampage_1": return "alpha_rampage_1";
+    case "iyslander": return "iyslander";
+    case "scar_for_a_scar_1": return "scar_for_a_scar_1";
+    case "scar_for_a_scar_2": return "scar_for_a_scar_2";
+    case "scar_for_a_scar_3": return "scar_for_a_scar_3";
+    case "yoji,_royal_protector": return "yoji,_royal_protector";
+    case "quicksilver_dagger": return "quicksilver_dagger";
+    case "blessing_of_aether_1": return "blessing_of_aether_1";
+    case "blessing_of_aether_2": return "blessing_of_aether_2";
+    case "blessing_of_aether_3": return "blessing_of_aether_3";
+    case "cracked_bauble_2": case "cracked_bauble_2": case "cracked_bauble_2": case "cracked_bauble_2": return "cracked_bauble_2";
+    case "spell_fray_gloves": return "MON401";
+    case "vantom_banshee_1": return "vantom_banshee_1";
+    case "vantom_banshee_2": return "vantom_banshee_2";
+    case "vantom_banshee_3": return "vantom_banshee_3";
+    case "vynnset": return "vynnset";
+    case "herald_of_judgment_2": return "herald_of_judgment_2";
+    case "banneret_of_courage_2": return "banneret_of_courage_2";
+    case "banneret_of_gallantry_2": return "banneret_of_gallantry_2";
+    case "banneret_of_protection_2": return "banneret_of_protection_2";
+    case "banneret_of_resilience_2": return "banneret_of_resilience_2";
+    case "banneret_of_salvation_2": return "banneret_of_salvation_2";
+    case "banneret_of_vigor_2": return "banneret_of_vigor_2";
+    case "evo_tekloscope_3": return "evo_tekloscope_3";
+    case "evo_energy_matrix_3": return "evo_energy_matrix_3";
+    case "evo_scatter_shot_3": return "evo_scatter_shot_3";
+    case "evo_rapid_fire_3": return "evo_rapid_fire_3";
+    case "liquid-cooled_mayhem_1"; return "liquid-cooled_mayhem_1";
+    case "hyper_driver_1": return "hyper_driver_1";
+    case "firewall_1": return "firewall_1";
+    case "firewall_2": return "firewall_2";
+    case "firewall_3": return "firewall_3";
+    case "under_loop_1": return "under_loop_1";
+    case "proto_base_head": return "proto_base_head";
+    case "proto_base_chest": return "proto_base_chest";
+    case "proto_base_arms": return "proto_base_arms";
+    case "proto_base_legs": return "proto_base_legs";
+    case "sigil_of_solace_1": return "sigil_of_solace_1";
+    case "star_fall": return "star_fall";
+    case "heavy_industry_power_plant": return "heavy_industry_power_plant";
+    case "the_hand_that_pulls_the_strings": return "the_hand_that_pulls_the_strings";
   }
   return $cardID;
 }
 
 function isClashLegal($cardID, $character) {
-  $set = substr($cardID, 0, 3);
-  $number = intval(substr($cardID, 3, 3));
+  $setID = SetID($cardID);
+  $set = substr($setID, 0, 3);
+  $number = intval(substr($setID, 3, 3));
   switch ($cardID) { //Special Use Promos
-    case "JDG001": case "JDG003": case "JDG006": case "JDG010": case "JDG010": case "JDG019": case "JDG024": case "JDG025": case "JDG038":
+    case "taipanis,_dracai_of_judgement": case "proclamation_of_requisition": case "theryon,_magister_of_justice": case "proclamation_of_abundance": case "proclamation_of_abundance": case "proclamation_of_production": case "brutus,_summa_rudis": case "proclamation_of_combat": case "magrar":
       return true;
       default:
       break;
@@ -512,15 +513,16 @@ function isClashLegal($cardID, $character) {
   }
   if(IsSpecialization($cardID)) return true;
   if(Rarity($cardID) == "C" || Rarity($cardID) == "T" || Rarity($cardID) == "R") return true;
-  if(($character == "DYN001" || $character == "") && $cardID == "ARC159") return true; //C&C is legal for Emperor in Clash
-  if(($character == "DTD002" || $character == "") && $set == "DTD" && $number >= 5 && $number <= 12) return true; //Figments are legal for Prism in Clash
+  if(($character == "emperor,_dracai_of_aesir" || $character == "") && $cardID == "command_and_conquer_1") return true; //C&C is legal for Emperor in Clash
+  if(($character == "prism,_advent_of_thrones" || $character == "") && $set == "DTD" && $number >= 5 && $number <= 12) return true; //Figments are legal for Prism in Clash
   return false;
 }
 
 function IsCardBanned($cardID, $format, $character)
 {
-  $set = substr($cardID, 0, 3);
-  if ($format == "commoner" && (Rarity($cardID) != "C" && Rarity($cardID) != "T" && Rarity($cardID) != "R") && CardType($cardID) != "C" && $cardID != "CRU187") return true;
+  $setID = SetID($cardID);
+  $set = substr($setID, 0, 3);
+  if ($format == "commoner" && (Rarity($cardID) != "C" && Rarity($cardID) != "T" && Rarity($cardID) != "R") && CardType($cardID) != "C" && $cardID != "springboard_somersault_2") return true;
   if ($format == "clash") return !isClashLegal($cardID, $character);
 
   //Ban spoiler cards in non-open-format
@@ -533,8 +535,8 @@ function isCardRestricted($cardID, $format, $count) {
 
   $restrictedCards = [
     "llcc" => [
-      "WTR043", "ELE005", "ELE006", "UPR139", "DTD230", "OUT056", "OUT057", "OUT058", 
-      "ROS195", "ROS196", "ROS197", 
+      "crippling_crush_1", "oaken_old_1", "awakening_3", "hypothermia_3", "warmonger's_diplomacy_3", "bonds_of_ancestry_1", "bonds_of_ancestry_2", "bonds_of_ancestry_3", 
+      "open_the_flood_gates_1", "open_the_flood_gates_2", "open_the_flood_gates_3", 
     ]
   ];
 
@@ -543,9 +545,9 @@ function isCardRestricted($cardID, $format, $count) {
 
 function isSpecialUsePromo($cardID) {
   $specialUsePromos = [
-      "JDG001", "JDG002", "JDG003", "JDG004", "JDG005", "JDG006", "JDG008", "JDG010",
-      "JDG019", "JDG024", "JDG025", "JDG038", "LSS001", "LSS002", "LSS003", "LSS004", "LSS005",
-      "LSS006", "LSS007", "LSS008", "FAB094", "LGS099", "HER101"
+      "taipanis,_dracai_of_judgement", "taipanis,_dracai_of_judgement", "proclamation_of_requisition", "proclamation_of_requisition", "gavel_of_natural_order", "theryon,_magister_of_justice", "theryon,_magister_of_justice", "proclamation_of_abundance",
+      "proclamation_of_production", "brutus,_summa_rudis", "proclamation_of_combat", "magrar", "ruu'di,_gem_keeper", "go_bananas_2", "taylor", "yorick,_weaver_of_tales", "tales_of_adventure_3",
+      "good_deeds_don't_go_unnoticed_2", "pink_visor", "diamond_hands", "hummingbird,_call_of_adventure", "shitty_xmas_present_2", "squizzy_&_floof"
   ];
   return in_array($cardID, $specialUsePromos);
 }
@@ -556,25 +558,25 @@ function isBannedInFormat($cardID, $format) {
 
   $bannedCards = [
       "blitz" => [
-          "WTR002", "WTR160", "WTR164", "WTR165", "WTR166", "ARC002", "ARC003", "ARC076", "ARC077",
-          "ARC122", "ARC160", "ELE006", "ELE063", "ELE186", "ELE187", "ELE188", "ELE222", "ELE223",
-          "WTR152", "CRU141", "CRU174", "CRU175", "CRU176", "CRU188", "MON065", "MON239", "EVR037",
-          "UPR089", "UPR103", "EVR120", "EVR121", "ELE002", "ELE003", "MON154", "MON155", "ARC114",
-          "ARC115", "CRU159", "CRU077", "CRU046", "CRU050", "DYN009", "OUT056", "OUT057", "OUT058",
-          "HVY048", "HVY050", "MST080", "MON266", "MON267", "MON268"
+          "rhinar", "tome_of_fyendal_2", "drone_of_brutality_1", "drone_of_brutality_2", "drone_of_brutality_3", "dash", "teklo_plasma_pistol", "viserai", "nebula_blade",
+          "tome_of_aetherwind_1", "art_of_war_2", "awakening_3", "briar", "ball_lightning_1", "ball_lightning_2", "ball_lightning_3", "rosetta_thorn", "duskblade",
+          "heartened_cross_strap", "bloodsheath_skeleta", "snapback_1", "snapback_2", "snapback_3", "cash_in_2", "tome_of_divinity_2", "stubby_hammerers", "mask_of_the_pouncing_lynx",
+          "tome_of_firebrand_1", "iyslander", "iyslander", "kraken's_aethervein", "oldhim", "winter's_wail", "chane", "galaxxi_black", "kano",
+          "crucible_of_aetherweave", "crucible_of_aetherweave", "kassai,_cintari_sellsword", "ira,_crimson_haze", "edge_of_autumn", "berserk_2", "bonds_of_ancestry_1", "bonds_of_ancestry_2", "bonds_of_ancestry_3",
+          "victor_goldmane", "miller's_grindstone", "orihon_of_mystic_tenets_3", "belittle_1", "belittle_2", "belittle_3"
       ],
       "cc" => [
-          "WTR160", "WTR164", "WTR165", "WTR166", "ARC122", "ARC160", "ARC170", "ARC171", "ARC172",
-          "CRU141", "CRU188", "MON001", "MON003", "MON065", "MON153", "MON155", "MON239", "MON266",
-          "MON267", "MON268", "ELE006", "ELE186", "ELE187", "ELE188", "ELE223", "ELE115", "ELE031",
-          "ELE034", "ELE062", "ELE222", "ELE001", "ELE003", "EVR017", "UPR001", "UPR003", "UPR089",
-          "UPR102", "EVR121", "DYN009", "OUT056", "OUT057", "OUT058", "MST080", "ARC006", "ROS225"
+          "tome_of_fyendal_2", "drone_of_brutality_1", "drone_of_brutality_2", "drone_of_brutality_3", "tome_of_aetherwind_1", "art_of_war_2", "plunder_run_1", "plunder_run_2", "plunder_run_3",
+          "bloodsheath_skeleta", "cash_in_2", "prism,_sculptor_of_arc_light", "luminaris", "tome_of_divinity_2", "chane,_bound_by_shadow", "galaxxi_black", "stubby_hammerers", "belittle_1",
+          "belittle_2", "belittle_3", "awakening_3", "ball_lightning_1", "ball_lightning_2", "ball_lightning_3", "duskblade", "crown_of_seeds", "lexi,_livewire",
+          "voltaire,_strike_twice", "briar,_warden_of_thorns", "rosetta_thorn", "oldhim,_grandfather_of_eternity", "winter's_wail", "bravo,_star_of_the_show", "dromai,_ash_artist", "storm_of_sandikai", "tome_of_firebrand_1",
+          "iyslander,_stormbind", "kraken's_aethervein", "berserk_2", "bonds_of_ancestry_1", "bonds_of_ancestry_2", "bonds_of_ancestry_3", "orihon_of_mystic_tenets_3", "high_octane_1", "count_your_blessings_3"
       ],
       "commoner" => [
-          "ELE172", "ELE186", "ELE187", "ELE188", "MON266", "MON267", "MON268", "MON230"
+          "amulet_of_ice_3", "ball_lightning_1", "ball_lightning_2", "ball_lightning_3", "belittle_1", "belittle_2", "belittle_3", "aether_ironweave"
       ],
       "llcc" => [
-          "EVR121"
+          "kraken's_aethervein"
       ]
   ];
 
@@ -584,15 +586,15 @@ function isBannedInFormat($cardID, $format) {
 function ReverseArt($cardID)
 {
   switch ($cardID) {
-    case "WTR078": return "CRU049";
-    case "CRU004": return "CRU005";
-    case "CRU051": return "CRU052";
-    case "CRU079": return "CRU080";
-    case "DYN069": return "DYN070";
-    case "DYN115": return "DYN116";
-    case "OUT005": return "OUT006";
-    case "OUT007": return "OUT008";
-    case "OUT009": return "OUT010";
+    case "harmonized_kodachi": return "harmonized_kodachi";
+    case "mandible_claw": return "mandible_claw";
+    case "zephyr_needle": return "zephyr_needle";
+    case "cintari_saber": return "cintari_saber";
+    case "quicksilver_dagger": return "quicksilver_dagger";
+    case "spider's_bite": return "spider's_bite";
+    case "nerve_scalpel": return "nerve_scalpel";
+    case "orbitoclast": return "orbitoclast";
+    case "scale_peeler": return "scale_peeler";
     default:
       return $cardID;
   }
@@ -606,20 +608,8 @@ function GetCardId($card, $isFaBDB, $isFaBMeta, $orderedSets) {
       return explode("-", $sku->{'sku'})[0];
   } elseif ($isFaBMeta) {
       return $card->{'identifier'};
-  } elseif (isset($card->{'setIdentifiers'})) {
-      $earliest = -1;
-      $id = "";
-      foreach ($card->{'setIdentifiers'} as $setCard) {
-          $set = substr($setCard, 0, 3);
-          for ($j = 0; $j < count($orderedSets); ++$j) {
-              if ($orderedSets[$j] == $set && ($earliest == -1 || $j < $earliest)) {
-                  $earliest = $j;
-                  $id = $setCard;
-                  break;
-              }
-          }
-      }
-      return $id;
+  } elseif (isset($card->{'identifier'})) {
+      return str_replace("-", "_", $card->{'identifier'});
   } elseif (isset($card->{'cardIdentifier'})) {
       return $card->{'cardIdentifier'};
   }
@@ -627,7 +617,7 @@ function GetCardId($card, $isFaBDB, $isFaBMeta, $orderedSets) {
 }
 
 function ProcessCard($id, $count, $numSideboard, $isFaBDB, &$totalCards, &$modularSideboard, &$unsupportedCards, &$character, &$weapon1, &$weapon2, &$weaponSideboard, &$head, &$headSideboard, &$chest, &$chestSideboard, &$arms, &$armsSideboard, &$legs, &$legsSideboard, &$offhand, &$offhandSideboard, &$quiver, &$quiverSideboard, &$deckCards, &$sideboardCards) {
-  $id = GetAltCardID($id);
+  // $id = GetAltCardID($id);
   $cardName = CardName($id); 
   if ($cardName == "") {
       if ($unsupportedCards != "") $unsupportedCards .= " ";

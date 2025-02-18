@@ -4,7 +4,7 @@ function AKOHitEffect($cardID)
 {
   global $mainPlayer, $defPlayer, $combatChainState, $CCS_DamageDealt;
   switch ($cardID) {
-    case "AKO013":
+    case "strength_rules_all_red":
       if (IsHeroAttackTarget()) {
         SetArsenalFacing("UP", $defPlayer);
         AddDecisionQueue("MULTIZONEINDICES", $mainPlayer, "THEIRARS:type=AA;maxAttack=" . $combatChainState[$CCS_DamageDealt] - 1);
@@ -23,17 +23,17 @@ function TCCHitEffect($cardID)
 {
   global $mainPlayer, $defPlayer, $combatChainState, $CCS_GoesWhereAfterLinkResolves;
   switch ($cardID) {
-    case "TCC088":
+    case "mauling_qi_red":
       if (ComboActive()) DamageTrigger($defPlayer, damage: 1, type: "DAMAGE", source: $cardID);
       break;
-    case "TCC016":
+    case "under_loop_red":
       $combatChainState[$CCS_GoesWhereAfterLinkResolves] = "BOTDECK";
       break;
-    case "TCC050":
+    case "jinglewood_smash_hit":
       $charIndex = FindCharacterIndex($mainPlayer, $cardID);
       DestroyCharacter($mainPlayer, $charIndex);
       break;
-    case "TCC083":
+    case "bittering_thorns_red":
       AddCurrentTurnEffectFromCombat($cardID, $mainPlayer);
       break;
     default:
@@ -45,7 +45,7 @@ function EVOHitEffect($cardID)
 {
   global $mainPlayer, $defPlayer, $combatChainState, $CCS_GoesWhereAfterLinkResolves;
   switch ($cardID) {
-    case "EVO006":
+    case "banksy":
       if (IsHeroAttackTarget()) {
         AddDecisionQueue("MULTIZONEINDICES", $mainPlayer, "MYITEMS:hasCrank=true");
         AddDecisionQueue("SETDQCONTEXT", $mainPlayer, "Choose a card with Crank to get a steam counter", 1);
@@ -53,7 +53,7 @@ function EVOHitEffect($cardID)
         AddDecisionQueue("MZADDCOUNTER", $mainPlayer, "-", 1);
       }
       break;
-    case "EVO054":
+    case "annihilator_engine_red":
       if (IsHeroAttackTarget() && EvoUpgradeAmount($mainPlayer) >= 1) {
         global $combatChain, $CombatChain;
         $defendingCards = GetChainLinkCards($defPlayer);
@@ -61,11 +61,11 @@ function EVOHitEffect($cardID)
           $defendingCardsArr = array_reverse(explode(",", GetChainLinkCards($defPlayer, exclCardTypes: "C")));
           foreach ($defendingCardsArr as $defendingCard) {
             if (CardType($combatChain[$defendingCard]) == "E") {
-              WriteLog(CardLink("EVO054", "EVO054") . " destroyed " . CardLink($combatChain[$defendingCard], $combatChain[$defendingCard]) . ".");
+              WriteLog(CardLink("annihilator_engine_red", "annihilator_engine_red") . " destroyed " . CardLink($combatChain[$defendingCard], $combatChain[$defendingCard]) . ".");
               $charID = FindCharacterIndex($defPlayer, $combatChain[$defendingCard]);
               DestroyCharacter($defPlayer, $charID);
             } else {
-              WriteLog(CardLink("EVO054", "EVO054") . " destroyed " . CardLink($combatChain[$defendingCard], $combatChain[$defendingCard]) . ".");
+              WriteLog(CardLink("annihilator_engine_red", "annihilator_engine_red") . " destroyed " . CardLink($combatChain[$defendingCard], $combatChain[$defendingCard]) . ".");
               AddGraveyard($combatChain[$defendingCard], $defPlayer, "CC");
               $CombatChain->Remove($defendingCard);
             }
@@ -73,13 +73,13 @@ function EVOHitEffect($cardID)
         }
       }
       break;
-    case "EVO055":
+    case "terminator_tank_red":
       if (IsHeroAttackTarget() && EvoUpgradeAmount($mainPlayer) >= 1) PummelHit();
       break;
-    case "EVO056":
+    case "war_machine_red":
       if (IsHeroAttackTarget() && EvoUpgradeAmount($mainPlayer) >= 1) DestroyArsenal($defPlayer, effectController: $mainPlayer);
       break;
-    case "EVO138":
+    case "heist_red":
       if (IsHeroAttackTarget()) {
         AddDecisionQueue("MULTIZONEINDICES", $mainPlayer, "MYBANISH:maxCost=1;subtype=Item&THEIRBANISH:maxCost=1;subtype=Item");
         AddDecisionQueue("SETDQCONTEXT", $mainPlayer, "Choose an item to put into play");
@@ -88,37 +88,37 @@ function EVOHitEffect($cardID)
         AddDecisionQueue("PUTPLAY", $mainPlayer, "0", 1);
       }
       break;
-    case "EVO150":
-    case "EVO151":
-    case "EVO152":
+    case "spring_a_leak_red":
+    case "spring_a_leak_yellow":
+    case "spring_a_leak_blue":
       AddDecisionQueue("MULTIZONEINDICES", $mainPlayer, "THEIRITEMS:hasSteamCounter=true&THEIRCHAR:hasSteamCounter=true");
       AddDecisionQueue("SETDQCONTEXT", $mainPlayer, "Choose an equipment, item, or weapon. Remove all steam counters from it.");
       AddDecisionQueue("CHOOSEMULTIZONE", $mainPlayer, "<-", 1);
       AddDecisionQueue("MZREMOVECOUNTER", $mainPlayer, "-", 1);
       break;
-    case "EVO186":
-    case "EVO187":
-    case "EVO188":
-    case "EVO189":
-    case "EVO190":
-    case "EVO191":
+    case "data_link_red":
+    case "data_link_yellow":
+    case "data_link_blue":
+    case "dive_through_data_red":
+    case "dive_through_data_yellow":
+    case "dive_through_data_blue":
       PlayerOpt($mainPlayer, 1);
       break;
-    case "EVO198":
-    case "EVO199":
-    case "EVO200":
-    case "EVO201":
-    case "EVO202":
-    case "EVO203":
+    case "expedite_red":
+    case "expedite_yellow":
+    case "expedite_blue":
+    case "metex_red":
+    case "metex_yellow":
+    case "metex_blue":
       MZMoveCard($mainPlayer, "MYHAND:subtype=Item;maxCost=1", "", may: true);
       AddDecisionQueue("PUTPLAY", $mainPlayer, "0", 1);
       break;
-    case "EVO216":
-    case "EVO217":
-    case "EVO218":
+    case "under_loop_red":
+    case "under_loop_yellow":
+    case "under_loop_blue":
       $combatChainState[$CCS_GoesWhereAfterLinkResolves] = "BOTDECK";
       break;
-    case "EVO236":
+    case "already_dead_red":
       if (IsHeroAttackTarget()) {
         $deck = new Deck($defPlayer);
         if ($deck->Empty()) {
@@ -132,10 +132,10 @@ function EVOHitEffect($cardID)
         AddDecisionQueue("ALREADYDEAD", $mainPlayer, "-", 1);
       }
       break;
-    case "EVO241":
+    case "intoxicating_shot_blue":
       if (!IsAllyAttackTarget()) {
-        PlayAura("DTD232", $defPlayer);
-        PlayAura("WTR225", $defPlayer);
+        PlayAura("courage", $defPlayer);
+        PlayAura("quicken", $defPlayer);
       }
       break;
     default:
@@ -147,7 +147,7 @@ function HVYHitEffect($cardID)
 {
   global $mainPlayer, $defPlayer, $currentTurnEffects;;
   switch ($cardID) {
-    case "HVY012":
+    case "send_packing_yellow":
       for ($i = 0; $i < count($currentTurnEffects); $i += CurrentTurnEffectsPieces()) {
         if ($currentTurnEffects[$i] == $cardID) {
           RemoveCurrentTurnEffect($i);
@@ -155,14 +155,14 @@ function HVYHitEffect($cardID)
         }
       }
       break;
-    case "HVY050":
+    case "millers_grindstone":
       if (IsHeroAttackTarget()) {
         Clash($cardID, $mainPlayer);
       }
       break;
-    case "HVY071":
-    case "HVY072":
-    case "HVY073":
+    case "command_respect_red":
+    case "command_respect_yellow":
+    case "command_respect_blue":
       if (IsHeroAttackTarget() && HasIncreasedAttack()) {
         AddDecisionQueue("MULTIZONEINDICES", $mainPlayer, "THEIRARS", 1);
         AddDecisionQueue("SETDQCONTEXT", $mainPlayer, "Choose a card you want to destroy from their arsenal", 1);
@@ -170,35 +170,35 @@ function HVYHitEffect($cardID)
         AddDecisionQueue("MZDESTROY", $mainPlayer, false, 1);
       }
       break;
-    case "HVY074":
-    case "HVY075":
-    case "HVY076":
+    case "concuss_red":
+    case "concuss_yellow":
+    case "concuss_blue":
       if (IsHeroAttackTarget() && HasIncreasedAttack()) PummelHit();
       break;
-    case "HVY208":
+    case "pay_up_red":
       if (IsHeroAttackTarget()) {
-        AddDecisionQueue("MULTIZONEINDICES", $mainPlayer, "THEIRITEMS:type=T;cardID=DYN243");
+        AddDecisionQueue("MULTIZONEINDICES", $mainPlayer, "THEIRITEMS:type=T;cardID=gold");
         AddDecisionQueue("CHOOSEMULTIZONE", $mainPlayer, "<-", 1);
         AddDecisionQueue("MZOP", $mainPlayer, "GAINCONTROL", 1);
         AddDecisionQueue("ELSE", $mainPlayer, "-");
         AddDecisionQueue("DEAL1DAMAGE", $defPlayer, $cardID, 1);
       }
       break;
-    case "HVY213":
-    case "HVY214":
-    case "HVY215":
+    case "down_but_not_out_red":
+    case "down_but_not_out_yellow":
+    case "down_but_not_out_blue":
       if (SearchCurrentTurnEffects($cardID, $mainPlayer, true)) {
-        PlayAura("HVY240", $mainPlayer); //Agility
-        PlayAura("HVY241", $mainPlayer); //Might
-        PlayAura("HVY242", $mainPlayer); //Vigor
+        PlayAura("agility", $mainPlayer); //Agility
+        PlayAura("might", $mainPlayer); //Might
+        PlayAura("vigor", $mainPlayer); //Vigor
       }
       break;
-    case "HVY225":
-    case "HVY226":
-    case "HVY227":
-      PutItemIntoPlayForPlayer("DYN243", $mainPlayer, effectController: $mainPlayer);//Gold
+    case "performance_bonus_red":
+    case "performance_bonus_yellow":
+    case "performance_bonus_blue":
+      PutItemIntoPlayForPlayer("gold", $mainPlayer, effectController: $mainPlayer);//Gold
       return "";
-    case "HVY249":
+    case "judge_jury_executioner_red":
       if (HasAimCounter() && IsHeroAttackTarget()) {
         $defPlayerHand = &GetHand($defPlayer);
         $defPlayerDiscardNum = count($defPlayerHand) - 1;

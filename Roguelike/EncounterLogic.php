@@ -141,7 +141,7 @@ function GetRandomCards($inputString)
       array_push($result, $pool[rand(0, count($pool) - 1)]);
       return $result[0];
     case "ResourceGems":
-      $poolResources = array("WTR000", "ARC000", "EVR000", "CRU000", "UPR000", "DVR027", "WTR224", "ARC218", "MON306", "ELE237", "UPR224"); //5 cracked baubles to weight them as more likely to occur. 11 options equally likely
+      $poolResources = array("heart_of_fyendal_blue", "eye_of_ophidia_blue", "grandeur_of_valahai_blue", "arknight_shard_blue", "blood_of_the_dracai_red", "titanium_bauble_blue", "cracked_bauble_yellow", "cracked_bauble_yellow", "cracked_bauble_yellow", "cracked_bauble_yellow", "cracked_bauble_yellow"); //5 cracked baubles to weight them as more likely to occur. 11 options equally likely
       return $poolResources[rand(0, count($poolResources) - 1)];
   }
 }

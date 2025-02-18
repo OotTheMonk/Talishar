@@ -3,12 +3,12 @@
 function ROSAbilityType($cardID): string
 {
   return match ($cardID) {
-    "ROS007", "ROS008", "ROS019", "ROS020", "ROS021", "ROS027",
-    "ROS030", "ROS071", "ROS073", "ROS164", "ROS212", "ROS213",
-    "ROS214", "ROS249", "ROS250", "ROS163" => "I",
-    "ROS015", "ROS115", "ROS116", "ROS165" => "A",
-    "ROS003", "ROS009" => "AA",
-    "ROS246" => "A",
+    "aurora_shooting_star", "aurora", "oscilio_constella_intelligence", "oscilio", "volzar_the_lightning_rod", "sanctuary_of_aria",
+    "well_grounded", "lightning_greaves", "twinkle_toes", "inklined_cloak", "hood_of_second_thoughts", "bruised_leather",
+    "four_finger_gloves", "calming_cloak", "calming_gesture", "aether_bindings_of_the_third_age" => "I",
+    "staff_of_verdant_shoots", "bloodtorn_bodice", "runehold_release", "hold_focus" => "A",
+    "rotwood_reaper", "star_fall" => "AA",
+    "adaptive_dissolver" => "A",
     default => ""
   };
 }
@@ -17,10 +17,10 @@ function ROSAbilityCost($cardID): int
 {
   global $currentPlayer;
   return match ($cardID) {
-    "ROS015" => 3,
-    "ROS003", "ROS007", "ROS008", "ROS027" => 2,
-    "ROS009", "ROS071", "ROS249", "ROS250" => 1,
-    "ROS021" => HasAuraWithSigilInName($currentPlayer) ? 0 : 1,
+    "staff_of_verdant_shoots" => 3,
+    "rotwood_reaper", "aurora_shooting_star", "aurora", "sanctuary_of_aria" => 2,
+    "star_fall", "lightning_greaves", "calming_cloak", "calming_gesture" => 1,
+    "volzar_the_lightning_rod" => HasAuraWithSigilInName($currentPlayer) ? 0 : 1,
     default => 0
   };
 }
@@ -28,7 +28,7 @@ function ROSAbilityCost($cardID): int
 function ROSAbilityHasGoAgain($cardID): bool
 {
   return match ($cardID) {
-    "ROS015", "ROS115", "ROS116", "ROS165" => true,
+    "staff_of_verdant_shoots", "bloodtorn_bodice", "runehold_release", "hold_focus" => true,
     default => false,
   };
 }
@@ -36,9 +36,9 @@ function ROSAbilityHasGoAgain($cardID): bool
 function ROSEffectAttackModifier($cardID): int
 {
   return match ($cardID) {
-    "ROS066", "ROS112", "ROS129" => 1,
-    "ROS065", "ROS111", "ROS128" => 2,
-    "ROS064", "ROS110", "ROS127", "ROS248" => 3,
+    "strong_yield_blue", "electrostatic_discharge_blue", "condemn_to_slaughter_blue" => 1,
+    "strong_yield_yellow", "electrostatic_discharge_yellow", "condemn_to_slaughter_yellow" => 2,
+    "strong_yield_red", "electrostatic_discharge_red", "condemn_to_slaughter_red", "unsheathed_red" => 3,
     default => 0,
   };
 }
@@ -49,14 +49,14 @@ function ROSCombatEffectActive($cardID, $attackID): bool
   $actionsPlayed = explode(",", GetClassState($mainPlayer, $CS_ActionsPlayed));
   $numActions = count($actionsPlayed);    
   return match ($cardID) {
-    "ROS010-GOAGAIN" => TypeContains($attackID, "AA", $mainPlayer) || TypeContains($attackID, "A", $mainPlayer), //Arc Lightning giving next action go again.
-    "ROS064", "ROS065", "ROS066", "ROS012", "ROS076" => true,
-    "ROS074" => $actionsPlayed[$numActions-2] == "ROS074" && $actionsPlayed[$numActions-1] != "ROS074" && (TypeContains($attackID, "AA", $mainPlayer) || TypeContains($attackID, "AA", $mainPlayer)),
-    "ROS075" => true,
-    "ROS110", "ROS111", "ROS112" => CardType($attackID) == "AA" && CardCost($attackID) <= 1,
-    "ROS118" => CardType($attackID) == "AA" && ClassContains($attackID, "RUNEBLADE", $mainPlayer),
-    "ROS127", "ROS128", "ROS129", "ROS119" => ClassContains($attackID, "RUNEBLADE", $mainPlayer),
-    "ROS248" => CardSubType($attackID) == "Sword", // this conditional should remove both the buff and 2x attack bonus go again.
+    "arc_lightning_yellow-GOAGAIN" => TypeContains($attackID, "AA", $mainPlayer) || TypeContains($attackID, "A", $mainPlayer), //Arc Lightning giving next action go again.
+    "strong_yield_red", "strong_yield_yellow", "strong_yield_blue", "burn_up__shock_red", "gone_in_a_flash_red" => true,
+    "current_funnel_blue" => $actionsPlayed[$numActions-2] == "current_funnel_blue" && $actionsPlayed[$numActions-1] != "current_funnel_blue" && (TypeContains($attackID, "AA", $mainPlayer) || TypeContains($attackID, "AA", $mainPlayer)),
+    "eclectic_magnetism_red" => true,
+    "electrostatic_discharge_red", "electrostatic_discharge_yellow", "electrostatic_discharge_blue" => CardType($attackID) == "AA" && CardCost($attackID) <= 1,
+    "machinations_of_dominion_blue" => CardType($attackID) == "AA" && ClassContains($attackID, "RUNEBLADE", $mainPlayer),
+    "condemn_to_slaughter_red", "condemn_to_slaughter_yellow", "condemn_to_slaughter_blue", "succumb_to_temptation_yellow" => ClassContains($attackID, "RUNEBLADE", $mainPlayer),
+    "unsheathed_red" => CardSubType($attackID) == "Sword", // this conditional should remove both the buff and 2x attack bonus go again.
     default => false,
   };
 }
@@ -68,47 +68,47 @@ function ROSPlayAbility($cardID, $from, $resourcesPaid, $target = "-", $addition
   global $combatChainState, $CS_ActionsPlayed;
   $otherPlayer = ($currentPlayer == 1 ? 2 : 1);
   switch ($cardID) {
-    case "ROS004":
+    case "germinate_blue":
       $xVal = $resourcesPaid / 2;
       for ($i = 0; $i <= $xVal; $i++) {
         AddDecisionQueue("SETDQCONTEXT", $currentPlayer, "Choose which aura to create:");
-        AddDecisionQueue("CHOOSECARD", $currentPlayer, "ARC112" . "," . "ELE109");
+        AddDecisionQueue("CHOOSECARD", $currentPlayer, "runechant" . "," . "embodiment_of_earth");
         AddDecisionQueue("PUTPLAY", $currentPlayer, "-", 1);
       }
       AddDecisionQueue("GAINLIFE", $currentPlayer, $xVal + 1);
       return "";
-    case "ROS007":
-    case "ROS008":
-      PlayAura("ELE110", $currentPlayer);
+    case "aurora_shooting_star":
+    case "aurora":
+      PlayAura("embodiment_of_lightning", $currentPlayer);
       return "";
-    case "ROS010":
+    case "arc_lightning_yellow":
       AddCurrentTurnEffect($cardID, $currentPlayer);
       AddCurrentTurnEffect($cardID . "-GOAGAIN", $currentPlayer);
       return "";
-    case "ROS015":
+    case "staff_of_verdant_shoots":
       AddCurrentTurnEffect($cardID . "-AMP", $currentPlayer, from: "ABILITY");
       if (SearchCardList($additionalCosts, $currentPlayer, talent: "EARTH") != "") {
         AddCurrentTurnEffect($cardID, $currentPlayer, from: "ABILITY");
       }
       return CardLink($cardID, $cardID) . " is amping 1";
-    case "ROS016":
+    case "heartbeat_of_candlehold_blue":
       GainHealth(1, $currentPlayer);
       GainHealth(1, $currentPlayer);
       GainHealth(1, $currentPlayer);
       return "";
-    case "ROS019":
-    case "ROS020":
+    case "oscilio_constella_intelligence":
+    case "oscilio":
       Draw($currentPlayer);
       return "";
-    case "ROS021":
+    case "volzar_the_lightning_rod":
       $ampAmount = GetClassState($currentPlayer, $CS_NumLightningPlayed);
       if($ampAmount > 0) {
         AddCurrentTurnEffect($cardID . "," . $ampAmount, $currentPlayer, "ABILITY");
       }
       return CardLink($cardID, $cardID) . " is amping " . $ampAmount .".";
-    case "ROS027":
+    case "sanctuary_of_aria":
       if($from == "HAND") {
-        PutItemIntoPlayForPlayer("ROS027", $otherPlayer); //Work around for player to put it in play themselves (Mostly for Blitz LSS precons)
+        PutItemIntoPlayForPlayer("sanctuary_of_aria", $otherPlayer); //Work around for player to put it in play themselves (Mostly for Blitz LSS precons)
       }
       else{
         $params = explode("-", $target);
@@ -123,20 +123,20 @@ function ROSPlayAbility($cardID, $from, $resourcesPaid, $target = "-", $addition
         if(!SearchCurrentTurnEffects($cardID . "-1", $currentPlayer)) AddCurrentTurnEffect($cardID . "-1", $currentPlayer);  
       }
       return "";
-    case "ROS030":
+    case "well_grounded":
       IncrementClassState($currentPlayer, $CS_DamagePrevention, 2);
       return "";
-    case "ROS031":
-    case "ROS032":
-    case "ROS042":
-    case "ROS043":
-    case "ROS044":
-    case "ROS049":
-    case "ROS050":
-    case "ROS051":
-    case "ROS052":
-    case "ROS053":
-    case "ROS054":
+    case "felling_of_the_crown_red":
+    case "plow_under_yellow":
+    case "rootbound_carapace_red":
+    case "rootbound_carapace_yellow":
+    case "rootbound_carapace_blue":
+    case "blossoming_decay_red":
+    case "blossoming_decay_yellow":
+    case "blossoming_decay_blue":
+    case "cadaverous_tilling_red":
+    case "cadaverous_tilling_yellow":
+    case "cadaverous_tilling_blue":
       $totalBanishes = 3;
       $earthBanishes = 2; 
       // Only perform the action if we have the minimum # of cards that meet the requirement for total banishes.
@@ -160,15 +160,15 @@ function ROSPlayAbility($cardID, $from, $resourcesPaid, $target = "-", $addition
         AddDecisionQueue("ADDTRIGGER", $currentPlayer, $cardID, 1);
       }
       return "";
-    case "ROS033":
+    case "channel_the_millennium_tree_red":
       AddCurrentTurnEffect($cardID, $currentPlayer);
       return "";
-    case "ROS035":
+    case "seeds_of_tomorrow_blue":
       IncrementClassState($currentPlayer, $CS_DamagePrevention, 5);
       return CardLink($cardID, $cardID) . " is preventing the next 5 damage.";
-    case "ROS039":
-    case "ROS040":
-    case "ROS041":
+    case "summers_fall_red":
+    case "summers_fall_yellow":
+    case "summers_fall_blue":
       $totalBanishes = 3;
       $earthBanishes = 2; 
       // Only perform the action if we have the minimum # of cards that meet the requirement for total banishes.
@@ -196,14 +196,14 @@ function ROSPlayAbility($cardID, $from, $resourcesPaid, $target = "-", $addition
         AddDecisionQueue("SUMMERSFALL", $currentPlayer, $cardID.",NONE");
       }
       return "";
-    case "ROS055":
-    case "ROS056":
-    case "ROS057":
+    case "fruits_of_the_forest_red":
+    case "fruits_of_the_forest_yellow":
+    case "fruits_of_the_forest_blue":
       if (GetResolvedAbilityType($cardID, "HAND") == "I") {
         GainHealth(2, $currentPlayer);
       }
       return "";
-    case "ROS067": //fertile ground red
+    case "fertile_ground_red": //fertile ground red
       $earthCountInBanish = SearchCount(SearchBanish($currentPlayer, talent: "EARTH"));
       WriteLog($earthCountInBanish . " earth cards in banish");
       if ($earthCountInBanish >= 4) {
@@ -212,7 +212,7 @@ function ROSPlayAbility($cardID, $from, $resourcesPaid, $target = "-", $addition
         GainHealth(2, $currentPlayer);
       }
       return "";
-    case "ROS068": //fertile ground yellow
+    case "fertile_ground_yellow": //fertile ground yellow
       $earthCountInBanish = SearchCount(SearchBanish($currentPlayer, talent: "EARTH"));
       if ($earthCountInBanish >= 4) {
         GainHealth(4, $currentPlayer);
@@ -220,7 +220,7 @@ function ROSPlayAbility($cardID, $from, $resourcesPaid, $target = "-", $addition
         GainHealth(2, $currentPlayer);
       }
       return "";
-    case "ROS069": //fertile ground blue
+    case "fertile_ground_blue": //fertile ground blue
       $earthCountInBanish = SearchCount(SearchBanish($currentPlayer, talent: "EARTH"));
       if ($earthCountInBanish >= 4) {
         GainHealth(3, $currentPlayer);
@@ -228,42 +228,42 @@ function ROSPlayAbility($cardID, $from, $resourcesPaid, $target = "-", $addition
         GainHealth(2, $currentPlayer);
       }
       return "";
-    case "ROS071":
+    case "lightning_greaves":
       AddCurrentTurnEffect($cardID, $currentPlayer);
       return "";
-    case "ROS073":
+    case "twinkle_toes":
       IncrementClassState($currentPlayer, $CS_DamagePrevention, 2);
       return "";
-    case "ROS074":
+    case "current_funnel_blue":
       $actionsPlayed = explode(",", GetClassState($currentPlayer, $CS_ActionsPlayed));
       $numActions = count($actionsPlayed);    
       if (count($actionsPlayed) > 1 && TalentContains($actionsPlayed[$numActions-2], "LIGHTNING", $currentPlayer)) {
         AddCurrentTurnEffect($cardID, $currentPlayer);
       }
       return "";
-    case "ROS075":
+    case "eclectic_magnetism_red":
       AddCurrentTurnEffect($cardID, $currentPlayer);
       $combatChainState[$CCS_EclecticMag] = 1;
       return "";
-    case "ROS076":
+    case "gone_in_a_flash_red":
       AddCurrentTurnEffect($cardID, $currentPlayer);
       return "";
-    case "ROS078":
+    case "high_voltage_blue":
       AddCurrentTurnEffect($cardID, $currentPlayer);
       Writelog(CardLink($cardID, $cardID) . " is amping 1");
       return "";
-    case "ROS079":
-    case "ROS080":
-    case "ROS081":
+    case "blast_to_oblivion_red":
+    case "blast_to_oblivion_yellow":
+    case "blast_to_oblivion_blue":
       $combatChainState[$CCS_NextInstantBouncesAura] = 1;
       return "";
-    case "ROS085":
-    case "ROS086":
-    case "ROS087":
+    case "electromagnetic_somersault_red":
+    case "electromagnetic_somersault_yellow":
+    case "electromagnetic_somersault_blue":
       $minCost = match ($cardID) {
-        "ROS085" => 0,
-        "ROS086" => 1,
-        "ROS087" => 2
+        "electromagnetic_somersault_red" => 0,
+        "electromagnetic_somersault_yellow" => 1,
+        "electromagnetic_somersault_blue" => 2
       };
       $options = SearchCombatChainLink($currentPlayer, "AA", minCost: $minCost);
       if($options != "") {
@@ -284,48 +284,48 @@ function ROSPlayAbility($cardID, $from, $resourcesPaid, $target = "-", $addition
         }
       }
       return "";
-    case "ROS101":
-    case "ROS102":
-    case "ROS103":
+    case "second_strike_red":
+    case "second_strike_yellow":
+    case "second_strike_blue":
       if (GetClassState($currentPlayer, $CS_DamageDealt) + GetClassState($currentPlayer, $CS_ArcaneDamageDealt) > 0) GiveAttackGoAgain();
-    case "ROS104":
-    case "ROS105":
-    case "ROS106":
+    case "trip_the_light_fantastic_red":
+    case "trip_the_light_fantastic_yellow":
+    case "trip_the_light_fantastic_blue":
       if (GetResolvedAbilityType($cardID, "HAND") == "I") {
         IncrementClassState($currentPlayer, $CS_DamagePrevention, 2);
         return CardLink($cardID, $cardID) . " is preventing the next 2 damage.";
       }
       return "";
-    case "ROS110":
-    case "ROS111":
-    case "ROS112":
+    case "electrostatic_discharge_red":
+    case "electrostatic_discharge_yellow":
+    case "electrostatic_discharge_blue":
       AddCurrentTurnEffectNextAttack($cardID, $currentPlayer);
       return "";
-    case "ROS115":
+    case "bloodtorn_bodice":
       AddDecisionQueue("MULTIZONEINDICES", $currentPlayer, "MYAURAS");
       AddDecisionQueue("CHOOSEMULTIZONE", $currentPlayer, "<-", 1);
       AddDecisionQueue("MZDESTROY", $currentPlayer, "-", 1);
       AddDecisionQueue("GAINRESOURCES", $currentPlayer, "1", 1);
       return "";
-    case "ROS118":
-    case "ROS119":
+    case "machinations_of_dominion_blue":
+    case "succumb_to_temptation_yellow":
       AddCurrentTurnEffect($cardID, $currentPlayer);
       return "";
-    case "ROS120":
+    case "haunting_rendition_red":
       AddCurrentTurnEffect($cardID, $currentPlayer);
       IncrementClassState($currentPlayer, $CS_DamagePrevention, 2);
       return "";
-    case "ROS121":
-    case "ROS122":
-    case "ROS123":
+    case "splintering_deadwood_red":
+    case "splintering_deadwood_yellow":
+    case "splintering_deadwood_blue":
       AddDecisionQueue("MULTIZONEINDICES", $currentPlayer, "MYAURAS");
       AddDecisionQueue("MAYCHOOSEMULTIZONE", $currentPlayer, "<-", 1);
       AddDecisionQueue("MZDESTROY", $currentPlayer, "-", 1);
-      AddDecisionQueue("PLAYAURA", $currentPlayer, "ARC112", 1);
+      AddDecisionQueue("PLAYAURA", $currentPlayer, "runechant", 1);
       return "";
-    case "ROS127":
-    case "ROS128":
-    case "ROS129":
+    case "condemn_to_slaughter_red":
+    case "condemn_to_slaughter_yellow":
+    case "condemn_to_slaughter_blue":
       AddCurrentTurnEffect($cardID, $currentPlayer);
 
       AddDecisionQueue("MULTIZONEINDICES", $currentPlayer, "MYAURAS");
@@ -335,19 +335,19 @@ function ROSPlayAbility($cardID, $from, $resourcesPaid, $target = "-", $addition
       AddDecisionQueue("CHOOSEMULTIZONE", $otherPlayer, "<-", 1);
       AddDecisionQueue("MZDESTROY", $otherPlayer, "-", 1);
       return "";
-    case "ROS143":
-    case "ROS144":
-    case "ROS145":
-    case "ROS116":
-      PlayAura("ARC112", $currentPlayer);
+    case "hocus_pocus_red":
+    case "hocus_pocus_yellow":
+    case "hocus_pocus_blue":
+    case "runehold_release":
+      PlayAura("runechant", $currentPlayer);
       return "";
-    case "ROS155":
-    case "ROS156":
-    case "ROS157":
+    case "deadwood_dirge_red":
+    case "deadwood_dirge_yellow":
+    case "deadwood_dirge_blue":
       $numRunechants = match ($cardID) {
-        "ROS155" => 3,
-        "ROS156" => 2,
-        "ROS157" => 1
+        "deadwood_dirge_red" => 3,
+        "deadwood_dirge_yellow" => 2,
+        "deadwood_dirge_blue" => 1
       };
       if($currentPlayer == $mainPlayer){
         AddDecisionQueue("MULTIZONEINDICES", $currentPlayer, "MYAURAS");
@@ -357,126 +357,126 @@ function ROSPlayAbility($cardID, $from, $resourcesPaid, $target = "-", $addition
       }
       AddDecisionQueue("CHOOSEMULTIZONE", $currentPlayer, "<-", 1);
       AddDecisionQueue("MZDESTROY", $currentPlayer, "-", 1);
-      AddDecisionQueue("PLAYAURA", $currentPlayer, "ARC112-" . $numRunechants, 1);
+      AddDecisionQueue("PLAYAURA", $currentPlayer, "runechant-" . $numRunechants, 1);
       return "";
-    case "ROS163":
-      AddCurrentTurnEffect("ROS163", $currentPlayer);
+    case "aether_bindings_of_the_third_age":
+      AddCurrentTurnEffect("aether_bindings_of_the_third_age", $currentPlayer);
       return "";
-    case "ROS164":
+    case "inklined_cloak":
       GainResources($currentPlayer, 1);
       return "";
-    case "ROS165":
+    case "hold_focus":
       AddCurrentTurnEffect($cardID, $currentPlayer);
       return "";
-    case "ROS169":
+    case "mental_block_blue":
       AddCurrentTurnEffect($cardID, $currentPlayer);
       IncrementClassState($currentPlayer, $CS_DamagePrevention, 2);
       return "";
-    case "ROS170":
-    case "ROS171":
-    case "ROS172":
+    case "chorus_of_the_amphitheater_red":
+    case "chorus_of_the_amphitheater_yellow":
+    case "chorus_of_the_amphitheater_blue":
       if (GetResolvedAbilityType($cardID, "HAND") == "I" && $from == "HAND") {
         AddCurrentTurnEffect($cardID, $currentPlayer, from: "ABILITY");
       } else {
         DealArcane(ArcaneDamage($cardID), 2, "PLAYCARD", $cardID, resolvedTarget: $target);
       }
       return "";
-    case "ROS173":
-    case "ROS174":
-    case "ROS175":
+    case "glyph_overlay_red":
+    case "glyph_overlay_yellow":
+    case "glyph_overlay_blue":
       $numSigils = 0;
       $sigils = SearchAura($currentPlayer, nameIncludes: "Sigil");
       if($sigils != "") $numSigils = count(explode(",", $sigils));
       DealArcane(ArcaneDamage($cardID) + $numSigils, 0, "PLAYCARD", $cardID, resolvedTarget: $target);
       return "";
-    case "ROS179":
-    case "ROS180":
-    case "ROS181":
+    case "save_the_thought_red":
+    case "save_the_thought_yellow":
+    case "save_the_thought_blue":
       $numCardsShuffled = match ($cardID) {
-        "ROS179" => 3,
-        "ROS180" => 2,
-        "ROS181" => 1
+        "save_the_thought_red" => 3,
+        "save_the_thought_yellow" => 2,
+        "save_the_thought_blue" => 1
       };
       $actions = SearchDiscard($currentPlayer, "A");
-      PlayAura("DYN244", $currentPlayer);
+      PlayAura("ponder", $currentPlayer);
       if ($actions == "") return "";
       AddDecisionQueue("MULTICHOOSEDISCARD", $currentPlayer, $numCardsShuffled . "-" . $actions);
       AddDecisionQueue("SPECIFICCARD", $currentPlayer, "REMEMBRANCE", 1);
       AddDecisionQueue("SHUFFLEDECK", $currentPlayer, "-", 1);
       return "";
-    case "ROS186":
-    case "ROS187":
-    case "ROS188":
+    case "arcane_twining_red":
+    case "arcane_twining_yellow":
+    case "arcane_twining_blue":
       if (GetResolvedAbilityType($cardID, "HAND") == "I" && $from == "HAND") {
         AddCurrentTurnEffect($cardID, $currentPlayer, from: "ABILITY");
       } else {
         DealArcane(ArcaneDamage($cardID), 2, "PLAYCARD", $cardID, resolvedTarget: $target);
       }
       return "";
-    case "ROS192":
-    case "ROS193":
-    case "ROS194":
+    case "exploding_aether_red":
+    case "exploding_aether_yellow":
+    case "exploding_aether_blue":
       $ampAmount = match ($cardID) {
-        "ROS192" => 3,
-        "ROS193" => 2,
-        "ROS194" => 1
+        "exploding_aether_red" => 3,
+        "exploding_aether_yellow" => 2,
+        "exploding_aether_blue" => 1
       };
       AddCurrentTurnEffect($cardID . "," . $ampAmount, $currentPlayer, "PLAY");
       return CardLink($cardID, $cardID) . " is amping " . $ampAmount;
-    case "ROS166"://destructive aethertide
-    case "ROS167"://eternal inferno
-    case "ROS176":
-    case "ROS177":
-    case "ROS178":
-    case "ROS189":
-    case "ROS190":
-    case "ROS191":
-    case "ROS195":
-    case "ROS196":
-    case "ROS197"://open the floodgates
-    case "ROS198":
-    case "ROS199":
-    case "ROS200":
-    case "ROS201":
-    case "ROS202":
-    case "ROS203":
+    case "destructive_aethertide_blue"://destructive aethertide
+    case "eternal_inferno_red"://eternal inferno
+    case "pop_the_bubble_red":
+    case "pop_the_bubble_yellow":
+    case "pop_the_bubble_blue":
+    case "etchings_of_arcana_red":
+    case "etchings_of_arcana_yellow":
+    case "etchings_of_arcana_blue":
+    case "open_the_flood_gates_red":
+    case "open_the_flood_gates_yellow":
+    case "open_the_flood_gates_blue"://open the floodgates
+    case "overflow_the_aetherwell_red":
+    case "overflow_the_aetherwell_yellow":
+    case "overflow_the_aetherwell_blue":
+    case "perennial_aetherbloom_red":
+    case "perennial_aetherbloom_yellow":
+    case "perennial_aetherbloom_blue":
       DealArcane(ArcaneDamage($cardID), 0, "PLAYCARD", $cardID, resolvedTarget: $target);
       return "";
-    case "ROS204":
-    case "ROS205":
-    case "ROS206":
+    case "photon_splicing_red":
+    case "photon_splicing_yellow":
+    case "photon_splicing_blue":
       if (GetResolvedAbilityType($cardID, "HAND") == "I" && $from == "HAND") {
         AddCurrentTurnEffect($cardID, $currentPlayer, from: "ABILITY");
       } else {
         DealArcane(ArcaneDamage($cardID), 2, "PLAYCARD", $cardID, resolvedTarget: $target);
       }
       return "";
-    case "ROS207":
-    case "ROS208":
-    case "ROS209":
+    case "trailblazing_aether_red":
+    case "trailblazing_aether_yellow":
+    case "trailblazing_aether_blue":
       DealArcane(ArcaneDamage($cardID), 0, "PLAYCARD", $cardID, resolvedTarget: $target);
       return "";
-    case "ROS217":
+    case "ten_foot_tall_and_bulletproof_red":
       AddCurrentTurnEffect($cardID, $currentPlayer);
       return "";
-    case "ROS223":
-    case "ROS224":
-    case "ROS225":
+    case "count_your_blessings_red":
+    case "count_your_blessings_yellow":
+    case "count_your_blessings_blue":
       $baseLife = match ($cardID) {
-        "ROS223" => 3,
-        "ROS224" => 2,
-        "ROS225" => 1
+        "count_your_blessings_red" => 3,
+        "count_your_blessings_yellow" => 2,
+        "count_your_blessings_blue" => 1
       };
       $cardsInGraveyard = SearchCount(SearchDiscardByName($currentPlayer, "Count Your Blessings"))-1; //-1 so it doesn't count itself as the card on Talishar goes in the graveyard before it finish resolving
       $cardsInGraveyard = $cardsInGraveyard < 0 ? 0 : $cardsInGraveyard;
       GainHealth($cardsInGraveyard + $baseLife, $currentPlayer); 
       return "";
-    case "ROS212":
-    case "ROS213":
-    case "ROS214":
+    case "hood_of_second_thoughts":
+    case "bruised_leather":
+    case "four_finger_gloves":
       IncrementClassState($currentPlayer, $CS_DamagePrevention);
       return "";
-    case "ROS218":
+    case "call_to_the_grave_blue":
       AddDecisionQueue("FINDINDICES", $currentPlayer, "DECK");
       AddDecisionQueue("MAYCHOOSEDECK", $currentPlayer, "<-", 1);
       AddDecisionQueue("ADDDISCARD", $currentPlayer, "DECK", 1);
@@ -484,31 +484,31 @@ function ROSPlayAbility($cardID, $from, $resourcesPaid, $target = "-", $addition
       AddDecisionQueue("WRITELOG", $currentPlayer, "<0> was chosen.", 1);
       AddDecisionQueue("SHUFFLEDECK", $currentPlayer, "-", 1);
       return "";
-    case "ROS219":
+    case "truce_blue":
       if($currentPlayer == $mainPlayer) AddNextTurnEffect($cardID, $currentPlayer);
       else AddCurrentTurnEffect($cardID, $currentPlayer);
       return "";
-    case "ROS231":
-    case "ROS232":
-    case "ROS233":
+    case "arcane_polarity_red":
+    case "arcane_polarity_yellow":
+    case "arcane_polarity_blue":
       if (GetClassState($currentPlayer, $CS_ArcaneDamageTaken) > 0) {
         $HealthGain = match ($cardID) {
-          "ROS231" => 4,
-          "ROS232" => 3,
-          "ROS233" => 2
+          "arcane_polarity_red" => 4,
+          "arcane_polarity_yellow" => 3,
+          "arcane_polarity_blue" => 2
         };
         GainHealth($HealthGain, $currentPlayer);
       } else {
         GainHealth(1, $currentPlayer);
       }
       return "";
-    case "ROS244":
+    case "drink_em_under_the_table_red":
       if (IsHeroAttackTarget()) AskWager($cardID);
       return "";
-    case "ROS246":
+    case "adaptive_dissolver":
       ModularMove($cardID, $additionalCosts);
       return "";
-    case "ROS247":
+    case "plan_for_the_worst_blue":
       LookAtHand($otherPlayer);
       LookAtArsenal($otherPlayer);
       if ($otherPlayer != $mainPlayer) AddNextTurnEffect($cardID . "-1", $otherPlayer);
@@ -524,16 +524,16 @@ function ROSPlayAbility($cardID, $from, $resourcesPaid, $target = "-", $addition
       AddDecisionQueue("MULTIADDDECK", $currentPlayer, "-");
       AddDecisionQueue("SHUFFLEDECK", $currentPlayer, "-");
       return "";
-    case "ROS248":
+    case "unsheathed_red":
       AddCurrentTurnEffect($cardID, $currentPlayer);
       return "";
-    case "ROS249":
+    case "calming_cloak":
       AddCurrentTurnEffect($cardID, $currentPlayer);
       return "";
-    case "ROS250":
-      PlayAura("MON104", $currentPlayer, 1);
+    case "calming_gesture":
+      PlayAura("spectral_shield", $currentPlayer, 1);
       return "";
-    case "ROS252":
+    case "dust_from_the_fertile_fields_red":
       PutPermanentIntoPlay($currentPlayer, $cardID);
       return "";
     default:
@@ -545,25 +545,25 @@ function ROSHitEffect($cardID): void
 {
   global $currentPlayer, $defPlayer;
   switch ($cardID) {
-    case "ROS036":
-    case "ROS037":
-    case "ROS038":
-      PlayAura("ELE109", $currentPlayer);
+    case "earth_form_red":
+    case "earth_form_yellow":
+    case "earth_form_blue":
+      PlayAura("embodiment_of_earth", $currentPlayer);
       break;
-    case "ROS082":
-    case "ROS083":
-    case "ROS084":
-      PlayAura("ELE110", $currentPlayer);
+    case "lightning_form_red":
+    case "lightning_form_yellow":
+    case "lightning_form_blue":
+      PlayAura("embodiment_of_lightning", $currentPlayer);
       break;
-    case "ROS121":
-    case "ROS122":
-    case "ROS123":
+    case "splintering_deadwood_red":
+    case "splintering_deadwood_yellow":
+    case "splintering_deadwood_blue":
       AddDecisionQueue("MULTIZONEINDICES", $currentPlayer, "MYAURAS");
       AddDecisionQueue("MAYCHOOSEMULTIZONE", $currentPlayer, "<-", 1);
       AddDecisionQueue("MZDESTROY", $currentPlayer, "-", 1);
-      AddDecisionQueue("PLAYAURA", $currentPlayer, "ARC112", 1);
+      AddDecisionQueue("PLAYAURA", $currentPlayer, "runechant", 1);
       break;
-    case "ROS220":
+    case "hand_behind_the_pen_red":
       if (ArsenalHasFaceDownCard($defPlayer)) {
         SetArsenalFacing("UP", $defPlayer);
       }
@@ -573,7 +573,7 @@ function ROSHitEffect($cardID): void
       AddDecisionQueue("MZBANISH", $currentPlayer, "THEIRARS", 1);
       AddDecisionQueue("MZREMOVE", $currentPlayer, "-", 1);
       break;
-    case "ROS221":
+    case "smash_up_red":
       if (ArsenalHasFaceDownCard($defPlayer)) {
         SetArsenalFacing("UP", $defPlayer);
       }
@@ -583,7 +583,7 @@ function ROSHitEffect($cardID): void
       AddDecisionQueue("MZBANISH", $currentPlayer, "THEIRARS", 1);
       AddDecisionQueue("MZREMOVE", $currentPlayer, "-", 1);
       break;
-    case "ROS222":
+    case "tongue_tied_red":
       if (ArsenalHasFaceDownCard($defPlayer)) {
         SetArsenalFacing("UP", $defPlayer);
       }
@@ -593,14 +593,14 @@ function ROSHitEffect($cardID): void
       AddDecisionQueue("MZBANISH", $currentPlayer, "THEIRARS", 1);
       AddDecisionQueue("MZREMOVE", $currentPlayer, "-", 1);
       break;
-    case "ROS243":
+    case "splatter_skull_red":
       AddDecisionQueue("MULTIZONEINDICES", $currentPlayer, "THEIRBANISH:isIntimidated=true");
       AddDecisionQueue("SETDQCONTEXT", $currentPlayer, "Choose an intimidated card to put into the graveyard (The cards were intimated in left to right order)", 1);
       AddDecisionQueue("CHOOSEMULTIZONE", $currentPlayer, "<-", 1);
       AddDecisionQueue("MZADDZONE", $currentPlayer, "THEIRDISCARD", 1);
       AddDecisionQueue("MZREMOVE", $currentPlayer, "THEIRBANISH", 1);
       break;
-    case "ROS117":
+    case "snuff_out_red":
       $myAuras = &GetAuras($currentPlayer);
       if (count($myAuras) > 0) {
         AddDecisionQueue("MULTIZONEINDICES", $currentPlayer, "MYAURAS");
@@ -612,7 +612,7 @@ function ROSHitEffect($cardID): void
         AddDecisionQueue("DISCARDCARD", $defPlayer, "HAND-".$defPlayer, 1);
       }
       break;
-    case "ROS216":
+    case "cut_through_the_facade_red":
       AddDecisionQueue("MULTIZONEINDICES", $currentPlayer, "THEIRAURAS");
       AddDecisionQueue("MAYCHOOSEMULTIZONE", $currentPlayer, "<-", 1);
       AddDecisionQueue("MZDESTROY", $currentPlayer, "-", 1);
@@ -639,7 +639,7 @@ function HasAuraWithSigilInName($player)
 function IsDoubleArcane($cardID): bool //checks for cards that can shock, but not use up arcane buffs on the shock
 {
   return match ($cardID) {
-    "ROS024" => true,
+    "comet_storm__shock_red" => true,
     default => false,
   };
 }

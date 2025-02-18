@@ -2,889 +2,889 @@
 function return_Hero_Type($Cardcode){
     switch($Cardcode){
 
-	case "LSS001":
+	case "ruudi_gem_keeper":
 		return Adult;
 		break;
-	case "LSS003":
+	case "taylor":
 		return Young;
 		break;
-	case "LSS003":
+	case "taylor":
 		return Young;
 		break;
-	case "LSS004":
+	case "yorick_weaver_of_tales":
 		return Young;
 		break;
-	case "LSS004":
+	case "yorick_weaver_of_tales":
 		return Young;
 		break;
-	case "JDG001":
+	case "taipanis_dracai_of_judgement":
 		return Adult;
 		break;
-	case "JDG001":
+	case "taipanis_dracai_of_judgement":
 		return Adult;
 		break;
-	case "JDG002":
+	case "taipanis_dracai_of_judgement":
 		return Adult;
 		break;
-	case "JDG006":
+	case "theryon_magister_of_justice":
 		return Adult;
 		break;
-	case "HER001":
+	case "rhinar_reckless_rampage":
 		return Adult;
 		break;
-	case "HER021":
+	case "rhinar_reckless_rampage":
 		return Adult;
 		break;
-	case "WIN001":
+	case "rhinar_reckless_rampage":
 		return Adult;
 		break;
-	case "RNR001":
+	case "rhinar_reckless_rampage":
 		return Adult;
 		break;
-	case "1HP001":
+	case "rhinar_reckless_rampage":
 		return Adult;
 		break;
-	case "WTR001":
+	case "rhinar_reckless_rampage":
 		return Adult;
 		break;
-	case "WTR001":
+	case "rhinar_reckless_rampage":
 		return Adult;
 		break;
-	case "CRU001":
+	case "rhinar_reckless_rampage":
 		return Adult;
 		break;
-	case "CRU001":
+	case "rhinar_reckless_rampage":
 		return Adult;
 		break;
-	case "HER005":
+	case "rhinar":
 		return Young;
 		break;
-	case "HER054":
+	case "rhinar":
 		return Young;
 		break;
-	case "XXX003":
+	case "rhinar":
 		return Young;
 		break;
-	case "RNR002":
+	case "rhinar":
 		return Young;
 		break;
-	case "RVD001":
+	case "rhinar":
 		return Young;
 		break;
-	case "1HP002":
+	case "rhinar":
 		return Young;
 		break;
-	case "WTR002":
+	case "rhinar":
 		return Young;
 		break;
-	case "WTR002":
+	case "rhinar":
 		return Young;
 		break;
-	case "HER002":
+	case "bravo_showstopper":
 		return Adult;
 		break;
-	case "HER022":
+	case "bravo_showstopper":
 		return Adult;
 		break;
-	case "WIN002":
+	case "bravo_showstopper":
 		return Adult;
 		break;
-	case "BVO001":
+	case "bravo_showstopper":
 		return Adult;
 		break;
-	case "1HP043":
+	case "bravo_showstopper":
 		return Adult;
 		break;
-	case "WTR038":
+	case "bravo_showstopper":
 		return Adult;
 		break;
-	case "WTR038":
+	case "bravo_showstopper":
 		return Adult;
 		break;
-	case "CRU022":
+	case "bravo_showstopper":
 		return Adult;
 		break;
-	case "CRU022":
+	case "bravo_showstopper":
 		return Adult;
 		break;
-	case "HER006":
+	case "bravo":
 		return Young;
 		break;
-	case "HER055":
+	case "bravo":
 		return Young;
 		break;
 	case "XXX002":
 		return Young;
 		break;
-	case "BVO002":
+	case "bravo":
 		return Young;
 		break;
-	case "1HP044":
+	case "bravo":
 		return Young;
 		break;
-	case "WTR039":
+	case "bravo":
 		return Young;
 		break;
-	case "WTR039":
+	case "bravo":
 		return Young;
 		break;
-	case "HER003":
+	case "katsu_the_wanderer":
 		return Adult;
 		break;
-	case "HER023":
+	case "katsu_the_wanderer":
 		return Adult;
 		break;
-	case "WIN003":
+	case "katsu_the_wanderer":
 		return Adult;
 		break;
-	case "WTR076":
+	case "katsu_the_wanderer":
 		return Adult;
 		break;
-	case "KSU001":
+	case "katsu_the_wanderer":
 		return Adult;
 		break;
-	case "1HP086":
+	case "katsu_the_wanderer":
 		return Adult;
 		break;
-	case "WTR076":
+	case "katsu_the_wanderer":
 		return Adult;
 		break;
-	case "CRU045":
+	case "katsu_the_wanderer":
 		return Adult;
 		break;
-	case "CRU045":
+	case "katsu_the_wanderer":
 		return Adult;
 		break;
-	case "OUT045":
+	case "katsu_the_wanderer":
 		return Adult;
 		break;
-	case "HER007":
+	case "katsu":
 		return Young;
 		break;
-	case "HER056":
+	case "katsu":
 		return Young;
 		break;
 	case "XXX004":
 		return Young;
 		break;
-	case "KSU002":
+	case "katsu":
 		return Young;
 		break;
-	case "1HP087":
+	case "katsu":
 		return Young;
 		break;
-	case "WTR077":
+	case "katsu":
 		return Young;
 		break;
-	case "WTR077":
+	case "katsu":
 		return Young;
 		break;
-	case "OUT046":
+	case "katsu":
 		return Young;
 		break;
-	case "KAT001":
+	case "katsu":
 		return Young;
 		break;
-	case "HER004":
+	case "dorinthea_ironsong":
 		return Adult;
 		break;
-	case "HER024":
+	case "dorinthea_ironsong":
 		return Adult;
 		break;
-	case "WIN004":
+	case "dorinthea_ironsong":
 		return Adult;
 		break;
-	case "TEA001":
+	case "dorinthea_ironsong":
 		return Adult;
 		break;
-	case "1HP138":
+	case "dorinthea_ironsong":
 		return Adult;
 		break;
-	case "WTR113":
+	case "dorinthea_ironsong":
 		return Adult;
 		break;
-	case "WTR113":
+	case "dorinthea_ironsong":
 		return Adult;
 		break;
-	case "CRU076":
+	case "dorinthea_ironsong":
 		return Adult;
 		break;
-	case "CRU076":
+	case "dorinthea_ironsong":
 		return Adult;
 		break;
-	case "HER008":
+	case "dorinthea":
 		return Young;
 		break;
-	case "HER057":
+	case "dorinthea":
 		return Young;
 		break;
-	case "XXX001":
+	case "dorinthea":
 		return Young;
 		break;
-	case "TEA002":
+	case "dorinthea":
 		return Young;
 		break;
-	case "1HP139":
+	case "dorinthea":
 		return Young;
 		break;
-	case "WTR114":
+	case "dorinthea":
 		return Young;
 		break;
-	case "WTR114":
+	case "dorinthea":
 		return Young;
 		break;
-	case "HER009":
+	case "dash_inventor_extraordinaire":
 		return Adult;
 		break;
-	case "HER017":
+	case "dash_inventor_extraordinaire":
 		return Adult;
 		break;
-	case "WIN005":
+	case "dash_inventor_extraordinaire":
 		return Adult;
 		break;
-	case "1HP180":
+	case "dash_inventor_extraordinaire":
 		return Adult;
 		break;
-	case "ARC001":
+	case "dash_inventor_extraordinaire":
 		return Adult;
 		break;
-	case "ARC001":
+	case "dash_inventor_extraordinaire":
 		return Adult;
 		break;
-	case "CRU098":
+	case "dash_inventor_extraordinaire":
 		return Adult;
 		break;
-	case "CRU098":
+	case "dash_inventor_extraordinaire":
 		return Adult;
 		break;
-	case "HER013":
+	case "dash":
 		return Young;
 		break;
-	case "HER070":
+	case "dash":
 		return Young;
 		break;
-	case "1HP181":
+	case "dash":
 		return Young;
 		break;
-	case "ARC002":
+	case "dash":
 		return Young;
 		break;
-	case "ARC002":
+	case "dash":
 		return Young;
 		break;
-	case "HER010":
+	case "azalea_ace_in_the_hole":
 		return Adult;
 		break;
-	case "HER018":
+	case "azalea_ace_in_the_hole":
 		return Adult;
 		break;
-	case "WIN006":
+	case "azalea_ace_in_the_hole":
 		return Adult;
 		break;
-	case "1HP221":
+	case "azalea_ace_in_the_hole":
 		return Adult;
 		break;
-	case "ARC038":
+	case "azalea_ace_in_the_hole":
 		return Adult;
 		break;
-	case "ARC038":
+	case "azalea_ace_in_the_hole":
 		return Adult;
 		break;
-	case "CRU119":
+	case "azalea_ace_in_the_hole":
 		return Adult;
 		break;
-	case "CRU119":
+	case "azalea_ace_in_the_hole":
 		return Adult;
 		break;
-	case "OUT089":
+	case "azalea_ace_in_the_hole":
 		return Adult;
 		break;
-	case "HER014":
+	case "azalea":
 		return Young;
 		break;
-	case "HER071":
+	case "azalea":
 		return Young;
 		break;
-	case "1HP222":
+	case "azalea":
 		return Young;
 		break;
-	case "ARC039":
+	case "azalea":
 		return Young;
 		break;
-	case "ARC039":
+	case "azalea":
 		return Young;
 		break;
-	case "OUT090":
+	case "azalea":
 		return Young;
 		break;
-	case "AZL001":
+	case "azalea":
 		return Young;
 		break;
-	case "HER011":
+	case "viserai_rune_blood":
 		return Adult;
 		break;
-	case "HER019":
+	case "viserai_rune_blood":
 		return Adult;
 		break;
-	case "WIN007":
+	case "viserai_rune_blood":
 		return Adult;
 		break;
-	case "1HP258":
+	case "viserai_rune_blood":
 		return Adult;
 		break;
-	case "ARC075":
+	case "viserai_rune_blood":
 		return Adult;
 		break;
-	case "ARC075":
+	case "viserai_rune_blood":
 		return Adult;
 		break;
-	case "CRU138":
+	case "viserai_rune_blood":
 		return Adult;
 		break;
-	case "CRU138":
+	case "viserai_rune_blood":
 		return Adult;
 		break;
-	case "HER015":
+	case "viserai":
 		return Young;
 		break;
-	case "1HP259":
+	case "viserai":
 		return Young;
 		break;
-	case "ARC076":
+	case "viserai":
 		return Young;
 		break;
-	case "ARC076":
+	case "viserai":
 		return Young;
 		break;
-	case "HER012":
+	case "kano_dracai_of_aether":
 		return Adult;
 		break;
-	case "HER020":
+	case "kano_dracai_of_aether":
 		return Adult;
 		break;
-	case "WIN008":
+	case "kano_dracai_of_aether":
 		return Adult;
 		break;
-	case "1HP301":
+	case "kano_dracai_of_aether":
 		return Adult;
 		break;
-	case "ARC113":
+	case "kano_dracai_of_aether":
 		return Adult;
 		break;
-	case "ARC113":
+	case "kano_dracai_of_aether":
 		return Adult;
 		break;
-	case "CRU158":
+	case "kano_dracai_of_aether":
 		return Adult;
 		break;
-	case "CRU158":
+	case "kano_dracai_of_aether":
 		return Adult;
 		break;
-	case "HER016":
+	case "kano":
 		return Young;
 		break;
-	case "HER072":
+	case "kano":
 		return Young;
 		break;
-	case "1HP302":
+	case "kano":
 		return Young;
 		break;
-	case "ARC114":
+	case "kano":
 		return Young;
 		break;
-	case "ARC114":
+	case "kano":
 		return Young;
 		break;
-	case "HER025":
+	case "kayo_berserker_runt":
 		return Young;
 		break;
-	case "1HP003":
+	case "kayo_berserker_runt":
 		return Young;
 		break;
-	case "CRU002":
+	case "kayo_berserker_runt":
 		return Young;
 		break;
-	case "CRU002":
+	case "kayo_berserker_runt":
 		return Young;
 		break;
-	case "HER000":
+	case "ira_crimson_haze":
 		return Young;
 		break;
-	case "IRA001":
+	case "ira_crimson_haze":
 		return Young;
 		break;
-	case "1HP089":
+	case "ira_crimson_haze":
 		return Young;
 		break;
-	case "CRU046":
+	case "ira_crimson_haze":
 		return Young;
 		break;
-	case "CRU046":
+	case "ira_crimson_haze":
 		return Young;
 		break;
-	case "HER026":
+	case "benji_the_piercing_wind":
 		return Young;
 		break;
-	case "1HP088":
+	case "benji_the_piercing_wind":
 		return Young;
 		break;
-	case "CRU047":
+	case "benji_the_piercing_wind":
 		return Young;
 		break;
-	case "CRU047":
+	case "benji_the_piercing_wind":
 		return Young;
 		break;
-	case "CRU047":
+	case "benji_the_piercing_wind":
 		return Young;
 		break;
-	case "OUT047":
+	case "benji_the_piercing_wind":
 		return Young;
 		break;
-	case "BEN001":
+	case "benji_the_piercing_wind":
 		return Young;
 		break;
-	case "HER029":
+	case "kassai_cintari_sellsword":
 		return Young;
 		break;
-	case "1HP140":
+	case "kassai_cintari_sellsword":
 		return Young;
 		break;
-	case "CRU077":
+	case "kassai_cintari_sellsword":
 		return Young;
 		break;
-	case "CRU077":
+	case "kassai_cintari_sellsword":
 		return Young;
 		break;
-	case "CRU077":
+	case "kassai_cintari_sellsword":
 		return Young;
 		break;
-	case "CRU097":
+	case "shiyana_diamond_gemini":
 		return Young;
 		break;
-	case "CRU097":
+	case "shiyana_diamond_gemini":
 		return Young;
 		break;
-	case "HER027":
+	case "data_doll_mkii":
 		return Young;
 		break;
-	case "1HP182":
+	case "data_doll_mkii":
 		return Young;
 		break;
-	case "CRU099":
+	case "data_doll_mkii":
 		return Young;
 		break;
-	case "CRU099":
+	case "data_doll_mkii":
 		return Young;
 		break;
-	case "HER028":
+	case "kavdaen_trader_of_skins":
 		return Young;
 		break;
-	case "1HP220":
+	case "kavdaen_trader_of_skins":
 		return Young;
 		break;
-	case "CRU118":
+	case "kavdaen_trader_of_skins":
 		return Young;
 		break;
-	case "CRU118":
+	case "kavdaen_trader_of_skins":
 		return Young;
 		break;
-	case "CRU118":
+	case "kavdaen_trader_of_skins":
 		return Young;
 		break;
-	case "HER030":
+	case "prism_sculptor_of_arc_light":
 		return Adult;
 		break;
-	case "HER038":
+	case "prism_sculptor_of_arc_light":
 		return Adult;
 		break;
-	case "HER069":
+	case "prism_sculptor_of_arc_light":
 		return Adult;
 		break;
-	case "HER069":
+	case "prism_sculptor_of_arc_light":
 		return Adult;
 		break;
-	case "WIN009":
+	case "prism_sculptor_of_arc_light":
 		return Adult;
 		break;
-	case "MON001":
+	case "prism_sculptor_of_arc_light":
 		return Adult;
 		break;
-	case "MON001":
+	case "prism_sculptor_of_arc_light":
 		return Adult;
 		break;
-	case "HER034":
+	case "prism":
 		return Young;
 		break;
-	case "PSM001":
+	case "prism":
 		return Young;
 		break;
-	case "MON002":
+	case "prism":
 		return Young;
 		break;
-	case "MON002":
+	case "prism":
 		return Young;
 		break;
-	case "HER031":
+	case "ser_boltyn_breaker_of_dawn":
 		return Adult;
 		break;
-	case "HER039":
+	case "ser_boltyn_breaker_of_dawn":
 		return Adult;
 		break;
-	case "WIN010":
+	case "ser_boltyn_breaker_of_dawn":
 		return Adult;
 		break;
-	case "MON029":
+	case "ser_boltyn_breaker_of_dawn":
 		return Adult;
 		break;
-	case "MON029":
+	case "ser_boltyn_breaker_of_dawn":
 		return Adult;
 		break;
-	case "HER035":
+	case "boltyn":
 		return Young;
 		break;
-	case "BOL001":
+	case "boltyn":
 		return Young;
 		break;
-	case "MON030":
+	case "boltyn":
 		return Young;
 		break;
-	case "MON030":
+	case "boltyn":
 		return Young;
 		break;
-	case "HER032":
+	case "levia_shadowborn_abomination":
 		return Adult;
 		break;
-	case "HER040":
+	case "levia_shadowborn_abomination":
 		return Adult;
 		break;
-	case "WIN011":
+	case "levia_shadowborn_abomination":
 		return Adult;
 		break;
-	case "MON119":
+	case "levia_shadowborn_abomination":
 		return Adult;
 		break;
-	case "MON119":
+	case "levia_shadowborn_abomination":
 		return Adult;
 		break;
-	case "HER036":
+	case "levia":
 		return Young;
 		break;
-	case "LEV001":
+	case "levia":
 		return Young;
 		break;
-	case "MON120":
+	case "levia":
 		return Young;
 		break;
-	case "MON120":
+	case "levia":
 		return Young;
 		break;
-	case "HER033":
+	case "chane_bound_by_shadow":
 		return Adult;
 		break;
-	case "HER041":
+	case "chane_bound_by_shadow":
 		return Adult;
 		break;
-	case "WIN012":
+	case "chane_bound_by_shadow":
 		return Adult;
 		break;
-	case "MON153":
+	case "chane_bound_by_shadow":
 		return Adult;
 		break;
-	case "MON153":
+	case "chane_bound_by_shadow":
 		return Adult;
 		break;
-	case "HER037":
+	case "chane":
 		return Young;
 		break;
-	case "CHN001":
+	case "chane":
 		return Young;
 		break;
-	case "MON154":
+	case "chane":
 		return Young;
 		break;
-	case "MON154":
+	case "chane":
 		return Young;
 		break;
-	case "HER042":
+	case "oldhim_grandfather_of_eternity":
 		return Adult;
 		break;
-	case "HER048":
+	case "oldhim_grandfather_of_eternity":
 		return Adult;
 		break;
-	case "WIN013":
+	case "oldhim_grandfather_of_eternity":
 		return Adult;
 		break;
-	case "ELE001":
+	case "oldhim_grandfather_of_eternity":
 		return Adult;
 		break;
-	case "ELE001":
+	case "oldhim_grandfather_of_eternity":
 		return Adult;
 		break;
-	case "HER045":
+	case "oldhim":
 		return Young;
 		break;
-	case "OLD001":
+	case "oldhim":
 		return Young;
 		break;
-	case "ELE002":
+	case "oldhim":
 		return Young;
 		break;
-	case "ELE002":
+	case "oldhim":
 		return Young;
 		break;
-	case "HER043":
+	case "lexi_livewire":
 		return Adult;
 		break;
-	case "HER049":
+	case "lexi_livewire":
 		return Adult;
 		break;
-	case "WIN014":
+	case "lexi_livewire":
 		return Adult;
 		break;
-	case "ELE031":
+	case "lexi_livewire":
 		return Adult;
 		break;
-	case "ELE031":
+	case "lexi_livewire":
 		return Adult;
 		break;
-	case "HER046":
+	case "lexi":
 		return Young;
 		break;
-	case "LXI001":
+	case "lexi":
 		return Young;
 		break;
-	case "ELE032":
+	case "lexi":
 		return Young;
 		break;
-	case "ELE032":
+	case "lexi":
 		return Young;
 		break;
-	case "HER044":
+	case "briar_warden_of_thorns":
 		return Adult;
 		break;
-	case "HER050":
+	case "briar_warden_of_thorns":
 		return Adult;
 		break;
-	case "HER063":
+	case "briar_warden_of_thorns":
 		return Adult;
 		break;
-	case "WIN015":
+	case "briar_warden_of_thorns":
 		return Adult;
 		break;
 	case "XXX012":
 		return Adult;
 		break;
-	case "ELE062":
+	case "briar_warden_of_thorns":
 		return Adult;
 		break;
-	case "ELE062":
+	case "briar_warden_of_thorns":
 		return Adult;
 		break;
-	case "HER047":
+	case "briar":
 		return Young;
 		break;
-	case "HER064":
+	case "briar":
 		return Young;
 		break;
-	case "XXX011":
+	case "briar":
 		return Young;
 		break;
-	case "BRI001":
+	case "briar":
 		return Young;
 		break;
-	case "ELE063":
+	case "briar":
 		return Young;
 		break;
-	case "ELE063":
+	case "briar":
 		return Young;
 		break;
-	case "WIN016":
+	case "bravo_star_of_the_show":
 		return Adult;
 		break;
-	case "EVR017":
+	case "bravo_star_of_the_show":
 		return Adult;
 		break;
-	case "EVR017":
+	case "bravo_star_of_the_show":
 		return Adult;
 		break;
-	case "HER051":
+	case "valda_brightaxe":
 		return Young;
 		break;
-	case "EVR019":
+	case "valda_brightaxe":
 		return Young;
 		break;
-	case "HER053":
+	case "genis_wotchuneed":
 		return Young;
 		break;
-	case "EVR085":
+	case "genis_wotchuneed":
 		return Young;
 		break;
-	case "HER052":
+	case "iyslander":
 		return Young;
 		break;
-	case "EVR120":
+	case "iyslander":
 		return Young;
 		break;
-	case "UPR103":
+	case "iyslander":
 		return Young;
 		break;
-	case "UPR103":
+	case "iyslander":
 		return Young;
 		break;
-	case "UPR103":
+	case "iyslander":
 		return Young;
 		break;
-	case "DVR001":
+	case "dorinthea_quicksilver_prodigy":
 		return Young;
 		break;
-	case "HER059":
+	case "dromai_ash_artist":
 		return Adult;
 		break;
-	case "HER066":
+	case "dromai_ash_artist":
 		return Adult;
 		break;
-	case "WIN018":
+	case "dromai_ash_artist":
 		return Adult;
 		break;
-	case "UPR001":
+	case "dromai_ash_artist":
 		return Adult;
 		break;
-	case "HER062":
+	case "dromai":
 		return Young;
 		break;
-	case "DRO001":
+	case "dromai":
 		return Young;
 		break;
-	case "UPR002":
+	case "dromai":
 		return Young;
 		break;
-	case "HER058":
+	case "fai_rising_rebellion":
 		return Adult;
 		break;
-	case "HER065":
+	case "fai_rising_rebellion":
 		return Adult;
 		break;
-	case "WIN017":
+	case "fai_rising_rebellion":
 		return Adult;
 		break;
-	case "UPR044":
+	case "fai_rising_rebellion":
 		return Adult;
 		break;
-	case "HER061":
+	case "fai":
 		return Young;
 		break;
-	case "FAI001":
+	case "fai":
 		return Young;
 		break;
-	case "UPR045":
+	case "fai":
 		return Young;
 		break;
-	case "HER060":
+	case "iyslander_stormbind":
 		return Adult;
 		break;
-	case "HER067":
+	case "iyslander_stormbind":
 		return Adult;
 		break;
-	case "WIN019":
+	case "iyslander_stormbind":
 		return Adult;
 		break;
-	case "UPR102":
+	case "iyslander_stormbind":
 		return Adult;
 		break;
-	case "DYN001":
+	case "emperor_dracai_of_aesir":
 		return Young;
 		break;
-	case "DYN001":
+	case "emperor_dracai_of_aesir":
 		return Young;
 		break;
-	case "DYN001":
+	case "emperor_dracai_of_aesir":
 		return Young;
 		break;
-	case "HER075":
+	case "yoji_royal_protector":
 		return Young;
 		break;
-	case "DYN025":
+	case "yoji_royal_protector":
 		return Young;
 		break;
-	case "HER074":
+	case "arakni_huntsman":
 		return Adult;
 		break;
-	case "WIN020":
+	case "arakni_huntsman":
 		return Adult;
 		break;
-	case "DYN113":
+	case "arakni_huntsman":
 		return Adult;
 		break;
-	case "HER073":
+	case "arakni":
 		return Young;
 		break;
-	case "DYN114":
+	case "arakni":
 		return Young;
 		break;
-	case "HER077":
+	case "uzuri_switchblade":
 		return Adult;
 		break;
-	case "WIN021":
+	case "uzuri_switchblade":
 		return Adult;
 		break;
-	case "OUT001":
+	case "uzuri_switchblade":
 		return Adult;
 		break;
-	case "HER076":
+	case "uzuri":
 		return Young;
 		break;
-	case "HER083":
+	case "uzuri":
 		return Young;
 		break;
-	case "OUT002":
+	case "uzuri":
 		return Young;
 		break;
-	case "UZU001":
+	case "uzuri":
 		return Young;
 		break;
-	case "HER079":
+	case "arakni_solitary_confinement":
 		return Young;
 		break;
-	case "HER082":
+	case "arakni_solitary_confinement":
 		return Young;
 		break;
-	case "OUT003":
+	case "arakni_solitary_confinement":
 		return Young;
 		break;
-	case "ARA001":
+	case "arakni_solitary_confinement":
 		return Young;
 		break;
-	case "HER078":
+	case "riptide_lurker_of_the_deep":
 		return Adult;
 		break;
-	case "WIN022":
+	case "riptide_lurker_of_the_deep":
 		return Adult;
 		break;
-	case "OUT091":
+	case "riptide_lurker_of_the_deep":
 		return Adult;
 		break;
-	case "HER080":
+	case "riptide":
 		return Young;
 		break;
-	case "HER081":
+	case "riptide":
 		return Young;
 		break;
-	case "OUT092":
+	case "riptide":
 		return Young;
 		break;
-	case "RIP001":
+	case "riptide":
 		return Young;
 		break;
-	case "TER001":
+	case "terra":
 		return Young
 		break;
-	case "AUR001":
+	case "aurora":
 		return Young
 		break;
-	case "AJV001":
+	case "jarl_vetreidi":
 		return Adult
 		break;		
-	case "ROS008":
+	case "aurora":
 		return Young
 		break;
         default:

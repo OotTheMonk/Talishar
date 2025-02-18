@@ -31,14 +31,14 @@ function LandmarkBeginEndPhaseAbilities()
   global $landmarks, $mainPlayer, $CS_NumBluePlayed, $CS_NumBlueDefended;
   for ($i = 0; $i < count($landmarks); ++$i) {
     switch ($landmarks[$i]) {
-      case "MON000":
+      case "great_library_of_solana":
         if (SearchPitchForColor($mainPlayer, 2) >= 2) {
-          AddCurrentTurnEffect("MON000", $mainPlayer);
+          AddCurrentTurnEffect("great_library_of_solana", $mainPlayer);
         }
         break;
-      case "MST000":
+      case "mistcloak_gully":
         if(GetClassState($landmarks[$i+1], $CS_NumBluePlayed) > 0 && SearchPitchForColor($landmarks[$i+1], 3) > 0 && GetClassState($landmarks[$i+1], $CS_NumBlueDefended) > 0) {
-          Transcend($landmarks[$i+1], "MST400", $landmarks[$i+2]);
+          Transcend($landmarks[$i+1], "MST000_inner_chi_blue", $landmarks[$i+2]);
           DestroyLandmark($i, true);
         }
         elseif(GetClassState($landmarks[$i+1], $CS_NumBluePlayed) <= 0 && SearchPitchForColor($landmarks[$i+1], 3) <= 0 && GetClassState($landmarks[$i+1], $CS_NumBlueDefended) <= 0) {
@@ -56,7 +56,7 @@ function LandmarkStartTurnAbilities()
   global $landmarks, $mainPlayer;
   for ($i = 0; $i < count($landmarks); ++$i) {
     switch ($landmarks[$i]) {
-      case "MST000":
+      case "mistcloak_gully":
         if($landmarks[$i+1] != $mainPlayer) {
           AddCurrentTurnEffect($landmarks[$i], $mainPlayer);
         }
