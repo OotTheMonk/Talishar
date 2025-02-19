@@ -2883,6 +2883,7 @@ function PlayAbility($cardID, $from, $resourcesPaid, $target = "-", $additionalC
   else if ($set == "AIO") return AIOPlayAbility($cardID, $from, $resourcesPaid, $target, $additionalCosts);
   else if ($set == "AJV") return AJVPlayAbility($cardID, $from, $resourcesPaid, $target, $additionalCosts);
   else if ($set == "HNT") return HNTPlayAbility($cardID, $from, $resourcesPaid, $target, $additionalCosts);
+  else if ($set == "AST") return ASTPlayAbility($cardID, $from, $resourcesPaid, $target, $additionalCosts);
   else {
     switch ($cardID) {
       case "LGS176":

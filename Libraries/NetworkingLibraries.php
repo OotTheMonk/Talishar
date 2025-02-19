@@ -3041,6 +3041,17 @@ function PayAdditionalCosts($cardID, $from, $index="-")
     default:
       break;
   }
+  $ID = CardIdentifier($cardID);
+  switch($ID) {
+    case "skyward-serenade-2":
+      AddDecisionQueue("SETDQCONTEXT", $currentPlayer, "Choose 2;");
+      AddDecisionQueue("MULTICHOOSETEXT", $currentPlayer, "2-create_embodiment_of_lightning,search_for_skyzyk,buff_next_attack-2");
+      AddDecisionQueue("SETCLASSSTATE", $currentPlayer, $CS_AdditionalCosts, 1);
+      AddDecisionQueue("SHOWMODES", $currentPlayer, $cardID, 1);
+      break;
+    default:
+      break;
+  }
 }
 
 function PlayCardEffect($cardID, $from, $resourcesPaid, $target = "-", $additionalCosts = "-", $uniqueID = "-1", $layerIndex = -1)

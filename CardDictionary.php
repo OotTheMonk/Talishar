@@ -56,6 +56,28 @@ $CID_TekloChest = "LGS187";
 $CID_TekloArms = "LGS188";
 $CID_TekloLegs = "LGS189";
 
+function CardIdentifier($cardID)
+{
+  $cardName = CardName($cardID);
+  $cardColor = PitchValue($cardID) != -1 ? PitchValue($cardID) : 0;
+  return str_replace(" ", "-", $cardName) . "-$cardColor";
+}
+
+// this function will just be a piece of scaffolding, in the long run I don't think it will be needed
+function IdentifierToCardID($ID)
+{
+  switch($ID) {
+    case "embodiment-of-lightning-0":
+      return "ELE110";
+    case "skyzyk-1":
+      return "AST015";
+    case "skyward-serenade-2":
+      return "AST023";
+    default:
+      return $ID;
+  } 
+}
+
 function CardType($cardID, $from="")
 {
   global $CS_AdditionalCosts, $currentPlayer;
