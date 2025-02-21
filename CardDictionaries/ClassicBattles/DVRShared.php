@@ -2,16 +2,16 @@
 
   function DVRAbilityType($cardID) {
     switch($cardID) {
-      case "DVR002": return "AA";
-      case "DVR004": return "A";
+      case "dawnblade_resplendent": return "AA";
+      case "blossom_of_spring": return "A";
       default: return "";
     }
   }
 
   function DVRAbilityCost($cardID) {
     switch($cardID) {
-      case "DVR002": return 1;
-      case "DVR004": return 0;
+      case "dawnblade_resplendent": return 1;
+      case "blossom_of_spring": return 0;
       default: return "";
     }
   }
@@ -20,30 +20,30 @@
     global $currentPlayer;
     switch($cardID)
     {
-      case "DVR004":
+      case "blossom_of_spring":
         GainResources($currentPlayer, 1);
         return "";
-      case "DVR008":
+      case "glistening_steelblade_yellow":
         AddCurrentTurnEffect($cardID, $currentPlayer);
         AddCurrentTurnEffect($cardID . "-1", $currentPlayer);
         return "";
-      case "DVR009":
+      case "en_garde_red":
         AddCurrentTurnEffect($cardID, $currentPlayer);
         return "";
-      case "DVR013":
+      case "run_through_yellow":
         GiveAttackGoAgain();
         AddCurrentTurnEffectFromCombat($cardID, $currentPlayer);
         return "";
-      case "DVR014":
+      case "thrust_red":
         AddCurrentTurnEffect($cardID, $currentPlayer);
         return "";
-      case "DVR019":
+      case "on_a_knife_edge_yellow":
         AddCurrentTurnEffect($cardID, $currentPlayer);
         return "";
-      case "DVR022":
+      case "visit_the_blacksmith_blue":
         AddCurrentTurnEffect($cardID, $currentPlayer);
         return "";
-      case "DVR023":
+      case "blade_flash_blue":
         GiveAttackGoAgain();
         return "";
     }
@@ -54,10 +54,10 @@ function DVREffectAttackModifier($cardID)
   $params = explode(",", $cardID);
   $cardID = $params[0];
   switch($cardID) {
-    case "DVR009": return 3;
-    case "DVR013": return 2;
-    case "DVR014": return 3;
-    case "DVR022": return 1;
+    case "en_garde_red": return 3;
+    case "run_through_yellow": return 2;
+    case "thrust_red": return 3;
+    case "visit_the_blacksmith_blue": return 1;
     default: return 0;
   }
 }
@@ -68,9 +68,9 @@ function DVRCombatEffectActive($cardID, $attackID)
   $params = explode(",", $cardID);
   $cardID = $params[0];
   switch($cardID) {
-    case "DVR008": case "DVR008-1": return CardNameContains($attackID, "Dawnblade", $mainPlayer, true); 
-    case "DVR009": return TypeContains($attackID, "W", $mainPlayer);
-    case "DVR013": case "DVR014": case "DVR019": case "DVR022": case "DVR023": return CardSubType($attackID) == "Sword";
+    case "glistening_steelblade_yellow": case "glistening_steelblade_yellow-1": return CardNameContains($attackID, "Dawnblade", $mainPlayer, true); 
+    case "en_garde_red": return TypeContains($attackID, "W", $mainPlayer);
+    case "run_through_yellow": case "thrust_red": case "on_a_knife_edge_yellow": case "visit_the_blacksmith_blue": case "blade_flash_blue": return CardSubType($attackID) == "Sword";
     default: return false;
   }
 }
@@ -78,12 +78,12 @@ function DVRCombatEffectActive($cardID, $attackID)
 function HalaGoldenhelmAbility($player, $index)
 {
   GiveAttackGoAgain();
-  $rv = CardLink("DVR007", "DVR007") . " gave the attack go again";
+  $rv = CardLink("hala_goldenhelm", "hala_goldenhelm") . " gave the attack go again";
   $arsenal = &GetArsenal($player);
   ++$arsenal[$index+3];
   if($arsenal[$index+3] >= 2) {
     $rv .= " and searches for Glistening Steelblade";
-    MentorTrigger($player, $index, specificCard:"DVR008");
+    MentorTrigger($player, $index, specificCard:"glistening_steelblade_yellow");
   }
   WriteLog($rv);
 }

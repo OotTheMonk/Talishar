@@ -3,9 +3,9 @@
 function AIOAbilityType($cardID, $index = -1, $from = "-"): string
 {
   return match ($cardID) {
-    "AIO006" => "A",
-    "AIO004" => "A",
-    "AIO026" => "A",
+    "heavy_industry_gear_shift" => "A",
+    "heavy_industry_power_plant" => "A",
+    "cerebellum_processor_blue" => "A",
     default => ""
   };
 }
@@ -13,7 +13,7 @@ function AIOAbilityType($cardID, $index = -1, $from = "-"): string
 function AIOAbilityHasGoAgain($cardID): bool
 {
   return match ($cardID) {
-    "AIO004"  => true,
+    "heavy_industry_power_plant"  => true,
     default => false
   };
 }
@@ -28,7 +28,7 @@ function AIOCombatEffectActive($cardID, $attackID): bool
 function AIOAbilityCost($cardID): int
 {
   return match ($cardID) {
-    "AIO004"  => 1,
+    "heavy_industry_power_plant"  => 1,
     default => 0
   };
 }
@@ -37,17 +37,17 @@ function AIOPlayAbility($cardID, $from, $resourcesPaid, $target = "-", $addition
 {
   global $currentPlayer, $CS_PlayIndex;
   switch ($cardID) {
-    case "AIO006":
+    case "heavy_industry_gear_shift":
       $deck = new Deck($currentPlayer);
       for($i = 0; $i < 2 && !$deck->Empty(); ++$i) {
         $banished = $deck->BanishTop();
         if(ClassContains($banished, "MECHANOLOGIST", $currentPlayer)) GainActionPoints(1, $currentPlayer);
       }
       return "";
-    case "AIO004":
+    case "heavy_industry_power_plant":
       AddCurrentTurnEffect($cardID, $currentPlayer);
       return "";
-    case "AIO026":
+    case "cerebellum_processor_blue":
       if ($from == "PLAY") {
         Draw($currentPlayer);
       }

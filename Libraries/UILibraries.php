@@ -6,7 +6,7 @@ require_once("CoreLibraries.php");
 
 $isReactFE = false;
 
-//0 Card number = card ID (e.g. WTR000 = Heart of Fyendal)
+//0 Card number = card ID (e.g. heart_of_fyendal_blue = Heart of Fyendal)
 //1 action = (ProcessInput mode)
 //2 overlay = 0 is none, 1 is grayed out/disabled
 //3 borderColor = Border Color
@@ -164,11 +164,11 @@ function JSONRenderedCard(
   }
   //Volzar Amp icon
   if($controller != NULL){
-    if($cardNumber == "ROS021" && $controller == $playerID && GetClassState($playerID, $CS_NumLightningPlayed) > 0 && $lightningPlayed == NULL) {
+    if($cardNumber == "volzar_the_lightning_rod" && $controller == $playerID && GetClassState($playerID, $CS_NumLightningPlayed) > 0 && $lightningPlayed == NULL) {
       $countersMap->lightning = GetClassState($playerID, $CS_NumLightningPlayed);
       $countersMap->counters = 0;
     }
-    if($cardNumber == "ROS021" && $controller == $otherPlayer && GetClassState($otherPlayer, $CS_NumLightningPlayed) > 0 && $lightningPlayed == NULL) {
+    if($cardNumber == "volzar_the_lightning_rod" && $controller == $otherPlayer && GetClassState($otherPlayer, $CS_NumLightningPlayed) > 0 && $lightningPlayed == NULL) {
       $countersMap->lightning = GetClassState($otherPlayer, $CS_NumLightningPlayed);
       $countersMap->counters = 0;
     }

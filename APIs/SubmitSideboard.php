@@ -13,14 +13,11 @@ include "../AI/CombatDummy.php";
 include_once "../includes/dbh.inc.php";
 include_once "../includes/functions.inc.php";
 include_once "../MenuFiles/StartHelper.php";
-
 SetHeaders();
-
 
 $response = new stdClass();
 session_start();
 $_POST = json_decode(file_get_contents('php://input'), true);
-
 if($_POST == NULL) {
   $response->error = "Parameters were not passed";
   echo json_encode($response);

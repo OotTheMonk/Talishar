@@ -7,7 +7,7 @@
     $otherPlayer = ($currentPlayer == 1 ? 2 : 1);
     switch($cardID)
     {
-      case "ELE000":
+      case "korshem_crossroad_of_elements":
         $rv = "Korshem is a partially manual card. Use the instant ability to destroy it when appropriate. Use the Revert Gamestate button under the Stats page if necessary.";
         if($from == "PLAY")
         {
@@ -15,19 +15,19 @@
           $rv = "Korshem was destroyed";
         }
         return $rv;
-      case "ELE103": case "ELE104": case "ELE105":
+      case "invigorate_red": case "invigorate_yellow": case "invigorate_blue":
         AddCurrentTurnEffect($cardID, $currentPlayer);
         return "";
-      case "ELE106": GainHealth(3, $currentPlayer); return "";
-      case "ELE107": GainHealth(2, $currentPlayer); return "";
-      case "ELE108": GainHealth(1, $currentPlayer); return "";
-      case "ELE112":
+      case "rejuvenate_red": GainHealth(3, $currentPlayer); return "";
+      case "rejuvenate_yellow": GainHealth(2, $currentPlayer); return "";
+      case "rejuvenate_blue": GainHealth(1, $currentPlayer); return "";
+      case "pulse_of_volthaven_red":
         if (count($combatChain) > 0 || isset($layers[0]) && (CardType($layers[0]) == "AA" || GetAbilityType($layers[0]) == "AA")) {
           AddCurrentTurnEffectFromCombat($cardID, $currentPlayer);
         }
         else AddCurrentTurnEffect($cardID, $currentPlayer);
         return "";
-      case "ELE113":
+      case "pulse_of_candlehold_yellow":
         AddDecisionQueue("FINDINDICES", $currentPlayer, $cardID);
         AddDecisionQueue("PREPENDLASTRESULT", $currentPlayer, "2-", 1);
         AddDecisionQueue("MULTICHOOSEDISCARD", $currentPlayer, "<-", 1);
@@ -35,14 +35,14 @@
         AddDecisionQueue("MULTIREMOVEDISCARD", $currentPlayer, "1", 1);
         AddDecisionQueue("MULTIADDTOPDECK", $currentPlayer, "-", 1);
         return "";
-      case "ELE114":
+      case "pulse_of_isenloft_blue":
         AddCurrentTurnEffect($cardID, $currentPlayer);
         return "";
-      case "ELE115":
+      case "crown_of_seeds":
         AddDecisionQueue("DRAW", $currentPlayer, "-", 1);
         AddDecisionQueue("ADDCLASSSTATE", $currentPlayer, $CS_DamagePrevention . "-1", 1);
         return "";
-      case "ELE116":
+      case "plume_of_evergrowth":
         $params = explode("-", $target);
         $index = SearchdiscardForUniqueID($params[1], $currentPlayer);
         if ($index != -1) {
@@ -54,29 +54,29 @@
           return "FAILED";
         }
         return "";
-      case "ELE118":
+      case "tome_of_harvests_blue":
         Draw($currentPlayer);
         Draw($currentPlayer);
         Draw($currentPlayer);
         return "";
-      case "ELE119": case "ELE120": case "ELE121":
+      case "evergreen_red": case "evergreen_yellow": case "evergreen_blue":
         return "";
-      case "ELE122": case "ELE123": case "ELE124":
+      case "weave_earth_red": case "weave_earth_yellow": case "weave_earth_blue":
         AddCurrentTurnEffect($cardID, $currentPlayer);
         return "";
-      case "ELE125": case "ELE126": case "ELE127":
+      case "summerwood_shelter_red": case "summerwood_shelter_yellow": case "summerwood_shelter_blue":
        AddDecisionQueue("FINDINDICES", $currentPlayer, $cardID);
        AddDecisionQueue("CHOOSECOMBATCHAIN", $currentPlayer, "<-", 1);
        AddDecisionQueue("COMBATCHAINDEFENSEMODIFIER", $currentPlayer, PlayBlockModifier($cardID), 1);
        return "";
-      case "ELE131": case "ELE132": case "ELE133":
+      case "break_ground_red": case "break_ground_yellow": case "break_ground_blue":
         MZMoveCard($currentPlayer, "MYARS", "MYBOTDECK", may:true, silent:true);
         AddDecisionQueue("DRAW", $currentPlayer, "-", 1);
         return "";
-      case "ELE137": case "ELE138": case "ELE139":
+      case "earthlore_surge_red": case "earthlore_surge_yellow": case "earthlore_surge_blue":
         AddCurrentTurnEffect($cardID, $currentPlayer);
         return "";
-      case "ELE140": case "ELE141": case "ELE142":
+      case "sow_tomorrow_red": case "sow_tomorrow_yellow": case "sow_tomorrow_blue":
         $params = explode("-", $target);
         $index = SearchdiscardForUniqueID($params[1], $currentPlayer);
         if ($index != -1) {
@@ -95,35 +95,35 @@
           return "FAILED";
         }
         return "";
-      case "ELE143":
+      case "amulet_of_earth_blue":
         if($from == "PLAY") AddCurrentTurnEffect($cardID, $currentPlayer);
         return "";
-      case "ELE144":
+      case "heart_of_ice":
         AddCurrentTurnEffect($cardID, $otherPlayer);
         return "";
-      case "ELE145":
-        PlayAura("ELE111", $otherPlayer, effectController: $currentPlayer);
+      case "coat_of_frost":
+        PlayAura("frostbite", $otherPlayer, effectController: $currentPlayer);
         return "";
-      case "ELE147":
+      case "blizzard_blue":
         AddDecisionQueue("SETDQCONTEXT", $mainPlayer, "Choose_to_pay_2_or_you_lose_and_can't_gain_go_again");
         AddDecisionQueue("BUTTONINPUT", $mainPlayer, "0,2", 0, 1);
         AddDecisionQueue("PAYRESOURCES", $mainPlayer, "<-", 1);
         AddDecisionQueue("GREATERTHANPASS", $mainPlayer, "0", 1);
         AddDecisionQueue("ADDCURRENTEFFECT", $mainPlayer, $cardID, 1);
         return "";
-      case "ELE151": case "ELE152": case "ELE153":
+      case "ice_quake_red": case "ice_quake_yellow": case "ice_quake_blue":
         AddCurrentTurnEffect($cardID, $currentPlayer);
         AddCurrentTurnEffect($cardID . "-HIT", $currentPlayer);
         return "";
-      case "ELE154": case "ELE155": case "ELE156":
+      case "weave_ice_red": case "weave_ice_yellow": case "weave_ice_blue":
         AddCurrentTurnEffect($cardID, $currentPlayer);
         return "";
-      case "ELE163": case "ELE164": case "ELE165":
+      case "chill_to_the_bone_red": case "chill_to_the_bone_yellow": case "chill_to_the_bone_blue":
         AddCurrentTurnEffect($cardID, $currentPlayer);
         return "";
-      case "ELE166": case "ELE167": case "ELE168":
-        if($cardID == "ELE166") $cost = 3;
-        else if($cardID == "ELE167") $cost = 2;
+      case "polar_blast_red": case "polar_blast_yellow": case "polar_blast_blue":
+        if($cardID == "polar_blast_red") $cost = 3;
+        else if($cardID == "polar_blast_yellow") $cost = 2;
         else $cost = 1;
         AddDecisionQueue("SETDQCONTEXT", $otherPlayer, "Choose_if_you_want_to_pay_".$cost."_to_prevent_Dominate");
         AddDecisionQueue("BUTTONINPUT", $otherPlayer, "0," . $cost, 0, 1);
@@ -135,9 +135,9 @@
           WriteLog(CardLink($cardID, $cardID) . " draw a card.");
         }
         return "";
-      case "ELE169": case "ELE170": case "ELE171": 
-        if($cardID == "ELE169") $pay = 3;
-        else if($cardID == "ELE170") $pay = 2;
+      case "winters_bite_red": case "winters_bite_yellow": case "winters_bite_blue": 
+        if($cardID == "winters_bite_red") $pay = 3;
+        else if($cardID == "winters_bite_yellow") $pay = 2;
         else $pay = 1;
         if(ShouldAutotargetOpponent($currentPlayer)) {
           AddDecisionQueue("PASSPARAMETER", $currentPlayer, "Target_Opponent");
@@ -148,65 +148,65 @@
           AddDecisionQueue("PLAYERTARGETEDABILITY", $currentPlayer, "WINTERSBITE-" . $pay, 1);
         }
         return "";
-      case "ELE172":
+      case "amulet_of_ice_blue":
         if($from == "PLAY") PayOrDiscard($otherPlayer, 2);
         return "";
-      case "ELE173":
+      case "shock_charmers":
         AddCurrentTurnEffect($cardID, $currentPlayer);
         return "";
-      case "ELE176":
+      case "blink_blue":
         GainActionPoints(1, $currentPlayer);
         return "";
-      case "ELE177": case "ELE178": case "ELE179":
+      case "flash_red": case "flash_yellow": case "flash_blue":
         AddAfterResolveEffect($cardID, $currentPlayer);
         return "";
-      case "ELE180": case "ELE181": case "ELE182":
+      case "weave_lightning_red": case "weave_lightning_yellow": case "weave_lightning_blue":
         AddCurrentTurnEffect($cardID, $currentPlayer);
         return "";
-      case "ELE183": case "ELE184": case "ELE185":
+      case "lightning_press_red": case "lightning_press_yellow": case "lightning_press_blue":
         $amount = 3;
-        if($cardID == "ELE184") $amount = 2;
-        else if($cardID == "ELE185") $amount = 1;
+        if($cardID == "lightning_press_yellow") $amount = 2;
+        else if($cardID == "lightning_press_blue") $amount = 1;
         $targetIndex = intval(explode("-", $target)[1]);
         if($targetIndex != 0) CombatChainPowerModifier($targetIndex, $amount);
         else AddCurrentTurnEffect($cardID, $currentPlayer);
         return "";
-      case "ELE186": case "ELE187": case "ELE188":
+      case "ball_lightning_red": case "ball_lightning_yellow": case "ball_lightning_blue":
         AddCurrentTurnEffect($cardID, $currentPlayer);
         return "";
-      case "ELE189": case "ELE190": case "ELE191":
+      case "lightning_surge_red": case "lightning_surge_yellow": case "lightning_surge_blue":
         if($from == "ARS") GiveAttackGoAgain();
         return "";
-      case "ELE195": case "ELE196": case "ELE197":
+      case "shock_striker_red": case "shock_striker_yellow": case "shock_striker_blue":
         if($from == "PLAY") AddCurrentTurnEffect($cardID, $currentPlayer, "", 1);
         return "";
-      case "ELE198": case "ELE199": case "ELE200":
+      case "electrify_red": case "electrify_yellow": case "electrify_blue":
         AddCurrentTurnEffect($cardID, $currentPlayer);
         if($from == "ARS") {
           Draw($currentPlayer);
           WriteLog(CardLink($cardID, $cardID) . " draw a card.");
         }
         return "";
-      case "ELE201":
+      case "amulet_of_lightning_blue":
         if($from == "PLAY") {
           if(count($combatChain) > 0) GiveAttackGoAgain();
           else AddCurrentTurnEffect($cardID, $currentPlayer);
         }
         return "";
-      case "ELE233":
+      case "ragamuffins_hat":
         Draw($currentPlayer);
         AddDecisionQueue("FINDINDICES", $currentPlayer, "HAND");
         AddDecisionQueue("CHOOSEHAND", $currentPlayer, "<-", 1);
         AddDecisionQueue("MULTIREMOVEHAND", $currentPlayer, "-", 1);
         AddDecisionQueue("OPT", $currentPlayer, "<-");
         return "";
-      case "ELE234":
+      case "deep_blue":
         GainResources($currentPlayer, 3);
         return "";
-      case "ELE235":
+      case "cracker_jax":
         AddCurrentTurnEffect($cardID, $currentPlayer);
         return "";
-      case "ELE236":
+      case "runaways":
         IncrementClassState($currentPlayer, $CS_DamagePrevention);
         return "";
       default: return "";
@@ -218,11 +218,11 @@
     global $mainPlayer, $defPlayer;
     switch($cardID)
     {
-      case "ELE148": case "ELE149": case "ELE150":
+      case "frost_fang_red": case "frost_fang_yellow": case "frost_fang_blue":
         if(IsHeroAttackTarget()) PayOrDiscard($defPlayer, 2);
         break;
-      case "ELE157": case "ELE158": case "ELE159":
-        if(IsHeroAttackTarget()) PlayAura("ELE111", $defPlayer, effectController: $mainPlayer);
+      case "icy_encounter_red": case "icy_encounter_yellow": case "icy_encounter_blue":
+        if(IsHeroAttackTarget()) PlayAura("frostbite", $defPlayer, effectController: $mainPlayer);
         break;
       default: break;
     }
@@ -230,8 +230,8 @@
 
   function SowTomorrowIndices($player, $cardID)
   {
-    if($cardID == "ELE140") $minCost = 0;
-    else if($cardID == "ELE141") $minCost = 1;
+    if($cardID == "sow_tomorrow_red") $minCost = 0;
+    else if($cardID == "sow_tomorrow_yellow") $minCost = 1;
     else $minCost = 2;
     $earth = CombineSearches(SearchDiscard($player, "A", "", -1, $minCost, "", "EARTH"), SearchDiscard($player, "AA", "", -1, $minCost, "", "EARTH"));
     $elemental = CombineSearches(SearchDiscard($player, "A", "", -1, $minCost, "", "ELEMENTAL"), SearchDiscard($player, "AA", "", -1, $minCost, "", "ELEMENTAL"));
@@ -259,7 +259,7 @@
       PrependDecisionQueue("CHOOSETHEIRCHARACTER", $player, "<-", 1);
       PrependDecisionQueue("SETDQCONTEXT", $player, "Choose an equipment to destroy", 1);
       PrependDecisionQueue("FINDINDICES", $otherPlayer, "EQUIP0", 1);
-      PrependDecisionQueue("WRITELOG", $player, "Player $otherPlayer declined_to_pay_for_".CardLink("ELE093", "ELE093").".", 1);
+      PrependDecisionQueue("WRITELOG", $player, "Player $otherPlayer declined_to_pay_for_".CardLink("exposed_to_the_elements_blue", "exposed_to_the_elements_blue").".", 1);
       PrependDecisionQueue("GREATERTHANPASS", $otherPlayer, "0", 1);
       PrependDecisionQueue("PAYRESOURCES", $otherPlayer, "<-", 1);
       PrependDecisionQueue("BUTTONINPUT", $otherPlayer, "0,2", 0);

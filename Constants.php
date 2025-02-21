@@ -1,11 +1,11 @@
 <?php
 
-$Card_CourageBanner = "DTD048";
-$Card_QuickenBanner = "DTD049";
-$Card_SpellbaneBanner = "DTD050";
-$Card_BlockBanner = "DTD054";
-$Card_LifeBanner = "DTD055";
-$Card_ResourceBanner = "DTD056";
+$Card_CourageBanner = "banneret_of_courage_yellow";
+$Card_QuickenBanner = "banneret_of_gallantry_yellow";
+$Card_SpellbaneBanner = "banneret_of_protection_yellow";
+$Card_BlockBanner = "banneret_of_resilience_yellow";
+$Card_LifeBanner = "banneret_of_salvation_yellow";
+$Card_ResourceBanner = "banneret_of_vigor_yellow";
 
 $GameStatus_Over = 2;
 $GameStatus_Rematch = 3;
@@ -676,8 +676,8 @@ function ResetCardPlayed($cardID, $from="-")
   if(DelimStringContains($type, "A") && ClassContains($cardID, "WIZARD", $currentPlayer) && (GetResolvedAbilityType($cardID) == "A" || GetResolvedAbilityType($cardID) == "") && GetClassState($currentPlayer, $CS_NextWizardNAAInstant) == 1) {
     SetClassState($currentPlayer, $CS_NextWizardNAAInstant, 0);
     //Section below helps with visualization and removing used effects
-    SearchCurrentTurnEffects("ARC116", $currentPlayer, true);
-    SearchCurrentTurnEffects("CRU162", $currentPlayer, true);
+    SearchCurrentTurnEffects("storm_striders", $currentPlayer, true);
+    SearchCurrentTurnEffects("chain_lightning_yellow", $currentPlayer, true);
     $effectRemoved = true;
   }
   if(DelimStringContains($type, "A") && (GetResolvedAbilityType($cardID) == "A" || GetResolvedAbilityType($cardID) == "") && GetClassState($currentPlayer, $CS_NextNAAInstant) == 1) {
@@ -688,7 +688,7 @@ function ResetCardPlayed($cardID, $from="-")
   $abilityType = GetResolvedAbilityType($cardID, $from);
   if(!$effectRemoved && DelimStringContains($type, "A") && ($abilityType == "A" || $abilityType == "")) {
     if ($mainPlayer == $currentPlayer) {
-      SearchCurrentTurnEffects("ROS075", $mainPlayer, true);
+      SearchCurrentTurnEffects("eclectic_magnetism_red", $mainPlayer, true);
       $combatChainState[$CCS_EclecticMag] = 0;
     }
   }

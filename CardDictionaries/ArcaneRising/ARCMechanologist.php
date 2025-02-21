@@ -6,7 +6,7 @@ function ARCMechanologistPlayAbility($cardID, $from, $resourcesPaid, $target = "
   global $CombatChain, $CS_LastDynCost;
   $rv = "";
   switch($cardID) {
-    case "ARC003":
+    case "teklo_plasma_pistol":
       $abilityType = GetResolvedAbilityType($cardID);
       if($abilityType == "A")
       {
@@ -16,21 +16,21 @@ function ARCMechanologistPlayAbility($cardID, $from, $resourcesPaid, $target = "
         $character->Finished();
       }
       return "";
-    case "ARC004":
+    case "teklo_foundry_heart":
       $deck = new Deck($currentPlayer);
       for($i = 0; $i < 2 && !$deck->Empty(); ++$i) {
         $banished = $deck->BanishTop();
         if(ClassContains($banished, "MECHANOLOGIST", $currentPlayer)) GainResources($currentPlayer, 1);
       }
       return "";
-    case "ARC005":
+    case "achilles_accelerator":
       GainActionPoints(1, $currentPlayer);
       return "";
-    case "ARC006":
+    case "high_octane_red":
       Draw($currentPlayer);
       AddCurrentTurnEffect($cardID, $currentPlayer);
       return "";
-    case "ARC009":
+    case "spark_of_genius_yellow":
       AddDecisionQueue("MULTIZONEINDICES", $currentPlayer, "MYDECK:subtype=Item;class=MECHANOLOGIST;minCost=" . (GetClassState($currentPlayer, $CS_LastDynCost) / 2) . ";maxCost=" . (GetClassState($currentPlayer, $CS_LastDynCost) / 2));
       AddDecisionQueue("MAYCHOOSEMULTIZONE", $currentPlayer, "<-", 1);
       AddDecisionQueue("MZREMOVE", $currentPlayer, "-", 1);
@@ -38,23 +38,23 @@ function ARCMechanologistPlayAbility($cardID, $from, $resourcesPaid, $target = "
       AddDecisionQueue("SHUFFLEDECK", $currentPlayer, "-");
       if(GetClassState($currentPlayer, $CS_NumBoosted) > 0) AddDecisionQueue("DRAW", $currentPlayer, "-");
       return "";
-    case "ARC010":
+    case "induction_chamber_red":
       if($from == "PLAY") {
         $items = &GetItems($currentPlayer);
         if($CombatChain->HasCurrentLink()) GiveAttackGoAgain();
         else $items[GetClassState($currentPlayer, $CS_PlayIndex)+1] = 1;
       }
       return $rv;
-    case "ARC014": case "ARC015": case "ARC016":
-      if($cardID == "ARC014") $maxCost = 2;
-      else if($cardID == "ARC015") $maxCost = 1;
+    case "pour_the_mold_red": case "pour_the_mold_yellow": case "pour_the_mold_blue":
+      if($cardID == "pour_the_mold_red") $maxCost = 2;
+      else if($cardID == "pour_the_mold_yellow") $maxCost = 1;
       else $maxCost = 0;
       AddDecisionQueue("MULTIZONEINDICES", $currentPlayer, "MYHAND:subtype=Item;maxCost=$maxCost;class=MECHANOLOGIST");
       AddDecisionQueue("MAYCHOOSEMULTIZONE", $currentPlayer, "<-", 1);
       AddDecisionQueue("MZREMOVE", $currentPlayer, "-", 1);
       AddDecisionQueue("PUTPLAY", $currentPlayer, (GetClassState($currentPlayer, $CS_NumBoosted) > 0 ? 1 : 0), 1);
       return "";
-    case "ARC017":
+    case "aether_sink_yellow":
       $index = GetClassState($currentPlayer, $CS_PlayIndex);
       $items = &GetItems($currentPlayer);
       if($index != -1) {
@@ -65,13 +65,13 @@ function ARCMechanologistPlayAbility($cardID, $from, $resourcesPaid, $target = "
         }
       }
       return $rv;
-    case "ARC018":
+    case "cognition_nodes_blue":
       if($from == "PLAY") {
         $items = &GetItems($currentPlayer);
         if(!$CombatChain->HasCurrentLink()) $items[GetClassState($currentPlayer, $CS_PlayIndex) + 1] = 1;
       }
       return $rv;
-    case "ARC019":
+    case "convection_amplifier_red":
       $index = GetClassState($currentPlayer, $CS_PlayIndex);
       $items = &GetItems($currentPlayer);
       if($index != -1) {
@@ -81,16 +81,16 @@ function ARCMechanologistPlayAbility($cardID, $from, $resourcesPaid, $target = "
         $rv = "Gives your next attack this turn Dominate";
       }
       return $rv;
-    case "ARC032": case "ARC033": case "ARC034":
+    case "locked_and_loaded_red": case "locked_and_loaded_yellow": case "locked_and_loaded_blue":
       AddCurrentTurnEffect($cardID, $currentPlayer);
       $boosted = GetClassState($currentPlayer, $CS_NumBoosted) > 0;
       if($boosted) Opt($cardID, 1);
       return "";
-    case "ARC035":
+    case "dissipation_shield_yellow":
       AddCurrentTurnEffect($cardID . "-" . $additionalCosts, $currentPlayer, "PLAY");
       $rv = "";
       return $rv;
-    case "ARC037":
+    case "optekal_monocle_blue":
       if($from == "PLAY") {
         $index = GetClassState($currentPlayer, $CS_PlayIndex);
         $items = &GetItems($currentPlayer);
@@ -109,14 +109,14 @@ function ARCMechanologistHitEffect($cardID, $from)
 {
   global $mainPlayer, $combatChainState, $CCS_GoesWhereAfterLinkResolves;
   switch ($cardID) {
-    case "ARC011": case "ARC012": case "ARC013":
+    case "pedal_to_the_metal_red": case "pedal_to_the_metal_yellow": case "pedal_to_the_metal_blue":
       AddCurrentTurnEffectFromCombat($cardID, $mainPlayer);
       break;
-    case "ARC018":
+    case "cognition_nodes_blue":
       if(substr($from, 0, 5) != "THEIR") $combatChainState[$CCS_GoesWhereAfterLinkResolves] = "BOTDECK";
       else $combatChainState[$CCS_GoesWhereAfterLinkResolves] = "THEIRBOTDECK";
       break;
-    case "ARC020": case "ARC021": case "ARC022":
+    case "over_loop_red": case "over_loop_yellow": case "over_loop_blue":
       if(substr($from, 0, 5) != "THEIR") $combatChainState[$CCS_GoesWhereAfterLinkResolves] = "BOTDECK";
       else $combatChainState[$CCS_GoesWhereAfterLinkResolves] = "THEIRBOTDECK";
       break;
@@ -127,43 +127,43 @@ function ARCMechanologistHitEffect($cardID, $from)
 
 function HasBoost($cardID, $player)
 {
-  if(SearchCurrentTurnEffects("MST231", $player) && TypeContains($cardID, "AA", $player)) return true;
+  if(SearchCurrentTurnEffects("evo_speedslip_blue", $player) && TypeContains($cardID, "AA", $player)) return true;
   switch ($cardID) {
-    case "ARC011": case "ARC012": case "ARC013":
-    case "ARC020": case "ARC021": case "ARC022":
-    case "ARC023": case "ARC024": case "ARC025":
-    case "ARC026": case "ARC027": case "ARC028":
-    case "ARC029": case "ARC030": case "ARC031":
-    case "CRU106": case "CRU107": case "CRU108":
-    case "CRU109": case "CRU110": case "CRU111":
-    case "EVR073": case "EVR074": case "EVR075":
-    case "EVR079": case "EVR080": case "EVR081":
-    case "DYN090":
-    case "DYN095": case "DYN096": case "DYN097":
-		case "DYN101": case "DYN102": case "DYN103":
-		case "DYN104": case "DYN105": case "DYN106":
-    case "TCC016":
-    case "EVO138": case "EVO141": case "EVO142":
-    case "EVO147": case "EVO148": case "EVO149":
-    case "EVO150": case "EVO151": case "EVO152":
-    case "EVO162": case "EVO163": case "EVO164":
-    case "EVO165": case "EVO166": case "EVO167":
-    case "EVO168": case "EVO169": case "EVO170":
-    case "EVO171": case "EVO172": case "EVO173":
-    case "EVO177": case "EVO178": case "EVO179":
-    case "EVO183": case "EVO184": case "EVO185":
-    case "EVO186": case "EVO187": case "EVO188":
-    case "EVO189": case "EVO190": case "EVO191":
-    case "EVO192": case "EVO193": case "EVO194":
-    case "EVO195": case "EVO196": case "EVO197":
-    case "EVO198": case "EVO199": case "EVO200":
-    case "EVO201": case "EVO202": case "EVO203":
-    case "EVO204": case "EVO205": case "EVO206":
-    case "EVO207": case "EVO208": case "EVO209":
-    case "EVO210": case "EVO211": case "EVO212":
-    case "EVO213": case "EVO214": case "EVO215":
-    case "EVO216": case "EVO217": case "EVO218":
-    case "AIO009":
+    case "pedal_to_the_metal_red": case "pedal_to_the_metal_yellow": case "pedal_to_the_metal_blue":
+    case "over_loop_red": case "over_loop_yellow": case "over_loop_blue":
+    case "throttle_red": case "throttle_yellow": case "throttle_blue":
+    case "zero_to_sixty_red": case "zero_to_sixty_yellow": case "zero_to_sixty_blue":
+    case "zipper_hit_red": case "zipper_hit_yellow": case "zipper_hit_blue":
+    case "high_speed_impact_red": case "high_speed_impact_yellow": case "high_speed_impact_blue":
+    case "combustible_courier_red": case "combustible_courier_yellow": case "combustible_courier_blue":
+    case "tbone_red": case "tbone_yellow": case "tbone_blue":
+    case "zoom_in_red": case "zoom_in_yellow": case "zoom_in_blue":
+    case "pulsewave_harpoon_red":
+    case "scramble_pulse_red": case "scramble_pulse_yellow": case "scramble_pulse_blue":
+		case "crankshaft_red": case "crankshaft_yellow": case "crankshaft_blue":
+		case "jump_start_red": case "jump_start_yellow": case "jump_start_blue":
+    case "under_loop_red":
+    case "heist_red": case "steel_street_hoons_blue": case "twin_drive_red":
+    case "bull_bar_red": case "bull_bar_yellow": case "bull_bar_blue":
+    case "spring_a_leak_red": case "spring_a_leak_yellow": case "spring_a_leak_blue":
+    case "zero_to_fifty_red": case "zero_to_fifty_yellow": case "zero_to_fifty_blue":
+    case "razzle_dazzle_red": case "razzle_dazzle_yellow": case "razzle_dazzle_blue":
+    case "full_tilt_red": case "full_tilt_yellow": case "full_tilt_blue":
+    case "gas_guzzler_red": case "gas_guzzler_yellow": case "gas_guzzler_blue":
+    case "big_bertha_red": case "big_bertha_yellow": case "big_bertha_blue":
+    case "rev_up_red": case "rev_up_yellow": case "rev_up_blue":
+    case "data_link_red": case "data_link_yellow": case "data_link_blue":
+    case "dive_through_data_red": case "dive_through_data_yellow": case "dive_through_data_blue":
+    case "sprocket_rocket_red": case "sprocket_rocket_yellow": case "sprocket_rocket_blue":
+    case "dumpster_dive_red": case "dumpster_dive_yellow": case "dumpster_dive_blue":
+    case "expedite_red": case "expedite_yellow": case "expedite_blue":
+    case "metex_red": case "metex_yellow": case "metex_blue":
+    case "out_pace_red": case "out_pace_yellow": case "out_pace_blue":
+    case "lay_waste_red": case "lay_waste_yellow": case "lay_waste_blue":
+    case "fender_bender_red": case "fender_bender_yellow": case "fender_bender_blue":
+    case "panel_beater_red": case "panel_beater_yellow": case "panel_beater_blue":
+    case "under_loop_red": case "under_loop_yellow": case "under_loop_blue":
+    case "fast_and_furious_red":
       return true;
     default: return false;
   }
@@ -172,7 +172,7 @@ function HasBoost($cardID, $player)
 function Boost($cardID)
 {
   global $currentPlayer;
-  if(SearchCurrentTurnEffects("MST231", $currentPlayer, true) && HasBoost($cardID, $currentPlayer)) {
+  if(SearchCurrentTurnEffects("evo_speedslip_blue", $currentPlayer, true) && HasBoost($cardID, $currentPlayer)) {
       $amountBoostChoices = "0,1,2";
       AddDecisionQueue("SETDQCONTEXT", $currentPlayer, "Choose how many times you want to activate boost on " . CardLink($cardID, $cardID));
       AddDecisionQueue("BUTTONINPUT", $currentPlayer, $amountBoostChoices);
@@ -192,22 +192,22 @@ function DoBoost($player, $cardID, $boostCount=1)
   for ($i = 0; $i < $boostCount; $i++) {
     if($deck->Empty()) { WriteLog("Could not boost"); return; }
     ItemBoostEffects();
-    GainActionPoints(CountCurrentTurnEffects("ARC006", $player), $player);
-    GainResources($player, CountCurrentTurnEffects("AIO004", $player));
+    GainActionPoints(CountCurrentTurnEffects("high_octane_red", $player), $player);
+    GainResources($player, CountCurrentTurnEffects("heavy_industry_power_plant", $player));
     $boostedCardID = $deck->Top(remove:true);
     SelfBoostEffects($player, $boostedCardID, $cardID);
     CharacterBoostAbilities($player);
     OnBoostedEffects($player, $boostedCardID);
     $skipBanish = false;
     if (CardNameContains($boostedCardID, "Hyper Driver", $player)) {
-      $skipBanish = EquipmentBoostEffect($player, "EVO011", $boostedCardID);
+      $skipBanish = EquipmentBoostEffect($player, "hyperx3", $boostedCardID);
     }
-    if(CardSubType($boostedCardID) == "Item" && SearchCurrentTurnEffects("DYN091-2", $player, true)) {
+    if(CardSubType($boostedCardID) == "Item" && SearchCurrentTurnEffects("bios_update_red-2", $player, true)) {
       $skipBanish = true;
       PutItemIntoPlayForPlayer($boostedCardID, $player);
     }
-    if(SearchCurrentTurnEffects("CRU102", $player)) {
-      AddLayer("TRIGGER", $player, "CRU102");
+    if(SearchCurrentTurnEffects("viziertronic_model_i", $player)) {
+      AddLayer("TRIGGER", $player, "viziertronic_model_i");
     }
     if (!$skipBanish) BanishCardForPlayer($boostedCardID, $player, "DECK", "BOOST");
     $grantsGA = ClassContains($boostedCardID, "MECHANOLOGIST", $player);
@@ -227,13 +227,13 @@ function OnBoostedEffects($player, $boosted)
 {
   switch($boosted)
   {
-    case "EVO177": case "EVO178": case "EVO179":
+    case "big_bertha_red": case "big_bertha_yellow": case "big_bertha_blue":
       AddDecisionQueue("SETDQCONTEXT", $player, "Choose a Hyper Driver to get a steam counter", 1);
-      AddDecisionQueue("MULTIZONEINDICES", $player, "MYITEMS:isSameName=ARC036");
+      AddDecisionQueue("MULTIZONEINDICES", $player, "MYITEMS:isSameName=hyper_driver_red");
       AddDecisionQueue("CHOOSEMULTIZONE", $player, "<-", 1);
       AddDecisionQueue("MZADDCOUNTER", $player, "-", 1);
       break;
-    case "AIO009":
+    case "fast_and_furious_red":
       AddDecisionQueue("SETDQCONTEXT", $player, "Choose an item with cranked to get a steam counter", 1);
       AddDecisionQueue("MULTIZONEINDICES", $player, "MYITEMS:hasCrank=true");
       AddDecisionQueue("CHOOSEMULTIZONE", $player, "<-", 1);
@@ -246,8 +246,8 @@ function OnBoostedEffects($player, $boosted)
 function SelfBoostEffects($player, $boosted, $cardID)
 {
   switch($cardID) {
-    case "EVO192": case "EVO193": case "EVO194":
-    case "EVO195": case "EVO196": case "EVO197":
+    case "sprocket_rocket_red": case "sprocket_rocket_yellow": case "sprocket_rocket_blue":
+    case "dumpster_dive_red": case "dumpster_dive_yellow": case "dumpster_dive_blue":
       if(SubtypeContains($boosted, "Item", $player) || IsEquipment($boosted, $player)) AddCurrentTurnEffect($cardID, $player);
       break;
     default: break;
@@ -260,23 +260,23 @@ function ItemBoostEffects()
   $items = &GetItems($currentPlayer);
   for($i = count($items) - ItemPieces(); $i >= 0; $i -= ItemPieces()) {
     switch($items[$i]) {
-      case "ARC036":
-      case "DYN110": case "DYN111": case "DYN112": case "EVO234":
+      case "hyper_driver_red":
+      case "hyper_driver_red": case "hyper_driver_yellow": case "hyper_driver_blue": case "hyper_driver":
         if($items[$i+2] == 2) {
           AddLayer("TRIGGER", $currentPlayer, $items[$i], $i, "-", $items[$i + 4]);
           $items[$i+2] = 1;
         }
         break;
-      case "EVR072":
+      case "teklo_pounder_blue":
         if($items[$i+2] == 2) {
           WriteLog(CardLink($items[$i], $items[$i]) . " gives the attack +2");
           --$items[$i+1];
           $items[$i+2] = 1;
-          AddCurrentTurnEffect("EVR072", $currentPlayer, "PLAY");
+          AddCurrentTurnEffect("teklo_pounder_blue", $currentPlayer, "PLAY");
           if($items[$i+1] <= 0) DestroyItemForPlayer($currentPlayer, $i);
         }
         break;
-      case "EVO090": case "EVO091": case "EVO092":
+      case "hadron_collider_red": case "hadron_collider_yellow": case "hadron_collider_blue":
         AddCurrentTurnEffect($items[$i] . "," . $items[$i+1], $currentPlayer, "PLAY");
         DestroyItemForPlayer($currentPlayer, $i);
         break;
@@ -286,7 +286,7 @@ function ItemBoostEffects()
 }
 
 function EquipmentBoostEffect($player, $charID, $cardID) {
-  if (!FindCharacterIndex($player, "EVO011")) return false;
+  if (!FindCharacterIndex($player, "hyperx3")) return false;
   if (SearchCharacterForCard($player, $charID)) {
     $chars = &GetPlayerCharacter($player);
     $index = FindCharacterIndex($player, $charID);
@@ -299,7 +299,7 @@ function EquipmentBoostEffect($player, $charID, $cardID) {
 
 function OnBoostCardPutUnderCharacter(&$chars, $index, $charID, $player) {
   switch ($charID) {
-    case "EVO011":
+    case "hyperx3":
       if ($chars[$index+1] != 1 && $chars[$index+2] >= 3) {
         Draw($player, true, true);
         $chars[$index+1] = 1;

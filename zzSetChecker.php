@@ -16,7 +16,7 @@ for ($number = 0; $number < 300; ++$number) {
     ++$count;
   }
   if($type == "AR" && AttackValue($card) != 0) echo($card . " Attack Reaction has attack " . AttackValue($card) . ".<BR>");
-  if ($type == "AA" && $card != "EVR138" && AttackValue($card) == 0) echo ($card . " Attack action has no attack.<br>");
+  if ($type == "AA" && $card != "fractal_replication_red" && AttackValue($card) == 0) echo ($card . " Attack action has no attack.<br>");
   if (($type != "C" && $type != "E" && $type != "W" && $type != "T") && PitchValue($card) == 0) echo ($card . " has no pitch value.<br>");
   CheckImage($card);
 }

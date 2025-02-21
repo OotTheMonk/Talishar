@@ -7,20 +7,20 @@
     $rv = "";
     switch($cardID)
     {
-      case "MON029": case "MON030":
+      case "ser_boltyn_breaker_of_dawn": case "boltyn":
         if(HasIncreasedAttack()) GiveAttackGoAgain();
         return "";
-      case "MON033":
+      case "beacon_of_victory_yellow":
         AddDecisionQueue("ATTACKMODIFIER", $currentPlayer, intval($additionalCosts), 1);
         if(GetClassState($currentPlayer, $CS_NumCharged) > 0) {
-          AddDecisionQueue("FINDINDICES", $currentPlayer, "MON033-2", 1);
+          AddDecisionQueue("FINDINDICES", $currentPlayer, "beacon_of_victory_yellow-2", 1);
           AddDecisionQueue("MAYCHOOSEDECK", $currentPlayer, "<-", 1);
           AddDecisionQueue("MULTIADDHAND", $currentPlayer, "-", 1);
           AddDecisionQueue("REVEALCARDS", $currentPlayer, "-", 1);
           AddDecisionQueue("SHUFFLEDECK", $currentPlayer, "-");
         }
         return "";
-      case "MON034":
+      case "lumina_ascension_yellow":
         AddCurrentTurnEffect($cardID, $currentPlayer);
         $character = &GetPlayerCharacter($currentPlayer);
         if(GetClassState($currentPlayer, $CS_NumCharged) > 0) {
@@ -29,25 +29,25 @@
           }
         }
         return "";
-      case "MON105":
+      case "hatchet_of_body":
         if(CardNameContains(GetClassState($currentPlayer, $CS_LastAttack), "Hatchet of Mind", $currentPlayer)) AddCharacterEffect($currentPlayer, $combatChainState[$CCS_WeaponIndex], $cardID);
         return "";
-      case "MON106":
+      case "hatchet_of_mind":
         if(CardNameContains(GetClassState($currentPlayer, $CS_LastAttack), "Hatchet of Body", $currentPlayer)) AddCharacterEffect($currentPlayer, $combatChainState[$CCS_WeaponIndex], $cardID);
         return "";
-      case "MON108":
+      case "gallantry_gold":
         AddCurrentTurnEffect($cardID, $currentPlayer);
         return "";
-      case "MON109":
+      case "spill_blood_red":
         AddCurrentTurnEffect($cardID, $currentPlayer);
         return "";
-      case "MON110": case "MON111": case "MON112":
+      case "dusk_path_pilgrimage_red": case "dusk_path_pilgrimage_yellow": case "dusk_path_pilgrimage_blue":
         AddCurrentTurnEffect($cardID, $currentPlayer);
         return "";
-      case "MON113": case "MON114": case "MON115":
+      case "plow_through_red": case "plow_through_yellow": case "plow_through_blue":
         AddCurrentTurnEffect($cardID, $currentPlayer);
         return "";
-      case "MON116": case "MON117": case "MON118":
+      case "second_swing_red": case "second_swing_yellow": case "second_swing_blue":
         if(GetClassState($currentPlayer, $CS_AtksWWeapon) == 0) return "Does nothing because there were no weapon attacks this turn";
         AddCurrentTurnEffect($cardID, $currentPlayer);
         return "";
@@ -60,10 +60,10 @@
     global $mainPlayer, $CS_NumCharged, $combatChainState, $CCS_GoesWhereAfterLinkResolves;
     switch($cardID)
     {
-      case "MON042": case "MON043": case "MON044":
+      case "bolt_of_courage_red": case "bolt_of_courage_yellow": case "bolt_of_courage_blue":
         if(GetClassState($mainPlayer, $CS_NumCharged) > 0) Draw($mainPlayer);
         break;
-      case "MON048": case "MON049": case "MON050":
+      case "engulfing_light_red": case "engulfing_light_yellow": case "engulfing_light_blue":
         if(GetClassState($mainPlayer, $CS_NumCharged) > 0) $combatChainState[$CCS_GoesWhereAfterLinkResolves] = "SOUL";
         break;
       default: break;

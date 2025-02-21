@@ -6,13 +6,13 @@
     $rv = "";
     switch($cardID)
     {
-      case "MON121":
+      case "hexagore_the_death_hydra":
         $numBD = SearchCount(SearchBanish($currentPlayer, "", "", -1, -1, "", "", true));
         $damage = 6 - $numBD;
         WriteLog("Player " . $currentPlayer . " lost " . $damage . " life");
         DamageTrigger($currentPlayer, $damage, "PLAYCARD", $cardID);
         return "";
-      case "MON125":
+      case "shadow_of_blasmophet_red":
         Draw($currentPlayer);
         $card = DiscardRandom();
         if(ModifiedAttackValue($card, $currentPlayer, "HAND", source:$cardID) >= 6) {
@@ -20,7 +20,7 @@
           AddDecisionQueue("SHUFFLEDECK", $currentPlayer, "-");
         }
         return "";
-      case "MON138": case "MON139": case "MON140":
+      case "deadwood_rumbler_red": case "deadwood_rumbler_yellow": case "deadwood_rumbler_blue":
         Draw($currentPlayer);
         $card = DiscardRandom();
         if(ModifiedAttackValue($card, $currentPlayer, "HAND", source:$cardID) >= 6) {
@@ -31,20 +31,20 @@
           AddDecisionQueue("MZREMOVE", $currentPlayer, "-", 1);
         }
         return "";
-      case "MON150": case "MON151": case "MON152":
+      case "unworldly_bellow_red": case "unworldly_bellow_yellow": case "unworldly_bellow_blue":
         AddCurrentTurnEffect($cardID, $currentPlayer);
         return "";
-      case "MON221":
+      case "ravenous_meataxe":
         Draw($currentPlayer);
         $card = DiscardRandom();
         if(ModifiedAttackValue($card, $currentPlayer, "HAND", source:$cardID) >= 6) AddCurrentTurnEffect($cardID, $currentPlayer);
         return "";
-      case "MON222":
+      case "tear_limb_from_limb_blue":
         Draw($currentPlayer);
         $card = DiscardRandom();
         if(ModifiedAttackValue($card, $currentPlayer, "HAND", source:$cardID) >= 6) AddCurrentTurnEffect($cardID, $currentPlayer);
         return "";
-      case "MON223": case "MON224": case "MON225":
+      case "pulping_red": case "pulping_yellow": case "pulping_blue":
         Draw($currentPlayer);
         $card = DiscardRandom();
         if(ModifiedAttackValue($card, $currentPlayer, "HAND", source:$cardID) >= 6) AddCurrentTurnEffect($cardID, $currentPlayer);
@@ -72,7 +72,7 @@
     for($i = 0; $i < 3; $i++) {
       $index = GetRandom(0, count($discard)/DiscardPieces()-1) * DiscardPieces();
       if(ModifiedAttackValue($discard[$index], $currentPlayer, "GY", source:$cardID) >= 6) ++$BanishedIncludes6;
-      elseif($discard[$index] == "DTD107") ++$diabolicOfferingCount;
+      elseif($discard[$index] == "diabolic_offering_blue") ++$diabolicOfferingCount;
       $cardID = RemoveDiscard($currentPlayer, $index);
       BanishCardForPlayer($cardID, $currentPlayer, "DISCARD", $modifier);
       $discard = array_values($discard);
@@ -86,10 +86,10 @@
     $deck = new Deck($player);
     if($deck->Empty()) return;
     $topDeck = $deck->BanishTop("-", $player);
-    if(ModifiedAttackValue($topDeck, $player, "DECK", source:"MON406") >= 6) {
+    if(ModifiedAttackValue($topDeck, $player, "DECK", source:"lady_barthimont") >= 6) {
       $arsenal = &GetArsenal($player);
       ++$arsenal[$index+3];
-      AddCurrentTurnEffect("MON406", $player);
+      AddCurrentTurnEffect("lady_barthimont", $player);
       if($arsenal[$index+3] == 2) MentorTrigger($player, $index);
     }
   }

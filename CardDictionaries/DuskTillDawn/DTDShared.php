@@ -3,24 +3,24 @@
 function DTDAbilityCost($cardID)
 {
   switch($cardID) {
-    case "DTD001": case "DTD002": return 2;
-    case "DTD003": return 2;
-    case "DTD004": return 1;
-    case "DTD046": return 2;
-    case "DTD060": case "DTD061": case "DTD062": return 1;
-    case "DTD075": case "DTD076": case "DTD077": case "DTD078": return 0;
-    case "DTD105": return 2;
-    case "DTD106": return 1;
-    case "DTD135": return 0;
-    case "DTD136": return 1;
-    case "DTD164": return 0;
-    case "DTD193": return 0;
-    case "DTD199": return 1;
-    case "DTD205": return 3;
-    case "DTD207": return 1;
-    case "DTD210": return 2;
-    case "DTD405": case "DTD406": case "DTD407": case "DTD408"://Angels
-    case "DTD409": case "DTD410": case "DTD411": case "DTD412": return 2;
+    case "prism_awakener_of_sol": case "prism_advent_of_thrones": return 2;
+    case "luminaris_celestial_fury": return 2;
+    case "empyrean_rapture": return 1;
+    case "beaming_blade": return 2;
+    case "v_for_valor_red": case "v_for_valor_yellow": case "v_for_valor_blue": return 1;
+    case "radiant_view": case "radiant_raiment": case "radiant_touch": case "radiant_flow": return 0;
+    case "hell_hammer": return 2;
+    case "spoiled_skull": return 1;
+    case "flail_of_agony": return 0;
+    case "grimoire_of_the_haunt": return 1;
+    case "levia_redeemed": return 0;
+    case "nasreth_the_soul_harrower": return 0;
+    case "rugged_roller": return 1;
+    case "decimator_great_axe": return 3;
+    case "ironsong_versus": return 1;
+    case "scepter_of_pain": return 2;
+    case "suraya_archangel_of_erudition": case "themis_archangel_of_judgment": case "aegis_archangel_of_protection": case "sekem_archangel_of_ravages"://Angels
+    case "avalon_archangel_of_rebirth": case "metis_archangel_of_tenacity": case "victoria_archangel_of_triumph": case "bellona_archangel_of_war": return 2;
     default: return 0;
   }
 }
@@ -28,24 +28,24 @@ function DTDAbilityCost($cardID)
 function DTDAbilityType($cardID, $index = -1)
 {
   switch($cardID) {
-    case "DTD001": case "DTD002": return "I";
-    case "DTD003": return "I";
-    case "DTD004": return "I";
-    case "DTD046": return "AA";
-    case "DTD060": case "DTD061": case "DTD062": return "AR";
-    case "DTD075": case "DTD076": case "DTD077": case "DTD078": return "I";
-    case "DTD105": return "AA";
-    case "DTD106": return "A";
-    case "DTD135": return "AA";
-    case "DTD136": return "I";
-    case "DTD164": return "A";
-    case "DTD193": return "AA";
-    case "DTD199": return "AA";
-    case "DTD205": return "AA";
-    case "DTD207": return "A";
-    case "DTD210": return "A";
-    case "DTD405": case "DTD406": case "DTD407": case "DTD408"://Angels
-    case "DTD409": case "DTD410": case "DTD411": case "DTD412": return "AA";
+    case "prism_awakener_of_sol": case "prism_advent_of_thrones": return "I";
+    case "luminaris_celestial_fury": return "I";
+    case "empyrean_rapture": return "I";
+    case "beaming_blade": return "AA";
+    case "v_for_valor_red": case "v_for_valor_yellow": case "v_for_valor_blue": return "AR";
+    case "radiant_view": case "radiant_raiment": case "radiant_touch": case "radiant_flow": return "I";
+    case "hell_hammer": return "AA";
+    case "spoiled_skull": return "A";
+    case "flail_of_agony": return "AA";
+    case "grimoire_of_the_haunt": return "I";
+    case "levia_redeemed": return "A";
+    case "nasreth_the_soul_harrower": return "AA";
+    case "rugged_roller": return "AA";
+    case "decimator_great_axe": return "AA";
+    case "ironsong_versus": return "A";
+    case "scepter_of_pain": return "A";
+    case "suraya_archangel_of_erudition": case "themis_archangel_of_judgment": case "aegis_archangel_of_protection": case "sekem_archangel_of_ravages"://Angels
+    case "avalon_archangel_of_rebirth": case "metis_archangel_of_tenacity": case "victoria_archangel_of_triumph": case "bellona_archangel_of_war": return "AA";
     default: return "";
   }
 }
@@ -53,8 +53,8 @@ function DTDAbilityType($cardID, $index = -1)
 function DTDAbilityHasGoAgain($cardID)
 {
   switch($cardID) {
-    case "DTD106": return true;
-    case "DTD207": return true;
+    case "spoiled_skull": return true;
+    case "ironsong_versus": return true;
     default: return false;
   }
 }
@@ -67,47 +67,47 @@ function DTDEffectAttackModifier($cardID)
   if(count($params) > 1) $parameter = $params[1];
   if(strlen($cardID) > 6) $cardID = $dashArr[0];
   switch($cardID) {
-    case "DTD011": return -1;
-    case "DTD032": return 3;
-    case "DTD033": return 2;
-    case "DTD034": return 1;
-    case "DTD035": return 4;
-    case "DTD036": return 3;
-    case "DTD037": return 2;
-    case "DTD053": return 2;//Prayer of Bellona
-    case "DTD057": case "DTD058": case "DTD059": return 1;//Beaming Bravado
-    case "DTD060": return 3;
-    case "DTD061": return 2;
-    case "DTD062": return 1;
-    case "DTD069": return 3;//Resounding Courage
-    case "DTD070": return 2;
-    case "DTD071": return 1;
-    case "DTD072": return 3;//Charge of the Light Brigade
-    case "DTD073": return 2;
-    case "DTD074": return 1;
-    case "DTD080-1": return 2;
-    case "DTD082": case "DTD083": case "DTD084": return 1;
-    case "DTD111": return $parameter;
-    case "DTD118": return 5;
-    case "DTD119": return 4;
-    case "DTD120": return 3;
-    case "DTD127": case "DTD128": case "DTD129": return 2;
-    case "DTD130": case "DTD131": case "DTD132": return 2;
-    case "DTD149": return 3;
-    case "DTD150": return 2;
-    case "DTD151": return 1;
-    case "DTD161": return 5;
-    case "DTD162": return 4;
-    case "DTD163": return 3;
-    case "DTD187": return 3;
-    case "DTD188": return 2;
-    case "DTD189": return 1;
-    case "DTD196": return 1;//Anthem of Spring
-    case "DTD208": return 1;
-    case "DTD213": return 3;
-    case "DTD229": return 2;
-    case "DTD232": return 1;//Courage
-    case "DTD411": return -1;
+    case "figment_of_triumph_yellow": return -1;
+    case "angelic_descent_red": return 3;
+    case "angelic_descent_yellow": return 2;
+    case "angelic_descent_blue": return 1;
+    case "angelic_wrath_red": return 4;
+    case "angelic_wrath_yellow": return 3;
+    case "angelic_wrath_blue": return 2;
+    case "prayer_of_bellona_yellow": return 2;//Prayer of Bellona
+    case "beaming_bravado_red": case "beaming_bravado_yellow": case "beaming_bravado_blue": return 1;//Beaming Bravado
+    case "v_for_valor_red": return 3;
+    case "v_for_valor_yellow": return 2;
+    case "v_for_valor_blue": return 1;
+    case "resounding_courage_red": return 3;//Resounding Courage
+    case "resounding_courage_yellow": return 2;
+    case "resounding_courage_blue": return 1;
+    case "charge_of_the_light_brigade_red": return 3;//Charge of the Light Brigade
+    case "charge_of_the_light_brigade_yellow": return 2;
+    case "charge_of_the_light_brigade_blue": return 1;
+    case "lumina_lance_yellow-1": return 2;
+    case "lay_to_rest_red": case "lay_to_rest_yellow": case "lay_to_rest_blue": return 1;
+    case "blood_dripping_frenzy_blue": return $parameter;
+    case "shaden_scream_red": return 5;
+    case "shaden_scream_yellow": return 4;
+    case "shaden_scream_blue": return 3;
+    case "tribute_to_demolition_red": case "tribute_to_demolition_yellow": case "tribute_to_demolition_blue": return 2;
+    case "tribute_to_the_legions_of_doom_red": case "tribute_to_the_legions_of_doom_yellow": case "tribute_to_the_legions_of_doom_blue": return 2;
+    case "envelop_in_darkness_red": return 3;
+    case "envelop_in_darkness_yellow": return 2;
+    case "envelop_in_darkness_blue": return 1;
+    case "putrid_stirrings_red": return 5;
+    case "putrid_stirrings_yellow": return 4;
+    case "putrid_stirrings_blue": return 3;
+    case "beseech_the_demigon_red": return 3;
+    case "beseech_the_demigon_yellow": return 2;
+    case "beseech_the_demigon_blue": return 1;
+    case "anthem_of_spring_blue": return 1;//Anthem of Spring
+    case "chorus_of_ironsong_yellow": return 1;
+    case "runic_reckoning_red": return 3;
+    case "hack_to_reality_yellow": return 2;
+    case "courage": return 1;//Courage
+    case "victoria_archangel_of_triumph": return -1;
     default:
       return 0;
   }
@@ -122,44 +122,44 @@ function DTDCombatEffectActive($cardID, $attackID)
   $cardID = $params[0];
   if(strlen($cardID) > 6) $cardID = $dashArr[0];
   switch($cardID) {
-    case "DTD010": return true;
-    case "DTD011": return CardType($attackID) == "AA";
-    case "DTD032": case "DTD033": case "DTD034": return SubtypeContains($attackID, "Angel", $mainPlayer);
-    case "DTD035": case "DTD036": case "DTD037": return str_contains(NameOverride($attackID, $mainPlayer), "Herald");
-    case "DTD051": return CardType($attackID) == "AA";//Beckoning Light
-    case "DTD052": return CardType($attackID) == "AA";//Spirit of War
-    case "DTD053": return true;//Prayer of Bellona
-    case "DTD057": case "DTD058": case "DTD059": return true;//Beaming Bravado
-    case "DTD060": case "DTD061": case "DTD062": return true;
-    case "DTD063": case "DTD064": case "DTD065": return true;//Glaring Impact
-    case "DTD066": case "DTD067": case "DTD068": return true;
-    case "DTD069": case "DTD070": case "DTD071": return true;//Resounding Courage
-    case "DTD072": case "DTD073": case "DTD074": return $combatChainState[$CCS_AttackNumCharged] > 0;//Charge of the Light Brigade
-    case "DTD080-1": case "DTD080-2": case "DTD080-3": return true;
-    case "DTD082": case "DTD083": case "DTD084": return true;
-    case "DTD094": case "DTD095": case "DTD096": return true;
-    case "DTD111": return ClassContains($attackID, "BRUTE", $mainPlayer) || TalentContains($attackID, "SHADOW", $mainPlayer);
-    case "DTD118": case "DTD119": case "DTD120": return ClassContains($attackID, "BRUTE", $mainPlayer) || TalentContains($attackID, "SHADOW", $mainPlayer);
-    case "DTD127": case "DTD128": case "DTD129": return true;
-    case "DTD130": case "DTD131": case "DTD132": return true;
-    case "DTD149": case "DTD150": case "DTD151": return $combatChainState[$CCS_WasRuneGate] == 1;
-    case "DTD161": case "DTD162": case "DTD163": return $combatChainState[$CCS_WasRuneGate] == 1;
-    case "DTD196": return CardType($attackID) == "AA";//Anthem of Spring
-    case "DTD198": return true;//Call Down the Lightning
-    case "DTD187": case "DTD188": case "DTD189":
+    case "figment_of_tenacity_yellow": return true;
+    case "figment_of_triumph_yellow": return CardType($attackID) == "AA";
+    case "angelic_descent_red": case "angelic_descent_yellow": case "angelic_descent_blue": return SubtypeContains($attackID, "Angel", $mainPlayer);
+    case "angelic_wrath_red": case "angelic_wrath_yellow": case "angelic_wrath_blue": return str_contains(NameOverride($attackID, $mainPlayer), "Herald");
+    case "beckoning_light_red": return CardType($attackID) == "AA";//Beckoning Light
+    case "spirit_of_war_red": return CardType($attackID) == "AA";//Spirit of War
+    case "prayer_of_bellona_yellow": return true;//Prayer of Bellona
+    case "beaming_bravado_red": case "beaming_bravado_yellow": case "beaming_bravado_blue": return true;//Beaming Bravado
+    case "v_for_valor_red": case "v_for_valor_yellow": case "v_for_valor_blue": return true;
+    case "glaring_impact_red": case "glaring_impact_yellow": case "glaring_impact_blue": return true;//Glaring Impact
+    case "light_the_way_red": case "light_the_way_yellow": case "light_the_way_blue": return true;
+    case "resounding_courage_red": case "resounding_courage_yellow": case "resounding_courage_blue": return true;//Resounding Courage
+    case "charge_of_the_light_brigade_red": case "charge_of_the_light_brigade_yellow": case "charge_of_the_light_brigade_blue": return $combatChainState[$CCS_AttackNumCharged] > 0;//Charge of the Light Brigade
+    case "lumina_lance_yellow-1": case "lumina_lance_yellow-2": case "lumina_lance_yellow-3": return true;
+    case "lay_to_rest_red": case "lay_to_rest_yellow": case "lay_to_rest_blue": return true;
+    case "defender_of_daybreak_red": case "defender_of_daybreak_yellow": case "defender_of_daybreak_blue": return true;
+    case "blood_dripping_frenzy_blue": return ClassContains($attackID, "BRUTE", $mainPlayer) || TalentContains($attackID, "SHADOW", $mainPlayer);
+    case "shaden_scream_red": case "shaden_scream_yellow": case "shaden_scream_blue": return ClassContains($attackID, "BRUTE", $mainPlayer) || TalentContains($attackID, "SHADOW", $mainPlayer);
+    case "tribute_to_demolition_red": case "tribute_to_demolition_yellow": case "tribute_to_demolition_blue": return true;
+    case "tribute_to_the_legions_of_doom_red": case "tribute_to_the_legions_of_doom_yellow": case "tribute_to_the_legions_of_doom_blue": return true;
+    case "envelop_in_darkness_red": case "envelop_in_darkness_yellow": case "envelop_in_darkness_blue": return $combatChainState[$CCS_WasRuneGate] == 1;
+    case "putrid_stirrings_red": case "putrid_stirrings_yellow": case "putrid_stirrings_blue": return $combatChainState[$CCS_WasRuneGate] == 1;
+    case "anthem_of_spring_blue": return CardType($attackID) == "AA";//Anthem of Spring
+    case "call_down_the_lightning_yellow": return true;//Call Down the Lightning
+    case "beseech_the_demigon_red": case "beseech_the_demigon_yellow": case "beseech_the_demigon_blue":
       return SearchCurrentTurnEffects($cardID . "," . $attackID, $mainPlayer) && $CombatChain->AttackCard()->From() == "BANISH";
-    case "DTD190": case "DTD191": case "DTD192":
+    case "tear_through_the_portal_red": case "tear_through_the_portal_yellow": case "tear_through_the_portal_blue":
       return SearchCurrentTurnEffects($cardID . "," . $attackID, $mainPlayer) && $CombatChain->AttackCard()->From() == "BANISH";
-    case "DTD207": return SubtypeContains($attackID, "Sword", $mainPlayer);//Ironsong Versus
-    case "DTD208": return true;
-    case "DTD213": return CardType($attackID) == "AA" && ClassContains($attackID, "RUNEBLADE", $mainPlayer);
-    case "DTD229": return true;
-    case "DTD229-HIT": return true;
-    case "DTD232": return true;//Courage
+    case "ironsong_versus": return SubtypeContains($attackID, "Sword", $mainPlayer);//Ironsong Versus
+    case "chorus_of_ironsong_yellow": return true;
+    case "runic_reckoning_red": return CardType($attackID) == "AA" && ClassContains($attackID, "RUNEBLADE", $mainPlayer);
+    case "hack_to_reality_yellow": return true;
+    case "hack_to_reality_yellow-HIT": return true;
+    case "courage": return true;//Courage
     case $Card_LifeBanner: return true;
     case $Card_ResourceBanner: return true;
-    case "DTD410": return true;
-    case "DTD411": return CardType($attackID) == "AA";
+    case "metis_archangel_of_tenacity": return true;
+    case "victoria_archangel_of_triumph": return CardType($attackID) == "AA";
     default:
       return false;
   }
@@ -171,64 +171,64 @@ function DTDPlayAbility($cardID, $from, $resourcesPaid, $target, $additionalCost
   $otherPlayer = ($currentPlayer == 1 ? 2 : 1);
   $rv = "";
   switch($cardID) {
-    case "DTD001": case "DTD002":
+    case "prism_awakener_of_sol": case "prism_advent_of_thrones":
       AddDecisionQueue("AWAKEN", $currentPlayer, $target, 1);
       return "";
-    case "DTD003":
+    case "luminaris_celestial_fury":
       GiveAttackGoAgain();
       return "";
-    case "DTD004":
+    case "empyrean_rapture":
       AddCurrentTurnEffect($cardID . "-1", $currentPlayer);
       return "";
-    case "DTD005":
-      PlayAura("DYN244", $currentPlayer);
+    case "figment_of_erudition_yellow":
+      PlayAura("ponder", $currentPlayer);
       return "";
-    case "DTD006":
+    case "figment_of_judgment_yellow":
       AddDecisionQueue("MULTIZONEINDICES", $currentPlayer, "THEIRBANISH&MYBANISH");
       AddDecisionQueue("SETDQCONTEXT", $currentPlayer, "Choose a card to turn face-down");
       AddDecisionQueue("MAYCHOOSEMULTIZONE", $currentPlayer, "<-", 1);
       AddDecisionQueue("MZOP", $currentPlayer, "TURNBANISHFACEDOWN", 1);
       return "";
-    case "DTD007":
-      PlayAura("MON104", $currentPlayer);
+    case "figment_of_protection_yellow":
+      PlayAura("spectral_shield", $currentPlayer);
       return "";
-    case "DTD008":
+    case "figment_of_ravages_yellow":
       DealArcane(1, 2, "PLAYCARD", $cardID, false, $currentPlayer);
       return "";
-    case "DTD009":
+    case "figment_of_rebirth_yellow":
       MZMoveCard($currentPlayer, "MYDISCARD:type=A;pitch=2&MYDISCARD:type=AA;pitch=2", "MYTOPDECK", may:true);
       return;
-    case "DTD010":
+    case "figment_of_tenacity_yellow":
       if(count($combatChain) > 0) AddCurrentTurnEffectFromCombat($cardID, $currentPlayer);
       else AddCurrentTurnEffect($cardID, $currentPlayer);
       return "";
-    case "DTD011":
+    case "figment_of_triumph_yellow":
       AddCurrentTurnEffect($cardID, $otherPlayer);
       return "";
-    case "DTD012":
-      PlayAura("DTD232", $currentPlayer);
+    case "figment_of_war_yellow":
+      PlayAura("courage", $currentPlayer);
       return "";
-    case "DTD032": case "DTD033": case "DTD034":
+    case "angelic_descent_red": case "angelic_descent_yellow": case "angelic_descent_blue":
       GiveAttackGoAgain();
       AddCurrentTurnEffect($cardID, $currentPlayer);
       return "";
-    case "DTD035": case "DTD036": case "DTD037":
+    case "angelic_wrath_red": case "angelic_wrath_yellow": case "angelic_wrath_blue":
       AddCurrentTurnEffect($cardID, $currentPlayer, "PLAY");
       break;
-    case "DTD038": case "DTD039": case "DTD040":
-      if($cardID == "DTD038") $amount = -3;
-      else if($cardID == "DTD039") $amount = -2;
+    case "celestial_reprimand_red": case "celestial_reprimand_yellow": case "celestial_reprimand_blue":
+      if($cardID == "celestial_reprimand_red") $amount = -3;
+      else if($cardID == "celestial_reprimand_yellow") $amount = -2;
       else $amount = -1;
       if($target != "-") $CombatChain->Card(intval($target))->ModifyPower($amount);
       return "";
-    case "DTD041": case "DTD042": case "DTD043":
+    case "celestial_resolve_red": case "celestial_resolve_yellow": case "celestial_resolve_blue":
       $options = GetChainLinkCards($defPlayer, nameContains:"Herald");
       if($options == "") return "No defending attack action cards";
       WriteLog($options);
       AddDecisionQueue("CHOOSECOMBATCHAIN", $currentPlayer, $options);
       AddDecisionQueue("COMBATCHAINDEFENSEMODIFIER", $currentPlayer, PlayBlockModifier($cardID), 1);
       return "";
-    case "DTD053":
+    case "prayer_of_bellona_yellow":
       AddCurrentTurnEffect($cardID, $currentPlayer);
       $deck = new Deck($currentPlayer);
       if($deck->Reveal() && PitchValue($deck->Top()) == 2)
@@ -238,20 +238,20 @@ function DTDPlayAbility($cardID, $from, $resourcesPaid, $target, $additionalCost
         Charge(false);
       }
       return "";
-    case "DTD060": case "DTD061": case "DTD062"://V for Valor
+    case "v_for_valor_red": case "v_for_valor_yellow": case "v_for_valor_blue"://V for Valor
       if($from == "PLAY") AddCurrentTurnEffect($cardID, $currentPlayer, from:"PLAY");
       return "";
-    case "DTD069": case "DTD070": case "DTD071"://Resounding Courage
+    case "resounding_courage_red": case "resounding_courage_yellow": case "resounding_courage_blue"://Resounding Courage
       AddCurrentTurnEffect($cardID, $currentPlayer);
-      if(GetClassState($currentPlayer, $CS_NumCharged) > 0) PlayAura("DTD232", $currentPlayer);
+      if(GetClassState($currentPlayer, $CS_NumCharged) > 0) PlayAura("courage", $currentPlayer);
       return "";
-    case "DTD072": case "DTD073": case "DTD074"://Charge of the Light Brigade
+    case "charge_of_the_light_brigade_red": case "charge_of_the_light_brigade_yellow": case "charge_of_the_light_brigade_blue"://Charge of the Light Brigade
       AddCurrentTurnEffect($cardID, $currentPlayer);
       return "";
-    case "DTD075": case "DTD076": case "DTD077": case "DTD078":
+    case "radiant_view": case "radiant_raiment": case "radiant_touch": case "radiant_flow":
       IncrementClassState($currentPlayer, $CS_DamagePrevention, 2);
       return "";
-    case "DTD080":
+    case "lumina_lance_yellow":
       if($additionalCosts != "-"){
         $modes = explode(",", $additionalCosts);
         for($i=0; $i<count($modes); ++$i)
@@ -259,22 +259,22 @@ function DTDPlayAbility($cardID, $from, $resourcesPaid, $target, $additionalCost
           BanishFromSoul($currentPlayer);
           switch($modes[$i])
           {
-            case "+2_Attack": AddCurrentTurnEffect("DTD080-1", $currentPlayer); break;
-            case "Draw_on_hit": AddCurrentTurnEffect("DTD080-2", $currentPlayer); break;
-            case "Go_again_on_hit": AddCurrentTurnEffect("DTD080-3", $currentPlayer); break;
+            case "+2_Attack": AddCurrentTurnEffect("lumina_lance_yellow-1", $currentPlayer); break;
+            case "Draw_on_hit": AddCurrentTurnEffect("lumina_lance_yellow-2", $currentPlayer); break;
+            case "Go_again_on_hit": AddCurrentTurnEffect("lumina_lance_yellow-3", $currentPlayer); break;
             default: break;
           }
         }
       }
       return "";
-    case "DTD082": case "DTD083": case "DTD084"://Lay to Rest
+    case "lay_to_rest_red": case "lay_to_rest_yellow": case "lay_to_rest_blue"://Lay to Rest
       $theirChar = &GetPlayerCharacter($otherPlayer);
       if(TalentContains($theirChar[0], "SHADOW", $otherPlayer)) AddCurrentTurnEffect($cardID, $currentPlayer);
       return "";
-    case "DTD085": GainHealth(3, $currentPlayer); break;//Blessing of Salvation
-    case "DTD086": GainHealth(2, $currentPlayer); break;
-    case "DTD087": GainHealth(1, $currentPlayer); break;
-    case "DTD088": case "DTD089": case "DTD090"://Cleansing Light
+    case "blessing_of_salvation_red": GainHealth(3, $currentPlayer); break;//Blessing of Salvation
+    case "blessing_of_salvation_yellow": GainHealth(2, $currentPlayer); break;
+    case "blessing_of_salvation_blue": GainHealth(1, $currentPlayer); break;
+    case "cleansing_light_red": case "cleansing_light_yellow": case "cleansing_light_blue"://Cleansing Light
       $params = explode("-", $target);
       if(substr($params[0], 0, 5) != "THEIR") {
         $zone = "MYAURAS-";
@@ -294,28 +294,28 @@ function DTDPlayAbility($cardID, $from, $resourcesPaid, $target, $additionalCost
         return "FAILED";
       }
       return "";
-    case "DTD091": case "DTD092": case "DTD093":
+    case "blistering_assault_red": case "blistering_assault_yellow": case "blistering_assault_blue":
       if(SearchPitchForColor($currentPlayer, 2) > 0) GiveAttackGoAgain();
       return "";
-    case "DTD100": case "DTD101": case "DTD102":
+    case "break_of_dawn_red": case "break_of_dawn_yellow": case "break_of_dawn_blue":
       AddCurrentTurnEffect($cardID, $currentPlayer);
       return "";
-    case "DTD105":
+    case "hell_hammer":
       AddCurrentTurnEffect($cardID, $currentPlayer);
       return "";
-    case "DTD106":
+    case "spoiled_skull":
       AddDecisionQueue("FINDINDICES", $currentPlayer, "MULTIACTIONSBANISH");
       AddDecisionQueue("PREPENDLASTRESULT", $currentPlayer, "3-", 1);
       AddDecisionQueue("APPENDLASTRESULT", $currentPlayer, "-3", 1);
       AddDecisionQueue("MULTICHOOSEBANISH", $currentPlayer, "<-", 1);
       AddDecisionQueue("SPECIFICCARD", $currentPlayer, "SPOILEDSKULL", 1);
       return "";
-    case "DTD108":
+    case "shaden_death_hydra_yellow":
       $numBD = SearchCount(SearchBanish($currentPlayer, "", "", -1, -1, "", "", true));
       $damage = 13 - $numBD;
       DamageTrigger($currentPlayer, $damage, "PLAYCARD", $cardID);
       return "";
-    case "DTD111":
+    case "blood_dripping_frenzy_blue":
       $cards = explode(",", $additionalCosts);
       $num6Pow = 0;
       for($i=0; $i<count($cards); ++$i)
@@ -323,54 +323,54 @@ function DTDPlayAbility($cardID, $from, $resourcesPaid, $target, $additionalCost
         if(HasBloodDebt($cards[$i])) Draw($currentPlayer);
         if(ModifiedAttackValue($cards[$i], $currentPlayer, "HAND", source:$cardID) >= 6) ++$num6Pow;
       }
-      if($num6Pow > 0) AddCurrentTurnEffect("DTD111," . $num6Pow, $currentPlayer);
+      if($num6Pow > 0) AddCurrentTurnEffect("blood_dripping_frenzy_blue," . $num6Pow, $currentPlayer);
       return "";
-    case "DTD112": case "DTD113": case "DTD114":
+    case "ram_raider_red": case "ram_raider_yellow": case "ram_raider_blue":
       if(ModifiedAttackValue($additionalCosts, $currentPlayer, "HAND", source:$cardID) >= 6) GiveAttackGoAgain();
       return "";
-    case "DTD118": case "DTD119": case "DTD120":
+    case "shaden_scream_red": case "shaden_scream_yellow": case "shaden_scream_blue":
       AddCurrentTurnEffect($cardID, $currentPlayer);
       return "";
-    case "DTD127": case "DTD128": case "DTD129":
+    case "tribute_to_demolition_red": case "tribute_to_demolition_yellow": case "tribute_to_demolition_blue":
       if(ModifiedAttackValue($additionalCosts, $currentPlayer, "HAND", source:$cardID) >= 6) {
         AddCurrentTurnEffect($cardID, $currentPlayer);
       }
       return "";
-    case "DTD130": case "DTD131": case "DTD132":
+    case "tribute_to_the_legions_of_doom_red": case "tribute_to_the_legions_of_doom_yellow": case "tribute_to_the_legions_of_doom_blue":
       if(ModifiedAttackValue($additionalCosts, $currentPlayer, "HAND", source:$cardID) >= 6) {
         AddCurrentTurnEffect($cardID, $currentPlayer);
       }
       return "";
-    case "DTD136":
-      PlayAura("DTD233", $currentPlayer);
+    case "grimoire_of_the_haunt":
+      PlayAura("eloquence", $currentPlayer);
       return "";
-    case "DTD140":
-      PlayAura("ARC112", $currentPlayer);
+    case "funeral_moon_red":
+      PlayAura("runechant", $currentPlayer);
       return "";
-    case "DTD141":
-      PlayAura("DTD233", $currentPlayer);
+    case "requiem_for_the_damned_red":
+      PlayAura("eloquence", $currentPlayer);
       return "";
-    case "DTD142":
-      PlayAlly("DTD193", $currentPlayer);
+    case "oblivion_blue":
+      PlayAlly("nasreth_the_soul_harrower", $currentPlayer);
       return "";
-    case "DTD149": case "DTD150": case "DTD151":
-      PlayAura("ARC112", $currentPlayer);
+    case "envelop_in_darkness_red": case "envelop_in_darkness_yellow": case "envelop_in_darkness_blue":
+      PlayAura("runechant", $currentPlayer);
       AddCurrentTurnEffect($cardID, $currentPlayer);
       return "";
-    case "DTD161": case "DTD162": case "DTD163":
+    case "putrid_stirrings_red": case "putrid_stirrings_yellow": case "putrid_stirrings_blue":
       AddCurrentTurnEffect($cardID, $currentPlayer);
       return "";
-    case "DTD164":
-      ResolveTransformHero($currentPlayer, "DTD164", "");
+    case "levia_redeemed":
+      ResolveTransformHero($currentPlayer, "levia_redeemed", "");
       return "";
-    case "DTD169":
+    case "dabble_in_darkness_red":
       $deck = new Deck($currentPlayer);
       if($deck->Empty()) return "Ravenous Dabble does not get negative attack because your deck is empty";
       $top = $deck->BanishTop();
       $pitch = PitchValue($top);
       $CombatChain->AttackCard()->ModifyPower(-$pitch);
       return "";
-    case "DTD170":
+    case "chains_of_mephetis_blue":
       if($from == "BANISH")
       {
         $auras = &GetAuras($currentPlayer);
@@ -378,29 +378,29 @@ function DTDPlayAbility($cardID, $from, $resourcesPaid, $target, $additionalCost
         $auras[$index+2] = 1;
       }
       return "";
-    case "DTD171":
+    case "dimenxxional_vortex":
       MZMoveCard($currentPlayer, "MYARS", "MYBANISH,ARS,-");
       MZMoveCard($otherPlayer, "MYARS", "MYBANISH,ARS,-");
       return "";
-    case "DTD175": GainHealth(3, $currentPlayer); return "";
-    case "DTD176": GainHealth(2, $currentPlayer); return "";
-    case "DTD177": GainHealth(1, $currentPlayer); return "";
-    case "DTD178": case "DTD179": case "DTD180":
+    case "grim_feast_red": GainHealth(3, $currentPlayer); return "";
+    case "grim_feast_yellow": GainHealth(2, $currentPlayer); return "";
+    case "grim_feast_blue": GainHealth(1, $currentPlayer); return "";
+    case "vile_inquisition_red": case "vile_inquisition_yellow": case "vile_inquisition_blue":
       AddDecisionQueue("SETDQCONTEXT", $currentPlayer, "Choose target hero");
       AddDecisionQueue("BUTTONINPUT", $currentPlayer, "Target_Opponent,Target_Yourself");
       AddDecisionQueue("PLAYERTARGETEDABILITY", $currentPlayer, $cardID, 1);
       return "";
-    case "DTD184": case "DTD185": case "DTD186":
+    case "soul_cleaver_red": case "soul_cleaver_yellow": case "soul_cleaver_blue":
       $theirSoul = &GetSoul($otherPlayer);
       if(count($theirSoul) > 0) GiveAttackGoAgain();
       return "";
-    case "DTD187": case "DTD188": case "DTD189":
+    case "beseech_the_demigon_red": case "beseech_the_demigon_yellow": case "beseech_the_demigon_blue":
       AddDecisionQueue("MULTIZONEINDICES", $currentPlayer, "MYBANISH:type=AA");
       AddDecisionQueue("CHOOSEMULTIZONE", $currentPlayer, "<-", 1);
       AddDecisionQueue("MZOP", $currentPlayer, "GETCARDID", 1);
       AddDecisionQueue("ADDCURRENTEFFECTLASTRESULT", $currentPlayer, $cardID . ",", 1);
       return "";
-    case "DTD190": case "DTD191": case "DTD192":
+    case "tear_through_the_portal_red": case "tear_through_the_portal_yellow": case "tear_through_the_portal_blue":
       $pitch = "";
       if (PitchValue($cardID) == 1) $pitch = "1";
       elseif (PitchValue($cardID) == 2) $pitch = "2";
@@ -410,10 +410,10 @@ function DTDPlayAbility($cardID, $from, $resourcesPaid, $target, $additionalCost
       AddDecisionQueue("MZOP", $currentPlayer, "GETCARDID", 1);
       AddDecisionQueue("ADDCURRENTEFFECTLASTRESULT", $currentPlayer, $cardID . ",", 1);
       return "";
-    case "DTD196"://Anthem of Spring
+    case "anthem_of_spring_blue"://Anthem of Spring
       AddCurrentTurnEffect($cardID, $currentPlayer);
       return "";
-    case "DTD197":
+    case "northern_winds_blue":
       AddDecisionQueue("MULTIZONEINDICES", $currentPlayer, "THEIRCHAR:type=E", 1);
       AddDecisionQueue("SETDQCONTEXT", $currentPlayer, "Choose which card you want to freeze", 1);
       AddDecisionQueue("CHOOSEMULTIZONE", $currentPlayer, "<-", 1);
@@ -427,10 +427,10 @@ function DTDPlayAbility($cardID, $from, $resourcesPaid, $target, $additionalCost
       AddDecisionQueue("CHOOSEMULTIZONE", $currentPlayer, "<-", 1);
       AddDecisionQueue("MZOP", $currentPlayer, "FREEZE", 1);
       return "";
-    case "DTD198"://Call Down the Lightning
+    case "call_down_the_lightning_yellow"://Call Down the Lightning
       AddCurrentTurnEffect($cardID, $currentPlayer);
       return "";
-    case "DTD202":
+    case "dig_up_dinner_blue":
       $discard = new Discard($currentPlayer);
       $deck = new Deck($currentPlayer);
       $cards = explode(",", $discard->RemoveRandom(3));
@@ -449,26 +449,26 @@ function DTDPlayAbility($cardID, $from, $resourcesPaid, $target, $additionalCost
         AddDecisionQueue("SHUFFLEDECK", $currentPlayer, "-");
       }
       return "";
-    case "DTD207"://Ironsong Versus
+    case "ironsong_versus"://Ironsong Versus
       AddCurrentTurnEffect($cardID, $currentPlayer);
       return "";
-    case "DTD208":
+    case "chorus_of_ironsong_yellow":
       AddCurrentTurnEffect($cardID, $currentPlayer);
       return "";
-    case "DTD209":
+    case "morlock_hill_blue":
       AddCurrentTurnEffect($cardID, $currentPlayer);
       return "";
-    case "DTD210":
+    case "scepter_of_pain":
       DealArcane(1, 3, "ABILITY", $cardID);
       AddDecisionQueue("SPECIFICCARD", $currentPlayer, "SCEPTEROFPAIN");
       return "";
-    case "DTD212":
+    case "bequest_the_vast_beyond_red":
       AddCurrentTurnEffect($cardID, $currentPlayer);
       return "";
-    case "DTD213":
+    case "runic_reckoning_red":
       AddCurrentTurnEffect($cardID, $currentPlayer);
       return "";
-    case "DTD215":
+    case "alluring_inducement_yellow":
       AddDecisionQueue("MULTIZONEINDICES", $currentPlayer, "THEIRHAND:type=AA");
       AddDecisionQueue("MAYCHOOSEMULTIZONE", $currentPlayer, "<-", 1);
       AddDecisionQueue("SETDQVAR", $currentPlayer, "1", 1);
@@ -476,33 +476,33 @@ function DTDPlayAbility($cardID, $from, $resourcesPaid, $target, $additionalCost
       AddDecisionQueue("CURRENTATTACKBECOMES", $currentPlayer, "-", 1);
       AddDecisionQueue("PASSPARAMETER", $currentPlayer, "{1}", 1);
       return "";
-    case "DTD219"://Lost in Thought
+    case "lost_in_thought_red"://Lost in Thought
       LookAtHand($otherPlayer);
       AddDecisionQueue("MULTIZONEINDICES", $currentPlayer, "THEIRHAND:type=AA");
       AddDecisionQueue("CHOOSEMULTIZONE", $currentPlayer, "<-", 1);
       AddDecisionQueue("MZREMOVE", $currentPlayer, "-", 1);
       AddDecisionQueue("ADDBOTDECK", $otherPlayer, "-", 1);
-      AddDecisionQueue("PASSPARAMETER", $otherPlayer, "DYN244", 1);
+      AddDecisionQueue("PASSPARAMETER", $otherPlayer, "ponder", 1);
       AddDecisionQueue("PUTPLAY", $otherPlayer, "-", 1);
       return "";
-    case "DTD228":
+    case "hold_the_line_blue":
       if(GetClassState($otherPlayer, $CS_NumCardsDrawn) >= 2)
       {
         IncrementClassState($currentPlayer, $CS_DamagePrevention, 3);
         WriteLog("Prevents the next 3 damage");
       }
       return "";
-    case "DTD229":
+    case "hack_to_reality_yellow":
       AddCurrentTurnEffect($cardID, $currentPlayer);
       AddCurrentTurnEffect($cardID . "-HIT", $currentPlayer);
       return "";
-    case "DTD230":
+    case "warmongers_diplomacy_blue":
       WarmongersDiplomacy($otherPlayer);
       AddDecisionQueue("ADDTHEIRNEXTTURNEFFECT", $otherPlayer, "<-");
       WarmongersDiplomacy($currentPlayer);
       AddDecisionQueue("ADDTHEIRNEXTTURNEFFECT", $currentPlayer, "<-");
       return "";
-    case "DTD231":
+    case "poison_the_well_blue":
       AddCurrentTurnEffect($cardID, $currentPlayer);
       return "";
     default:
@@ -522,7 +522,7 @@ function DTDHitEffect($cardID)
 {
   global $mainPlayer, $defPlayer;
   switch($cardID) {
-    case "DTD082": case "DTD083": case "DTD084":
+    case "lay_to_rest_red": case "lay_to_rest_yellow": case "lay_to_rest_blue":
       if(IsHeroAttackTarget())
       {
         AddDecisionQueue("MULTIZONEINDICES", $mainPlayer, "THEIRBANISH");
@@ -530,24 +530,24 @@ function DTDHitEffect($cardID)
         AddDecisionQueue("MZOP", $mainPlayer, "TURNBANISHFACEDOWN", 1);
       }
       break;
-    case "DTD135":
-      PlayAura("ARC112", $mainPlayer);
+    case "flail_of_agony":
+      PlayAura("runechant", $mainPlayer);
       break;
-    case "DTD172": case "DTD173": case "DTD174":
+    case "hungering_demigon_red": case "hungering_demigon_yellow": case "hungering_demigon_blue":
       if(IsHeroAttackTarget()) MZMoveCard($mainPlayer, "THEIRSOUL", "THEIRBANISH,SOUL,-");
       break;
-    case "DTD193":
+    case "nasreth_the_soul_harrower":
       if(IsHeroAttackTarget()) MZMoveCard($mainPlayer, "THEIRSOUL", "THEIRBANISH,SOUL,-," . $cardID);
       break;
-    case "DTD226":
+    case "censor_red":
       if(IsHeroAttackTarget()) {
         AddDecisionQueue("INPUTCARDNAME", $mainPlayer, "-");
         AddDecisionQueue("SETDQVAR", $mainPlayer, "0");
         AddDecisionQueue("WRITELOG", $mainPlayer, "<b>📣{0}</b> was chosen");
-        AddDecisionQueue("ADDCURRENTANDNEXTTURNEFFECT", $defPlayer, "DTD226,{0}");
+        AddDecisionQueue("ADDCURRENTANDNEXTTURNEFFECT", $defPlayer, "censor_red,{0}");
       }
       break;
-    case "DTD227":
+    case "mischievous_meeps_red":
       if(IsHeroAttackTarget()) {
         AddDecisionQueue("MULTIZONEINDICES", $mainPlayer, "THEIRITEMS:minCost=0;maxCost=2");
         AddDecisionQueue("SETDQCONTEXT", $mainPlayer, "Choose an item to gain control");
@@ -596,7 +596,7 @@ function HasMirage($cardID)
 {
   switch($cardID)
   {
-    case "DTD218": return true;
+    case "flicker_trick_red": return true;
     default: return false;
   }
 }
@@ -632,9 +632,9 @@ function MirageLayer()
 
 function ResolveTransformHero($player, $cardID, $parameter)
 {
-  $permIndex = SearchPermanentsForCard($player, "DTD164");
+  $permIndex = SearchPermanentsForCard($player, "levia_redeemed");
   if($permIndex != "") RemovePermanent($player, $permIndex);
-  $inventoryIndex = SearchInventoryForCard($player, "DTD564");
+  $inventoryIndex = SearchInventoryForCard($player, "levia_redeemed");
   if($inventoryIndex != "") RemoveInventory($player, $inventoryIndex);
   $char = &GetPlayerCharacter($player);
   AddSoul($char[0], $player, "PLAY");
@@ -656,10 +656,10 @@ function ResolveTransformHero($player, $cardID, $parameter)
   CurrentEffectIntellectModifier(true); ///When you transformm, You are no longer that hero, therefore your intellect reset 🐝
   switch($cardID)
   {
-    case "DTD164":
+    case "levia_redeemed":
       for($i=$banish->NumCards() - 1; $i >= 0; --$i) TurnBanishFaceDown($player, $i * BanishPieces());
       break;
-    case "DTD564": // 3.0.3a A player may look at any private object they own, or is in a zone that they own, unless the object is in the deck zone.
+    case "levia_redeemed": // 3.0.3a A player may look at any private object they own, or is in a zone that they own, unless the object is in the deck zone.
       $deck = new Deck($player);
       for($i=0; $i<$parameter; ++$i) $deck->BanishTop();
       WriteLog("Banished $parameter cards to your remaining blood debt triggers");
@@ -672,8 +672,8 @@ function DemiHeroHealth($cardID)
 {
   switch($cardID)
   {
-    case "DTD164": return 8;
-    case "DTD564": return 13;
+    case "levia_redeemed": return 8;
+    case "levia_redeemed": return 13;
     default: return 0;
   }
 }
@@ -681,7 +681,7 @@ function DemiHeroHealth($cardID)
 function CallDownLightning()
 {
   global $mainPlayer, $CombatChain;
-  WriteLog(CardLink("DTD198", "DTD198") . " deals 1 damage");
+  WriteLog(CardLink("call_down_the_lightning_yellow", "call_down_the_lightning_yellow") . " deals 1 damage");
   if(IsDecisionQueueActive()) {
     PrependDecisionQueue("MZDAMAGE", $mainPlayer, "1,ATTACKHIT," . $CombatChain->CurrentAttack());
     PrependDecisionQueue("PASSPARAMETER", $mainPlayer, "THEIRCHAR-0");

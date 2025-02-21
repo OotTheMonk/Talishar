@@ -43,7 +43,7 @@ class Deck {
           WriteLog("Player " . $this->playerID . " reveals " . CardLink($this->deck[$revealedCards], $this->deck[$revealedCards]));
           AddEvent("REVEAL", $this->deck[$revealedCards]);
         }
-        if(SearchLandmark("ELE000")) KorshemRevealAbility($this->playerID);
+        if(SearchLandmark("korshem_crossroad_of_elements")) KorshemRevealAbility($this->playerID);
         return true;
       } else {
         WriteLog("Your deck is empty. Nothing was revealed.");

@@ -12,26 +12,26 @@ function PlayAura($cardID, $player, $number = 1, $isToken = false, $rogueHeronSp
   }
   $auras = &GetAuras($player);
   $numMinusTokens = 0;
-  $numMinusTokens = CountCurrentTurnEffects("HVY209", $player) + CountCurrentTurnEffects("HVY209", $otherPlayer);
+  $numMinusTokens = CountCurrentTurnEffects("ripple_away_blue", $player) + CountCurrentTurnEffects("ripple_away_blue", $otherPlayer);
   $effectSource = $effectSource == "-" ? $EffectContext : $effectSource;
   // only modify the event if there is an event
   if ($number > 0) $number += CharacterModifiesPlayAura($player, $isToken, $effectController);
 
   if ($numMinusTokens > 0 && $isToken && (TypeContains($effectSource, "AA", $player) || TypeContains($effectSource, "A", $player))) $number -= $numMinusTokens;
-  if ($cardID == "ARC112") $number += CountCurrentTurnEffects("ARC081", $player);
-  if ($cardID == "MON104") {
-    $index = SearchArsenalReadyCard($player, "MON404");
+  if ($cardID == "runechant") $number += CountCurrentTurnEffects("mordred_tide_red", $player);
+  if ($cardID == "spectral_shield") {
+    $index = SearchArsenalReadyCard($player, "the_librarian");
     if ($index > -1) TheLibrarianEffect($player, $index);
   }
-  if ($cardID == "MST031") SearchCardList($additionalCosts, $player, subtype: "Chi") != "" ? $numAttackCounters += 4 : $numAttackCounters += 2;
-  if ($cardID == "MST043" || $cardID == "MST044" || $cardID == "MST045") $numAttackCounters += SearchPitchForColor($player, 3) > 0 ? 1 : 0;
-  if (ClassContains($cardID, "ILLUSIONIST", $player) && SearchCurrentTurnEffects("MST155", $player, true) && CardCost($cardID, $from) <= 2 && CardCost($cardID, $from) > -1) {
+  if ($cardID == "manifestation_of_miragai_blue") SearchCardList($additionalCosts, $player, subtype: "Chi") != "" ? $numAttackCounters += 4 : $numAttackCounters += 2;
+  if ($cardID == "waxing_specter_red" || $cardID == "waxing_specter_yellow" || $cardID == "waxing_specter_blue") $numAttackCounters += SearchPitchForColor($player, 3) > 0 ? 1 : 0;
+  if (ClassContains($cardID, "ILLUSIONIST", $player) && SearchCurrentTurnEffects("vengeful_apparition_red", $player, true) && CardCost($cardID, $from) <= 2 && CardCost($cardID, $from) > -1) {
     ++$numAttackCounters;
   }
-  if (ClassContains($cardID, "ILLUSIONIST", $player) && SearchCurrentTurnEffects("MST156", $player, true) && CardCost($cardID, $from) <= 1 && CardCost($cardID, $from) > -1) {
+  if (ClassContains($cardID, "ILLUSIONIST", $player) && SearchCurrentTurnEffects("vengeful_apparition_yellow", $player, true) && CardCost($cardID, $from) <= 1 && CardCost($cardID, $from) > -1) {
     ++$numAttackCounters;
   }
-  if (ClassContains($cardID, "ILLUSIONIST", $player) && SearchCurrentTurnEffects("MST157", $player, true) && CardCost($cardID, $from) <= 0 && CardCost($cardID, $from) > -1) {
+  if (ClassContains($cardID, "ILLUSIONIST", $player) && SearchCurrentTurnEffects("vengeful_apparition_blue", $player, true) && CardCost($cardID, $from) <= 0 && CardCost($cardID, $from) > -1) {
     ++$numAttackCounters;
   }
 
@@ -56,8 +56,8 @@ function PlayAura($cardID, $player, $number = 1, $isToken = false, $rogueHeronSp
   if (DelimStringContains(CardSubType($cardID), "Affliction")) IncrementClassState($otherPlayer, $CS_NumAuras, $number);
   else if (DelimStringContains(CardSubType($EffectContext), "Trap") || CardType($EffectContext) == "DR") IncrementClassState($defPlayer, $CS_NumAuras, $number);
   else if (CreatesAuraForOpponent($EffectContext)) IncrementClassState($effectController, $CS_NumAuras, $number);
-  else if ($cardID != "ELE111") IncrementClassState($player, $CS_NumAuras, $number);
-  if ($cardID == "HNT167") IncrementClassState($player, $CS_FealtyCreated, $number);
+  else if ($cardID != "frostbite") IncrementClassState($player, $CS_NumAuras, $number);
+  if ($cardID == "fealty") IncrementClassState($player, $CS_FealtyCreated, $number);
 }
 
 //cards that instruct the player to create an aura under their opponent's control
@@ -65,18 +65,18 @@ function PlayAura($cardID, $player, $number = 1, $isToken = false, $rogueHeronSp
 function CreatesAuraForOpponent($cardID)
 {
   return match($cardID) {
-    "OUT021" => true,
-    "OUT022" => true,
-    "OUT023" => true,
-    "OUT024" => true,
-    "OUT025" => true,
-    "OUT026" => true,
-    "OUT036" => true,
-    "OUT037" => true,
-    "OUT038" => true,
-    "OUT039" => true,
-    "OUT040" => true,
-    "OUT041" => true,
+    "spike_with_bloodrot_red" => true,
+    "spike_with_frailty_red" => true,
+    "spike_with_inertia_red" => true,
+    "infect_red" => true,
+    "infect_yellow" => true,
+    "infect_blue" => true,
+    "sedate_red" => true,
+    "sedate_yellow" => true,
+    "sedate_blue" => true,
+    "wither_red" => true,
+    "wither_yellow" => true,
+    "wither_blue" => true,
     default => false
   };
 }
@@ -84,17 +84,17 @@ function CreatesAuraForOpponent($cardID)
 function AuraNumUses($cardID)
 {
   switch ($cardID) {
-    case "EVR140":
-    case "EVR141":
-    case "EVR142":
-    case "EVR143":
-    case "UPR005":
-    case "DTD081":
-    case "ROS077":
-    case "ROS130":
-    case "ROS131":
-    case "ROS132":
-    case "HNT256":
+    case "shimmers_of_silver_blue":
+    case "haze_bending_blue":
+    case "passing_mirage_blue":
+    case "pierce_reality_blue":
+    case "burn_them_all_red":
+    case "radiant_forcefield_yellow":
+    case "channel_lightning_valley_yellow":
+    case "malefic_incantation_red":
+    case "malefic_incantation_yellow":
+    case "malefic_incantation_blue":
+    case "ring_of_roses_yellow":
       return 1;
     default:
       return 0;
@@ -115,13 +115,13 @@ function AuraDestroyed($player, $cardID, $isToken = false, $from = "HAND")
   for ($i = 0; $i < count($auras); $i += AuraPieces()) {
     $EffectContext = $auras[$i];
     switch ($auras[$i]) {
-      case "EVR141":
+      case "haze_bending_blue":
         if (!$isToken && $auras[$i + 5] > 0 && ClassContains($cardID, "ILLUSIONIST", $player)) {
           --$auras[$i + 5];
           AddLayer("TRIGGER", $player, $auras[$i], "-", "-", $auras[$i + 6]);
         }
         break;
-      case "EVO244":
+      case "phantom_tidemaw_blue":
         if (ClassContains($cardID, "ILLUSIONIST", $player)) PhantomTidemawDestroy($player, $i);
         break;
       default:
@@ -129,7 +129,7 @@ function AuraDestroyed($player, $cardID, $isToken = false, $from = "HAND")
     }
   }
   $goesWhere = GoesWhereAfterResolving($cardID, $from);
-  $numMercifulRetribution = SearchCount(SearchAurasForCard("MON012", $player)) + ($cardID == "MON012" ? 1 : 0);
+  $numMercifulRetribution = SearchCount(SearchAurasForCard("merciful_retribution_yellow", $player)) + ($cardID == "merciful_retribution_yellow" ? 1 : 0);
   if ($numMercifulRetribution > 0 && TalentContains($cardID, "LIGHT", $player)) {
     AddDecisionQueue("PASSPARAMETER", $player, $cardID, 1);
     AddDecisionQueue("ADDSOUL", $player, "PLAY", 1);
@@ -137,7 +137,7 @@ function AuraDestroyed($player, $cardID, $isToken = false, $from = "HAND")
   }
   for ($i = 0; $i < $numMercifulRetribution; ++$i) {
     if (CardType($cardID) != "T" && $isToken) WriteLog("<span style='color:red;'>The card is not put in your soul from Merciful Retribution because it is a token copy</span>");
-    AddDecisionQueue("ADDTRIGGER", $player, "MON012," . $cardID);
+    AddDecisionQueue("ADDTRIGGER", $player, "merciful_retribution_yellow," . $cardID);
   }
   if (HasWard($cardID, $player) && !$isToken) WardPoppedAbility($player, $cardID);
   if (CardType($cardID) == "T" || $isToken) return;//Don't need to add to anywhere if it's a token
@@ -154,63 +154,63 @@ function AuraLeavesPlay($player, $index, $uniqueID, $location = "AURAS")
   $uniqueID = $auras[$index + $uniqueIDIndex];
   $otherPlayer = ($player == 1 ? 2 : 1);
   switch ($cardID) {
-    case "DYN072":
+    case "ironsong_pride_red":
       $char = &GetPlayerCharacter($player);
       for ($j = 0; $j < count($char); $j += CharacterPieces()) {
         if (CardSubType($char[$j]) == "Sword") $char[$j + 3] = 0;
       }
       break;
-    case "DYN221":
-    case "DYN222":
-    case "DYN223":
+    case "tranquil_passing_red":
+    case "tranquil_passing_yellow":
+    case "tranquil_passing_blue":
       $banish = new Banish($otherPlayer);
       $banishCard = $banish->FirstCardWithModifier($cardID . "-" . $uniqueID);
       if ($banishCard == null) break;
       $banishIndex = $banishCard->Index();
       if ($banishIndex > -1) PlayAura($banish->Remove($banishIndex), $otherPlayer);
       break;
-    case "MST040":
-    case "MST041":
-    case "MST042":
+    case "waning_vengeance_red":
+    case "waning_vengeance_yellow":
+    case "waning_vengeance_blue":
       AddLayer("TRIGGER", $player, $cardID, "-", "-", $uniqueID);
       break;
-    case "MST137":
-    case "MST138":
-    case "MST139":
+    case "essence_of_ancestry_body_red":
+    case "essence_of_ancestry_soul_yellow":
+    case "essence_of_ancestry_mind_blue":
       $illusionistAuras = SearchAura($player, class: "ILLUSIONIST");
       $aurasArray = explode(",", $illusionistAuras);
       if (count($aurasArray) <= 1) AddLayer("TRIGGER", $player, $cardID, "-", "-", $uniqueID);
       break;
-    case "MST140":
-    case "MST141":
-    case "MST142":
+    case "haunting_specter_red":
+    case "haunting_specter_yellow":
+    case "haunting_specter_blue":
       AddLayer("TRIGGER", $player, $cardID, "-", "-", $uniqueID);
       break;
-    case "MST155":
-    case "MST156":
-    case "MST157":
+    case "vengeful_apparition_red":
+    case "vengeful_apparition_yellow":
+    case "vengeful_apparition_blue":
       $illusionistAuras = SearchAura($player, class: "ILLUSIONIST");
       $aurasArray = explode(",", $illusionistAuras);
       if (count($aurasArray) <= 1) AddLayer("TRIGGER", $player, $cardID, "-", "-", $uniqueID);
       break;
-    case "ROS022": //sigil of brilliance
+    case "sigil_of_brilliance_yellow": //sigil of brilliance
       AddDecisionQueue("DRAW", $player, "-", 0);
       break;
-    case "ROS045":
-      WriteLog(CardLink($cardID, $cardID) . " created an " . CardLink("ELE109", "ELE109"));
-      PlayAura("ELE109", $player);
+    case "sigil_of_sanctuary_blue":
+      WriteLog(CardLink($cardID, $cardID) . " created an " . CardLink("embodiment_of_earth", "embodiment_of_earth"));
+      PlayAura("embodiment_of_earth", $player);
       break;
-    case "ROS070": //sigil of earth
-      PlayAura("ELE109", $player);
+    case "sigil_of_earth_blue": //sigil of earth
+      PlayAura("embodiment_of_earth", $player);
       break;
-    case "ROS088":
-      WriteLog(CardLink($cardID, $cardID) . " created an " . CardLink("ELE110", "ELE110"));
-      PlayAura("ELE110", $player);
+    case "sigil_of_conductivity_blue":
+      WriteLog(CardLink($cardID, $cardID) . " created an " . CardLink("embodiment_of_lightning", "embodiment_of_lightning"));
+      PlayAura("embodiment_of_lightning", $player);
       break;
-    case "ROS113": //sigil of lightning
-      PlayAura("ELE110", $player);
+    case "sigil_of_lightning_blue": //sigil of lightning
+      PlayAura("embodiment_of_lightning", $player);
       break;
-    case "ROS133":
+    case "sigil_of_the_arknight_blue":
       $deck = new Deck($player);
       if ($deck->Reveal()) {
         if (CardType($deck->Top()) == "AA") {
@@ -218,33 +218,33 @@ function AuraLeavesPlay($player, $index, $uniqueID, $location = "AURAS")
         }
       }
       break;
-    case "ROS152":
-    case "ROS153":
-    case "ROS154":
+    case "arcane_cussing_red":
+    case "arcane_cussing_yellow":
+    case "arcane_cussing_blue":
       if($mainPlayer == $player) { // main player is the attacking player, these being equal would mean that it is "your turn" to Arcane Cussing
         AddLayer("TRIGGER", $player, $cardID);
       }
       break;
-    case "ROS161":
-      PlayAura("ARC112", $player);
+    case "sigil_of_deadwood_blue":
+      PlayAura("runechant", $player);
       break;
-    case "ROS168"://Sigil of aether
+    case "sigil_of_aether_blue"://Sigil of aether
       AddLayer("TRIGGER", $player, $cardID, "-", "Arcane", $uniqueID);
       break;
-    case "ROS182":
+    case "sigil_of_temporal_manipulation_blue":
       $deck = new Deck($player);
       $newCardID = $deck->Top();
       $mod = (DelimStringContains(CardType($newCardID), "A") ? "INST" : "-");
       BanishCardForPlayer($newCardID, $player, "DECK", $mod);
       $deck->Remove(0);
       break;
-    case "ROS210":
-      PlayAura("DYN244", $player);
+    case "sigil_of_forethought_blue":
+      PlayAura("ponder", $player);
       break;
-    case "ROS230":
+    case "sigil_of_fyendal_blue":
       GainHealth(1, $player);
       break;
-    case "ROS226":
+    case "sigil_of_cycles_blue":
       AddDecisionQueue("FINDINDICES", $player, "HAND");
       AddDecisionQueue("CHOOSEHAND", $player, "<-", 1);
       AddDecisionQueue("REMOVEMYHAND", $player, "-", 1);
@@ -254,26 +254,26 @@ function AuraLeavesPlay($player, $index, $uniqueID, $location = "AURAS")
     default:
       break;
   }
-  if (SearchCurrentTurnEffects("ROS163", $player) && DelimStringContains(CardName($cardID), "Sigil", partial: true)){
-    AddLayer("TRIGGER", $player, "ROS163");
+  if (SearchCurrentTurnEffects("aether_bindings_of_the_third_age", $player) && DelimStringContains(CardName($cardID), "Sigil", partial: true)){
+    AddLayer("TRIGGER", $player, "aether_bindings_of_the_third_age");
   }
 }
 
 function AuraPlayCounters($cardID)
 {
   switch ($cardID) {
-    case "CRU075":
+    case "zen_state":
       return 1;
-    case "EVR107":
-    case "ROS130":
+    case "runeblood_incantation_red":
+    case "malefic_incantation_red":
       return 3;
-    case "EVR108":
-    case "ROS131":
+    case "runeblood_incantation_yellow":
+    case "malefic_incantation_yellow":
       return 2;
-    case "EVR109":
-    case "ROS132":
+    case "runeblood_incantation_blue":
+    case "malefic_incantation_blue":
       return 1;
-    case "UPR140":
+    case "insidious_chill_blue":
       return 3;
     default:
       return 0;
@@ -354,7 +354,7 @@ function AuraDestroyAbility($player, $index, $isToken, $location = "AURAS")
   $auras = &GetAurasLocation($player, $location);
   $cardID = $auras[$index];
   switch ($cardID) {
-    case "EVR141":
+    case "haze_bending_blue":
       $auraConstants = AuraLocationConstants($location);
       $uniqueIDIndex = $auraConstants[1];
       $numUsesIndex = $auraConstants[2];
@@ -401,9 +401,9 @@ function AuraCostModifier($cardID = "")
   $modifier = 0;
   for ($i = count($myAuras) - AuraPieces(); $i >= 0; $i -= AuraPieces()) {
     switch ($myAuras[$i]) {
-      case "ELE111":
+      case "frostbite":
         $modifier += 1;
-        AddLayer("TRIGGER", $currentPlayer, "ELE111", "-", "-", $myAuras[$i + 6]);
+        AddLayer("TRIGGER", $currentPlayer, "frostbite", "-", "-", $myAuras[$i + 6]);
         break;
       default:
         break;
@@ -412,7 +412,7 @@ function AuraCostModifier($cardID = "")
 
   for ($i = count($theirAuras) - AuraPieces(); $i >= 0; $i -= AuraPieces()) {
     switch ($theirAuras[$i]) {
-      case "ELE146":
+      case "channel_lake_frigid_blue":
         $modifier += 1;
         break;
       default:
@@ -432,23 +432,23 @@ function AuraStartTurnAbilities()
   $EffectContext = $auras[$i];
     switch ($auras[$i]) {
     //These are all start of turn events without priority
-    case "MON006":
+    case "genesis_yellow":
       AddDecisionQueue("MULTIZONEINDICES", $mainPlayer, "MYHAND");
       AddDecisionQueue("SETDQCONTEXT", $mainPlayer, "Choose a card to put in your hero's soul for " . CardLink($auras[$i], $auras[$i]));
       AddDecisionQueue("MAYCHOOSEMULTIZONE", $mainPlayer, "<-", 1);
       AddDecisionQueue("MZREMOVE", $mainPlayer, "-", 1);
       AddDecisionQueue("SPECIFICCARD", $mainPlayer, "GENESIS", 1);
       break;
-    case "DYN013":
-    case "DYN014":
-    case "DYN015":
-      if ($auras[$i] == "DYN013") $amount = 3;
-      else if ($auras[$i] == "DYN014") $amount = 2;
+    case "blessing_of_savagery_red":
+    case "blessing_of_savagery_yellow":
+    case "blessing_of_savagery_blue":
+      if ($auras[$i] == "blessing_of_savagery_red") $amount = 3;
+      else if ($auras[$i] == "blessing_of_savagery_yellow") $amount = 2;
       else $amount = 1;
       AddCurrentTurnEffect($auras[$i], $mainPlayer, "PLAY");
       DestroyAuraUniqueID($mainPlayer, $auras[$i + 6]);
       break;
-    case "DYN029":
+    case "never_yield_blue":
       DestroyAuraUniqueID($mainPlayer, $auras[$i + 6]);
       $hand = &GetHand($mainPlayer);
       if (count($hand) == 0) {
@@ -465,52 +465,52 @@ function AuraStartTurnAbilities()
         AddDecisionQueue("MODDEFCOUNTER", $mainPlayer, "1", 1);
       }
       break;
-    case "DYN033":
-    case "DYN034":
-    case "DYN035":
-      if ($auras[$i] == "DYN033") $amount = 3;
-      else if ($auras[$i] == "DYN034") $amount = 2;
+    case "blessing_of_patience_red":
+    case "blessing_of_patience_yellow":
+    case "blessing_of_patience_blue":
+      if ($auras[$i] == "blessing_of_patience_red") $amount = 3;
+      else if ($auras[$i] == "blessing_of_patience_yellow") $amount = 2;
       else $amount = 1;
       GainHealth($amount, $mainPlayer);
       DestroyAuraUniqueID($mainPlayer, $auras[$i + 6]);
       break;
-    case "DYN048":
-      AddPlayerHand("DYN065", $mainPlayer, "-");
+    case "mindstate_of_tiger_blue":
+      AddPlayerHand("crouching_tiger", $mainPlayer, "-");
       DestroyAuraUniqueID($mainPlayer, $auras[$i + 6]);
       break;
-    case "DYN053":
-    case "DYN054":
-    case "DYN055":
-      if ($auras[$i] == "DYN053") $amount = 3;
-      else if ($auras[$i] == "DYN054") $amount = 2;
+    case "blessing_of_qi_red":
+    case "blessing_of_qi_yellow":
+    case "blessing_of_qi_blue":
+      if ($auras[$i] == "blessing_of_qi_red") $amount = 3;
+      else if ($auras[$i] == "blessing_of_qi_yellow") $amount = 2;
       else $amount = 1;
-      $index = BanishCardForPlayer("DYN065", $mainPlayer, "-", "TT", $mainPlayer);
+      $index = BanishCardForPlayer("crouching_tiger", $mainPlayer, "-", "TT", $mainPlayer);
       $banish = new Banish($mainPlayer);
       AddDecisionQueue("PASSPARAMETER", $mainPlayer, $banish->Card($index)->UniqueID());
       AddDecisionQueue("ADDLIMITEDCURRENTEFFECT", $mainPlayer, $auras[$i] . ",BANISH");
       DestroyAuraUniqueID($mainPlayer, $auras[$i + 6]);
       break;
-    case "DYN073":
-    case "DYN074":
-    case "DYN075":
-      if ($auras[$i] == "DYN073") $amount = 3;
-      else if ($auras[$i] == "DYN074") $amount = 2;
+    case "blessing_of_steel_red":
+    case "blessing_of_steel_yellow":
+    case "blessing_of_steel_blue":
+      if ($auras[$i] == "blessing_of_steel_red") $amount = 3;
+      else if ($auras[$i] == "blessing_of_steel_yellow") $amount = 2;
       else $amount = 1;
       AddCurrentTurnEffect($auras[$i], $mainPlayer, "PLAY");
       DestroyAuraUniqueID($mainPlayer, $auras[$i + 6]);
       break;
-    case "DYN098":
-    case "DYN099":
-    case "DYN100":
-      if ($auras[$i] == "DYN098") $amount = 3;
-      else if ($auras[$i] == "DYN099") $amount = 2;
+    case "blessing_of_ingenuity_red":
+    case "blessing_of_ingenuity_yellow":
+    case "blessing_of_ingenuity_blue":
+      if ($auras[$i] == "blessing_of_ingenuity_red") $amount = 3;
+      else if ($auras[$i] == "blessing_of_ingenuity_yellow") $amount = 2;
       else $amount = 1;
       DestroyAuraUniqueID($mainPlayer, $auras[$i + 6]);
-      $searchHyper = CombineSearches(SearchDiscardForCard($mainPlayer, "ARC036", "DYN111", "DYN112"), SearchBanishForCardMulti($mainPlayer, "ARC036", "DYN111", "DYN112"));
+      $searchHyper = CombineSearches(SearchDiscardForCard($mainPlayer, "hyper_driver_red", "hyper_driver_yellow", "hyper_driver_blue"), SearchBanishForCardMulti($mainPlayer, "hyper_driver_red", "hyper_driver_yellow", "hyper_driver_blue"));
       $countHyper = count(explode(",", $searchHyper));
       if ($amount > $countHyper) $amount = $countHyper;
       for ($j = 0; $j < $amount; ++$j) {
-        AddDecisionQueue("MULTIZONEINDICES", $mainPlayer, "MYDISCARD:cardID=ARC036;cardID=DYN111;cardID=DYN112&MYBANISH:cardID=ARC036;cardID=DYN111;cardID=DYN112");
+        AddDecisionQueue("MULTIZONEINDICES", $mainPlayer, "MYDISCARD:cardID=hyper_driver_red;cardID=hyper_driver_yellow;cardID=hyper_driver_blue&MYBANISH:cardID=hyper_driver_red;cardID=hyper_driver_yellow;cardID=hyper_driver_blue");
         AddDecisionQueue("SETDQCONTEXT", $mainPlayer, "Choose an item to put into play");
         AddDecisionQueue("CHOOSEMULTIZONE", $mainPlayer, "<-", 1);
         AddDecisionQueue("SETDQVAR", $mainPlayer, "0", 1);
@@ -520,41 +520,41 @@ function AuraStartTurnAbilities()
         AddDecisionQueue("PUTPLAY", $mainPlayer, "False", 1);
       }
       break;
-    case "DYN159":
-    case "DYN160":
-    case "DYN161":
-      if ($auras[$i] == "DYN159") $amount = 3;
-      else if ($auras[$i] == "DYN160") $amount = 2;
+    case "blessing_of_focus_red":
+    case "blessing_of_focus_yellow":
+    case "blessing_of_focus_blue":
+      if ($auras[$i] == "blessing_of_focus_red") $amount = 3;
+      else if ($auras[$i] == "blessing_of_focus_yellow") $amount = 2;
       else $amount = 1;
       DestroyAuraUniqueID($mainPlayer, $auras[$i + 6]);
       PlayerOpt($mainPlayer, $amount);
       AddDecisionQueue("SPECIFICCARD", $mainPlayer, "BLESSINGOFFOCUS", 1);
       break;
-    case "DYN179":
-    case "DYN180":
-    case "DYN181":
-      if ($auras[$i] == "DYN179") $amount = 3;
-      else if ($auras[$i] == "DYN180") $amount = 2;
+    case "blessing_of_occult_red":
+    case "blessing_of_occult_yellow":
+    case "blessing_of_occult_blue":
+      if ($auras[$i] == "blessing_of_occult_red") $amount = 3;
+      else if ($auras[$i] == "blessing_of_occult_yellow") $amount = 2;
       else $amount = 1;
-      PlayAura("ARC112", $mainPlayer, $amount, true);
+      PlayAura("runechant", $mainPlayer, $amount, true);
       DestroyAuraUniqueID($mainPlayer, $auras[$i + 6]);
       break;
-    case "DYN200":
-    case "DYN201":
-    case "DYN202":
+    case "blessing_of_aether_red":
+    case "blessing_of_aether_yellow":
+    case "blessing_of_aether_blue":
       AddCurrentTurnEffect($auras[$i], $mainPlayer, "PLAY");
       DestroyAuraUniqueID($mainPlayer, $auras[$i + 6]);
       break;
-    case "DYN218":
-    case "DYN219":
-    case "DYN220":
-      if ($auras[$i] == "DYN218") $amount = 3;
-      else if ($auras[$i] == "DYN219") $amount = 2;
+    case "blessing_of_spirits_red":
+    case "blessing_of_spirits_yellow":
+    case "blessing_of_spirits_blue":
+      if ($auras[$i] == "blessing_of_spirits_red") $amount = 3;
+      else if ($auras[$i] == "blessing_of_spirits_yellow") $amount = 2;
       else $amount = 1;
-      PlayAura("MON104", $mainPlayer, $amount);
+      PlayAura("spectral_shield", $mainPlayer, $amount);
       DestroyAuraUniqueID($mainPlayer, $auras[$i + 6]);
       break;
-    case "DTD170":
+    case "chains_of_mephetis_blue":
       if ($auras[$i + 2] > 0) {
         AddDecisionQueue("YESNO", $mainPlayer, "if_you_want_to_remove_a_Doom_Counter_and_keep_" . CardLink($auras[$i], $auras[$i]) . "_and_keep_it_in_play?");
         AddDecisionQueue("REMOVECOUNTERAURAORDESTROY", $mainPlayer, $auras[$i + 6]);
@@ -563,72 +563,72 @@ function AuraStartTurnAbilities()
         DestroyAuraUniqueID($mainPlayer, $auras[$i + 6]);
       }
       break;
-    case "TCC037":
-    case "TCC038":
-    case "TCC042":
-    case "TCC043":
+    case "crash_down_red":
+    case "earthlore_empowerment_red":
+    case "crash_down_yellow":
+    case "earthlore_empowerment_yellow":
       AddCurrentTurnEffect($auras[$i], $mainPlayer, "PLAY");
       DestroyAuraUniqueID($mainPlayer, $auras[$i + 6]);
       break;
-    case "TCC105":
-    case "HVY241": //Might
+    case "might":
+    case "might": //Might
       AddCurrentTurnEffect($auras[$i], $mainPlayer, "PLAY");
       DestroyAuraUniqueID($mainPlayer, $auras[$i + 6]);
       IncrementClassState($mainPlayer, $CS_NumMightDestroyed, 1);
       break;
-    case "TCC107":
-    case "HVY242": //Vigor
+    case "vigor":
+    case "vigor": //Vigor
       GainResources($mainPlayer, 1);
       DestroyAuraUniqueID($mainPlayer, $auras[$i + 6]);
       IncrementClassState($mainPlayer, $CS_NumVigorDestroyed, 1);
       break;
-    case "EVO243":
+    case "contest_the_mindfield_blue":
       DestroyAuraUniqueID($mainPlayer, $auras[$i + 6]);
       break;
-    case "HVY068":
-    case "HVY069":
-    case "HVY070":
+    case "stacked_in_your_favor_red":
+    case "stacked_in_your_favor_yellow":
+    case "stacked_in_your_favor_blue":
       $effectSource = $auras[$i];
       WriteLog("Resolving " . CardLink($auras[$i], $auras[$i]) . " ability");
       DestroyAuraUniqueID($mainPlayer, $auras[$i + 6]);
       Draw($mainPlayer, effectSource: $effectSource);
       MZMoveCard($mainPlayer, "MYHAND", "MYTOPDECK", silent: true);
       break;
-    case "HVY083":
-    case "HVY084":
-    case "HVY085":
+    case "big_bop_red":
+    case "big_bop_yellow":
+    case "big_bop_blue":
       AddCurrentTurnEffect($auras[$i] . "-BUFF", $mainPlayer, "PLAY");
       DestroyAuraUniqueID($mainPlayer, $auras[$i + 6]);
       break;
-    case "HVY086":
-    case "HVY087":
-    case "HVY088":
+    case "bigger_than_big_red":
+    case "bigger_than_big_yellow":
+    case "bigger_than_big_blue":
       AddCurrentTurnEffect($auras[$i] . "-BUFF", $mainPlayer, "PLAY");
       DestroyAuraUniqueID($mainPlayer, $auras[$i + 6]);
       break;
-    case "HVY240": //Agility
+    case "agility": //Agility
       if (!SearchCurrentTurnEffects($auras[$i], $mainPlayer)) AddCurrentTurnEffect($auras[$i], $mainPlayer, "PLAY");
       DestroyAuraUniqueID($mainPlayer, $auras[$i + 6]);
       IncrementClassState($mainPlayer, $CS_NumAgilityDestroyed, 1);
       break;
-    case "MST133":
+    case "restless_coalescence_yellow":
       AddCurrentTurnEffect($auras[$i], $mainPlayer, "PLAY", $auras[$i + 6]);
       break;
-    case "MST143":
-    case "MST144":
-    case "MST145":
+    case "sigil_of_solitude_red":
+    case "sigil_of_solitude_yellow":
+    case "sigil_of_solitude_blue":
       $AurasArray = explode(",", SearchAura($mainPlayer, class: "ILLUSIONIST"));
       if (count($AurasArray) > 1) DestroyAuraUniqueID($mainPlayer, $auras[$i + 6]);
       break;
-    case "AJV017": // Channel Mount Isen
+    case "channel_mount_isen_blue": // Channel Mount Isen
       $character = &GetPlayerCharacter($mainPlayer);
       $eqFrostbiteCount = 0;
       for ($k = 0; $k < count($character); $k += CharacterPieces()) {
-        if ($character[$k] == "ELE111") {
+        if ($character[$k] == "frostbite") {
           $slot = "";
           for ($j = 0; $j < count($currentTurnEffects); $j += CurrentTurnEffectsPieces()) {
             $effect = explode(",", $currentTurnEffects[$j]);
-            if ($effect[0] == "ELE111-" . $character[$k + 11]) {
+            if ($effect[0] == "frostbite-" . $character[$k + 11]) {
               $slot = $effect[1];
               if ($slot == "Arms" || $slot == "Legs" || $slot == "Head" || $slot == "Chest") { // Only count these Frostbites if they are in an equipment slot.
                 $eqFrostbiteCount += 1;
@@ -638,13 +638,13 @@ function AuraStartTurnAbilities()
         }
       }
       LoseHealth($eqFrostbiteCount, $mainPlayer);
-      WriteLog("Player $mainPlayer loses " . $eqFrostbiteCount . " life due to ". CardLink("AJV017", "AJV017") .".");
+      WriteLog("Player $mainPlayer loses " . $eqFrostbiteCount . " life due to ". CardLink("channel_mount_isen_blue", "channel_mount_isen_blue") .".");
       break;
-    case "HNT125":
+    case "agility_stance_yellow":
       if (!SearchCurrentTurnEffects($auras[$i], $mainPlayer)) AddCurrentTurnEffect($auras[$i], $mainPlayer, "PLAY"); 
       DestroyAuraUniqueID($mainPlayer, $auras[$i + 6]);
       break;
-    case "HNT126":
+    case "flurry_stance_red":
       $character = &GetPlayerCharacter($mainPlayer);
       $weaponIndex1 = CharacterPieces();
       $weaponIndex2 = CharacterPieces() * 2;
@@ -652,11 +652,11 @@ function AuraStartTurnAbilities()
       if(SubtypeContains($character[$weaponIndex2], "Dagger")) AddCharacterUses($mainPlayer, $weaponIndex2, 1);
       DestroyAuraUniqueID($mainPlayer, $auras[$i + 6]);
       break;
-    case "HNT127":
+    case "power_stance_blue":
       AddCurrentTurnEffect($auras[$i], $mainPlayer, "PLAY"); // These can stack, so we don't care if the effect is already in play. See: Ancestral Harmony for comparison.
       DestroyAuraUniqueID($mainPlayer, $auras[$i + 6]);
       break;
-    case "HNT163":
+    case "blessing_of_vynserakai_red":
       AddCurrentTurnEffect($auras[$i], $mainPlayer, "PLAY");
       DestroyAuraUniqueID($mainPlayer, $auras[$i + 6]);
       break;
@@ -668,18 +668,18 @@ function AuraStartTurnAbilities()
   for ($i = count($defPlayerAuras) - AuraPieces(); $i >= 0; $i -= AuraPieces()) {
     $EffectContext = $defPlayerAuras[$i];
     switch ($defPlayerAuras[$i]) {
-      case "MST133":
+      case "restless_coalescence_yellow":
         AddCurrentTurnEffect($defPlayerAuras[$i], $defPlayer, "PLAY", $defPlayerAuras[$i + 6]);
         break;
-      case "AJV017": // Channel Mount Isen
+      case "channel_mount_isen_blue": // Channel Mount Isen
         $character = &GetPlayerCharacter($mainPlayer);
         $eqFrostbiteCount = 0;
         for ($k = 0; $k < count($character); $k += CharacterPieces()) {
-          if ($character[$k] == "ELE111") {
+          if ($character[$k] == "frostbite") {
             $slot = "";
             for ($j = 0; $j < count($currentTurnEffects); $j += CurrentTurnEffectsPieces()) {
               $effect = explode(",", $currentTurnEffects[$j]);
-              if ($effect[0] == "ELE111-" . $character[$k + 11]) {
+              if ($effect[0] == "frostbite-" . $character[$k + 11]) {
                 $slot = $effect[1];
                 if ($slot == "Arms" || $slot == "Legs" || $slot == "Head" || $slot == "Chest") { // Only count these Frostbites if they are in an equipment slot.
                   $eqFrostbiteCount += 1;
@@ -689,7 +689,7 @@ function AuraStartTurnAbilities()
           }
         }
         LoseHealth($eqFrostbiteCount, $mainPlayer);
-        WriteLog("Player $mainPlayer loses " . $eqFrostbiteCount . " life due to ". CardLink("AJV017", "AJV017") .".");
+        WriteLog("Player $mainPlayer loses " . $eqFrostbiteCount . " life due to ". CardLink("channel_mount_isen_blue", "channel_mount_isen_blue") .".");
         break;
       default:
         break;
@@ -704,70 +704,70 @@ function AuraBeginningActionPhaseAbilities(){
     $EffectContext = $auras[$i];
     switch ($auras[$i]) {
       //These are all "beginning of the action phase" events with priority holding
-      case "WTR046":
-      case "WTR047":
-      case "WTR054":
-      case "WTR055":
-      case "WTR056":
-      case "WTR069":
-      case "WTR070":
-      case "WTR071":
-      case "WTR072":
-      case "WTR073":
-      case "WTR074":
-      case "ARC162":
-      case "CRU028":
-      case "CRU029":
-      case "CRU030":
-      case "CRU031":
-      case "CRU038":
-      case "CRU039":
-      case "CRU040":
-      case "CRU075":
-      case "CRU144":
-      case "MON186":
-      case "ELE025":
-      case "ELE026":
-      case "ELE027":
-      case "ELE028":
-      case "ELE029":
-      case "ELE030":
-      case "ELE109":
-      case "ELE206":
-      case "ELE207":
-      case "ELE208":
-      case "EVR107":
-      case "EVR108":
-      case "EVR109":
-      case "EVR131":
-      case "EVR132":
-      case "EVR133":
-      case "UPR190":
-      case "UPR218":
-      case "UPR219":
-      case "UPR220":
-      case "DYN217":
-      case "ROS022":
-      case "ROS033":
-      case "ROS061":
-      case "ROS062":
-      case "ROS063":
-      case "ROS064":
-      case "ROS065":
-      case "ROS066":
-      case "ROS070":
-      case "ROS113":
-      case "ROS133":
-      case "ROS161":
-      case "ROS168":// Sigil of aether
-      case "ROS182":
-      case "ROS210":
-      case "ROS226":
-      case "ROS230":
-      case "AJV018":
+      case "forged_for_war_yellow":
+      case "show_time_blue":
+      case "blessing_of_deliverance_red":
+      case "blessing_of_deliverance_yellow":
+      case "blessing_of_deliverance_blue":
+      case "emerging_power_red":
+      case "emerging_power_yellow":
+      case "emerging_power_blue":
+      case "stonewall_confidence_red":
+      case "stonewall_confidence_yellow":
+      case "stonewall_confidence_blue":
+      case "chains_of_eminence_red":
+      case "stamp_authority_blue":
+      case "towering_titan_red":
+      case "towering_titan_yellow":
+      case "towering_titan_blue":
+      case "emerging_dominance_red":
+      case "emerging_dominance_yellow":
+      case "emerging_dominance_blue":
+      case "zen_state":
+      case "runeblood_barrier_yellow":
+      case "soul_shackle":
+      case "emerging_avalanche_red":
+      case "emerging_avalanche_yellow":
+      case "emerging_avalanche_blue":
+      case "strength_of_sequoia_red":
+      case "strength_of_sequoia_yellow":
+      case "strength_of_sequoia_blue":
+      case "embodiment_of_earth":
+      case "embolden_red":
+      case "embolden_yellow":
+      case "embolden_blue":
+      case "runeblood_incantation_red":
+      case "runeblood_incantation_yellow":
+      case "runeblood_incantation_blue":
+      case "pyroglyphic_protection_red":
+      case "pyroglyphic_protection_yellow":
+      case "pyroglyphic_protection_blue":
+      case "fog_down_yellow":
+      case "sigil_of_protection_red":
+      case "sigil_of_protection_yellow":
+      case "sigil_of_protection_blue":
+      case "tome_of_aeo_blue":
+      case "sigil_of_brilliance_yellow":
+      case "channel_the_millennium_tree_red":
+      case "harvest_season_red":
+      case "harvest_season_yellow":
+      case "harvest_season_blue":
+      case "strong_yield_red":
+      case "strong_yield_yellow":
+      case "strong_yield_blue":
+      case "sigil_of_earth_blue":
+      case "sigil_of_lightning_blue":
+      case "sigil_of_the_arknight_blue":
+      case "sigil_of_deadwood_blue":
+      case "sigil_of_aether_blue":// Sigil of aether
+      case "sigil_of_temporal_manipulation_blue":
+      case "sigil_of_forethought_blue":
+      case "sigil_of_cycles_blue":
+      case "sigil_of_fyendal_blue":
+      case "crumble_to_eternity_blue":
         AddLayer("TRIGGER", $mainPlayer, $auras[$i], "-", "-", $auras[$i + 6]);
         break;
-      case "WTR075":
+      case "seismic_surge":
         IncrementClassState($mainPlayer, $CS_NumSeismicSurgeDestroyed, 1);
         AddLayer("TRIGGER", $mainPlayer, $auras[$i], "-", "-", $auras[$i + 6]);
         break;
@@ -783,18 +783,18 @@ function AuraBeginEndPhaseTriggers()
   $auras = &GetAuras($mainPlayer);
   for ($i = count($auras) - AuraPieces(); $i >= 0; $i -= AuraPieces()) {
     switch ($auras[$i]) {
-      case "UPR176":
-      case "UPR177":
-      case "UPR178":
-      case "DYN244":
-      case "OUT234":
-      case "OUT235":
-      case "OUT236":
-      case "ROS034":
-      case "HNT118":
+      case "read_the_ripples_red":
+      case "read_the_ripples_yellow":
+      case "read_the_ripples_blue":
+      case "ponder":
+      case "bloodrot_pox":
+      case "frailty":
+      case "inertia":
+      case "earths_embrace_blue":
+      case "sharpened_senses_yellow":
         AddLayer("TRIGGER", $mainPlayer, $auras[$i], "-", "-", $auras[$i + 6]);
         break;
-      case "HNT167":
+      case "fealty":
         $fealtySurvives = GetClassState($mainPlayer, $CS_FealtyCreated) + GetClassState($mainPlayer, $CS_NumDraconicPlayed);
         if (!$fealtySurvives) {
           AddLayer("TRIGGER", $mainPlayer, $auras[$i], "-", "-", $auras[$i + 6]);
@@ -812,8 +812,8 @@ function OpponentsAuraBeginEndPhaseTriggers()
   $auras = &GetAuras($defPlayer);
   for ($i = count($auras) - AuraPieces(); $i >= 0; $i -= AuraPieces()) {
     switch ($auras[$i]) {
-      case "ROS219":
-        AddLayer("TRIGGER", $defPlayer, $auras[$i], "ROS219-1", uniqueID: $auras[$i + 6]);
+      case "truce_blue":
+        AddLayer("TRIGGER", $defPlayer, $auras[$i], "truce_blue-1", uniqueID: $auras[$i + 6]);
         break;
       default:
         break;
@@ -829,19 +829,19 @@ function AuraBeginEndPhaseAbilities()
   for ($i = count($auras) - AuraPieces(); $i >= 0; $i -= AuraPieces()) {
     $remove = 0;
     switch ($auras[$i]) {
-      case "ELE117":
-      case "ROS033":
+      case "channel_mount_heroic_red":
+      case "channel_the_millennium_tree_red":
         ChannelTalent($i, "EARTH");
         break;
-      case "ELE146":
-      case "AJV017":
+      case "channel_lake_frigid_blue":
+      case "channel_mount_isen_blue":
         ChannelTalent($i, "ICE");
         break;
-      case "ELE175":
-      case "ROS077":
+      case "channel_thunder_steppe_yellow":
+      case "channel_lightning_valley_yellow":
         ChannelTalent($i, "LIGHTNING");
         break;
-      case "UPR005":
+      case "burn_them_all_red":
         $toBanish = ++$auras[$i + 2];
         $discardReds = SearchCount(SearchDiscard($mainPlayer, pitch: 1));
         if ($toBanish <= $discardReds) {
@@ -855,18 +855,18 @@ function AuraBeginEndPhaseAbilities()
           DestroyAura($mainPlayer, $i);
         }
         break;
-      case "UPR138":
+      case "channel_the_bleak_expanse_blue":
         ChannelTalent($i, "ICE");
         break;
-      case "ELE111":
+      case "frostbite":
         FrostHexEndTurnAbility($mainPlayer);
         $remove = 1;
         break;
-      case "DYN175":
+      case "looming_doom_blue":
         if ($auras[$i + 2] == 0) $remove = 1;
         else {
           --$auras[$i + 2];
-          DealArcane(2, 2, "PLAYCARD", "DYN175", false, $mainPlayer);
+          DealArcane(2, 2, "PLAYCARD", "looming_doom_blue", false, $mainPlayer);
         }
         break;
       default:
@@ -880,7 +880,7 @@ function AuraBeginEndPhaseAbilities()
   for ($i = count($mainCharacter) - CharacterPieces(); $i >= 0; $i -= CharacterPieces()) {
     $remove = 0;
     switch ($mainCharacter[$i]) {
-      case "ELE111":
+      case "frostbite":
         FrostHexEndTurnAbility($mainPlayer);
         $remove = 1;
         break;
@@ -920,21 +920,21 @@ function AuraEndTurnAbilities()
   for ($i = count($auras) - AuraPieces(); $i >= 0; $i -= AuraPieces()) {
     $remove = false;
     switch ($auras[$i]) {
-      case "ARC167":
-      case "ARC168":
-      case "ARC169":
+      case "enchanting_melody_red":
+      case "enchanting_melody_yellow":
+      case "enchanting_melody_blue":
         if (GetClassState($mainPlayer, $CS_NumNonAttackCards) == 0) $remove = true;
         break;
-      case "ELE226":
+      case "sting_of_sorcery_blue":
         $remove = true;
         break;
-      case "UPR139":
+      case "hypothermia_blue":
         $remove = true;
         break;
-      case "DYN072":
+      case "ironsong_pride_red":
         if (GetClassState($mainPlayer, $CS_HitsWithSword) <= 0) $remove = true;
         break;
-      case "HNT073":
+      case "prowess_of_agility_blue":
         if (GetClassState($mainPlayer, $CS_NumTimesAttacked) < 3) $remove = true;
         break;
       default:
@@ -959,16 +959,16 @@ function AuraDamagePreventionAmount($player, $index, $type, $damage = 0, $active
   if (HasWard($auras[$index], $player)) $preventedDamage = WardAmount($auras[$index], $player, $index);
   elseif (HasArcaneShelter($auras[$index]) && $type == "ARCANE") $preventedDamage = ArcaneShelterAmount($auras[$index]);
   switch ($auras[$index]) {
-    case "ARC167":
+    case "enchanting_melody_red":
       $preventedDamage = 4;
       break;
-    case "ARC168":
+    case "enchanting_melody_yellow":
       $preventedDamage = 3;
       break;
-    case "ARC169":
+    case "enchanting_melody_blue":
       $preventedDamage = 2;
       break;
-    case "DTD081":
+    case "radiant_forcefield_yellow":
       $auras = &GetAuras($player);
       if ($active) {
         $soul = &GetSoul($player);
@@ -988,9 +988,9 @@ function AuraDamagePreventionAmount($player, $index, $type, $damage = 0, $active
     default:
       break;
   }
-  if (!$check && SearchCurrentTurnEffects("OUT174", $player) != "" && $preventedDamage > 0) {//vambrace
+  if (!$check && SearchCurrentTurnEffects("vambrace_of_determination", $player) != "" && $preventedDamage > 0) {//vambrace
     $preventedDamage -= 1;
-    SearchCurrentTurnEffects("OUT174", $player, remove:true);
+    SearchCurrentTurnEffects("vambrace_of_determination", $player, remove:true);
   }
   return $preventedDamage;
 }
@@ -1023,39 +1023,39 @@ function AuraTakeDamageAbilities($player, $damage, $type, $source)
       break;
     }
     switch ($auras[$i]) {
-      case "CRU075":
+      case "zen_state":
         if ($preventable) $damage -= 1;
         break;
-      case "CRU144":
+      case "runeblood_barrier_yellow":
         if ($auras[$i + 1] == 2) {
           $auras[$i + 1] = 1;
-          $numRunchants = CountAura("ARC112", $player);
+          $numRunchants = CountAura("runechant", $player);
           if ($numRunchants <= $damage) {
             for ($j = 0; $j < $numRunchants; $j++) {
-              $index = SearchAurasForIndex("ARC112", $player);
+              $index = SearchAurasForIndex("runechant", $player);
               if ($index != -1) DestroyAuraUniqueID($player, $auras[$index + 6]);
             }
-            if ($numRunchants > 1) WriteLog($numRunchants . " " . CardLink("ARC112", "ARC112") . "s were destroyed");
-            else WriteLog($numRunchants . " " . CardLink("ARC112", "ARC112") . " was destroyed");
+            if ($numRunchants > 1) WriteLog($numRunchants . " " . CardLink("runechant", "runechant") . "s were destroyed");
+            else WriteLog($numRunchants . " " . CardLink("runechant", "runechant") . " was destroyed");
             if ($preventable) $damage -= $numRunchants;
           } else {
             for ($j = 0; $j < $damage; $j++) {
-              $index = SearchAurasForIndex("ARC112", $player);
+              $index = SearchAurasForIndex("runechant", $player);
               if ($index != -1) DestroyAuraUniqueID($player, $auras[$index + 6]);
             }
-            if ($damage > 1) WriteLog($damage . " " . CardLink("ARC112", "ARC112") . "s were destroyed");
-            else WriteLog($damage . " " . CardLink("ARC112", "ARC112") . " was destroyed");
+            if ($damage > 1) WriteLog($damage . " " . CardLink("runechant", "runechant") . "s were destroyed");
+            else WriteLog($damage . " " . CardLink("runechant", "runechant") . " was destroyed");
             if ($preventable) $damage -= $damage;
           }
         }
         break;
-      case "EVR131":
+      case "pyroglyphic_protection_red":
         if ($type == "ARCANE" && $preventable) $damage -= 3;
         break;
-      case "EVR132":
+      case "pyroglyphic_protection_yellow":
         if ($type == "ARCANE" && $preventable) $damage -= 2;
         break;
-      case "EVR133":
+      case "pyroglyphic_protection_blue":
         if ($type == "ARCANE" && $preventable) $damage -= 1;
         break;
       default:
@@ -1075,13 +1075,13 @@ function AuraDamageTakenAbilities($player, $damage, $source)
   for ($i = count($auras) - AuraPieces(); $i >= 0; $i -= AuraPieces()) {
     $remove = 0;
     switch ($auras[$i]) {
-      case "ARC106":
-      case "ARC107":
-      case "ARC108":
-      case "EVR023":
-      case "ROS152":
-      case "ROS153":
-      case "ROS154":
+      case "bloodspill_invocation_red":
+      case "bloodspill_invocation_yellow":
+      case "bloodspill_invocation_blue":
+      case "nerves_of_steel_blue":
+      case "arcane_cussing_red":
+      case "arcane_cussing_yellow":
+      case "arcane_cussing_blue":
         $remove = 1;
         break;
       default:
@@ -1093,16 +1093,16 @@ function AuraDamageTakenAbilities($player, $damage, $source)
   $otherAuras = &GetAuras($otherPlayer);
   for ($i = count($otherAuras) - AuraPieces(); $i >= 0; $i -= AuraPieces()) {
     switch ($otherAuras[$i]) {
-      case "ROS077":
+      case "channel_lightning_valley_yellow":
         if(GetClassState($otherPlayer, $CS_DamageDealt) == 0 && GetClassState($otherPlayer, $CS_ArcaneDamageDealt) == 0 && $damage > 0 && $otherAuras[$i + 5] > 0){
           $otherAuras[$i + 5] -= 1;
-          if (CardType($source) != "AA" || !SearchCurrentTurnEffects("OUT108", $otherPlayer) && !HitEffectsArePrevented($source)) {
+          if (CardType($source) != "AA" || !SearchCurrentTurnEffects("tarpit_trap_yellow", $otherPlayer) && !HitEffectsArePrevented($source)) {
             AddLayer("TRIGGER", $otherPlayer, $otherAuras[$i], uniqueID: $otherAuras[$i + 6]);
           }
         }
         elseif (GetClassState($player, $CS_DamageTaken) == 0 && GetClassState($player, $CS_ArcaneDamageTaken) == 0 && $damage > 0 && $otherAuras[$i + 5] > 0) {
           $otherAuras[$i + 5] -= 1;
-          if (CardType($source) != "AA" || !SearchCurrentTurnEffects("OUT108", $otherPlayer) && !HitEffectsArePrevented($source)) {
+          if (CardType($source) != "AA" || !SearchCurrentTurnEffects("tarpit_trap_yellow", $otherPlayer) && !HitEffectsArePrevented($source)) {
             AddLayer("TRIGGER", $otherPlayer, $otherAuras[$i], uniqueID: $otherAuras[$i + 6]);
           }
         }
@@ -1121,9 +1121,9 @@ function AuraDamageDealtAbilities($player, $damage)
   for ($i = count($auras) - AuraPieces(); $i >= 0; $i -= AuraPieces()) {
     $remove = 0;
     switch ($auras[$i]) {
-      case "ROS152":
-      case "ROS153":
-      case "ROS154":
+      case "arcane_cussing_red":
+      case "arcane_cussing_yellow":
+      case "arcane_cussing_blue":
         $remove = 1;
         break;
       default:
@@ -1141,7 +1141,7 @@ function AuraLoseHealthAbilities($player, $amount)
   for ($i = count($auras) - AuraPieces(); $i >= 0; $i -= AuraPieces()) {
     $remove = 0;
     switch ($auras[$i]) {
-      case "MON157":
+      case "dimenxxional_crossroads_yellow":
         if ($player == $mainPlayer) $remove = 1;
         break;
       default:
@@ -1161,7 +1161,7 @@ function AuraPlayAbilities($cardID, $from = "")
   for ($i = count($auras) - AuraPieces(); $i >= 0; $i -= AuraPieces()) {
     $remove = 0;
     switch ($auras[$i]) {
-      case "WTR225":
+      case "quicken":
         if (($cardType == "AA" && (GetResolvedAbilityType($cardID) == "" || GetResolvedAbilityType($cardID) == "AA"))
           || (DelimStringContains($cardSubType, "Aura") && $from == "PLAY" && (GetResolvedAbilityType($cardID) == "" || GetResolvedAbilityType($cardID) == "AA"))
           || (TypeContains($cardID, "W") && GetResolvedAbilityType($cardID) == "AA" && $from == "EQUIP")) {
@@ -1170,48 +1170,48 @@ function AuraPlayAbilities($cardID, $from = "")
           $remove = 1;
         }
         break;
-      case "ARC112":
+      case "runechant":
         if (($cardType == "AA" && GetResolvedAbilityType($cardID) != "I" && $from != "PLAY") || (DelimStringContains($cardSubType, "Aura") && $from == "PLAY") || ((TypeContains($cardID, "W", $currentPlayer) && GetResolvedAbilityType($cardID) == "AA")) && GetResolvedAbilityType($cardID) != "I") {
           AddLayer("TRIGGER", $currentPlayer, $auras[$i], "-", "-", $auras[$i + 6]);
         }
         break;
-      case "MON157":
+      case "dimenxxional_crossroads_yellow":
         DimenxxionalCrossroadsPassive($cardID, $from);
         break;
-      case "ELE110":
+      case "embodiment_of_lightning":
         if ($cardType == "AA" && GetResolvedAbilityType($cardID) != "I") {
           AddLayer("TRIGGER", $currentPlayer, $auras[$i], "-", $cardID, $auras[$i + 6]);
         }
         break;
-      case "EVR143":
+      case "pierce_reality_blue":
         if ($auras[$i + 5] > 0 && CardType($cardID) == "AA" && ClassContains($cardID, "ILLUSIONIST", $currentPlayer) && GetClassState($currentPlayer, $CS_NumIllusionistActionCardAttacks) <= 1) {
           WriteLog(CardLink($auras[$i], $auras[$i]) . " gives the attack +2");
           --$auras[$i + 5];
-          AddCurrentTurnEffect("EVR143", $currentPlayer, true);
+          AddCurrentTurnEffect("pierce_reality_blue", $currentPlayer, true);
         }
         break;
-      case "ELE175":
+      case "channel_thunder_steppe_yellow":
         if ((DelimStringContains($cardType, "A") || $cardType == "AA") && (GetResolvedAbilityType($cardID, $from) == "" || GetResolvedAbilityType($cardID, $from) == "AA" || GetResolvedAbilityType($cardID, $from) == "A")) {
           AddLayer("TRIGGER", $currentPlayer, $auras[$i], $cardType, "-", $auras[$i + 6]);
         }
         break;
-      case "DTD232":
+      case "courage":
         if ($cardType == "AA" && (GetResolvedAbilityType($cardID, $from) == "" || GetResolvedAbilityType($cardID, $from) == "AA")
           || (DelimStringContains($cardSubType, "Aura") && $from == "PLAY")
           || ((TypeContains($cardID, "W", $currentPlayer) && GetResolvedAbilityType($cardID) != "A")) && GetResolvedAbilityType($cardID) != "I") {
-          AddCurrentTurnEffect("DTD232", $currentPlayer);
+          AddCurrentTurnEffect("courage", $currentPlayer);
           $remove = 1;
         }
         break;
-      case "DTD233":
+      case "eloquence":
         if (DelimStringContains($cardType, "A") && $from != "PLAY") {
           WriteLog(CardLink($auras[$i], $auras[$i]) . " gives the next non-attack action card go again");
           AddLayer("TRIGGER", $currentPlayer, $auras[$i], $cardType, "-", $auras[$i + 6]);
         }
         break;
-      case "ROS130":
-      case "ROS131":
-      case "ROS132":
+      case "malefic_incantation_red":
+      case "malefic_incantation_yellow":
+      case "malefic_incantation_blue":
         if ($cardType == "AA" && (GetResolvedAbilityType($cardID, $from) == "" || GetResolvedAbilityType($cardID, $from) == "AA") && $auras[$i + 5] > 0) {
           --$auras[$i + 5];
           AddLayer("TRIGGER", $currentPlayer, $auras[$i], "-", $cardID, $auras[$i + 6]);
@@ -1231,12 +1231,12 @@ function AuraAttackAbilities($attackID)
   $attackType = CardType($attackID);
   for ($i = count($auras) - AuraPieces(); $i >= 0; $i -= AuraPieces()) {
     switch ($auras[$i]) {
-      case "ELE226":
+      case "sting_of_sorcery_blue":
         if ($attackType == "AA") {
           AddLayer("TRIGGER", $mainPlayer, $auras[$i], "-", $attackID, $auras[$i + 6]);
         }
         break;
-      case "EVR140":
+      case "shimmers_of_silver_blue":
         if ($auras[$i + 5] > 0 && DelimStringContains(CardSubtype($attackID), "Aura") && ClassContains($attackID, "ILLUSIONIST", $mainPlayer)) {
           $index = GetClassState($mainPlayer, $CS_PlayIndex);
           WriteLog(CardLink($auras[$i], $auras[$i]) . " puts a +1 counter on " . CardLink($auras[$index], $auras[$index]));
@@ -1244,20 +1244,20 @@ function AuraAttackAbilities($attackID)
           --$auras[$i + 5];
         }
         break;
-      case "EVR142":
+      case "passing_mirage_blue":
         if ($auras[$i + 5] > 0 && ClassContains($attackID, "ILLUSIONIST", $mainPlayer) && GetClassState($mainPlayer, $CS_NumIllusionistAttacks) <= 1) {
           WriteLog(CardLink($auras[$i], $auras[$i]) . " makes your first illusionist attack each turn lose Phantasm");
           --$auras[$i + 5];
-          AddCurrentTurnEffect("EVR142", $mainPlayer, true);
+          AddCurrentTurnEffect("passing_mirage_blue", $mainPlayer, true);
         }
         break;
-      case "UPR005":
+      case "burn_them_all_red":
         if ($auras[$i + 5] > 0 && DelimStringContains(CardSubType($attackID), "Dragon")) {
           --$auras[$i + 5];
           AddLayer("TRIGGER", $mainPlayer, $auras[$i], "-", $attackID, $auras[$i + 6]);
         }
         break;
-      case "HNT073":
+      case "prowess_of_agility_blue":
         if (GetClassState($mainPlayer, $CS_NumTimesAttacked) == 4) {
           AddLayer("TRIGGER", $mainPlayer, $auras[$i], "-", $attackID, $auras[$i + 6]);
         }
@@ -1275,9 +1275,9 @@ function AuraHitEffects($attackID)
   for ($i = count($auras) - AuraPieces(); $i >= 0; $i -= AuraPieces()) {
     $remove = 0;
     switch ($auras[$i]) {
-      case "ARC106":
-      case "ARC107":
-      case "ARC108":
+      case "bloodspill_invocation_red":
+      case "bloodspill_invocation_yellow":
+      case "bloodspill_invocation_blue":
         if ($attackType == "AA") {
           AddLayer("TRIGGER", $mainPlayer, $auras[$i], "-", $attackID, $auras[$i + 6]);
         }
@@ -1300,7 +1300,7 @@ function AuraAttackModifiers($index, &$attackModifiers, $onBlock=false)
   if (!$onBlock) {//This codeblock was counting CMH twice on block
     for ($i = 0; $i < count($myAuras); $i += AuraPieces()) {
       switch ($myAuras[$i]) {
-        case "ELE117":
+        case "channel_mount_heroic_red":
           if (CardType($chainCard->ID()) == "AA") {
             $modifier += 3;
             array_push($attackModifiers, $myAuras[$i]);
@@ -1314,7 +1314,7 @@ function AuraAttackModifiers($index, &$attackModifiers, $onBlock=false)
             array_push($attackModifiers, -1);
           }
           break;
-        case "HNT118":
+        case "sharpened_senses_yellow":
           if(IsWeaponAttack())
           {
             $modifier += 1;
@@ -1329,7 +1329,7 @@ function AuraAttackModifiers($index, &$attackModifiers, $onBlock=false)
   $theirAuras = &GetAuras($player == 1 ? 2 : 1);
   for ($i = 0; $i < count($theirAuras); $i += AuraPieces()) {
     switch ($theirAuras[$i]) {
-      case "MON011":
+      case "parable_of_humility_yellow":
         if (CardType($CombatChain->CurrentAttack()) == "AA") {
           $modifier -= 1;
           array_push($attackModifiers, $theirAuras[$i]);
@@ -1386,7 +1386,7 @@ function AuraIntellectModifier()
   $auras = &GetAuras($mainPlayer);
   for ($i = 0; $i < count($auras); $i += AuraPieces()) {
     switch ($auras[$i]) {
-      case "EVO243":
+      case "contest_the_mindfield_blue":
         $intellectModifier -= 1;
         break;
       default:
@@ -1396,7 +1396,7 @@ function AuraIntellectModifier()
   $auras = &GetAuras($otherPlayer);
   for ($i = 0; $i < count($auras); $i += AuraPieces()) {
     switch ($auras[$i]) {
-      case "EVO243":
+      case "contest_the_mindfield_blue":
         $intellectModifier -= 1;
         break;
       default:
@@ -1412,9 +1412,9 @@ function PayAuraAbilityAdditionalCosts($cardID, $from)
   $index = GetClassState($currentPlayer, $CS_PlayIndex);
   $auras = &GetAuras($currentPlayer);
   switch ($cardID) {
-    case "DTD060":
-    case "DTD061":
-    case "DTD062":
+    case "v_for_valor_red":
+    case "v_for_valor_yellow":
+    case "v_for_valor_blue":
       $hand = &GetHand($currentPlayer);
       if (count($hand) == 0) {
         WriteLog("You do not have a card to charge. Reverting gamestate.", highlight: true);
@@ -1424,7 +1424,7 @@ function PayAuraAbilityAdditionalCosts($cardID, $from)
       DestroyAura($currentPlayer, $index);
       Charge(may: false);
       break;
-    case "MST133":
+    case "restless_coalescence_yellow":
       $abilityType = GetResolvedAbilityType($cardID);
       if ($abilityType == "I" && $from == "PLAY" && SearchCurrentTurnEffectsForUniqueID($auras[$index + 6]) != -1) {
         --$auras[$index + 3];
@@ -1434,7 +1434,7 @@ function PayAuraAbilityAdditionalCosts($cardID, $from)
         $auras[$index + 1] = 1;
       }
       break;
-    case "HNT167":
+    case "fealty":
       DestroyAura($currentPlayer, $index);
     default:
       break;
@@ -1447,7 +1447,7 @@ function AurasAttackYouControlModifiers($cardID, $player)
   $attackModifier = 0;
   for ($i = 0; $i < count($auras); $i += ItemPieces()) {
     switch ($auras[$i]) {
-      case "ELE117":
+      case "channel_mount_heroic_red":
         if (CardType($cardID) == "AA") $attackModifier += 3;
       default:
         break;

@@ -25,12 +25,12 @@ function BanishCard(&$banish, &$classState, $cardID, $mod, $player = "", $from =
   $characterID = ShiyanaCharacter($character[0]);
   AddEvent("BANISH", (isFaceDownMod($mod) ? "CardBack" : $cardID));
   //Effects that change the modifier
-  if ($characterID == "DTD564" && $character[1] < 3) {
+  if ($characterID == "levia_redeemed" && $character[1] < 3) {
     AddLayer("TRIGGER", $player, $characterID);
-    if ($mod != "INT") $mod = "DTD564";
+    if ($mod != "INT") $mod = "levia_redeemed";
   }
   //Do effects that change where it goes, or banish it if not
-  if ($from == "DECK" && (SearchCharacterActive($player, "CRU099") || SearchCurrentTurnEffects("CRU099-SHIYANA", $player)) && CardSubType($cardID, $from) == "Item" && CardCost($cardID, $from) <= 2) {
+  if ($from == "DECK" && (SearchCharacterActive($player, "data_doll_mkii") || SearchCurrentTurnEffects("data_doll_mkii-SHIYANA", $player)) && CardSubType($cardID, $from) == "Item" && CardCost($cardID, $from) <= 2) {
     $character = &GetPlayerCharacter($player);
     AddLayer("TRIGGER", $player, $character[0], $cardID);
   }
@@ -43,25 +43,25 @@ function BanishCard(&$banish, &$classState, $cardID, $mod, $player = "", $from =
   ++$classState[$CS_CardsBanished];
   if (isFaceDownMod($mod)) return $rv;
   //Do additional effects
-  if ($cardID == "DTD109" && $from == "HAND" && $mod != "DTD564" && ($mod != "NOFEAR" || $player == $mainPlayer)) $banish[count($banish) - 2] = "TT";
+  if ($cardID == "slithering_shadowpede_red" && $from == "HAND" && $mod != "levia_redeemed" && ($mod != "NOFEAR" || $player == $mainPlayer)) $banish[count($banish) - 2] = "TT";
   if (($mod == "BOOST" || $from == "DECK") 
-  && ($cardID == "ARC176" || $cardID == "ARC177" || $cardID == "ARC178") 
+  && ($cardID == "back_alley_breakline_red" || $cardID == "back_alley_breakline_yellow" || $cardID == "back_alley_breakline_blue") 
   && (TypeContains($EffectContext, "A", $player) || TypeContains($EffectContext, "AA", $player) || GetAbilityType($EffectContext) != "")
   && $player == $mainPlayer) {
     WriteLog("Player ". $player ." gained 1 action point from " . CardLink($cardID, $cardID).".");
     ++$actionPoints;
   }
-  if (($mod == "BOOST" && $from == "DECK") && ($cardID == "DYN101" || $cardID == "DYN102" || $cardID == "DYN103")) {
+  if (($mod == "BOOST" && $from == "DECK") && ($cardID == "crankshaft_red" || $cardID == "crankshaft_yellow" || $cardID == "crankshaft_blue")) {
     WriteLog(CardLink($cardID, $cardID) . " was banished to pay a boost cost. Put a counter on a Hyper Drive you control.");
     AddLayer("TRIGGER", $player, $cardID);
   }
   if (ModifiedAttackValue($cardID, $player, $from, source: $banishedBy) >= 6) {
-    if ($classState[$CS_Num6PowBan] == 0 && $player == $mainPlayer && ($characterID == "MON119" || $characterID == "MON120") && $character[1] == 2) { // Levia
+    if ($classState[$CS_Num6PowBan] == 0 && $player == $mainPlayer && ($characterID == "levia_shadowborn_abomination" || $characterID == "levia") && $character[1] == 2) { // Levia
       WriteLog(CardLink($characterID, $characterID) . " banished a card with 6+ power, and won't lose life from Blood Debt this turn.");
     }
     ++$classState[$CS_Num6PowBan];
-    $index = FindCharacterIndex($player, "MON122");
-    if ($index >= 0 && IsCharacterAbilityActive($player, $index, checkGem: true) && $player == $mainPlayer && SearchLayersForCardID("MON122") == -1) {
+    $index = FindCharacterIndex($player, "hooves_of_the_shadowbeast");
+    if ($index >= 0 && IsCharacterAbilityActive($player, $index, checkGem: true) && $player == $mainPlayer && SearchLayersForCardID("hooves_of_the_shadowbeast") == -1) {
       AddLayer("TRIGGER", $player, $character[$index]);
     }
   }
@@ -76,30 +76,30 @@ function BanishCard(&$banish, &$classState, $cardID, $mod, $player = "", $from =
     } else DestroyCharacter($player, $charIndex, wasBanished: true);
   }
   if ($banishedBy != "" && $player != $mainPlayer) CheckContracts($mainPlayer, $cardID);
-  if ($banishedBy == "DTD193" && TalentContains($cardID, "LIGHT", $player)) {
+  if ($banishedBy == "nasreth_the_soul_harrower" && TalentContains($cardID, "LIGHT", $player)) {
     GainHealth(1, $otherPlayer);
     return $rv;
   }
-  if ($banishedBy == "MST104" && (DelimStringContains(CardType($cardID), "A") || CardType($cardID) == "AA")) {
+  if ($banishedBy == "persuasive_prognosis_blue" && (DelimStringContains(CardType($cardID), "A") || CardType($cardID) == "AA")) {
     GainHealth(1, $otherPlayer);
     return $rv;
   }
-  if ($banishedBy == "MST106" && ColorContains($cardID, 1, $player)) {
+  if ($banishedBy == "art_of_desire_body_red" && ColorContains($cardID, 1, $player)) {
     Draw($otherPlayer);
     GainHealth(1, $otherPlayer);
     return $rv;
   }
-  if ($banishedBy == "MST107" && ColorContains($cardID, 2, $player)) {
+  if ($banishedBy == "art_of_desire_soul_yellow" && ColorContains($cardID, 2, $player)) {
     Draw($otherPlayer);
     GainHealth(1, $otherPlayer);
     return $rv;
   }
-  if ($banishedBy == "MST108" && ColorContains($cardID, 3, $player)) {
+  if ($banishedBy == "art_of_desire_mind_blue" && ColorContains($cardID, 3, $player)) {
     Draw($otherPlayer);
     GainHealth(1, $otherPlayer);
     return $rv;
   }
-  if ($banishedBy == "MST109" || $banishedBy == "MST110" || $banishedBy == "MST111" && count($banish) / BanishPieces() >= 2) {
+  if ($banishedBy == "bonds_of_attraction_red" || $banishedBy == "bonds_of_attraction_yellow" || $banishedBy == "bonds_of_attraction_blue" && count($banish) / BanishPieces() >= 2) {
     $count = count($banish) - BanishPieces();
     $pitchValues = [];
     for ($i = $count; $i >= 0; $i--) {
@@ -112,7 +112,7 @@ function BanishCard(&$banish, &$classState, $cardID, $mod, $player = "", $from =
     }
     return $rv;
   }
-  if (($banishedBy == "MST115" || $banishedBy == "MST116" || $banishedBy == "MST117") && count($banish) / BanishPieces() >= 2) {
+  if (($banishedBy == "bonds_of_memory_red" || $banishedBy == "bonds_of_memory_yellow" || $banishedBy == "bonds_of_memory_blue") && count($banish) / BanishPieces() >= 2) {
     $count = count($banish) - BanishPieces();
     $cardNames = [];
     for ($i = $count; $i >= 0; $i--) {
@@ -125,15 +125,15 @@ function BanishCard(&$banish, &$classState, $cardID, $mod, $player = "", $from =
     }
     return $rv;
   }
-  if (($banishedBy == "MST118" || $banishedBy == "MST119" || $banishedBy == "MST120") && TypeContains($cardID, "AA", $player)) {
+  if (($banishedBy == "desires_of_flesh_red" || $banishedBy == "desires_of_flesh_yellow" || $banishedBy == "desires_of_flesh_blue") && TypeContains($cardID, "AA", $player)) {
     GainHealth(1, $otherPlayer);
     return $rv;
   }
-  if (($banishedBy == "MST121" || $banishedBy == "MST122" || $banishedBy == "MST123") && (TypeContains($cardID, "AR", $player) || TypeContains($cardID, "DR", $player) || TypeContains($cardID, "I", $player))) {
+  if (($banishedBy == "impulsive_desire_red" || $banishedBy == "impulsive_desire_yellow" || $banishedBy == "impulsive_desire_blue") && (TypeContains($cardID, "AR", $player) || TypeContains($cardID, "DR", $player) || TypeContains($cardID, "I", $player))) {
     GainHealth(1, $otherPlayer);
     return $rv;
   }
-  if (($banishedBy == "MST124" || $banishedBy == "MST125" || $banishedBy == "MST126") && TypeContains($cardID, "A", $player)) {
+  if (($banishedBy == "minds_desire_red" || $banishedBy == "minds_desire_yellow" || $banishedBy == "minds_desire_blue") && TypeContains($cardID, "A", $player)) {
     GainHealth(1, $otherPlayer);
     return $rv;
   }
@@ -249,7 +249,7 @@ function AddArsenal($cardID, $player, $from, $facing, $counters = 0)
   $arsenal = &GetArsenal($player);
   $character = &GetPlayerCharacter($player);
   $cardSubType = CardSubType($cardID);
-  if ($facing == "UP" && $from == "DECK" && $cardSubType == "Arrow" && FindCharacterIndex($player, "DYN151") != -1) $counters = 1;
+  if ($facing == "UP" && $from == "DECK" && $cardSubType == "Arrow" && FindCharacterIndex($player, "sandscour_greatbow") != -1) $counters = 1;
   array_push($arsenal, $cardID);
   array_push($arsenal, $facing);
   array_push($arsenal, 1); //Num uses - currently always 1
@@ -258,31 +258,31 @@ function AddArsenal($cardID, $player, $from, $facing, $counters = 0)
   array_push($arsenal, GetUniqueId($cardID, $player)); //Unique ID
   $otherPlayer = $player == 1 ? 2 : 1;
   if ($facing == "UP") {
-    if ($from == "DECK" && ($cardID == "ARC176" || $cardID == "ARC177" || $cardID == "ARC178") && (TypeContains($EffectContext, "A", $player) || TypeContains($EffectContext, "AA", $player) || GetResolvedAbilityType($EffectContext, $from) == "A")) {
+    if ($from == "DECK" && ($cardID == "back_alley_breakline_red" || $cardID == "back_alley_breakline_yellow" || $cardID == "back_alley_breakline_blue") && (TypeContains($EffectContext, "A", $player) || TypeContains($EffectContext, "AA", $player) || GetResolvedAbilityType($EffectContext, $from) == "A")) {
       if ($player == $mainPlayer) {
         WriteLog("Player ". $player ." gained 1 action point from " . CardLink($cardID, $cardID).".");
         GainActionPoints(1);
       }    }
-    if ($from == "DECK" && CardSubType($cardID) == "Arrow" && SearchCharacterActive($player, "OUT097")) {
-      AddLayer("TRIGGER", $player, "OUT097", "-", "-", -1);
+    if ($from == "DECK" && CardSubType($cardID) == "Arrow" && SearchCharacterActive($player, "crows_nest")) {
+      AddLayer("TRIGGER", $player, "crows_nest", "-", "-", -1);
     }
     switch ($cardID) {
-      case "ARC057":
-      case "ARC058":
-      case "ARC059":
+      case "head_shot_red":
+      case "head_shot_yellow":
+      case "head_shot_blue":
         AddCurrentTurnEffect($cardID, $player);
         break;
-      case "ARC063":
-      case "ARC064":
-      case "ARC065":
+      case "ridge_rider_shot_red":
+      case "ridge_rider_shot_yellow":
+      case "ridge_rider_shot_blue":
         Opt($cardID, 1);
         break;
-      case "CRU123":
+      case "remorseless_red":
         AddCurrentTurnEffect($cardID, $otherPlayer);
         break;
-      case "OUT130":
-      case "OUT131":
-      case "OUT132":
+      case "spire_sniping_red":
+      case "spire_sniping_yellow":
+      case "spire_sniping_blue":
         SpireSnipingAbility($player);
         break;
       default:
@@ -315,9 +315,9 @@ function SetArsenalFacing($facing, $player)
 function ArsenalTurnFaceUpAbility($cardID, $player)
 {
   switch ($cardID) {
-    case "OUT130":
-    case "OUT131":
-    case "OUT132":
+    case "spire_sniping_red":
+    case "spire_sniping_yellow":
+    case "spire_sniping_blue":
       SpireSnipingAbility($player);
       break;
     default:
@@ -362,7 +362,7 @@ function AddSoul($cardID, $player, $from, $isMainPhase = true)
   AddEvent("SOUL", $cardID);
   global $CS_NumAddedToSoul, $CS_NumYellowPutSoul;
   global $myStateBuiltFor;
-  if ($cardID == "DYN066") {
+  if ($cardID == "spirit_of_eirina_yellow") {
     WriteLog("The spirit of Eirina is inside you, always.");
     PutItemIntoPlayForPlayer($cardID, $player);
   } else {
@@ -375,7 +375,7 @@ function AddSoul($cardID, $player, $from, $isMainPhase = true)
     }
     IncrementClassState($player, $CS_NumAddedToSoul);
     if (ColorContains($cardID, 2, $player)) IncrementClassState($player, $CS_NumYellowPutSoul);
-    if ($isMainPhase && str_contains(NameOverride($cardID, $player), "Herald") && (SearchCharacterActive($player, "DTD001") || SearchCharacterActive($player, "DTD002"))) {
+    if ($isMainPhase && str_contains(NameOverride($cardID, $player), "Herald") && (SearchCharacterActive($player, "prism_awakener_of_sol") || SearchCharacterActive($player, "prism_advent_of_thrones"))) {
       if ($from != "CC") {
         $char = GetPlayerCharacter($player);
         AddLayer("TRIGGER", $player, $char[0]);
@@ -385,7 +385,7 @@ function AddSoul($cardID, $player, $from, $isMainPhase = true)
       }
     }
     if ($player == $mainPlayer)
-      if (SearchCharacterAlive($player, "DTD004") && !SearchCurrentTurnEffects("DTD004", $player) && CardNameContains($cardID, "Herald", $player, true)) AddCurrentTurnEffect("DTD004", $player);
+      if (SearchCharacterAlive($player, "empyrean_rapture") && !SearchCurrentTurnEffects("empyrean_rapture", $player) && CardNameContains($cardID, "Herald", $player, true)) AddCurrentTurnEffect("empyrean_rapture", $player);
   }
 }
 
@@ -432,45 +432,45 @@ function EffectArcaneBonus($source)
   $source = $idArr[0];
   $modifier = (count($idArr) > 1 ? $idArr[1] : 0);
   switch ($source) {
-    case "ARC115":
+    case "crucible_of_aetherweave":
       return 1;
-    case "ARC122":
+    case "tome_of_aetherwind_red":
       return 1;
-    case "ARC123":
-    case "ARC124":
-    case "ARC125":
+    case "absorb_in_aether_red":
+    case "absorb_in_aether_yellow":
+    case "absorb_in_aether_blue":
       return 2;
-    case "ARC129":
+    case "stir_the_aetherwinds_red":
       return 3;
-    case "ARC130":
+    case "stir_the_aetherwinds_yellow":
       return 2;
-    case "ARC131":
+    case "stir_the_aetherwinds_blue":
       return 1;
-    case "ARC132":
-    case "ARC133":
-    case "ARC134":
+    case "aether_flare_red":
+    case "aether_flare_yellow":
+    case "aether_flare_blue":
       return intval($modifier);
-    case "CRU161":
+    case "metacarpus_node":
       return 1;
-    case "CRU165":
-    case "CRU166":
-    case "CRU167":
+    case "cindering_foresight_red":
+    case "cindering_foresight_yellow":
+    case "cindering_foresight_blue":
       return 1;
-    case "CRU171":
-    case "CRU172":
-    case "CRU173":
+    case "rousing_aether_red":
+    case "rousing_aether_yellow":
+    case "rousing_aether_blue":
       return 1;
-    case "DYN192":
+    case "surgent_aethertide":
       return intval($modifier);
-    case "DYN200":
+    case "blessing_of_aether_red":
       return 3;
-    case "DYN201":
+    case "blessing_of_aether_yellow":
       return 2;
-    case "DYN202":
+    case "blessing_of_aether_blue":
       return 1;
-    case "DYN209":
-    case "DYN210":
-    case "DYN211":
+    case "tempest_aurora_red":
+    case "tempest_aurora_yellow":
+    case "tempest_aurora_blue":
       return 1;
     default:
       return 0;
@@ -485,13 +485,13 @@ function AssignArcaneBonus($playerID)
     if ($currentTurnEffects[$i + 1] == $playerID && EffectArcaneBonus($currentTurnEffects[$i]) > 0) {
       $skip = intval($currentTurnEffects[$i + 2]) != -1;
       switch ($currentTurnEffects[$i]) {
-        case "DYN209":
+        case "tempest_aurora_red":
           if (CardCost($layers[$layerIndex]) > 2) $skip = true;
           break;
-        case "DYN210":
+        case "tempest_aurora_yellow":
           if (CardCost($layers[$layerIndex]) > 1) $skip = true;
           break;
-        case "DYN211":
+        case "tempest_aurora_blue":
           if (CardCost($layers[$layerIndex]) > 0) $skip = true;
           break;
         default:
@@ -516,9 +516,9 @@ function ClearNextCardArcaneBuffs($player, $playedCard = "", $from = "")
     $remove = 0;
     if ($currentTurnEffects[$i + 1] == $player) {
       switch ($currentTurnEffects[$i]) {
-        case "DYN200":
-        case "DYN201":
-        case "DYN202":
+        case "blessing_of_aether_red":
+        case "blessing_of_aether_yellow":
+        case "blessing_of_aether_blue":
           if (!IsStaticType(CardType($playedCard), $from, $playedCard)) $remove = 1;
           break;
         default:
@@ -613,39 +613,34 @@ function AddGraveyard($cardID, $player, $from, $effectController = "")
   global $mainPlayer, $mainPlayerGamestateStillBuilt;
   global $myDiscard, $theirDiscard, $mainDiscard, $defDiscard;
   global $myStateBuiltFor, $CS_CardsEnteredGY, $EffectContext;
-  if ($from == "DECK" && ($cardID == "ARC176" || $cardID == "ARC177" || $cardID == "ARC178") && (TypeContains($EffectContext, "A", $player) || TypeContains($EffectContext, "AA", $player))) {
+  if ($from == "DECK" && ($cardID == "back_alley_breakline_red" || $cardID == "back_alley_breakline_yellow" || $cardID == "back_alley_breakline_blue") && (TypeContains($EffectContext, "A", $player) || TypeContains($EffectContext, "AA", $player))) {
     if ($player == $mainPlayer) {
       WriteLog("Player ". $player ." gained 1 action point from " . CardLink($cardID, $cardID).".");
       GainActionPoints(1);
     }
   }
-  //Code for EVO400+ going to GY, then Scrapped and it makes them unplayable.
+  //Code for equipped evos+ going to GY, then Scrapped and it makes them unplayable.
+  // this may not be required anymore
   if ($from == "CHAR") {
-    $set = substr($cardID, 0, 3);
-    $number = intval(substr($cardID, 3, 3));
-    if ($number >= 400 && !IsAltCard($cardID)) {
-      $number -= 400;
-      if ($number < 0) return;
-      $id = $number;
-      if ($number < 100) $id = "0" . $id;
-      if ($number < 10) $id = "0" . $id;
-      $cardID = $set . $id;
+    $splitCard = explode("_", $cardID);
+    if ($splitCard[count($splitCard) - 1] == "equip") {
+      $cardID = GetCardIDBeforeTransform($cardID);
     }
   }
   if (HasEphemeral($cardID) || TypeContains($cardID, "T", $player)) return;
   switch ($cardID) {
-    case "MON124":
+    case "mark_of_the_beast_yellow":
       BanishCardForPlayer($cardID, $player, $from, "NA");
       return;
-    case "CRU007":
+    case "beast_within_yellow":
       if ($from != "CC") AddLayer("TRIGGER", $player, $cardID);
       break;
-    case "WTR164":
-    case "WTR165":
-    case "WTR166":
+    case "drone_of_brutality_red":
+    case "drone_of_brutality_yellow":
+    case "drone_of_brutality_blue":
       AddBottomDeck($cardID, $player, $from);
       return;
-    case "HVY207":
+    case "nasty_surprise_blue":
       if ($effectController != $player && $from != "CC") AddLayer("TRIGGER", $player, $cardID);
       break;
     default:
@@ -769,11 +764,11 @@ function IsAltCard($cardID)
     case "MON400":
     case "MON401":
     case "MON402":
-    case "MON404":
-    case "MON405":
-    case "MON406":
-    case "MON407":
-    case "HNT407":
+    case "the_librarian":
+    case "minerva_themis":
+    case "lady_barthimont":
+    case "lord_sutcliffe":
+    case "the_hand_that_pulls_the_strings":
       return true;
   }
   return false;

@@ -449,19 +449,19 @@ function MZStartTurnAbility($player, $MZIndex)
 {
   $cardID = GetMZCard($player, $MZIndex);
   switch ($cardID) {
-    case "UPR086":
+    case "thaw_red":
       AddDecisionQueue("PASSPARAMETER", $player, $MZIndex);
       AddDecisionQueue("MZREMOVE", $player, "-", 1);
       AddDecisionQueue("MULTIBANISH", $player, "GY,-", 1);
-      AddDecisionQueue("FINDINDICES", $player, "UPR086");
+      AddDecisionQueue("FINDINDICES", $player, "thaw_red");
       AddDecisionQueue("CHOOSEMULTIZONE", $player, "<-", 1);
       AddDecisionQueue("AFTERTHAW", $player, "<-", 1);
       break;
-    case "HNT150":
+    case "loyalty_beyond_the_grave_red":
       AddDecisionQueue("PASSPARAMETER", $player, $MZIndex);
       AddDecisionQueue("MZREMOVE", $player, "-", 1);
       AddDecisionQueue("MULTIBANISH", $player, "GY,-", 1);
-      MZMoveCard($player, "MYDISCARD:isSameName=HNT150", "MYBANISH", DQContext:"Choose a card named Loyalty Beyond the Grave to banish", isSubsequent:true);
+      MZMoveCard($player, "MYDISCARD:isSameName=loyalty_beyond_the_grave_red", "MYBANISH", DQContext:"Choose a card named Loyalty Beyond the Grave to banish", isSubsequent:true);
       AddDecisionQueue("DRAW", $player, "-", 0);
       break;
     default:
@@ -472,8 +472,8 @@ function MZStartTurnAbility($player, $MZIndex)
 function MZMoveCard($player, $search, $where, $may = false, $isReveal = false, $silent = false, $isSubsequent = false, $DQContext = "")
 {
   $otherPlayer = $player == 1 ? 2 : 1;
-  if (str_contains($search, "DECK") && (SearchAurasForCard("UPR138", $otherPlayer) != "" || SearchAurasForCard("UPR138", $player) != "")) {
-    WriteLog("Deck search prevented by " . CardLink("UPR138", "UPR138"));
+  if (str_contains($search, "DECK") && (SearchAurasForCard("channel_the_bleak_expanse_blue", $otherPlayer) != "" || SearchAurasForCard("channel_the_bleak_expanse_blue", $player) != "")) {
+    WriteLog("Deck search prevented by " . CardLink("channel_the_bleak_expanse_blue", "channel_the_bleak_expanse_blue"));
     return "";
   }
   AddDecisionQueue("MULTIZONEINDICES", $player, $search, ($isSubsequent ? 1 : 0));

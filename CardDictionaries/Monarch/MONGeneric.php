@@ -6,29 +6,29 @@
     $rv = "";
     switch($cardID)
     {
-      case "MON238": GainResources($currentPlayer, 1); return "";
-      case "MON239": AddCurrentTurnEffect($cardID, $currentPlayer); return "";
-      case "MON240": GainActionPoints(2, $currentPlayer); return "";
-      case "MON245":
+      case "blood_drop_brocade": GainResources($currentPlayer, 1); return "";
+      case "stubby_hammerers": AddCurrentTurnEffect($cardID, $currentPlayer); return "";
+      case "time_skippers": GainActionPoints(2, $currentPlayer); return "";
+      case "exude_confidence_red":
         if($from == "PLAY") $CombatChain->AttackCard()->ModifyPower(2);
         return "";
-      case "MON251": case "MON252": case "MON253":
+      case "seek_horizon_red": case "seek_horizon_yellow": case "seek_horizon_blue":
         if($additionalCosts != "-") AddDecisionQueue("OP", $currentPlayer, "GIVEATTACKGOAGAIN", 1);
         return "";
-      case "MON260": case "MON261": case "MON262":
+      case "captains_call_red": case "captains_call_yellow": case "captains_call_blue":
         AddDecisionQueue("PASSPARAMETER", $currentPlayer, $additionalCosts, 1);
         AddDecisionQueue("MODAL", $currentPlayer, $cardID, 1);
         return "";
-      case "MON263": case "MON264": case "MON265":
+      case "adrenaline_rush_red": case "adrenaline_rush_yellow": case "adrenaline_rush_blue":
         if(PlayerHasLessHealth($currentPlayer)) { AddCurrentTurnEffect($cardID, $currentPlayer); $rv = "Gets +3 power"; }
         return $rv;
-      case "MON266": case "MON267": case "MON268":
+      case "belittle_red": case "belittle_yellow": case "belittle_blue":
         if(DelimStringContains($additionalCosts, "BELITTLE") && CanRevealCards($currentPlayer)) {
-          MZMoveCard($currentPlayer, "MYDECK:isSameName=MON296", "MYHAND", may:true, isReveal:true);
+          MZMoveCard($currentPlayer, "MYDECK:isSameName=minnowism_red", "MYHAND", may:true, isReveal:true);
           AddDecisionQueue("SHUFFLEDECK", $currentPlayer, "-");
         }
         return "";
-      case "MON272": case "MON273": case "MON274":
+      case "frontline_scout_red": case "frontline_scout_yellow": case "frontline_scout_blue":
         if(!IsAllyAttackTarget()) {
           $otherPlayer = ($currentPlayer == 1 ? 2 : 1);
           AddDecisionQueue("FINDINDICES", $otherPlayer, "HAND");
@@ -36,21 +36,21 @@
         }
         if($from == "ARS") GiveAttackGoAgain();
         return "";
-      case "MON278": case "MON279": case "MON280":
+      case "pound_for_pound_red": case "pound_for_pound_yellow": case "pound_for_pound_blue":
         if(PlayerHasLessHealth($currentPlayer)) { AddCurrentTurnEffect($cardID, $currentPlayer); }
         return "";
-      case "MON281": case "MON282": case "MON283":
+      case "rally_the_rearguard_red": case "rally_the_rearguard_yellow": case "rally_the_rearguard_blue":
         if($from == "PLAY") {
           $CombatChain->AbilityCard()->ModifyDefense(3);
         }
         return "";
-      case "MON296": case "MON297": case "MON298":
+      case "minnowism_red": case "minnowism_yellow": case "minnowism_blue":
         AddCurrentTurnEffect($cardID, $currentPlayer);
         return "";
-      case "MON299": case "MON300": case "MON301":
+      case "warmongers_recital_red": case "warmongers_recital_yellow": case "warmongers_recital_blue":
         AddCurrentTurnEffect($cardID, $currentPlayer);
         return "";
-      case "MON303": case "MON304": case "MON305": 
+      case "memorial_ground_red": case "memorial_ground_yellow": case "memorial_ground_blue": 
         $params = explode("-", $target);
         $index = SearchdiscardForUniqueID($params[1], $currentPlayer);
         if($index != -1) {
@@ -72,9 +72,9 @@
     global $mainPlayer;
     switch($cardID)
     {
-      case "MON246": if(SearchDiscard($mainPlayer, "AA") == "") { AddCurrentTurnEffectFromCombat($cardID, $mainPlayer); } break;
-      case "MON269": case "MON270": case "MON271": AddCurrentTurnEffectFromCombat($cardID, $mainPlayer); break;
-      case "MON275": case "MON276": case "MON277": GiveAttackGoAgain(); break;
+      case "nourishing_emptiness_red": if(SearchDiscard($mainPlayer, "AA") == "") { AddCurrentTurnEffectFromCombat($cardID, $mainPlayer); } break;
+      case "brandish_red": case "brandish_yellow": case "brandish_blue": AddCurrentTurnEffectFromCombat($cardID, $mainPlayer); break;
+      case "overload_red": case "overload_yellow": case "overload_blue": GiveAttackGoAgain(); break;
       default: break;
     }
   }
@@ -85,7 +85,7 @@
     $found = false;
     for($i=1; $i<$CombatChain->NumCardsActiveLink(); ++$i) {
       $card = $CombatChain->Card($i, cardNumber:true);
-      $attackValue = ModifiedAttackValue($card->ID(), $defPlayer, "CC", source:"MON245");
+      $attackValue = ModifiedAttackValue($card->ID(), $defPlayer, "CC", source:"exude_confidence_red");
       if(!IsAllyAttackTarget() && $card->PlayerID() == $defPlayer && $attackValue >= CachedTotalAttack()) $found = true;
     }
     return $found;

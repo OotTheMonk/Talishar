@@ -151,16 +151,16 @@ function GetCrossroadsImage()
           case "Hard":
             switch($encounter->position)
             {
-              case 1: return "CRU122_cropped.png";
-              case 3: return "CRU006_cropped.png";
-              case 5: return "ELE227_cropped.png";
-              case 8: return "RVD025_cropped.png";
-              case 9: return "EVR184_cropped.png";
-              case 10: return "MON240_cropped.png";
-              case 12: return "CRU075_cropped.png";
-              case 14: return "WTR092_cropped.png";
-              case 17: return "CRU046_cropped.png";
-              default: return "EVR100_cropped.png";
+              case 1: return "perch_grapplers_cropped.png";
+              case 3: return "skullhorn_cropped.png";
+              case 5: return "sigil_of_suffering_red_cropped.png";
+              case 8: return "clearing_bellow_blue_cropped.png";
+              case 9: return "potion_of_seeing_blue_cropped.png";
+              case 10: return "time_skippers_cropped.png";
+              case 12: return "zen_state_cropped.png";
+              case 14: return "flic_flak_red_cropped.png";
+              case 17: return "ira_crimson_haze_cropped.png";
+              default: return "read_the_glide_path_red_cropped.png";
 
             }
         }

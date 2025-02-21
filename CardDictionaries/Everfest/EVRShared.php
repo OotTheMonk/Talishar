@@ -4,25 +4,25 @@
   {
     switch($cardID)
     {
-      case "EVR053": return 1;
-      case "EVR070": return 0;
-      case "EVR085": return 2;
-      case "EVR087": return 1;
-      case "EVR103": return 0;
-      case "EVR137": return 0;
-      case "EVR121": return 3;
-      case "EVR157": return 1;
-      case "EVR173": case "EVR174": case "EVR175": return 0;
-      case "EVR176": return 0;
-      case "EVR177": return 0;
-      case "EVR178": return 0;
-      case "EVR179": return 0;
-      case "EVR180": return 0;
-      case "EVR181": return 0;
-      case "EVR182": case "EVR183": case "EVR184": case "EVR185": case "EVR186": return 0;
-      case "EVR187": return 0;
-      case "EVR190": return 0;
-      case "EVR195": return 3;
+      case "helm_of_sharp_eye": return 1;
+      case "microprocessor_blue": return 0;
+      case "genis_wotchuneed": return 2;
+      case "dreadbore": return 1;
+      case "vexing_quillhand": return 0;
+      case "crown_of_reflection": return 0;
+      case "krakens_aethervein": return 3;
+      case "firebreathing_red": return 1;
+      case "even_bigger_than_that_red": case "even_bigger_than_that_yellow": case "even_bigger_than_that_blue": return 0;
+      case "amulet_of_assertiveness_yellow": return 0;
+      case "amulet_of_echoes_blue": return 0;
+      case "amulet_of_havencall_blue": return 0;
+      case "amulet_of_ignition_yellow": return 0;
+      case "amulet_of_intervention_blue": return 0;
+      case "amulet_of_oblation_blue": return 0;
+      case "clarity_potion_blue": case "healing_potion_blue": case "potion_of_seeing_blue": case "potion_of_deja_vu_blue": case "potion_of_ironhide_blue": return 0;
+      case "potion_of_luck_blue": return 0;
+      case "talisman_of_featherfoot_yellow": return 0;
+      case "silver": return 3;
       default: return 0;
     }
   }
@@ -31,36 +31,36 @@
   {
     switch($cardID)
     {
-      case "EVR053": return "AR";
-      case "EVR070": return "A";
-      case "EVR085": return "A";
-      case "EVR087": return "A";
-      case "EVR103": return "A";
-      case "EVR137": return "I";
-      case "EVR121": return "I";
-      case "EVR157": 
+      case "helm_of_sharp_eye": return "AR";
+      case "microprocessor_blue": return "A";
+      case "genis_wotchuneed": return "A";
+      case "dreadbore": return "A";
+      case "vexing_quillhand": return "A";
+      case "crown_of_reflection": return "I";
+      case "krakens_aethervein": return "I";
+      case "firebreathing_red": 
         if($from == "PLAY") return "I";
         else return "AA";
-      case "EVR176": 
+      case "amulet_of_assertiveness_yellow": 
       if($from == "PLAY") return "AR";
       else return "A";
-      case "EVR177":
+      case "amulet_of_echoes_blue":
         if($from == "PLAY") return "I";
         else return "A";
-      case "EVR178":       
+      case "amulet_of_havencall_blue":       
         if($from == "PLAY") return "DR";
         else return "A";
-      case "EVR179": 
-      case "EVR180": 
-      case "EVR181": 
-      case "EVR182": 
+      case "amulet_of_ignition_yellow": 
+      case "amulet_of_intervention_blue": 
+      case "amulet_of_oblation_blue": 
+      case "clarity_potion_blue": 
         if($from == "PLAY") return "I";
         else return "A";
-      case "EVR183": return "A";
-      case "EVR184": case "EVR185": case "EVR186": case "EVR187": 
+      case "healing_potion_blue": return "A";
+      case "potion_of_seeing_blue": case "potion_of_deja_vu_blue": case "potion_of_ironhide_blue": case "potion_of_luck_blue": 
         if($from == "PLAY") return "I";
         else return "A";
-      case "EVR195": return "A";
+      case "silver": return "A";
       default: return "";
     }
   }
@@ -69,11 +69,11 @@
   {
     switch($cardID)
     {
-      case "EVR085": return true;
-      case "EVR087": return true;
-      case "EVR103": return true;
-      case "EVR183": return true;
-      case "EVR195": return true;
+      case "genis_wotchuneed": return true;
+      case "dreadbore": return true;
+      case "vexing_quillhand": return true;
+      case "healing_potion_blue": return true;
+      case "silver": return true;
       default: return false;
     }
   }
@@ -85,48 +85,48 @@
     if(count($params) > 1) $parameter = $params[1];
     switch($cardID)
     {
-      case "EVR001": return 1;
-      case "EVR004": return $parameter;
-      case "EVR008": case "EVR009": case "EVR010": return 2;
-      case "EVR014": case "EVR015": case "EVR016": return 5;
-      case "EVR017": return 2;
-      case "EVR021": return -4;
-      case "EVR047-2": case "EVR048-2": case "EVR049-2": return 1;
-      case "EVR057-1": case "EVR058-1": case "EVR059-1": return 1;
-      case "EVR057-2": return 3;
-      case "EVR058-2": return 2;
-      case "EVR059-2": return 1;
-      case "EVR060": return 3;
-      case "EVR061": return 2;
-      case "EVR062": return 1;
-      case "EVR066": return 3;
-      case "EVR067": return 2;
-      case "EVR068": return 1;
-      case "EVR072": return 2;
-      case "EVR082": return 3;
-      case "EVR083": return 2;
-      case "EVR084": return 1;
-      case "EVR087": return 1;
-      case "EVR090": return 2;
-      case "EVR091": return 3;
-      case "EVR092": return 2;
-      case "EVR093": return 1;
-      case "EVR100": return 3;
-      case "EVR101": return 2;
-      case "EVR102": return 1;
-      case "EVR143": return 2;
-      case "EVR150": return 4;
-      case "EVR151": return 3;
-      case "EVR152": return 2;
-      case "EVR157-BUFF": return 1;
-      case "EVR160": return IsHeroAttackTarget() ? -1 : 0;
-      case "EVR161-2": 
-      case "EVR162-2":
-      case "EVR163-2": 
+      case "skull_crushers": return 1;
+      case "rolling_thunder_red": return $parameter;
+      case "bare_fangs_red": case "bare_fangs_yellow": case "bare_fangs_blue": return 2;
+      case "bad_beats_red": case "bad_beats_yellow": case "bad_beats_blue": return 5;
+      case "bravo_star_of_the_show": return 2;
+      case "pulverize_red": return -4;
+      case "twin_twisters_red-2": case "twin_twisters_yellow-2": case "twin_twisters_blue-2": return 1;
+      case "slice_and_dice_red-1": case "slice_and_dice_yellow-1": case "slice_and_dice_blue-1": return 1;
+      case "slice_and_dice_red-2": return 3;
+      case "slice_and_dice_yellow-2": return 2;
+      case "slice_and_dice_blue-2": return 1;
+      case "blade_runner_red": return 3;
+      case "blade_runner_yellow": return 2;
+      case "blade_runner_blue": return 1;
+      case "outland_skirmish_red": return 3;
+      case "outland_skirmish_yellow": return 2;
+      case "outland_skirmish_blue": return 1;
+      case "teklo_pounder_blue": return 2;
+      case "rotary_ram_red": return 3;
+      case "rotary_ram_yellow": return 2;
+      case "rotary_ram_blue": return 1;
+      case "dreadbore": return 1;
+      case "rain_razors_yellow": return 2;
+      case "release_the_tension_red": return 3;
+      case "release_the_tension_yellow": return 2;
+      case "release_the_tension_blue": return 1;
+      case "read_the_glide_path_red": return 3;
+      case "read_the_glide_path_yellow": return 2;
+      case "read_the_glide_path_blue": return 1;
+      case "pierce_reality_blue": return 2;
+      case "veiled_intentions_red": return 4;
+      case "veiled_intentions_yellow": return 3;
+      case "veiled_intentions_blue": return 2;
+      case "firebreathing_red-BUFF": return 1;
+      case "this_rounds_on_me_blue": return IsHeroAttackTarget() ? -1 : 0;
+      case "life_of_the_party_red-2": 
+      case "life_of_the_party_yellow-2":
+      case "life_of_the_party_blue-2": 
         return 2;
-      case "EVR170-2": return 3;
-      case "EVR171-2": return 2;
-      case "EVR172-2": return 1;
+      case "smashing_good_time_red-2": return 3;
+      case "smashing_good_time_yellow-2": return 2;
+      case "smashing_good_time_blue-2": return 1;
       default: return 0;
     }
   }
@@ -138,47 +138,47 @@
     $cardID = $params[0];
     switch($cardID)
     {
-      case "EVR001": return ClassContains($attackID, "BRUTE", $mainPlayer);
-      case "EVR004": return ClassContains($attackID, "BRUTE", $mainPlayer);
-      case "EVR008": case "EVR009": case "EVR010": return true;
-      case "EVR014": case "EVR015": case "EVR016": return CardType($attackID) == "AA" && ClassContains($attackID, "BRUTE", $mainPlayer);
-      case "EVR017": return CardCost($attackID) >= 3;
-      case "EVR019": return HasCrush($attackID);
-      case "EVR021": return true;
-      case "EVR044": case "EVR045": case "EVR046": return CardType($attackID) == "AA" && AttackValue($attackID) <= 2;//Base attack
-      case "EVR047-1": case "EVR048-1": case "EVR049-1": return true;
-      case "EVR047-2": case "EVR048-2": case "EVR049-2": return true;
-      case "EVR057-1": case "EVR058-1": case "EVR059-1":
+      case "skull_crushers": return ClassContains($attackID, "BRUTE", $mainPlayer);
+      case "rolling_thunder_red": return ClassContains($attackID, "BRUTE", $mainPlayer);
+      case "bare_fangs_red": case "bare_fangs_yellow": case "bare_fangs_blue": return true;
+      case "bad_beats_red": case "bad_beats_yellow": case "bad_beats_blue": return CardType($attackID) == "AA" && ClassContains($attackID, "BRUTE", $mainPlayer);
+      case "bravo_star_of_the_show": return CardCost($attackID) >= 3;
+      case "valda_brightaxe": return HasCrush($attackID);
+      case "pulverize_red": return true;
+      case "ride_the_tailwind_red": case "ride_the_tailwind_yellow": case "ride_the_tailwind_blue": return CardType($attackID) == "AA" && AttackValue($attackID) <= 2;//Base attack
+      case "twin_twisters_red-1": case "twin_twisters_yellow-1": case "twin_twisters_blue-1": return true;
+      case "twin_twisters_red-2": case "twin_twisters_yellow-2": case "twin_twisters_blue-2": return true;
+      case "slice_and_dice_red-1": case "slice_and_dice_yellow-1": case "slice_and_dice_blue-1":
         $subtype = CardSubType($attackID);
         if($subtype != "Sword" && $subtype != "Dagger") return false;
         return TypeContains($attackID, "W", $mainPlayer) && GetClassState($mainPlayer, $CS_AtksWWeapon) == 0;
-      case "EVR057-2": case "EVR058-2": case "EVR059-2":
+      case "slice_and_dice_red-2": case "slice_and_dice_yellow-2": case "slice_and_dice_blue-2":
         $subtype = CardSubType($attackID);
         if($subtype != "Sword" && $subtype != "Dagger") return false;
         return TypeContains($attackID, "W", $mainPlayer) && GetClassState($mainPlayer, $CS_AtksWWeapon) == 1;
-      case "EVR060": case "EVR061": case "EVR062": return TypeContains($attackID, "W", $mainPlayer);
-      case "EVR066": case "EVR067": case "EVR068": return TypeContains($attackID, "W", $mainPlayer) && Is1H($attackID);
-      case "EVR066-1": case "EVR067-1": case "EVR068-1": return TypeContains($attackID, "W", $mainPlayer);
-      case "EVR072": return true;
-      case "EVR082": case "EVR083": case "EVR084": return CardType($attackID) == "AA" && ClassContains($attackID, "MECHANOLOGIST", $mainPlayer);
-      case "EVR087": return CardSubType($attackID) == "Arrow";
-      case "EVR090": return CardSubType($attackID) == "Arrow";
-      case "EVR091": case "EVR092": case "EVR093": return CardSubType($attackID) == "Arrow";
-      case "EVR091-1": case "EVR092-1": case "EVR093-1": return CardSubType($attackID) == "Arrow";
-      case "EVR094": case "EVR095": case "EVR096": return CardType($attackID) == "AA";
-      case "EVR100": case "EVR101": case "EVR102": return CardSubType($attackID) == "Arrow";
-      case "EVR142": return ClassContains($attackID, "ILLUSIONIST", $mainPlayer);
-      case "EVR143": return ClassContains($attackID, "ILLUSIONIST", $mainPlayer) && CardType($attackID) == "AA";
-      case "EVR150": case "EVR151": case "EVR152": return CardType($attackID) == "AA";
-      case "EVR160": return true;
-      case "EVR161-1": case "EVR161-2": case "EVR161-3": return true;
-      case "EVR162-1": case "EVR162-2": case "EVR162-3": return true;
-      case "EVR163-1": case "EVR163-2": case "EVR163-3": return true;
-      case "EVR164": case "EVR165": case "EVR166": return true;
-      case "EVR170-1": case "EVR171-1": case "EVR172-1": return CardType($attackID) == "AA";
-      case "EVR170-2": case "EVR171-2": case "EVR172-2": return CardType($attackID) == "AA";
-      case "EVR186": return true;
-      case "EVR157-BUFF": return true;
+      case "blade_runner_red": case "blade_runner_yellow": case "blade_runner_blue": return TypeContains($attackID, "W", $mainPlayer);
+      case "outland_skirmish_red": case "outland_skirmish_yellow": case "outland_skirmish_blue": return TypeContains($attackID, "W", $mainPlayer) && Is1H($attackID);
+      case "outland_skirmish_red-1": case "outland_skirmish_yellow-1": case "outland_skirmish_blue-1": return TypeContains($attackID, "W", $mainPlayer);
+      case "teklo_pounder_blue": return true;
+      case "rotary_ram_red": case "rotary_ram_yellow": case "rotary_ram_blue": return CardType($attackID) == "AA" && ClassContains($attackID, "MECHANOLOGIST", $mainPlayer);
+      case "dreadbore": return CardSubType($attackID) == "Arrow";
+      case "rain_razors_yellow": return CardSubType($attackID) == "Arrow";
+      case "release_the_tension_red": case "release_the_tension_yellow": case "release_the_tension_blue": return CardSubType($attackID) == "Arrow";
+      case "release_the_tension_red-1": case "release_the_tension_yellow-1": case "release_the_tension_blue-1": return CardSubType($attackID) == "Arrow";
+      case "fatigue_shot_red": case "fatigue_shot_yellow": case "fatigue_shot_blue": return CardType($attackID) == "AA";
+      case "read_the_glide_path_red": case "read_the_glide_path_yellow": case "read_the_glide_path_blue": return CardSubType($attackID) == "Arrow";
+      case "passing_mirage_blue": return ClassContains($attackID, "ILLUSIONIST", $mainPlayer);
+      case "pierce_reality_blue": return ClassContains($attackID, "ILLUSIONIST", $mainPlayer) && CardType($attackID) == "AA";
+      case "veiled_intentions_red": case "veiled_intentions_yellow": case "veiled_intentions_blue": return CardType($attackID) == "AA";
+      case "this_rounds_on_me_blue": return true;
+      case "life_of_the_party_red-1": case "life_of_the_party_red-2": case "life_of_the_party_red-3": return true;
+      case "life_of_the_party_yellow-1": case "life_of_the_party_yellow-2": case "life_of_the_party_yellow-3": return true;
+      case "life_of_the_party_blue-1": case "life_of_the_party_blue-2": case "life_of_the_party_blue-3": return true;
+      case "high_striker_red": case "high_striker_yellow": case "high_striker_blue": return true;
+      case "smashing_good_time_red-1": case "smashing_good_time_yellow-1": case "smashing_good_time_blue-1": return CardType($attackID) == "AA";
+      case "smashing_good_time_red-2": case "smashing_good_time_yellow-2": case "smashing_good_time_blue-2": return CardType($attackID) == "AA";
+      case "potion_of_ironhide_blue": return true;
+      case "firebreathing_red-BUFF": return true;
       default: return false;
     }
   }
@@ -191,100 +191,100 @@
     $rv = "";
     switch($cardID)
     {
-      case "EVR002":
+      case "swing_big_red":
         if(IsHeroAttackTarget()) {
           AddCurrentTurnEffect($cardID, $currentPlayer);
         }
         return "";
-      case "EVR003":
+      case "ready_to_roll_blue":
         AddCurrentTurnEffect($cardID, $currentPlayer);
         return "";
-      case "EVR004":
+      case "rolling_thunder_red":
         AddCurrentTurnEffect($cardID . "," . GetDieRoll($currentPlayer), $currentPlayer);
         return "";
-      case "EVR005": case "EVR006": case "EVR007":
+      case "high_roller_red": case "high_roller_yellow": case "high_roller_blue":
         $rv = "Intimidates";
         Intimidate();
-        if($cardID == "EVR005") $targetHigh = 4;
-        else if($cardID == "EVR006") $targetHigh = 5;
-        else if($cardID == "EVR007") $targetHigh = 6;
+        if($cardID == "high_roller_red") $targetHigh = 4;
+        else if($cardID == "high_roller_yellow") $targetHigh = 5;
+        else if($cardID == "high_roller_blue") $targetHigh = 6;
         if(GetClassState($currentPlayer, $CS_HighestRoll) >= $targetHigh) Intimidate();
         return "";
-      case "EVR008": case "EVR009": case "EVR010":
+      case "bare_fangs_red": case "bare_fangs_yellow": case "bare_fangs_blue":
         Draw($currentPlayer);
         $card = DiscardRandom();
         if(ModifiedAttackValue($card, $currentPlayer, "HAND", source:$cardID) >= 6) AddCurrentTurnEffect($cardID, $currentPlayer);
         return "";
-      case "EVR011": case "EVR012": case "EVR013":
+      case "wild_ride_red": case "wild_ride_yellow": case "wild_ride_blue":
         Draw($currentPlayer);
         $card = DiscardRandom();
         if(ModifiedAttackValue($card, $currentPlayer, "HAND", source:$cardID) >= 6) GiveAttackGoAgain();
         return "";
-      case "EVR014": case "EVR015": case "EVR016":
-        if($cardID == "EVR014") $target = 4;
-        else if($cardID == "EVR015") $target = 5;
+      case "bad_beats_red": case "bad_beats_yellow": case "bad_beats_blue":
+        if($cardID == "bad_beats_red") $target = 4;
+        else if($cardID == "bad_beats_yellow") $target = 5;
         else $target = 6;
         if(GetDieRoll($currentPlayer) >= $target) AddCurrentTurnEffect($cardID, $currentPlayer);
         return $rv;
-      case "EVR022":
+      case "imposing_visage_blue":
         AddDecisionQueue("FINDINDICES", $currentPlayer, "DECKAURAMAXCOST," . ($resourcesPaid-CardCost($cardID)), 1);
         AddDecisionQueue("MAYCHOOSEDECK", $currentPlayer, "<-", 1);
         AddDecisionQueue("PUTPLAY", $currentPlayer, "-", 1);
         AddDecisionQueue("SHUFFLEDECK", $currentPlayer, "-");
         return "";
-      case "EVR023":
+      case "nerves_of_steel_blue":
         AddDecisionQueue("MULTIZONEINDICES", $currentPlayer, "MYCHAR:type=E;subtype=Chest;hasNegCounters=true");
         AddDecisionQueue("SETDQCONTEXT", $currentPlayer, "Choose a chest piece to remove a -1 defense counter");
         AddDecisionQueue("CHOOSEMULTIZONE", $currentPlayer, "<-", 1);
         AddDecisionQueue("MZOP", $currentPlayer, "GETCARDINDEX", 1);
         AddDecisionQueue("MODDEFCOUNTER", $currentPlayer, "1", 1);
         return "";
-      case "EVR030": case "EVR031": case "EVR032":
-        if($cardID == "EVR030") $amount = 3;
-        else if($cardID == "EVR031") $amount = 2;
+      case "seismic_stir_red": case "seismic_stir_yellow": case "seismic_stir_blue":
+        if($cardID == "seismic_stir_red") $amount = 3;
+        else if($cardID == "seismic_stir_yellow") $amount = 2;
         else $amount = 1;
-        PlayAura("WTR075", $currentPlayer, $amount);
+        PlayAura("seismic_surge", $currentPlayer, $amount);
         return "";
-      case "EVR033": case "EVR034": case "EVR035":
+      case "steadfast_red": case "steadfast_yellow": case "steadfast_blue":
         if($target != "-") {
           if(substr($target, 0, 2) == "MY") AddCurrentTurnEffect($cardID, $currentPlayer, $from, GetMZCard(($currentPlayer == 1 ? 2 : 1), $target));
           else AddCurrentTurnEffect($cardID, $currentPlayer, $from, GetMZCard($currentPlayer, $target));
         }
         return "";
-      case "EVR047": case "EVR048": case "EVR049":
+      case "twin_twisters_red": case "twin_twisters_yellow": case "twin_twisters_blue":
         AddDecisionQueue("PASSPARAMETER", $currentPlayer, $additionalCosts);
         AddDecisionQueue("MODAL", $currentPlayer, "TWINTWISTERS");
         return "";
-      case "EVR053":
+      case "helm_of_sharp_eye":
         $deck = new Deck($currentPlayer);
         $deck->BanishTop("TCC");
         return "";
-      case "EVR054":
+      case "shatter_yellow":
         AddDecisionQueue("FINDINDICES", $currentPlayer, "WEAPON");
         AddDecisionQueue("CHOOSEMULTIZONE", $currentPlayer, "<-", 1);
-        AddDecisionQueue("ADDMZBUFF", $currentPlayer, "EVR054", 1);
+        AddDecisionQueue("ADDMZBUFF", $currentPlayer, "shatter_yellow", 1);
         return "";
-      case "EVR055":
+      case "blood_on_her_hands_yellow":
         AddCurrentTurnEffect($cardID, $currentPlayer);
         AddDecisionQueue("PASSPARAMETER", $currentPlayer, $additionalCosts, 1);
         AddDecisionQueue("MODAL", $currentPlayer, "BLOODONHERHANDS", 1);
         break;
-      case "EVR056":
+      case "oath_of_steel_red":
         AddCurrentTurnEffect($cardID, $currentPlayer);
         return "";
-      case "EVR057": case "EVR058": case "EVR059":
+      case "slice_and_dice_red": case "slice_and_dice_yellow": case "slice_and_dice_blue":
         AddCurrentTurnEffect($cardID . "-1", $currentPlayer);
         AddCurrentTurnEffect($cardID . "-2", $currentPlayer);
         return "";
-      case "EVR060": case "EVR061": case "EVR062":
+      case "blade_runner_red": case "blade_runner_yellow": case "blade_runner_blue":
         GiveAttackGoAgain();
         AddCurrentTurnEffectFromCombat($cardID, $currentPlayer);
         return "";
-      case "EVR066": case "EVR067": case "EVR068":
+      case "outland_skirmish_red": case "outland_skirmish_yellow": case "outland_skirmish_blue":
         AddCurrentTurnEffect($cardID, $currentPlayer);
         AddCurrentTurnEffect($cardID . "-1", $currentPlayer);
         return "";
-      case "EVR070":
+      case "microprocessor_blue":
         if($from == "PLAY")
         {
           $items = &GetItems($currentPlayer);
@@ -294,16 +294,16 @@
           AddDecisionQueue("MODAL", $currentPlayer, "MICROPROCESSOR,".GetClassState($currentPlayer, $CS_PlayIndex), 1);
         }
         return $rv;
-      case "EVR073": case "EVR074": case "EVR075":
+      case "tbone_red": case "tbone_yellow": case "tbone_blue":
         if($combatChainState[$CCS_NumBoosted] && !IsAllyAttackTarget()) $combatChainState[$CCS_RequiredEquipmentBlock] = 1;
         return "";
-      case "EVR079": case "EVR080": case "EVR081":
+      case "zoom_in_red": case "zoom_in_yellow": case "zoom_in_blue":
         Opt($cardID, $combatChainState[$CCS_NumBoosted]);
         return "Lets you opt " . $combatChainState[$CCS_NumBoosted];
-      case "EVR082": case "EVR083": case "EVR084":
+      case "rotary_ram_red": case "rotary_ram_yellow": case "rotary_ram_blue":
         AddCurrentTurnEffect($cardID, $currentPlayer);
         return "";
-      case "EVR085":
+      case "genis_wotchuneed":
         AddDecisionQueue("PASSPARAMETER", $currentPlayer, "0");
         AddDecisionQueue("SETDQVAR", $currentPlayer, "0");
         AddDecisionQueue("FINDINDICES", $otherPlayer, "HAND");
@@ -311,53 +311,53 @@
         AddDecisionQueue("MULTIREMOVEHAND", $otherPlayer, "-", 1);
         AddDecisionQueue("ADDBOTDECK", $otherPlayer, "-", 1);
         AddDecisionQueue("DRAW", $otherPlayer, "-", 1);
-        AddDecisionQueue("PASSPARAMETER", $currentPlayer, "EVR195", 1);
+        AddDecisionQueue("PASSPARAMETER", $currentPlayer, "silver", 1);
         AddDecisionQueue("PUTPLAY", $currentPlayer, "0", 1);
         AddDecisionQueue("PASSPARAMETER", $currentPlayer, "1", 1);
         AddDecisionQueue("SETDQVAR", $currentPlayer, "0", 1);
         AddDecisionQueue("DQVARPASSIFSET", $currentPlayer, "0");
         AddDecisionQueue("DRAW", $currentPlayer, "-", 1);
         return "";
-      case "EVR087":
+      case "dreadbore":
         LoadArrow($currentPlayer);
         AddDecisionQueue("LASTARSENALADDEFFECT", $currentPlayer, $cardID . ",HAND", 1);
         return "";
-      case "EVR089":
+      case "trishot_blue":
         AddDecisionQueue("FINDINDICES", $currentPlayer, "WEAPON,Bow");
         AddDecisionQueue("CHOOSEMULTIZONE", $currentPlayer, "<-", 1);
         AddDecisionQueue("ADDMZUSES", $currentPlayer, 2, 1);
         return "";
-      case "EVR090":
+      case "rain_razors_yellow":
         AddCurrentTurnEffect($cardID, 1);
         AddCurrentTurnEffect($cardID, 2);
         return "";
-      case "EVR091": case "EVR092": case "EVR093":
+      case "release_the_tension_red": case "release_the_tension_yellow": case "release_the_tension_blue":
         AddCurrentTurnEffect($cardID, $currentPlayer);
         AddCurrentTurnEffect($cardID . "-1", $otherPlayer);
         return "";
-      case "EVR100": case "EVR101": case "EVR102":
+      case "read_the_glide_path_red": case "read_the_glide_path_yellow": case "read_the_glide_path_blue":
         AddCurrentTurnEffect($cardID, $currentPlayer);
         Opt($cardID, 1);
         return "";
-      case "EVR103":
-        PlayAura("ARC112", $currentPlayer, 2);
+      case "vexing_quillhand":
+        PlayAura("runechant", $currentPlayer, 2);
         return "";
-      case "EVR106":
-        if(GetClassState($currentPlayer, $CS_NumNonAttackCards) > 1 && GetClassState($currentPlayer, $CS_NumAttackCards) > 0) PlayAura("ARC112", $currentPlayer, 4);
+      case "revel_in_runeblood_red":
+        if(GetClassState($currentPlayer, $CS_NumNonAttackCards) > 1 && GetClassState($currentPlayer, $CS_NumAttackCards) > 0) PlayAura("runechant", $currentPlayer, 4);
         AddCurrentTurnEffect($cardID, $currentPlayer);
         return "";
-      case "EVR121":
+      case "krakens_aethervein":
         DealArcane(1, 1, "ABILITY", $cardID);
         AddDecisionQueue("SPECIFICCARD", $currentPlayer, "KRAKENAETHERVEIN");
         return "";
-      case "EVR123":
+      case "aether_wildfire_red":
         DealArcane(4, 1, "PLAYCARD", $cardID, resolvedTarget: $target);
         if($currentPlayer != $mainPlayer) {
-          AddDecisionQueue("PREPENDLASTRESULT", $currentPlayer, "EVR123,");
+          AddDecisionQueue("PREPENDLASTRESULT", $currentPlayer, "aether_wildfire_red,");
           AddDecisionQueue("ADDCURRENTEFFECT", $currentPlayer, "<-");
         }
         return "";
-      case "EVR124":
+      case "scour_blue":
         $targetPlayer = substr($target, 0, 5) == "THEIR";
         $parameter = $targetPlayer ? "THEIRAURAS:maxCost=0" : "MYAURAS:maxCost=0";
         for($i=0; $i<$resourcesPaid; ++$i) {
@@ -368,17 +368,17 @@
         }
         AddDecisionQueue("SCOUR", $currentPlayer, $resourcesPaid.",".$targetPlayer, 1);
         return "";
-      case "EVR125": case "EVR126": case "EVR127":
+      case "emeritus_scolding_red": case "emeritus_scolding_yellow": case "emeritus_scolding_blue":
         $oppTurn = $currentPlayer != $mainPlayer;
-        if($cardID == "EVR125") $damage = ($oppTurn ? 6 : 4);
-        if($cardID == "EVR126") $damage = ($oppTurn ? 5 : 3);
-        if($cardID == "EVR127") $damage = ($oppTurn ? 4 : 2);
+        if($cardID == "emeritus_scolding_red") $damage = ($oppTurn ? 6 : 4);
+        if($cardID == "emeritus_scolding_yellow") $damage = ($oppTurn ? 5 : 3);
+        if($cardID == "emeritus_scolding_blue") $damage = ($oppTurn ? 4 : 2);
         DealArcane($damage, 0, "PLAYCARD", $cardID, resolvedTarget: $target);
         return "";
-      case "EVR128": case "EVR129": case "EVR130":
+      case "pry_red": case "pry_yellow": case "pry_blue":
         if($mainPlayer != $currentPlayer) $numReveal = count(GetHand($otherPlayer));
-        else if($cardID == "EVR128") $numReveal = 3;
-        else if($cardID == "EVR129") $numReveal = 2;
+        else if($cardID == "pry_red") $numReveal = 3;
+        else if($cardID == "pry_yellow") $numReveal = 2;
         else $numReveal = 1;
         AddDecisionQueue("PASSPARAMETER", $mainPlayer, $numReveal);
         AddDecisionQueue("SETDQVAR", $currentPlayer, "0");
@@ -386,40 +386,40 @@
         AddDecisionQueue("BUTTONINPUT", $currentPlayer, "Target_Opponent,Target_Yourself");
         AddDecisionQueue("PLAYERTARGETEDABILITY", $currentPlayer, "PRY", 1);
         return "";
-      case "EVR134": case "EVR135": case "EVR136":
+      case "timekeepers_whim_red": case "timekeepers_whim_yellow": case "timekeepers_whim_blue":
         DealArcane(ArcaneDamage($cardID), 0, "PLAYCARD", $cardID, resolvedTarget: $target);
         return "";
-      case "EVR137":
+      case "crown_of_reflection":
         MZChooseAndDestroy($currentPlayer, "MYAURAS:class=ILLUSIONIST");
         AddDecisionQueue("FINDINDICES", $currentPlayer, "CROWNOFREFLECTION", 1);
         AddDecisionQueue("MAYCHOOSEHAND", $currentPlayer, "<-", 1);
         AddDecisionQueue("MULTIREMOVEHAND", $currentPlayer, "-", 1);
         AddDecisionQueue("PUTPLAY", $currentPlayer, "-", 1);
         return "";
-      case "EVR138":
+      case "fractal_replication_red":
         FractalReplicationStats("Ability");
         return "";
-      case "EVR150": case "EVR151": case "EVR152":
+      case "veiled_intentions_red": case "veiled_intentions_yellow": case "veiled_intentions_blue":
         AddCurrentTurnEffect($cardID, $currentPlayer);
         return "";
-      case "EVR157":
+      case "firebreathing_red":
         if($from == "PLAY") AddCurrentTurnEffect($cardID . "-BUFF", $currentPlayer, "PLAY");
         return "";
-      case "EVR158":
-        PutItemIntoPlayForPlayer("EVR195", $currentPlayer, 0, intval($additionalCosts));
+      case "cash_out_blue":
+        PutItemIntoPlayForPlayer("silver", $currentPlayer, 0, intval($additionalCosts));
         return "";
-      case "EVR159":
+      case "knick_knack_bricabrac_red":
         AddDecisionQueue("PASSPARAMETER", $currentPlayer, $additionalCosts);
         AddDecisionQueue("SPECIFICCARD", $currentPlayer, "KNICKKNACK");
         AddDecisionQueue("SHUFFLEDECK", $currentPlayer, "-");  
         return "";
-      case "EVR160":
+      case "this_rounds_on_me_blue":
         Draw(1);
         Draw(2);
         if($currentPlayer != $mainPlayer) AddCurrentTurnEffect($cardID, $otherPlayer);
         else AddNextTurnEffect($cardID, $otherPlayer);
         return "";
-      case "EVR161": case "EVR162": case "EVR163":
+      case "life_of_the_party_red": case "life_of_the_party_yellow": case "life_of_the_party_blue":
         $rand = GetRandom(1, 3);
         $altCostPaid = DelimStringContains($additionalCosts, "ALTERNATIVECOST");
         $log = "";
@@ -438,13 +438,13 @@
           AddCurrentTurnEffect($cardID . "-3", $currentPlayer); 
         }
         return $log .= ($altCostPaid == 1 ? " Party time!🍻" : ".");
-      case "EVR164": case "EVR165": case "EVR166":
+      case "high_striker_red": case "high_striker_yellow": case "high_striker_blue":
         AddCurrentTurnEffect($cardID, $currentPlayer);
         return "";
-      case "EVR167": case "EVR168": case "EVR169":
-        if($cardID == "EVR167") $times = 4;
-        else if($cardID == "EVR168") $times = 3;
-        else if($cardID == "EVR169") $times = 2;
+      case "pick_a_card_any_card_red": case "pick_a_card_any_card_yellow": case "pick_a_card_any_card_blue":
+        if($cardID == "pick_a_card_any_card_red") $times = 4;
+        else if($cardID == "pick_a_card_any_card_yellow") $times = 3;
+        else if($cardID == "pick_a_card_any_card_blue") $times = 2;
         AddDecisionQueue("MULTIZONEINDICES", $currentPlayer, "THEIRHAND");
         AddDecisionQueue("CHOOSEMULTIZONE", $currentPlayer, "<-", 1);
         AddDecisionQueue("SETDQVAR", $currentPlayer, "0", 1);
@@ -453,26 +453,26 @@
         AddDecisionQueue("WRITELOG", $currentPlayer, "Card chosen: <1>", 1);
         for($i=0; $i<$times; ++$i) AddDecisionQueue("SPECIFICCARD", $currentPlayer, "PICKACARD", 1);
         return "";
-      case "EVR170": case "EVR171": case "EVR172":
+      case "smashing_good_time_red": case "smashing_good_time_yellow": case "smashing_good_time_blue":
         $rv = "Makes your next attack action that hits destroy an item";
         AddCurrentTurnEffect($cardID . "-1", $currentPlayer);
         if($from == "ARS") AddCurrentTurnEffect($cardID . "-2", $currentPlayer);
         return "";
-      case "EVR173": case "EVR174": case "EVR175":
-        if($cardID == "EVR173") $opt = 3;
-        else if($cardID == "EVR174") $opt = 2;
-        else if($cardID == "EVR175") $opt = 1;
+      case "even_bigger_than_that_red": case "even_bigger_than_that_yellow": case "even_bigger_than_that_blue":
+        if($cardID == "even_bigger_than_that_red") $opt = 3;
+        else if($cardID == "even_bigger_than_that_yellow") $opt = 2;
+        else if($cardID == "even_bigger_than_that_blue") $opt = 1;
         PlayerOpt($currentPlayer, $opt);
         AddDecisionQueue("SPECIFICCARD", $currentPlayer, "EVENBIGGERTHANTHAT-".$cardID);
         return "";
-      case "EVR176":
+      case "amulet_of_assertiveness_yellow":
         if($from == "PLAY") {
           $deck = new Deck($currentPlayer);
           if($deck->Empty()) return "Deck is empty";
           $deck->BanishTop(CardType($deck->Top()) == "AA" ? "TT" : "-");
         }
         return "";
-      case "EVR177":
+      case "amulet_of_echoes_blue":
         if($from == "PLAY") {
           if(ShouldAutotargetOpponent($currentPlayer)) {
             AddDecisionQueue("PASSPARAMETER", $currentPlayer, "Target_Opponent");
@@ -484,40 +484,40 @@
           AddDecisionQueue("PLAYERTARGETEDABILITY", $currentPlayer, "AMULETOFECHOES", 1);
         }
         return "";
-      case "EVR178":
+      case "amulet_of_havencall_blue":
         if($from == "PLAY") {
-          AddDecisionQueue("FINDINDICES", $currentPlayer, "EVR178");
+          AddDecisionQueue("FINDINDICES", $currentPlayer, "amulet_of_havencall_blue");
           AddDecisionQueue("MAYCHOOSEDECK", $currentPlayer, "<-", 1);
           AddDecisionQueue("ADDCARDTOCHAINASDEFENDINGCARD", $currentPlayer, "DECK", 1);
           AddDecisionQueue("SHUFFLEDECK", $currentPlayer, "-");
         }
         return "";
-      case "EVR179":
+      case "amulet_of_ignition_yellow":
         if($from == "PLAY") AddCurrentTurnEffect($cardID, $currentPlayer, $from);
         return "";
-      case "EVR180":
+      case "amulet_of_intervention_blue":
         if($from == "PLAY") {
           AddCurrentTurnEffect($cardID, $currentPlayer, $from);
           IncrementClassState($currentPlayer, $CS_DamagePrevention, 1);
         }
         return "";
-      case "EVR181":
+      case "amulet_of_oblation_blue":
         if($from == "PLAY") {
           AddDecisionQueue("FINDINDICES", $currentPlayer, "CCAA");
           AddDecisionQueue("CHOOSECOMBATCHAIN", $currentPlayer, "<-", 1);
           AddDecisionQueue("AMULETOFOBLATION", $currentPlayer, $cardID."-!CC", 1);
         }
         return "";
-      case "EVR182":
+      case "clarity_potion_blue":
         if($from == "PLAY") PlayerOpt($currentPlayer, 2);
         return "";
-      case "EVR183":
+      case "healing_potion_blue":
         if($from == "PLAY") GainHealth(2, $currentPlayer);
         return "";
-      case "EVR184":
+      case "potion_of_seeing_blue":
         if($from == "PLAY") LookAtHand($otherPlayer);
         return "";
-      case "EVR185":
+      case "potion_of_deja_vu_blue":
         if($from == "PLAY"){
           $cards = "";
           $pitch = &GetPitch($currentPlayer);
@@ -529,10 +529,10 @@
           if($cards != "") AddDecisionQueue("CHOOSETOP", $currentPlayer, $cards);
         }
         return "";
-      case "EVR186":
+      case "potion_of_ironhide_blue":
         if($from == "PLAY") AddCurrentTurnEffect($cardID, $currentPlayer);
         return "";
-      case "EVR187":
+      case "potion_of_luck_blue":
         if($from == "PLAY"){
           $numToDraw = 0;
           $card = "";
@@ -542,13 +542,13 @@
           for($i = 0; $i < $numToDraw; $i++) AddDecisionQueue("DRAW", $currentPlayer, "-", 1);
         }
         return "";
-      case "EVR190":
+      case "talisman_of_featherfoot_yellow":
         if($from == "PLAY"){
           DestroyItemForPlayer($currentPlayer, GetClassState($currentPlayer, $CS_PlayIndex));
           GiveAttackGoAgain();
         }
         return "Partially manual card: Activate the instant ability if you met the criteria";
-      case "EVR195":
+      case "silver":
         if($from == "PLAY"){
           DestroyItemForPlayer($currentPlayer, GetClassState($currentPlayer, $CS_PlayIndex));
           Draw($currentPlayer);
@@ -563,19 +563,19 @@
     global $mainPlayer, $defPlayer, $CS_NumAuras, $chainLinks, $chainLinkSummary;
     switch($cardID)
     {
-      case "EVR021":
+      case "pulverize_red":
         if(IsHeroAttackTarget()) AddNextTurnEffect($cardID, $defPlayer);
         break;
-      case "EVR038":
+      case "break_tide_yellow":
         if(ComboActive()) {
           $deck = new Deck($mainPlayer);
           $deck->BanishTop("NT", $mainPlayer);
         }
         break;
-      case "EVR039":
+      case "spring_tidings_yellow":
         for($i=0; $i<SearchCount(SearchChainLinks(-1, 2, "AA")); ++$i) Draw($mainPlayer);
         break;
-      case "EVR040":
+      case "winds_of_eternity_blue":
         if(ComboActive())
         {
           $deck = new Deck($mainPlayer);
@@ -593,10 +593,10 @@
           AddDecisionQueue("SHUFFLEDECK", $mainPlayer, "-");
         }
         break;
-      case "EVR044": case "EVR045": case "EVR046":
+      case "ride_the_tailwind_red": case "ride_the_tailwind_yellow": case "ride_the_tailwind_blue":
         AddCurrentTurnEffectFromCombat($cardID, $mainPlayer);
         break;
-      case "EVR088":
+      case "battering_bolt_red":
         if(IsHeroAttackTarget() && CanRevealCards($mainPlayer))
         {
           $hand = &GetHand($defPlayer);
@@ -617,36 +617,36 @@
           }
           LoseHealth($numDiscarded, $defPlayer);
           RevealCards($cards, $defPlayer);//CanReveal checked earlier
-          if($numDiscarded > 0)WriteLog(CardLink("EVR088", "EVR088") . " discarded " . $numDiscarded . " and caused the defending player to lose that much life.");
+          if($numDiscarded > 0)WriteLog(CardLink("battering_bolt_red", "battering_bolt_red") . " discarded " . $numDiscarded . " and caused the defending player to lose that much life.");
           $hand = array_values($hand);
         }
         break;
-      case "EVR094": case "EVR095": case "EVR096":
+      case "fatigue_shot_red": case "fatigue_shot_yellow": case "fatigue_shot_blue":
         if(IsHeroAttackTarget()) AddNextTurnEffect($cardID, $defPlayer);
         break;
-      case "EVR097": case "EVR098": case "EVR099":
+      case "timidity_point_red": case "timidity_point_yellow": case "timidity_point_blue":
         if(IsHeroAttackTarget()) AddNextTurnEffect($cardID, $defPlayer);
         break;
-      case "EVR104":
+      case "runic_reclamation_red":
         if(IsHeroAttackTarget()) {
           MZChooseAndDestroy($mainPlayer, "THEIRAURAS");
-          AddDecisionQueue("PASSPARAMETER", $mainPlayer, "ARC112", 1);
+          AddDecisionQueue("PASSPARAMETER", $mainPlayer, "runechant", 1);
           AddDecisionQueue("PUTPLAY", $mainPlayer, "-", 1);
         }
         break;
-      case "EVR105":
-        if(IsHeroAttackTarget() && GetClassState($mainPlayer, $CS_NumAuras) >= 3) AddCurrentTurnEffect("EVR105", $defPlayer);
+      case "swarming_gloomveil_red":
+        if(IsHeroAttackTarget() && GetClassState($mainPlayer, $CS_NumAuras) >= 3) AddCurrentTurnEffect("swarming_gloomveil_red", $defPlayer);
         break;
-      case "EVR110": case "EVR111": case "EVR112":
+      case "drowning_dire_red": case "drowning_dire_yellow": case "drowning_dire_blue":
         MZMoveCard($mainPlayer, "MYDISCARD:type=A", "MYBOTDECK", may:true);
         break;
-      case "EVR113": case "EVR114": case "EVR115":
+      case "reek_of_corruption_red": case "reek_of_corruption_yellow": case "reek_of_corruption_blue":
         if(IsHeroAttackTarget() && GetClassState($mainPlayer, $CS_NumAuras) > 0) PummelHit();
         break;
-      case "EVR138":
+      case "fractal_replication_red":
         FractalReplicationStats("Hit");
         break;
-      case "EVR156":
+      case "bingo_red":
         if(IsHeroAttackTarget()) {
           AddDecisionQueue("FINDINDICES", $defPlayer, "HAND");
           AddDecisionQueue("CHOOSEHAND", $defPlayer, "<-", 1);
@@ -662,8 +662,8 @@
   {
     switch($cardID)
     {
-      case "EVR021": return 3;
-      case "EVR024": case "EVR025": case "EVR026": return 3;
+      case "pulverize_red": return 3;
+      case "thunder_quake_red": case "thunder_quake_yellow": case "thunder_quake_blue": return 3;
       default: return 0;
     }
   }
@@ -729,8 +729,8 @@
   function LifeOfThePartyIndices()
   {
     global $currentPlayer;
-    $items = SearchMultizoneFormat(SearchItemsForCard("WTR162", $currentPlayer), "MYITEMS");
-    $handCards = SearchMultizoneFormat(SearchHandForCard($currentPlayer, "WTR162"), "MYHAND");
+    $items = SearchMultizoneFormat(SearchItemsForCard("crazy_brew_blue", $currentPlayer), "MYITEMS");
+    $handCards = SearchMultizoneFormat(SearchHandForCard($currentPlayer, "crazy_brew_blue"), "MYHAND");
     return CombineSearches($items, $handCards);
   }
 
@@ -761,7 +761,7 @@
     for($i=0; $i<count($chainLinks); ++$i) {
       for($j=0; $j<count($chainLinks[$i]); $j+=ChainLinksPieces()) {
         $isIllusionist = ClassContains($chainLinks[$i][$j], "ILLUSIONIST", $currentPlayer) || ($j == 0 && DelimStringContains($chainLinkSummary[$i*ChainLinkSummaryPieces()+3], "ILLUSIONIST"));
-        if($chainLinks[$i][$j+2] == "1" && $chainLinks[$i][$j] != "EVR138" && $isIllusionist && CardType($chainLinks[$i][$j]) == "AA")
+        if($chainLinks[$i][$j+2] == "1" && $chainLinks[$i][$j] != "fractal_replication_red" && $isIllusionist && CardType($chainLinks[$i][$j]) == "AA")
         {
           if($stat == "Hit") ProcessHitEffect($chainLinks[$i][$j]);
           elseif ($stat == "Ability") {
@@ -770,7 +770,7 @@
             ModalAbilities($currentPlayer, $modalAbilities[0], $modalAbilities[1]);
           }
           else {
-            $attack = ModifiedAttackValue($chainLinks[$i][$j], $currentPlayer, "CC", source:"EVR138");
+            $attack = ModifiedAttackValue($chainLinks[$i][$j], $currentPlayer, "CC", source:"fractal_replication_red");
             if($attack > $highestAttack) $highestAttack = $attack;
             $modifiedBaseAttack = $chainLinkSummary[$i*ChainLinkSummaryPieces()+6];
             if($modifiedBaseAttack > $highestAttack) $highestAttack = $modifiedBaseAttack;
@@ -784,7 +784,7 @@
     }
     for($i=0; $i<$CombatChain->NumCardsActiveLink(); ++$i) {
       $cardID = $CombatChain->Card($i, cardNumber:true)->ID();
-      if($cardID != "EVR138" && ClassContains($cardID, "ILLUSIONIST", $currentPlayer) && CardType($cardID) == "AA")
+      if($cardID != "fractal_replication_red" && ClassContains($cardID, "ILLUSIONIST", $currentPlayer) && CardType($cardID) == "AA")
       {
         if($stat == "Hit") ProcessHitEffect($cardID);
         elseif ($stat == "Ability") {
@@ -793,7 +793,7 @@
           ModalAbilities($currentPlayer, $modalAbilities[0], $modalAbilities[1]);
         }
         else {
-          $attack = ModifiedAttackValue($cardID, $currentPlayer, "CC", source:"EVR138");
+          $attack = ModifiedAttackValue($cardID, $currentPlayer, "CC", source:"fractal_replication_red");
           if($attack > $highestAttack) $highestAttack = $attack;
           $block = BlockValue($cardID);
           if($block > $highestBlock) $highestBlock = $block;

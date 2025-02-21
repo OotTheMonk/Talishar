@@ -8,16 +8,16 @@
 
   function RVDAbilityType($cardID) {
     switch($cardID) {
-      case "RVD002": return "AA";
-      case "RVD004": return "A";
+      case "bone_basher": return "AA";
+      case "blossom_of_spring": return "A";
       default: return "";
     }
   }
 
   function RVDAbilityCost($cardID) {
     switch($cardID) {
-      case "RVD002": return 2;
-      case "RVD004": return 0;
+      case "bone_basher": return 2;
+      case "blossom_of_spring": return 0;
       default: return "";
     }
   }
@@ -27,18 +27,18 @@ function RVDPlayAbility($cardID)
   global $currentPlayer;
   $rv = "";
   switch($cardID) {
-    case "RVD004":
+    case "blossom_of_spring":
       GainResources($currentPlayer, 1);
       return "";
-    case "RVD013":
+    case "wrecking_ball_red":
       Draw($currentPlayer);
       $card = DiscardRandom();
       $rv = "Discarded " . CardLink($card, $card);
-      if(ModifiedAttackValue($card, $currentPlayer, "HAND", source:"RVD013") >= 6) {
+      if(ModifiedAttackValue($card, $currentPlayer, "HAND", source:"wrecking_ball_red") >= 6) {
         Intimidate();
       }
       return "";
-    case "RVD025":
+    case "clearing_bellow_blue":
       Intimidate();
       return "";
     default: return "";
@@ -47,13 +47,13 @@ function RVDPlayAbility($cardID)
 
 function ChiefRukutanAbility($player, $index)
 {
-  $rv = CardLink("RVD007", "RVD007") . " Intimidates";
+  $rv = CardLink("chief_rukutan", "chief_rukutan") . " Intimidates";
   Intimidate();
   $arsenal = &GetArsenal($player);
   ++$arsenal[$index+3];
   if($arsenal[$index+3] == 2) {
     $rv .= " and searches for an Alpha Rampage";
-    MentorTrigger($player, $index, specificCard:"WTR006");
+    MentorTrigger($player, $index, specificCard:"alpha_rampage_red");
   }
   WriteLog($rv);
 }
