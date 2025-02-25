@@ -17,14 +17,16 @@ function ASTAbilityHasGoAgain($cardID): bool
 function ASTEffectAttackModifier($cardID): int
 {
   global $currentPlayer, $defPlayer;
-  return match ($cardID) {
+  return match (CardIdentifier($cardID)) {
+    "skyward-serenade-2" => 1,
     default => 0
   };
 }
 
 function ASTCombatEffectActive($cardID, $attackID): bool
 {
-  return match($cardID) {
+  return match(CardIdentifier($cardID)) {
+    "skyward-serenade-2" => true,
     default => false
   };
 }
@@ -38,8 +40,13 @@ function ASTAbilityCost($cardID): int
 
 function ASTPlayAbility($cardID, $from, $resourcesPaid, $target = "-", $additionalCosts = ""): string
 {
-  global $current_player, $CS_PlayIndex;
-  switch ($cardID) {
+  global $currentPlayer, $CS_PlayIndex;
+  $ID = CardIdentifier($cardID);
+  switch ($ID) {
+    case "skyward-serenade-2":
+      AddDecisionQueue("PASSPARAMETER", $currentPlayer, $additionalCosts, 1);
+      AddDecisionQueue("MODAL", $currentPlayer, "SKYWARDSERENADE", 1);
+      return "";
     default:
       return "";
   }

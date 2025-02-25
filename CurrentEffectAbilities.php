@@ -509,6 +509,7 @@ function EffectAttackModifier($cardID)
   else if ($set == "ROS") return ROSEffectAttackModifier($cardID);
   else if ($set == "AJV") return AJVEffectAttackModifier($cardID);
   else if ($set == "HNT") return HNTEffectAttackModifier($cardID);
+  else if ($set == "AST") return ASTEffectAttackModifier($cardID);
   switch ($cardID) {
     case "ira_scarlet_revenger":
       return 1;
@@ -1846,6 +1847,7 @@ function IsCombatEffectActive($cardID, $defendingCard = "", $SpectraTarget = fal
   else if ($set == "AIO") return AIOCombatEffectActive($cardID, $cardToCheck);
   else if ($set == "AJV") return AJVCombatEffectActive($cardID, $cardToCheck);
   else if ($set == "HNT") return HNTCombatEffectActive($cardID, $cardToCheck, $flicked);
+  else if ($set == "AST") return ASTCombatEffectActive($cardID, $cardToCheck);
   switch ($cardID) {
     case "banneret_of_salvation_yellow":
       return DTDCombatEffectActive($cardID, $cardToCheck);

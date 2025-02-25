@@ -449,6 +449,12 @@ function AttackModifier($cardID, $from = "", $resourcesPaid = 0, $repriseActive 
     case "retrace_the_past_blue":
       return (SearchCurrentTurnEffectsForIndex("retrace_the_past_blue", $mainPlayer) != -1 ? 2 : 0);
     default:
+      break;
+  }
+  switch(CardIdentifier($cardID)) {
+    case "skyzyk-1":
+      return DoesAttackHaveGoAgain() ? 1 : 0;
+    default:
       return 0;
   }
 }
